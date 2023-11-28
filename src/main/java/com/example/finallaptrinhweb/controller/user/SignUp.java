@@ -34,7 +34,7 @@ public class SignUp extends HttpServlet {
         String code = send.getRandomVerifyCode();
         if (repass.equals(pass)) {
             try {
-                if (!UserDAO.getInstance().CheckExistUser(email)) {
+                if (!UserDAO.getInstance().CheckExistUser(email) ) {
                     UserDAO.getInstance().SignUp(name, email, pass, code);
                     if (send.sendVerifyCode(email, code)) {
                         HttpSession session = request.getSession();
