@@ -82,8 +82,9 @@ public class UserDAO {
                     .bind(0, this.GetId() + 1)
                     .bind(1, username)
                     .bind(2, email)
-                    .bind(3, password).
-                    bind(4, code).execute();
+                    .bind(3, password)
+                    .bind(4, code)
+                    .execute();
         });
     }
 
@@ -115,6 +116,15 @@ public class UserDAO {
                     .bind(5, detail_address)
                     .bind(6, phone)
                     .bind(7, email)
+                    .execute();
+        });
+    }
+
+    public void updatePassword(String email, String pass) throws SQLException {
+        JDBIConnector.me().get().useHandle((handle) -> {
+            handle.createUpdate("UPDATE users SET password = ? WHERE email = ?")
+                    .bind(0, pass)
+                    .bind(1, email)
                     .execute();
         });
     }
