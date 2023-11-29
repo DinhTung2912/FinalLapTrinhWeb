@@ -10,7 +10,10 @@ public class User {
     private String password;
     private String fullName;
     private Date dateOfBirth;
-    private String address;
+    private String city;
+    private String district;
+    private String ward;
+    private String detail_address;
     private String phone;
     private String verifyStatus;
     private int roleId;
@@ -18,21 +21,24 @@ public class User {
     public User() {
     }
 
-    public User(int id, String username, String email, String password, String fullName, Date dateOfBirth, String address, String phone, String verifyStatus, int roleId) {
+    public User(int id, String username, String email, String password, String fullName, Date dateOfBirth, String city, String district, String ward, String detail_address, String phone, String verifyStatus, int roleId) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
-        this.address = address;
+        this.city = city;
+        this.district = district;
+        this.ward = ward;
+        this.detail_address = detail_address;
         this.phone = phone;
         this.verifyStatus = verifyStatus;
         this.roleId = roleId;
     }
 
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(int id) {
@@ -40,7 +46,7 @@ public class User {
     }
 
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
     public void setUsername(String username) {
@@ -48,7 +54,7 @@ public class User {
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public void setEmail(String email) {
@@ -56,15 +62,15 @@ public class User {
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
-    public void setPassword(String passwordHash) {
-        this.password = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFullName() {
-        return this.fullName;
+        return fullName;
     }
 
     public void setFullName(String fullName) {
@@ -72,23 +78,47 @@ public class User {
     }
 
     public Date getDateOfBirth() {
-        return this.dateOfBirth;
+        return dateOfBirth;
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getAddress() {
-        return this.address;
+    public String getCity() {
+        return city;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getWard() {
+        return ward;
+    }
+
+    public void setWard(String ward) {
+        this.ward = ward;
+    }
+
+    public String getDetail_address() {
+        return detail_address;
+    }
+
+    public void setDetail_address(String detail_address) {
+        this.detail_address = detail_address;
     }
 
     public String getPhone() {
-        return this.phone;
+        return phone;
     }
 
     public void setPhone(String phone) {
@@ -96,7 +126,7 @@ public class User {
     }
 
     public String getVerifyStatus() {
-        return this.verifyStatus;
+        return verifyStatus;
     }
 
     public void setVerifyStatus(String verifyStatus) {
@@ -104,14 +134,29 @@ public class User {
     }
 
     public int getRoleId() {
-        return this.roleId;
+        return roleId;
     }
 
     public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 
+    @Override
     public String toString() {
-        return "Users{id=" + this.id + ", username='" + this.username + "', email='" + this.email + "', password='" + this.password + "', fullName='" + this.fullName + "', dateOfBirth=" + this.dateOfBirth + ", address='" + this.address + "', phone='" + this.phone + "', verifyStatus='" + this.verifyStatus + "', roleId=" + this.roleId + "}";
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", city='" + city + '\'' +
+                ", district='" + district + '\'' +
+                ", ward='" + ward + '\'' +
+                ", detail_address='" + detail_address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", verifyStatus='" + verifyStatus + '\'' +
+                ", roleId=" + roleId +
+                '}';
     }
 }

@@ -70,9 +70,9 @@
                 <a class="sign-in" href="./signIn.jsp">Đăng nhập</a>
                 <%} else {%>
                 <div class="wrap-user">
-                    <a class="user"><%= user.getUsername()%>
+                    <a class="user" href="user_info.jsp"><%= user.getUsername()%>
                     </a>
-                    <a class="sign-in" href="signout">Log Out</a>
+                    <a class="sign-in" href="signout">Đăng xuất</a>
                 </div>
                 <%}%>
 
