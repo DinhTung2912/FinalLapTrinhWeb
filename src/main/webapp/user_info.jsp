@@ -72,7 +72,6 @@
                                     String district = infor.getDistrict();
                                     String ward = infor.getWard();
                                     String detail_address = infor.getDetail_address();
-
                                 %>
                                 <form class="formAcount validate clearfix" method="post" action="updateinfouser">
                                     <div class="form-group clearfix">
@@ -114,7 +113,7 @@
                                         <div class="row">
                                             <label class="col-md-3 control-label">Email: <span>(*)</span></label>
                                             <div class="col-lg-6 col-md-9">
-                                                <input type="text" id="email" name="email"
+                                                <input type="text" name="email"
                                                        value="<%=user.getEmail()%>"
                                                        placeholder="Email"
                                                        class="validate[required,custom[email]] form-control input-sm"
@@ -192,13 +191,20 @@
                                     <h1>THAY ĐỔI MẬT KHẨU</h1>
                                     <div class="content">Bạn nên cập nhật mật khẩu thường xuyên vì lí do bảo mật</div>
                                 </header>
-                                <form id="formAcount" class="formAcount validate clearfix">
+                                <form id="formAcount" class="formAcount validate clearfix" method="post"
+                                      action="resetpassword">
+                                    <% String error = (String) request.getAttribute("wrongInfor");%>
+                                    <% if (error != null) {%>
+                                    <p style="color: <%=error.equals("Mật khẩu đã được thay đổi") ? "#7cb342" : "red"%>; margin-bottom: 10px"><%=error%>
+                                    </p>
+                                    <% } %>
                                     <div class="form-group clearfix">
                                         <div class="row">
                                             <label class="col-md-3 control-label"> Mật khẩu cũ: </label>
                                             <div class="col-lg-6 col-md-9">
                                                 <input type="password" name="pass"
-                                                       class="validate[required,minSize[4],maxSize[32]] form-control input-sm">
+                                                       class="validate[required,minSize[4],maxSize[32]] form-control input-sm"
+                                                       required>
                                             </div>
                                         </div>
                                     </div>
@@ -206,8 +212,9 @@
                                         <div class="row">
                                             <label class="col-md-3 control-label"> Mật khẩu mới: </label>
                                             <div class="col-lg-6 col-md-9">
-                                                <input type="password" name="pass"
-                                                       class="validate[required,minSize[4],maxSize[32]] form-control input-sm">
+                                                <input type="password" name="newpass"
+                                                       class="validate[required,minSize[4],maxSize[32]] form-control input-sm"
+                                                       required>
                                             </div>
                                         </div>
                                     </div>
@@ -215,8 +222,9 @@
                                         <div class="row">
                                             <label class="col-md-3 control-label"> Xác nhận mật khẩu: </label>
                                             <div class="col-lg-6 col-md-9">
-                                                <input type="password" id="pass" name="pass"
-                                                       class="validate[required,minSize[4],maxSize[32]] form-control input-sm">
+                                                <input type="password" id="pass" name="renewpass"
+                                                       class="validate[required,minSize[4],maxSize[32]] form-control input-sm"
+                                                       required>
                                             </div>
                                         </div>
                                     </div>
@@ -224,8 +232,7 @@
                                         <div class="row">
                                             <label class="col-md-3 control-label"></label>
                                             <div class="col-lg-6 col-md-9">
-                                                <button type="submit" class="btn-update">LƯU
-                                                </button>
+                                                <button class="btn-update">LƯU</button>
                                             </div>
                                         </div>
                                     </div>
