@@ -1,4 +1,4 @@
-package com.example.finallaptrinhweb.controller.user.GoogleService;
+package com.example.finallaptrinhweb.controller.user_page.GoogleService;
 
 import com.example.finallaptrinhweb.dao.UserDAO;
 import com.example.finallaptrinhweb.db.DbProperties;

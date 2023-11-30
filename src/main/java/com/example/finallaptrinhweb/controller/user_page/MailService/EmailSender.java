@@ -1,4 +1,4 @@
-package com.example.finallaptrinhweb.controller.user.MailService;
+package com.example.finallaptrinhweb.controller.user_page.MailService;
 
 
 import com.example.finallaptrinhweb.db.DbProperties;

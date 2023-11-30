@@ -1,7 +1,7 @@
-package com.example.finallaptrinhweb.controller.user;
+package com.example.finallaptrinhweb.controller.user_page;
 
 
-import com.example.finallaptrinhweb.controller.user.MailService.SendEmail;
+import com.example.finallaptrinhweb.controller.user_page.MailService.SendEmail;
 import com.example.finallaptrinhweb.dao.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,10 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(
-        name = "ForgotPass",
-        value = {"/forgotpassword"}
-)
+@WebServlet("/user/forgotpassword")
 public class ForgotPass extends HttpServlet {
     public ForgotPass() {
     }
