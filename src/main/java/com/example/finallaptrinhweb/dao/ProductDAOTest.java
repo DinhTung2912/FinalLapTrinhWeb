@@ -1,25 +1,28 @@
 package com.example.finallaptrinhweb.dao;
 
-import com.example.finallaptrinhweb.connection_pool.DBCPDataSource;
 import com.example.finallaptrinhweb.model.Product;
-
-import javax.sql.DataSource;
 import java.util.List;
 
 public class ProductDAOTest {
     public static void main(String[] args) {
-        // Khởi tạo DataSource từ connection pool configuration
-        DataSource dataSource = DBCPDataSource.getDataSource();
+        // Tạo một đối tượng ProductDAO
+        ProductDAO productDAO = new ProductDAO();
 
-        // Khởi tạo ProductDAO với DataSource
-        ProductDAO productDAO = new ProductDAO(dataSource);
+        // Lấy danh sách sản phẩm cho một danh mục cụ thể (ví dụ: categoryId = 1)
+        List<Product> products = productDAO.getAllProductsByCategory(1);
 
-        // Gọi phương thức getAllProducts để lấy danh sách sản phẩm
-        List<Product> productList = productDAO.getAllProducts();
+        // Hiển thị thông tin các sản phẩm
+        for (Product product : products) {
+            System.out.println("ProductServlet ID: " + product.getId());
+            System.out.println("ProductServlet Code: " + product.getProductCode());
+            System.out.println("ProductServlet Name: " + product.getProductName());
+            System.out.println("Category ID: " + product.getCategoryId());
+            System.out.println("Price: " + product.getPrice());
+            System.out.println("Discount Price: " + product.getDiscountPrice());
+            System.out.println("Image URL: " + product.getImageUrl());
 
-        // In thông tin của các sản phẩm ra màn hình
-        for (Product product : productList) {
-            System.out.println(product);
+
+            System.out.println("---------------------------------------");
         }
     }
 }
