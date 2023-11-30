@@ -2,6 +2,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <% User user = (User) session.getAttribute("auth");%>
+<head>
+    <link rel="stylesheet" href="css/header&footer.css">
+</head>
 <header class="header">
     <div class="container">
         <div class="header-left">
@@ -62,22 +65,31 @@
                 </button>
             </form>
             <div class="action">
+                <%if (user == null) { %>
+                <a class="sign-in" href="./signIn.jsp" style="margin-left: 20px">Đăng nhập</a>
+                <%} else {%>
                 <div class="cart">
                     <span class="count">3</span>
                     <i class="fa-solid fa-cart-shopping material-icons"></i>
                 </div>
-                <%if (user == null) { %>
-                <a class="sign-in" href="./signIn.jsp">Đăng nhập</a>
-                <%} else {%>
-                <div class="wrap-user">
-                    <a class="user" href="user_info.jsp"><%= user.getUsername()%>
-                    </a>
-                    <a class="sign-in" href="signout">Đăng xuất</a>
+                <div class="user-dropdown">
+                    <i class="fas fa-user fa-2x" style="color: #66b840" id="user-icon"></i>
+                    <div class="user-dropdown-content" id="user-dropdown-content">
+                        <ul class="user-menu">
+                            <li class="user-menu-item">
+                                <a href="user_info.jsp"><span class="nav-link-text">Quản lý thông tin cá
+                                                nhân</span></a>
+                            </li>
+                            <li class="user-menu-item">
+                                <a href="signout"><span class="nav-link-text">Đăng xuất</span></a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <%}%>
-
             </div>
         </div>
     </div>
 </header>
+
 

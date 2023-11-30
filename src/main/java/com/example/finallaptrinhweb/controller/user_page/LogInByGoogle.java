@@ -46,7 +46,7 @@ public class LogInByGoogle extends HttpServlet {
 
             HttpSession session = request.getSession();
             session.setAttribute("auth", user);
-            response.sendRedirect("./index.jsp");
+            response.sendRedirect("user/index.jsp");
         } catch (SQLException var8) {
             throw new RuntimeException(var8);
         }

@@ -29,7 +29,7 @@ public class UpdateInfoUser extends HttpServlet {
 
         try {
             UserDAO.getInstance().updateUserInfor(request.getParameter("email"), fullName, birthday, city, district, ward, detail_address, phone);
-            response.sendRedirect("user_info.jsp");
+            response.sendRedirect("user/user_info.jsp");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

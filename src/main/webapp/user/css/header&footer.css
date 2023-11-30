@@ -313,10 +313,6 @@ a {
     vertical-align: middle;
 }
 
-.header-right .action {
-    /* margin-left: 20px; */
-}
-
 .header-right .sign-in:hover {
     cursor: pointer;
 }
@@ -443,4 +439,60 @@ strong {
 
 .min-footer a:hover {
     color: #ff6600;
+}
+
+/*CSS CHO USER INFO */
+.user-dropdown-content {
+    cursor: pointer;
+    position: relative;
+}
+
+.user-dropdown i {
+    cursor: pointer;
+}
+
+.user-dropdown:hover .user-menu{
+    visibility: visible;
+    opacity: 1;
+}
+
+.user-dropdown-content .user-menu {
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+    list-style: none;
+    top: 100%;
+    left: 0;
+    text-align: left;
+    transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1), visibility 0.4s cubic-bezier(0.19, 1, 0.22, 1), transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 10;
+    padding: 12px 10px;
+    margin-top: 15px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.user-dropdown-content .user-menu-item::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 100%;
+    height: 15px;
+}
+
+.user-dropdown-content .user-menu-item a {
+    height: 40px;
+    text-wrap: nowrap;
+    display: flex;
+    align-items: center;
+    padding: 0 15px 0 10px;
+}
+
+.user-dropdown-content .user-menu-item span:hover {
+    color: #26b402;
+}
+
+.user-dropdown-content .user-menu-item span {
+    font-size: 14px;
+    color: #848484
 }

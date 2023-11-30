@@ -35,10 +35,10 @@ public class UserVerify extends HttpServlet {
                 throw new RuntimeException(var7);
             }
 
-            response.sendRedirect("./signIn.jsp");
+            response.sendRedirect("user/signIn.jsp");
         } else {
             request.setAttribute("wrongAuthCode", "Mã xác thực chưa đúng !");
-            request.getRequestDispatcher("./verify.jsp").forward(request, response);
+            request.getRequestDispatcher("user/verify.jsp").forward(request, response);
         }
 
     }

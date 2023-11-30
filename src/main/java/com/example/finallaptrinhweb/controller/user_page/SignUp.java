@@ -39,18 +39,18 @@ public class SignUp extends HttpServlet {
                     if (send.sendVerifyCode(email, code)) {
                         HttpSession session = request.getSession();
                         session.setAttribute("authcode", code);
-                        response.sendRedirect("./verify.jsp");
+                        response.sendRedirect("user/verify.jsp");
                     }
                 } else {
                     request.setAttribute("wrongInfor", "Tài khoản đã tồn tại !");
-                    request.getRequestDispatcher("./signUp.jsp").forward(request, response);
+                    request.getRequestDispatcher("user/signUp.jsp").forward(request, response);
                 }
             } catch (SQLException var10) {
                 throw new RuntimeException(var10);
             }
         } else {
             request.setAttribute("wrongInfor", "Mật khẩu không trùng khớp !");
-            request.getRequestDispatcher("./signUp.jsp").forward(request, response);
+            request.getRequestDispatcher("user/signUp.jsp").forward(request, response);
         }
 
     }

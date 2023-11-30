@@ -42,14 +42,14 @@ public class SignIn extends HttpServlet {
             if (VerifiedStatus) {
                 HttpSession session = request.getSession();
                 session.setAttribute("auth", user);
-                response.sendRedirect("./index.jsp");
+                response.sendRedirect("user/index.jsp");
             } else {
                 request.setAttribute("wrongInfor", "Tài khoản chưa kích hoạt");
-                request.getRequestDispatcher("./signIn.jsp").forward(request, response);
+                request.getRequestDispatcher("user/signIn.jsp").forward(request, response);
             }
         } else {
             request.setAttribute("wrongInfor", "Đăng nhập thất bại");
-            request.getRequestDispatcher("./signIn.jsp").forward(request, response);
+            request.getRequestDispatcher("user/signIn.jsp").forward(request, response);
         }
 
     }

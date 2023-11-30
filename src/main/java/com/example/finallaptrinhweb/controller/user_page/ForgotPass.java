@@ -32,11 +32,11 @@ public class ForgotPass extends HttpServlet {
             if (UserDAO.getInstance().CheckExistUser(email)) {
                 String pass = UserDAO.getInstance().GetPassword(email);
                 if (send.sendPassword(email, pass)) {
-                    response.sendRedirect("./signIn.jsp");
+                    response.sendRedirect("user/signIn.jsp");
                 }
             } else {
                 request.setAttribute("wrongInfor", "Tài khoản không tồn tại !");
-                request.getRequestDispatcher("./forgotPass.jsp").forward(request, response);
+                request.getRequestDispatcher("user/forgotPass.jsp").forward(request, response);
             }
 
         } catch (SQLException var6) {
