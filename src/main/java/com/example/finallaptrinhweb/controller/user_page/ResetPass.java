@@ -1,4 +1,4 @@
-package com.example.finallaptrinhweb.controller.user;
+package com.example.finallaptrinhweb.controller.user_page;
 
 import com.example.finallaptrinhweb.dao.UserDAO;
 import com.example.finallaptrinhweb.model.User;
@@ -8,9 +8,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Enumeration;
 
-@WebServlet(name = "ResetPass", value = "/resetpassword")
+@WebServlet("/user/resetpassword")
 public class ResetPass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

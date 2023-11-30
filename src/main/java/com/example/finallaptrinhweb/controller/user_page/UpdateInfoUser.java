@@ -1,7 +1,6 @@
-package com.example.finallaptrinhweb.controller.user;
+package com.example.finallaptrinhweb.controller.user_page;
 
 import com.example.finallaptrinhweb.dao.UserDAO;
-import com.example.finallaptrinhweb.model.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -9,7 +8,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "UpdateInfoUser", value = "/updateinfouser")
+@WebServlet("/user/updateinfouser")
 public class UpdateInfoUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,7 +28,7 @@ public class UpdateInfoUser extends HttpServlet {
 
         try {
             UserDAO.getInstance().updateUserInfor(request.getParameter("email"), fullName, birthday, city, district, ward, detail_address, phone);
-            response.sendRedirect("user_info.jsp");
+            response.sendRedirect("./user_info.jsp");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -1,4 +1,4 @@
-package com.example.finallaptrinhweb.controller.user;
+package com.example.finallaptrinhweb.controller.user_page;
 
 
 import com.example.finallaptrinhweb.dao.UserDAO;
@@ -12,9 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(
-        name = "UserVerify",
-        value = {"/verify"}
+@WebServlet("/user/verify"
 )
 public class UserVerify extends HttpServlet {
     public UserVerify() {
