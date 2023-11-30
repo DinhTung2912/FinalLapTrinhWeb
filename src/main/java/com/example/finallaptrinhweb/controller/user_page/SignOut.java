@@ -1,4 +1,4 @@
-package com.example.finallaptrinhweb.controller.user;
+package com.example.finallaptrinhweb.controller.user_page;
 
 
 import jakarta.servlet.ServletException;
@@ -10,9 +10,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet(
-        name = "SignOut",
-        value = {"/signout"}
+@WebServlet("/user/signout"
 )
 public class SignOut extends HttpServlet {
     public SignOut() {
@@ -25,6 +23,6 @@ public class SignOut extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.removeAttribute("auth");
-        response.sendRedirect("user/index.jsp");
+        response.sendRedirect("./index.jsp");
     }
 }

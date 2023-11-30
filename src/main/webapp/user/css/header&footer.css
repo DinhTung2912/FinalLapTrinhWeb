@@ -451,7 +451,7 @@ strong {
     cursor: pointer;
 }
 
-.user-dropdown:hover .user-menu{
+.user-dropdown:hover .user-menu {
     visibility: visible;
     opacity: 1;
 }

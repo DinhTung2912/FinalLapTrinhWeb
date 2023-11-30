@@ -44,7 +44,7 @@
                 <div class="or"><span>Hoặc </span></div>
                 <div class="social-icons">
 
-                    <a href="https://accounts.google.com/o/oauth2/auth?scope=profile%20email&redirect_uri=http://localhost:8080/FinalLapTrinhWeb_war_exploded/loginbygoogle&response_type=code&client_id=199448063192-cjher98pjlkob9tpeu7a37gd99n44rbu.apps.googleusercontent.com&prompt=select_account">
+                    <a href="https://accounts.google.com/o/oauth2/auth?scope=profile%20email&redirect_uri=http://localhost:8080/FinalLapTrinhWeb_war_exploded/user/loginbygoogle&response_type=code&client_id=199448063192-cjher98pjlkob9tpeu7a37gd99n44rbu.apps.googleusercontent.com&prompt=select_account">
                         <img src="assets/img/formIcon/google.jpg" alt="Google">
                     </a>
                 </div>

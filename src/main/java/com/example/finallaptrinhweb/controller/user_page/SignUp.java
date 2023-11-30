@@ -1,7 +1,7 @@
-package com.example.finallaptrinhweb.controller.user;
+package com.example.finallaptrinhweb.controller.user_page;
 
 
-import com.example.finallaptrinhweb.controller.user.MailService.SendEmail;
+import com.example.finallaptrinhweb.controller.user_page.MailService.SendEmail;
 import com.example.finallaptrinhweb.dao.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,9 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(
-        name = "SignUp",
-        value = {"/signup"}
+@WebServlet("/user/signup"
 )
 public class SignUp extends HttpServlet {
     public SignUp() {
@@ -39,18 +37,18 @@ public class SignUp extends HttpServlet {
                     if (send.sendVerifyCode(email, code)) {
                         HttpSession session = request.getSession();
                         session.setAttribute("authcode", code);
-                        response.sendRedirect("user/verify.jsp");
+                        response.sendRedirect("./verify.jsp");
                     }
                 } else {
                     request.setAttribute("wrongInfor", "Tài khoản đã tồn tại !");
-                    request.getRequestDispatcher("user/signUp.jsp").forward(request, response);
+                    request.getRequestDispatcher("./signUp.jsp").forward(request, response);
                 }
             } catch (SQLException var10) {
                 throw new RuntimeException(var10);
             }
         } else {
             request.setAttribute("wrongInfor", "Mật khẩu không trùng khớp !");
-            request.getRequestDispatcher("user/signUp.jsp").forward(request, response);
+            request.getRequestDispatcher("./signUp.jsp").forward(request, response);
         }
 
     }

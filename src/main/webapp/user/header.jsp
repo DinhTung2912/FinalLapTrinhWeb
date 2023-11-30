@@ -8,7 +8,7 @@
 <header class="header">
     <div class="container">
         <div class="header-left">
-            <a href="./index.jsp">
+            <a href="index.jsp">
                 <img src="https://tienthangvet.vn/wp-content/uploads/logo-tien-thang-vet.jpg" alt=""/>
             </a>
         </div>
@@ -66,11 +66,13 @@
             </form>
             <div class="action">
                 <%if (user == null) { %>
-                <a class="sign-in" href="./signIn.jsp" style="margin-left: 20px">Đăng nhập</a>
+                <a class="sign-in" href="signIn.jsp" style="margin-left: 20px">Đăng nhập</a>
                 <%} else {%>
                 <div class="cart">
                     <span class="count">3</span>
-                    <i class="fa-solid fa-cart-shopping material-icons"></i>
+                    <a href="cart.jsp">
+                        <i class="fa-solid fa-cart-shopping material-icons"></i>
+                    </a>
                 </div>
                 <div class="user-dropdown">
                     <i class="fas fa-user fa-2x" style="color: #66b840" id="user-icon"></i>

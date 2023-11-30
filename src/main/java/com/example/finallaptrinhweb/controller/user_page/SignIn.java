@@ -1,4 +1,4 @@
-package com.example.finallaptrinhweb.controller.user;
+package com.example.finallaptrinhweb.controller.user_page;
 
 
 import com.example.finallaptrinhweb.dao.UserDAO;
@@ -13,22 +13,20 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(
-        name = "signin",
-        value = {"/signin"}
-)
+@WebServlet("/user/signin")
 public class SignIn extends HttpServlet {
     public SignIn() {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doPost(request, response);
+        doPost(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
         User user = null;
+        System.out.println("signin");
 
         boolean VerifiedStatus;
         try {
@@ -42,14 +40,14 @@ public class SignIn extends HttpServlet {
             if (VerifiedStatus) {
                 HttpSession session = request.getSession();
                 session.setAttribute("auth", user);
-                response.sendRedirect("user/index.jsp");
+                response.sendRedirect("./index.jsp");
             } else {
                 request.setAttribute("wrongInfor", "Tài khoản chưa kích hoạt");
-                request.getRequestDispatcher("user/signIn.jsp").forward(request, response);
+                request.getRequestDispatcher("./signIn.jsp").forward(request, response);
             }
         } else {
             request.setAttribute("wrongInfor", "Đăng nhập thất bại");
-            request.getRequestDispatcher("user/signIn.jsp").forward(request, response);
+            request.getRequestDispatcher("./signIn.jsp").forward(request, response);
         }
 
     }

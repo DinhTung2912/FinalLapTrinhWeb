@@ -1,4 +1,4 @@
-package com.example.finallaptrinhweb.controller.user;
+package com.example.finallaptrinhweb.controller.user_page;
 
 import com.example.finallaptrinhweb.dao.UserDAO;
 import com.example.finallaptrinhweb.model.User;
@@ -8,9 +8,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Enumeration;
 
-@WebServlet(name = "ResetPass", value = "/resetpassword")
+@WebServlet("/user/resetpassword")
 public class ResetPass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,16 +28,16 @@ public class ResetPass extends HttpServlet {
         try {
             if (!UserDAO.getInstance().GetPassword(user.getEmail()).equals(pass)) {
                 request.setAttribute("wrongInfor", "Mật khẩu cũ không trùng khớp !");
-                request.getRequestDispatcher("user/user_info.jsp").forward(request, response);
+                request.getRequestDispatcher("./user_info.jsp").forward(request, response);
 
             } else if (!renewpass.equals(newpass)) {
                 request.setAttribute("wrongInfor", "Mật khẩu không trùng khớp !");
-                request.getRequestDispatcher("user/user_info.jsp").forward(request, response);
+                request.getRequestDispatcher("./user_info.jsp").forward(request, response);
 
             } else {
                 UserDAO.getInstance().updatePassword(user.getEmail(), newpass);
                 request.setAttribute("wrongInfor", "Mật khẩu đã được thay đổi");
-                request.getRequestDispatcher("user/user_info.jsp").forward(request, response);
+                request.getRequestDispatcher("./user_info.jsp").forward(request, response);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

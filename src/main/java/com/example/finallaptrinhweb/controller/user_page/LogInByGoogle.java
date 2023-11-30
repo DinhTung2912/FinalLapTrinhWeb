@@ -1,7 +1,7 @@
-package com.example.finallaptrinhweb.controller.user;
+package com.example.finallaptrinhweb.controller.user_page;
 
 
-import com.example.finallaptrinhweb.controller.user.GoogleService.Service;
+import com.example.finallaptrinhweb.controller.user_page.GoogleService.Service;
 import com.example.finallaptrinhweb.dao.UserDAO;
 import com.example.finallaptrinhweb.model.User;
 import jakarta.servlet.ServletException;
@@ -14,9 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(
-        name = "LogInByGoogle",
-        value = {"/loginbygoogle"}
+@WebServlet("/user/loginbygoogle"
 )
 public class LogInByGoogle extends HttpServlet {
     public LogInByGoogle() {
@@ -46,7 +44,7 @@ public class LogInByGoogle extends HttpServlet {
 
             HttpSession session = request.getSession();
             session.setAttribute("auth", user);
-            response.sendRedirect("user/index.jsp");
+            response.sendRedirect("./index.jsp");
         } catch (SQLException var8) {
             throw new RuntimeException(var8);
         }
