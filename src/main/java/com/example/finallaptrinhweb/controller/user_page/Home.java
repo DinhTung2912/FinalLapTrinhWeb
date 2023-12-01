@@ -21,7 +21,7 @@ public class Home extends HttpServlet {
 
         // Danh sách sản phẩm
         ProductDAO productDAO = new ProductDAO();
-        List<Product> products = productDAO.getAllProducts(0, 3);
+        List<Product> products = productDAO.getAllProductsLimited(0, 3);
         request.setAttribute("products", products);
 
         //Danh sách banner

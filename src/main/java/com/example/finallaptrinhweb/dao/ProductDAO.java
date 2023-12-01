@@ -15,7 +15,25 @@ public class ProductDAO {
     public ProductDAO() {
         // Không cần thiết lập kết nối ở đây, sử dụng getConnection khi cần
     }
-    public List<Product> getAllProducts(int start, int limit) {
+    public List<Product> getAllProducts() {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM products";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Product product = mapResultSetToProduct(resultSet);
+                products.add(product);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return products;
+    }
+    public List<Product> getAllProductsLimited(int start, int limit) {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM products LIMIT ?, ?";
 
@@ -52,6 +70,26 @@ public class ProductDAO {
 
         return total;
     }
+    public Product getProductById(int productId) {
+        Product product = null;
+        String query = "SELECT * FROM products WHERE id = ?";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setInt(1, productId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    product = mapResultSetToProduct(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+
+        }
+
+        return product;
+    }
 
 
 
@@ -82,9 +120,20 @@ public class ProductDAO {
         product.setCategoryId(resultSet.getInt("category_id"));
         product.setPrice(resultSet.getBigDecimal("price"));
         product.setDiscountPrice(resultSet.getBigDecimal("discountPrice"));
+        product.setQuantity(resultSet.getInt("quantity"));
+        product.setStockQuantity(resultSet.getInt("stockQuantity"));
+        product.setIngredients(resultSet.getString("ingredients"));
+        product.setDosage(resultSet.getString("dosage"));
+        product.setInstructions(resultSet.getString("instructions"));
+        product.setWarrantyPeriod(resultSet.getInt("warrantyPeriod"));
+        product.setProductType(resultSet.getString("productType"));
+        product.setSupplierId(resultSet.getInt("supplier_id"));
         product.setImageUrl(resultSet.getString("imageUrl"));
+        product.setActive(resultSet.getBoolean("active"));
 
+        // Bổ sung các trường thông tin khác nếu cần
 
         return product;
     }
+
 }

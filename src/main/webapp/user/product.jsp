@@ -142,12 +142,12 @@
                                   <!-- Hiển thị thông tin sản phẩm -->
                                   <div>
                                       <div class="product-element-top">
-                                          <a href="detail-product.html">
+                                          <a href="product_detail.jsp">
                                               <img src="${product.imageUrl}" alt="">
                                           </a>
                                       </div>
                                       <div class="product-element-bottom">
-                                          <a href="detail-product.html">
+                                          <a href="product_detail.jsp">
                                                   ${product.productName}
                                           </a>
                                       </div>
@@ -156,11 +156,38 @@
                                               <div class="unit">₫</div>
                                               <div class="price">${product.price}</div>
                                           </div>
-                                          <!-- Nút "Thêm vào giỏ hàng" -->
-                                          <!-- Đánh giá sao -->
-                                          <!-- Các nút thêm vào giỏ hàng, xem nhanh, yêu thích -->
+                                          <div class="rating">
+                                              <div class="stars" data-stars="4">
+                                                  <i class="fa-solid fa-star"></i>
+                                                  <i class="fa-solid fa-star"></i>
+                                                  <i class="fa-solid fa-star"></i>
+                                                  <i class="fa-solid fa-star-half-stroke"></i>
+                                                  <i class="fa-regular fa-star"></i>
+                                              </div>
+                                          </div>
+
                                       </div>
 
+
+
+                                  </div>
+                                  <div class="wd-buttons wd-pos-r-t">
+                                      <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href="" class="button product_type_simple add-to-cart-loop" aria-label="">
+                        <span>
+                          <i class="fa-solid fa-cart-shopping"></i>
+                        </span></a></div>
+                                      <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
+                                          <a href="" class="open-quick-view quick-view-button">
+                        <span>
+                          <i class="fa-solid fa-magnifying-glass"></i>
+                        </span></a>
+                                      </div>
+                                      <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
+                                          <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
+                        <span class="wd-tooltip-label">
+                          <i class="fa-regular fa-heart"></i>
+                        </span></a>
+                                      </div>
                                   </div>
                               </div>
                           </c:forEach>
@@ -171,7 +198,7 @@
                       <ul class="pagination-wrapper">
                           <c:forEach begin="1" end="${totalPages}" var="page">
                               <li class="page-item ${page == currentPage ? 'active' : ''}">
-                                  <a class="page-link" href="${pageContext.request.contextPath}/user/product?page=${page}">${page}</a>
+                                  <a class="page-link" href="${pageContext.request.contextPath}/user/products?page=${page}">${page}</a>
                               </li>
                           </c:forEach>
                       </ul>
