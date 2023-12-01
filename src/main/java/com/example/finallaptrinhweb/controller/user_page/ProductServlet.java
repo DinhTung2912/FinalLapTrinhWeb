@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/user/product")
+@WebServlet("/user/products")
 public class ProductServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,7 @@ public class ProductServlet extends HttpServlet {
 
         // Lấy danh sách sản phẩm từ ProductDAO
         ProductDAO productDAO = new ProductDAO();
-        List<Product> products = productDAO.getAllProducts(start, pageSize);
+        List<Product> products = productDAO.getAllProductsLimited(start, pageSize);
 
         // Chuyển danh sách sản phẩm và thông tin phân trang đến trang JSP
         request.setAttribute("product", products);

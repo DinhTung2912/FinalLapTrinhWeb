@@ -5,26 +5,24 @@ import java.util.List;
 
 public class ProductDAOTest {
     public static void main(String[] args) {
+        // Thay thế 1 bằng id sản phẩm mà bạn muốn kiểm thử
+        int productIdToTest = 1;
+
         // Tạo một đối tượng ProductDAO
-        int pageNumber = 1; // Trang đầu tiên
-        int pageSize = 10;  // 10 sản phẩm mỗi trang
-
         ProductDAO productDAO = new ProductDAO();
-        List<Product> products = productDAO.getAllProducts((pageNumber - 1) * pageSize, pageSize);
 
+        // Gọi phương thức để lấy chi tiết sản phẩm theo id
+        Product product = productDAO.getProductById(productIdToTest);
 
-        // Hiển thị thông tin các sản phẩm
-        for (Product product : products) {
-            System.out.println("ProductServlet ID: " + product.getId());
-            System.out.println("ProductServlet Code: " + product.getProductCode());
-            System.out.println("ProductServlet Name: " + product.getProductName());
-            System.out.println("Category ID: " + product.getCategoryId());
-            System.out.println("Price: " + product.getPrice());
-            System.out.println("Discount Price: " + product.getDiscountPrice());
-            System.out.println("Image URL: " + product.getImageUrl());
-
-
-            System.out.println("---------------------------------------");
+        // In thông tin sản phẩm
+        if (product != null) {
+            System.out.println("Thông tin sản phẩm có ID " + productIdToTest + ":");
+            System.out.println("ID: " + product.getId());
+            System.out.println("Tên sản phẩm: " + product.getProductName());
+            System.out.println("Giá: " + product.getPrice());
+            // In thêm thông tin khác nếu cần
+        } else {
+            System.out.println("Không tìm thấy sản phẩm có ID " + productIdToTest);
         }
     }
 }
