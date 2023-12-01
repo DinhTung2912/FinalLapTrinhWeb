@@ -15,6 +15,45 @@ public class ProductDAO {
     public ProductDAO() {
         // Không cần thiết lập kết nối ở đây, sử dụng getConnection khi cần
     }
+    public List<Product> getAllProducts(int start, int limit) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM products LIMIT ?, ?";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setInt(1, start);
+            preparedStatement.setInt(2, limit);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Product product = mapResultSetToProduct(resultSet);
+                    products.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return products;
+    }
+    public int getTotalProducts() {
+        int total = 0;
+        String query = "SELECT COUNT(*) FROM products";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            if (resultSet.next()) {
+                total = resultSet.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return total;
+    }
+
+
 
     public List<Product> getAllProductsByCategory(int categoryId) {
         List<Product> products = new ArrayList<>();

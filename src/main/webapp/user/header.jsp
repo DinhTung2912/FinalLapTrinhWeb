@@ -22,7 +22,7 @@
                         <a href="./pages/introduce.html"><span class="nav-link-text">Giới thiệu</span></a>
                     </li>
                     <li class="menu-item">
-                        <a href="product.jsp"><span class="nav-link-text">Sản phẩm</span></a>
+                        <a href="product"><span class="nav-link-text">Sản phẩm</span></a>
                         <div class="container">
                             <ul class="sub-menu">
                                 <li class="menu-item">
