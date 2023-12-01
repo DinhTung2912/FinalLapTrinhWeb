@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: jonny
-  Date: 24/11/2023
-  Time: 21:27
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -150,7 +144,7 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <a href="pages/products.html">Tất cả sản phẩm</a>
+                                    <a href="product">Tất cả sản phẩm</a>
                                 </div>
                             </div>
                             <div class="service">
@@ -213,117 +207,45 @@
                             <img src="https://tienthangvet.vn/wp-content/uploads/nokodemaseb-tri-nam-dang-xit.jpg"
                                  alt=""/>
                         </div>
-                        <a href="./pages/products.html" class="button">Xem ngay</a>
+                        <a href="product" class="button">Xem ngay</a>
                     </div>
-                    <div class="item">
-                        <div>
-                            <div class="product-element-top">
-                                <a href="pages/detail-product.html">
-                                    <img src="https://tienthangvet.vn/wp-content/uploads/Dipomax-J.jpg" alt="">
-                                </a>
+
+                    <c:forEach var="p" items="${products}">
+                        <div class="item">
+                            <div>
+                                <div class="product-element-top">
+                                    <a href="${pageContext.request.contextPath}/user/detail-product?id=${p.id}">
+                                        <img src="${p.imageUrl}" alt="">
+                                    </a>
+                                </div>
+                                <div class="product-element-bottom">
+                                    <a href="${pageContext.request.contextPath}/user/detail-product?id=${p.id}">
+                                            ${p.productName}
+                                    </a>
+                                </div>
                             </div>
-                            <div class="product-element-bottom">
-                                <a href="pages/detail-product.html">
-                                    Dipomax-J | Trị viêm da, nấm da, triệu chứng viêm da cấp
-                                    trên chó mèo
-                                </a>
-                            </div>
-                        </div>
-                        <div class="wd-buttons wd-pos-r-t">
-                            <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href=""
-                                                                                                    class="button product_type_simple add-to-cart-loop"
-                                                                                                    aria-label="Đọc thêm về “Vắc-xin vô hoạt Nisseiken Swine APM Inactivated Vaccine”">
-                      <span>
-                        <i class="fa-solid fa-cart-shopping"></i>
-                      </span></a></div>
-                            <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
-                                <a href="" class="open-quick-view quick-view-button">
-                      <span>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                      </span></a>
-                            </div>
-                            <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
-                                <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
-                      <span class="wd-tooltip-label">
-                        <i class="fa-regular fa-heart"></i>
-                      </span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div>
-                            <div class="product-element-top">
-                                <a href="pages/detail-product.html">
-                                    <img
-                                            src="https://tienthangvet.vn/wp-content/uploads/nutrimaxplus-bo-sung-vitamin-khoang-cho-thu-cung.jpg"
-                                            alt="">
-                                </a>
-                            </div>
-                            <div class="product-element-bottom">
-                                <a href="pages/detail-product.html">
-                                    Nutrimax-plus | gel dinh dưỡng bổ sung vitamin, khoáng
-                                    dành cho chó mèo
-                                </a>
+                            <div class="wd-buttons wd-pos-r-t">
+                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href="addtocart"
+                                                                                                        class="button product_type_simple add-to-cart-loop">
+                                        <span>
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </span></a></div>
+                                <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
+                                    <a href="" class="open-quick-view quick-view-button">
+                                        <span>
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </span></a>
+                                </div>
+                                <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
+                                    <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
+                                        <span class="wd-tooltip-label">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </span></a>
+                                </div>
                             </div>
                         </div>
-                        <div class="wd-buttons wd-pos-r-t">
-                            <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href=""
-                                                                                                    class="button product_type_simple add-to-cart-loop"
-                                                                                                    aria-label="Đọc thêm về “Vắc-xin vô hoạt Nisseiken Swine APM Inactivated Vaccine”">
-                      <span>
-                        <i class="fa-solid fa-cart-shopping"></i>
-                      </span></a></div>
-                            <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
-                                <a href="" class="open-quick-view quick-view-button">
-                      <span>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                      </span></a>
-                            </div>
-                            <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
-                                <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
-                      <span class="wd-tooltip-label">
-                        <i class="fa-regular fa-heart"></i>
-                      </span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div>
-                            <div class="product-element-top">
-                                <a href="pages/detail-product.html">
-                                    <img
-                                            src="https://tienthangvet.vn/wp-content/uploads/Nokodemaseb-dieu-tri-cac-trieu-chung-do-nam-gay-ra.jpg"
-                                            alt="">
-                                </a>
-                            </div>
-                            <div class="product-element-bottom">
-                                <a href="pages/detail-product.html">
-                                    Nokodermaseb | Dung dịch kháng khuẩn và điều trị nấm dạng
-                                    xịt
-                                </a>
-                            </div>
-                        </div>
-                        <div class="wd-buttons wd-pos-r-t">
-                            <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href=""
-                                                                                                    class="button product_type_simple add-to-cart-loop"
-                                                                                                    aria-label="Đọc thêm về “Vắc-xin vô hoạt Nisseiken Swine APM Inactivated Vaccine”">
-                      <span>
-                        <i class="fa-solid fa-cart-shopping"></i>
-                      </span></a></div>
-                            <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
-                                <a href="" class="open-quick-view quick-view-button">
-                      <span>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                      </span></a>
-                            </div>
-                            <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
-                                <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
-                      <span class="wd-tooltip-label">
-                        <i class="fa-regular fa-heart"></i>
-                      </span></a>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
+
                 </div>
             </div>
         </div>
@@ -337,125 +259,48 @@
                 <div class="container">
                     <div class="display-item">
                         <div class="slider">
+                            <c:forEach var="img_banner" items="${products}">
+                                <div>
+                                    <img src="${img_banner.imageUrl}" alt=""/>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                    <c:forEach var="p" items="${products}">
+                        <div class="item">
                             <div>
-                                <img src="https://tienthangvet.vn/wp-content/uploads/heo.jpg" alt=""/>
+                                <div class="product-element-top">
+                                    <a href="${pageContext.request.contextPath}/user/detail-product?id=${p.id}">
+                                        <img src="${p.imageUrl}" alt="">
+                                    </a>
+                                </div>
+                                <div class="product-element-bottom">
+                                    <a href="${pageContext.request.contextPath}/user/detail-product?id=${p.id}">
+                                            ${p.productName}
+                                    </a>
+                                </div>
                             </div>
-                            <div>
-                                <img src="https://tienthangvet.vn/wp-content/uploads/ga.jpg" alt=""/>
-                            </div>
-                            <div>
-                                <img src="https://tienthangvet.vn/wp-content/uploads/khung-banner-gao.jpg" alt=""/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div>
-                            <div class="product-element-top">
-                                <a href="pages/detail-product.html">
-                                    <img
-                                            src="https://tienthangvet.vn/wp-content/uploads/PROVITA-%E2%80%93-bo-sung-vitamin-khoang-acid-amin-cho-vat-nuoi-khoe-manh-1-768x768.jpg"
-                                            alt="">
-                                </a>
-                            </div>
-                            <div class="product-element-bottom">
-                                <a href="pages/detail-product.html">
-                                    PROVITA – bổ sung vitamin khoáng, acid amin cho vật nuôi khỏe mạnh
-                                </a>
-                            </div>
-                        </div>
-                        <div class="wd-buttons wd-pos-r-t">
-                            <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href=""
-                                                                                                    class="button product_type_simple add-to-cart-loop"
-                                                                                                    aria-label="Đọc thêm về “Vắc-xin vô hoạt Nisseiken Swine APM Inactivated Vaccine”">
-                      <span>
-                        <i class="fa-solid fa-cart-shopping"></i>
-                      </span></a></div>
-                            <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
-                                <a href="" class="open-quick-view quick-view-button">
-                      <span>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                      </span></a>
-                            </div>
-                            <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
-                                <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
-                      <span class="wd-tooltip-label">
-                        <i class="fa-regular fa-heart"></i>
-                      </span></a>
+                            <div class="wd-buttons wd-pos-r-t">
+                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href="addtocart"
+                                                                                                        class="button product_type_simple add-to-cart-loop">
+                                        <span>
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </span></a></div>
+                                <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
+                                    <a href="" class="open-quick-view quick-view-button">
+                                        <span>
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </span></a>
+                                </div>
+                                <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
+                                    <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
+                                        <span class="wd-tooltip-label">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </span></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <div>
-                            <div class="product-element-top">
-                                <a href="pages/detail-product.html">
-                                    <img
-                                            src="https://tienthangvet.vn/wp-content/uploads/Advance-Pro-lim-da-liem-bo-sung-khoang-cho-gia-suc.jpg"
-                                            alt="">
-                                </a>
-                            </div>
-                            <div class="product-element-bottom">
-                                <a href="pages/detail-product.html">
-                                    Advance Pro-lim – Đá liếm bổ sung khoáng cho gia súc
-                                </a>
-                            </div>
-                        </div>
-                        <div class="wd-buttons wd-pos-r-t">
-                            <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href=""
-                                                                                                    class="button product_type_simple add-to-cart-loop"
-                                                                                                    aria-label="Đọc thêm về “Vắc-xin vô hoạt Nisseiken Swine APM Inactivated Vaccine”">
-                      <span>
-                        <i class="fa-solid fa-cart-shopping"></i>
-                      </span></a></div>
-                            <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
-                                <a href="" class="open-quick-view quick-view-button">
-                      <span>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                      </span></a>
-                            </div>
-                            <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
-                                <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
-                      <span class="wd-tooltip-label">
-                        <i class="fa-regular fa-heart"></i>
-                      </span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div>
-                            <div class="product-element-top">
-                                <a href="pages/detail-product.html">
-                                    <img
-                                            src="https://tienthangvet.vn/wp-content/uploads/Super-red-skin-giup-ga-da-san-da-giam-bam-phong-nam..-768x768.jpg"
-                                            alt="">
-                                </a>
-                            </div>
-                            <div class="product-element-bottom">
-                                <a href="pages/detail-product.html">
-                                    SUPER RED SKIN (NANO) – giúp gà đá săn da, giảm bầm, phòng nấm
-                                </a>
-                            </div>
-                        </div>
-                        <div class="wd-buttons wd-pos-r-t">
-                            <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href=""
-                                                                                                    class="button product_type_simple add-to-cart-loop"
-                                                                                                    aria-label="Đọc thêm về “Vắc-xin vô hoạt Nisseiken Swine APM Inactivated Vaccine”">
-                      <span>
-                        <i class="fa-solid fa-cart-shopping"></i>
-                      </span></a></div>
-                            <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
-                                <a href="" class="open-quick-view quick-view-button">
-                      <span>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                      </span></a>
-                            </div>
-                            <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
-                                <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
-                      <span class="wd-tooltip-label">
-                        <i class="fa-regular fa-heart"></i>
-                      </span></a>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>
@@ -469,131 +314,48 @@
                 <div class="container">
                     <div class="display-item">
                         <div class="slider">
+                            <c:forEach var="img_banner" items="${products}">
+                                <div>
+                                    <img src="${img_banner.imageUrl}" alt=""/>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                    <c:forEach var="p" items="${products}">
+                        <div class="item">
                             <div>
-                                <img id="slider1"
-                                     src="https://tienthangvet.vn/wp-content/uploads/Regalos-ca-ngu-600x600.jpg"
-                                     alt=""/>
+                                <div class="product-element-top">
+                                    <a href="${pageContext.request.contextPath}/user/detail-product?id=${p.id}">
+                                        <img src="${p.imageUrl}" alt="">
+                                    </a>
+                                </div>
+                                <div class="product-element-bottom">
+                                    <a href="${pageContext.request.contextPath}/user/detail-product?id=${p.id}">
+                                            ${p.productName}
+                                    </a>
+                                </div>
                             </div>
-                            <div>
-                                <img id="slider2"
-                                     src="https://tienthangvet.vn/wp-content/uploads/Cupid-perfume-huong-Secret-love-tim-600x600.jpg"
-                                     alt=""/>
-                            </div>
-                            <div>
-                                <img id="slider3"
-                                     src="https://tienthangvet.vn/wp-content/uploads/Dau-tam-Modern-Pet-Dermacare-100ml.jpg"
-                                     alt=""/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div>
-                            <div class="product-element-top">
-                                <a href="pages/detail-product.html">
-                                    <img
-                                            src="https://tienthangvet.vn/wp-content/uploads/Os-cal-Vien-ho-tro-chuc-nang-xuong-cho-cho-meo.jpg"
-                                            alt="">
-                                </a>
-                            </div>
-                            <div class="product-element-bottom">
-                                <a href="pages/detail-product.html">
-                                    Os-cal – Viên hỗ trợ chức năng xương cho chó mèo
-                                </a>
-                            </div>
-                        </div>
-                        <div class="wd-buttons wd-pos-r-t">
-                            <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href=""
-                                                                                                    class="button product_type_simple add-to-cart-loop"
-                                                                                                    aria-label="Đọc thêm về “Vắc-xin vô hoạt Nisseiken Swine APM Inactivated Vaccine”">
-                      <span>
-                        <i class="fa-solid fa-cart-shopping"></i>
-                      </span></a></div>
-                            <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
-                                <a href="" class="open-quick-view quick-view-button">
-                      <span>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                      </span></a>
-                            </div>
-                            <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
-                                <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
-                      <span class="wd-tooltip-label">
-                        <i class="fa-regular fa-heart"></i>
-                      </span></a>
+                            <div class="wd-buttons wd-pos-r-t">
+                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href="addtocart"
+                                                                                                        class="button product_type_simple add-to-cart-loop">
+                                        <span>
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </span></a></div>
+                                <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
+                                    <a href="" class="open-quick-view quick-view-button">
+                                        <span>
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </span></a>
+                                </div>
+                                <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
+                                    <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
+                                        <span class="wd-tooltip-label">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </span></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <div>
-                            <div class="product-element-top">
-                                <a href="pages/detail-product.html">
-                                    <img
-                                            src="https://tienthangvet.vn/wp-content/uploads/I-PETT-KIDY-Vien-ho-tro-chuc-nang-than-cho-cho-meo.jpg"
-                                            alt="">
-                                </a>
-                            </div>
-                            <div class="product-element-bottom">
-                                <a href="pages/detail-product.html">
-                                    I-PETT KIDY – Viên hỗ trợ chức năng thận cho chó mèo
-                                </a>
-                            </div>
-                        </div>
-                        <div class="wd-buttons wd-pos-r-t">
-                            <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href=""
-                                                                                                    class="button product_type_simple add-to-cart-loop"
-                                                                                                    aria-label="Đọc thêm về “Vắc-xin vô hoạt Nisseiken Swine APM Inactivated Vaccine”">
-                      <span>
-                        <i class="fa-solid fa-cart-shopping"></i>
-                      </span></a></div>
-                            <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
-                                <a href="" class="open-quick-view quick-view-button">
-                      <span>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                      </span></a>
-                            </div>
-                            <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
-                                <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
-                      <span class="wd-tooltip-label">
-                        <i class="fa-regular fa-heart"></i>
-                      </span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div>
-                            <div class="product-element-top">
-                                <a href="pages/detail-product.html">
-                                    <img
-                                            src="https://tienthangvet.vn/wp-content/uploads/thuoc-bo-Retonic-dung-trong-thu-y-768x768.jpg"
-                                            alt="">
-                                </a>
-                            </div>
-                            <div class="product-element-bottom">
-                                <a href="pages/detail-product.html">
-                                    Retonic – Thuốc bổ thận, bổ gan dùng cho gia cầm
-                                </a>
-                            </div>
-                        </div>
-                        <div class="wd-buttons wd-pos-r-t">
-                            <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href=""
-                                                                                                    class="button product_type_simple add-to-cart-loop"
-                                                                                                    aria-label="Đọc thêm về “Vắc-xin vô hoạt Nisseiken Swine APM Inactivated Vaccine”">
-                      <span>
-                        <i class="fa-solid fa-cart-shopping"></i>
-                      </span></a></div>
-                            <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
-                                <a href="" class="open-quick-view quick-view-button">
-                      <span>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                      </span></a>
-                            </div>
-                            <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
-                                <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
-                      <span class="wd-tooltip-label">
-                        <i class="fa-regular fa-heart"></i>
-                      </span></a>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>
@@ -603,6 +365,11 @@
         <div class="wrapper-container">
             <div class="container">
                 <div class="owl-carousel owl-theme">
+                    <%--                                        <c:forEach var="brand" items="${brands}">--%>
+                    <%--                                            <div class="item">--%>
+                    <%--                                                <img src="${brand.imageUrl}" alt="">--%>
+                    <%--                                            </div>--%>
+                    <%--                                        </c:forEach>--%>
                     <div class="item">
                         <img src="https://tienthangvet.vn/wp-content/uploads/logo-APA.jpg" alt="">
                     </div>

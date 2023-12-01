@@ -8,7 +8,7 @@
 <header class="header">
     <div class="container">
         <div class="header-left">
-            <a href="index.jsp">
+            <a href="home">
                 <img src="https://tienthangvet.vn/wp-content/uploads/logo-tien-thang-vet.jpg" alt=""/>
             </a>
         </div>

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.sql.DataSource;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 
 public class DBCPDataSource {
@@ -37,7 +38,7 @@ public class DBCPDataSource {
     }
 
     static {
-        ds.setDriverClassName("com.mysql.jdbc.Driver");
+        ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         ds.setUrl("jdbc:mysql://localhost:3306/webbanthuocthuy30?useUnicode=yes&characterEncoding=UTF-8");
         ds.setUsername("root");
         ds.setPassword("");
