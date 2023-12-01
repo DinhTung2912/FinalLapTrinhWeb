@@ -6,10 +6,12 @@ import java.util.List;
 public class ProductDAOTest {
     public static void main(String[] args) {
         // Tạo một đối tượng ProductDAO
-        ProductDAO productDAO = new ProductDAO();
+        int pageNumber = 1; // Trang đầu tiên
+        int pageSize = 10;  // 10 sản phẩm mỗi trang
 
-        // Lấy danh sách sản phẩm cho một danh mục cụ thể (ví dụ: categoryId = 1)
-        List<Product> products = productDAO.getAllProductsByCategory(1);
+        ProductDAO productDAO = new ProductDAO();
+        List<Product> products = productDAO.getAllProducts((pageNumber - 1) * pageSize, pageSize);
+
 
         // Hiển thị thông tin các sản phẩm
         for (Product product : products) {
