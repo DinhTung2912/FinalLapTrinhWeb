@@ -26,7 +26,6 @@ public class SignIn extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
         User user = null;
-        System.out.println("signin");
 
         boolean VerifiedStatus;
         try {

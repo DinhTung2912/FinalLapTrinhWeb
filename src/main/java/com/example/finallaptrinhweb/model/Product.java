@@ -172,6 +172,6 @@ public class Product {
     }
 
     public String toString() {
-        return "Product{id=" + this.id + ", productCode='" + this.productCode + "', productName='" + this.productName + "', categoryId=" + this.categoryId + ", price=" + this.price + ", discountPrice=" + this.discountPrice + ", quantity=" + this.quantity + ", stockQuantity=" + this.stockQuantity + ", ingredients='" + this.ingredients + "', dosage='" + this.dosage + "', instructions='" + this.instructions + "', warrantyPeriod=" + this.warrantyPeriod + ", productType='" + this.productType + "', supplierId=" + this.supplierId + ", imageUrl='" + this.imageUrl + "', active=" + this.active + "}";
+        return "ProductServlet{id=" + this.id + ", productCode='" + this.productCode + "', productName='" + this.productName + "', categoryId=" + this.categoryId + ", price=" + this.price + ", discountPrice=" + this.discountPrice + ", quantity=" + this.quantity + ", stockQuantity=" + this.stockQuantity + ", ingredients='" + this.ingredients + "', dosage='" + this.dosage + "', instructions='" + this.instructions + "', warrantyPeriod=" + this.warrantyPeriod + ", productType='" + this.productType + "', supplierId=" + this.supplierId + ", imageUrl='" + this.imageUrl + "', active=" + this.active + "}";
     }
 }

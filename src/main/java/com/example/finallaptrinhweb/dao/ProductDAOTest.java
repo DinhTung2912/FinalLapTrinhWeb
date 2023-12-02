@@ -1,25 +1,28 @@
 package com.example.finallaptrinhweb.dao;
 
-import com.example.finallaptrinhweb.connection_pool.DBCPDataSource;
 import com.example.finallaptrinhweb.model.Product;
-
-import javax.sql.DataSource;
 import java.util.List;
 
 public class ProductDAOTest {
     public static void main(String[] args) {
-        // Khởi tạo DataSource từ connection pool configuration
-        DataSource dataSource = DBCPDataSource.getDataSource();
+        // Thay thế 1 bằng id sản phẩm mà bạn muốn kiểm thử
+        int productIdToTest = 1;
 
-        // Khởi tạo ProductDAO với DataSource
-        ProductDAO productDAO = new ProductDAO(dataSource);
+        // Tạo một đối tượng ProductDAO
+        ProductDAO productDAO = new ProductDAO();
 
-        // Gọi phương thức getAllProducts để lấy danh sách sản phẩm
-        List<Product> productList = productDAO.getAllProducts();
+        // Gọi phương thức để lấy chi tiết sản phẩm theo id
+        Product product = productDAO.getProductById(productIdToTest);
 
-        // In thông tin của các sản phẩm ra màn hình
-        for (Product product : productList) {
-            System.out.println(product);
+        // In thông tin sản phẩm
+        if (product != null) {
+            System.out.println("Thông tin sản phẩm có ID " + productIdToTest + ":");
+            System.out.println("ID: " + product.getId());
+            System.out.println("Tên sản phẩm: " + product.getProductName());
+            System.out.println("Giá: " + product.getPrice());
+            // In thêm thông tin khác nếu cần
+        } else {
+            System.out.println("Không tìm thấy sản phẩm có ID " + productIdToTest);
         }
     }
 }
