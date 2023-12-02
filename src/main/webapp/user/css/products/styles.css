@@ -185,7 +185,7 @@
     margin: 0 5px;
 }
 
-/* Product */
+/* ProductServlet */
 .container .content {
     width: 75%;
 }
@@ -271,7 +271,9 @@
     color: #333;
     opacity: 0.9;
 }
-
+.page-item {
+    margin-right: 10px;
+}
 
 .page-item.active .page-link{
     background-color: #66b840;

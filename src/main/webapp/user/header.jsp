@@ -8,7 +8,7 @@
 <header class="header">
     <div class="container">
         <div class="header-left">
-            <a href="index.jsp">
+            <a href="home">
                 <img src="https://tienthangvet.vn/wp-content/uploads/logo-tien-thang-vet.jpg" alt=""/>
             </a>
         </div>
@@ -22,7 +22,7 @@
                         <a href="./pages/introduce.html"><span class="nav-link-text">Giới thiệu</span></a>
                     </li>
                     <li class="menu-item">
-                        <a href="./pages/products.html"><span class="nav-link-text">Sản phẩm</span></a>
+                        <a href="products"><span class="nav-link-text">Sản phẩm</span></a>
                         <div class="container">
                             <ul class="sub-menu">
                                 <li class="menu-item">
