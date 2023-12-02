@@ -65,15 +65,15 @@
                 </button>
             </form>
             <div class="action">
-                <%if (user == null) { %>
-                <a class="sign-in" href="signIn.jsp" style="margin-left: 20px">Đăng nhập</a>
-                <%} else {%>
                 <div class="cart">
-                    <span class="count">3</span>
-                    <a href="cart.jsp">
+                    <span class="count">${totalItem}</span>
+                    <a href="shoppingcart">
                         <i class="fa-solid fa-cart-shopping material-icons"></i>
                     </a>
                 </div>
+                <%if (user == null) { %>
+                <a class="sign-in" href="signIn.jsp">Đăng nhập</a>
+                <%} else {%>
                 <div class="user-dropdown">
                     <i class="fas fa-user fa-2x" style="color: #66b840" id="user-icon"></i>
                     <div class="user-dropdown-content" id="user-dropdown-content">

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -37,6 +38,9 @@
     <!-- Breadcrumb Section End -->
     <!-- Shoping Cart Section Begin -->
     <section class="shoping-cart spad">
+        <%if (request.getAttribute("items") == null) {%>
+        <h1 style="text-align: center">Vui lòng mua sắm</h1>
+        <%} else {%>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -52,87 +56,34 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="https://tienthangvet.vn/wp-content/uploads/Dipomax-J.jpg" alt="">
+                            <c:forEach var="item" items="${items}">
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                        <img src="${item.imageUrl}" alt="">
 
-                                    <h5>Thuốc trị viêm da</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    45.000 VNĐ
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <span class="dec qtybtn">-</span>
-                                            <input type="text" value="1">
-                                            <span class="inc qtybtn">+</span>
-
+                                        <h5>${item.productName}</h5>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                            ${item.price} VNĐ
+                                    </td>
+                                    <td class="shoping__cart__quantity">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <a href="updatecart?action=decrement&id=${item.id}">-</a>
+                                                <input type="text" value="${cart[item.id]}">
+                                                <a href="updatecart?action=increment&id=${item.id}">+</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    45.000 VNĐ
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                            <span class="icon_close">
-
-                                            </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="https://tienthangvet.vn/wp-content/uploads/AP125RX-2.jpg" alt="">
-                                    <h5>Vắc xin vô hoạt</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    29.000 VNĐ
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <span class="dec qtybtn">-</span>
-                                            <input type="text" value="1">
-                                            <span class="inc qtybtn">+</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    29.000 VNĐ
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                            <span class="icon_close">
-
-                                            </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="https://tienthangvet.vn/wp-content/uploads/Danoguard-khang-sinh-tiem-tri-cac-benh-ho-hap-va-duong-ruot-600x600.jpg"
-                                         alt="">
-                                    <h5>Thuốc kháng sinh tiêm</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    36.000 VNĐ
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <span class="dec qtybtn">-</span>
-                                            <input type="text" value="1">
-                                            <span class="inc qtybtn">+</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    36.000 VNĐ
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                            <span class="icon_close">
-
-                                            </span>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="shoping__cart__total">
+                                            ${item.price * cart[item.id]} VNĐ
+                                    </td>
+                                    <td class="shoping__cart__item__close">
+                                        <a style="font-size: 18px;background-color: white"
+                                           href="updatecart?action=delete&id=${item.id}">X</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -162,7 +113,7 @@
                         <div class="shoping__checkout">
                             <h5>TỔNG TIỀN GIỎ HÀNG</h5>
                             <ul>
-                                <li>Tổng<span>110.000VNĐ</span></li>
+                                <li>Tổng<span>${totalAmount}VNĐ</span></li>
                             </ul>
                             <a href="check_out.html" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>
                         </div>
@@ -171,6 +122,7 @@
 
             </div>
         </div>
+        <%}%>
     </section>
 
 
