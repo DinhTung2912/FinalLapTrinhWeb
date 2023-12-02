@@ -142,12 +142,12 @@
                                   <!-- Hiển thị thông tin sản phẩm -->
                                   <div>
                                       <div class="product-element-top">
-                                          <a href="${pageContext.request.contextPath}/user/product?id=${p.id}">
+                                          <a href="${pageContext.request.contextPath}/user/product?id=${product.id}">
                                               <img src="${product.imageUrl}" alt="">
                                           </a>
                                       </div>
                                       <div class="product-element-bottom">
-                                          <a href="${pageContext.request.contextPath}/user/product?id=${p.id}">
+                                          <a href="${pageContext.request.contextPath}/user/product?id=${product.id}">
                                                   ${product.productName}
                                           </a>
                                       </div>
