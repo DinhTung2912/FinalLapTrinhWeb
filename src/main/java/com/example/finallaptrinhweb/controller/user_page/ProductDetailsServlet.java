@@ -5,6 +5,7 @@ import com.example.finallaptrinhweb.model.Product;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -28,9 +29,13 @@ public class ProductDetailsServlet extends HttpServlet {
                 // Gọi phương thức getProductById để lấy chi tiết sản phẩm
                 Product product = productDAO.getProductById(productId);
 
+                // Sản phẩm tương tự
+                List<Product> products = productDAO.getAllProductsLimited(0, 4);
+
                 if (product != null) {
                     // Đặt đối tượng Product vào request để hiển thị trên trang JSP
                     request.setAttribute("product", product);
+                    request.setAttribute("products", products);
 
                     // Chuyển hướng đến trang product-detail.jsp
                     RequestDispatcher dispatcher = request.getRequestDispatcher("./product_detail.jsp");

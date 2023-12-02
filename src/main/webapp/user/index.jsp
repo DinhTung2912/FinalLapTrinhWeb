@@ -207,19 +207,19 @@
                             <img src="https://tienthangvet.vn/wp-content/uploads/nokodemaseb-tri-nam-dang-xit.jpg"
                                  alt=""/>
                         </div>
-                        <a href="product" class="button">Xem ngay</a>
+                        <a href="products" class="button">Xem ngay</a>
                     </div>
 
                     <c:forEach var="p" items="${products}">
                         <div class="item">
                             <div>
                                 <div class="product-element-top">
-                                    <a href="${pageContext.request.contextPath}/user/detail-product?id=${p.id}">
+                                    <a href="${pageContext.request.contextPath}/user/product?id=${p.id}">
                                         <img src="${p.imageUrl}" alt="">
                                     </a>
                                 </div>
                                 <div class="product-element-bottom">
-                                    <a href="${pageContext.request.contextPath}/user/detail-product?id=${p.id}">
+                                    <a href="${pageContext.request.contextPath}/user/product?id=${p.id}">
                                             ${p.productName}
                                     </a>
                                 </div>
@@ -270,12 +270,12 @@
                         <div class="item">
                             <div>
                                 <div class="product-element-top">
-                                    <a href="${pageContext.request.contextPath}/user/detail-product?id=${p.id}">
+                                    <a href="${pageContext.request.contextPath}/user/product?id=${p.id}">
                                         <img src="${p.imageUrl}" alt="">
                                     </a>
                                 </div>
                                 <div class="product-element-bottom">
-                                    <a href="${pageContext.request.contextPath}/user/detail-product?id=${p.id}">
+                                    <a href="${pageContext.request.contextPath}/user/product?id=${p.id}">
                                             ${p.productName}
                                     </a>
                                 </div>
@@ -325,12 +325,12 @@
                         <div class="item">
                             <div>
                                 <div class="product-element-top">
-                                    <a href="${pageContext.request.contextPath}/user/detail-product?id=${p.id}">
+                                    <a href="${pageContext.request.contextPath}/user/product?id=${p.id}">
                                         <img src="${p.imageUrl}" alt="">
                                     </a>
                                 </div>
                                 <div class="product-element-bottom">
-                                    <a href="${pageContext.request.contextPath}/user/detail-product?id=${p.id}">
+                                    <a href="${pageContext.request.contextPath}/user/product?id=${p.id}">
                                             ${p.productName}
                                     </a>
                                 </div>
