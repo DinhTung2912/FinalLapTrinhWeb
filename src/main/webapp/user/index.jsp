@@ -225,8 +225,9 @@
                                 </div>
                             </div>
                             <div class="wd-buttons wd-pos-r-t">
-                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href="addtocart"
-                                                                                                        class="button product_type_simple add-to-cart-loop">
+                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a
+                                        href="addtocart?action=increment&id=${p.id}"
+                                        class="button product_type_simple add-to-cart-loop">
                                         <span>
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </span></a></div>
@@ -281,8 +282,9 @@
                                 </div>
                             </div>
                             <div class="wd-buttons wd-pos-r-t">
-                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href="addtocart"
-                                                                                                        class="button product_type_simple add-to-cart-loop">
+                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a
+                                        href="addtocart?action=increment&id=${p.id}"
+                                        class="button product_type_simple add-to-cart-loop">
                                         <span>
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </span></a></div>
@@ -336,8 +338,9 @@
                                 </div>
                             </div>
                             <div class="wd-buttons wd-pos-r-t">
-                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a href="addtocart"
-                                                                                                        class="button product_type_simple add-to-cart-loop">
+                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a
+                                        href="addtocart?action=increment&id=${p.id}"
+                                        class="button product_type_simple add-to-cart-loop">
                                         <span>
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </span></a></div>

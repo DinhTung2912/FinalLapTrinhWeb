@@ -118,7 +118,7 @@ public class ProductDAO {
         product.setProductCode(resultSet.getString("productCode"));
         product.setProductName(resultSet.getString("productName"));
         product.setCategoryId(resultSet.getInt("category_id"));
-        product.setPrice(resultSet.getBigDecimal("price"));
+        product.setPrice(resultSet.getDouble("price"));
         product.setDiscountPrice(resultSet.getBigDecimal("discountPrice"));
         product.setQuantity(resultSet.getInt("quantity"));
         product.setStockQuantity(resultSet.getInt("stockQuantity"));
