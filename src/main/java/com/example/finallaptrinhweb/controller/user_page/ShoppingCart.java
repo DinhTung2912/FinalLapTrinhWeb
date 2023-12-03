@@ -1,16 +1,14 @@
 package com.example.finallaptrinhweb.controller.user_page;
 
-import com.example.finallaptrinhweb.dao.ProductDAO;
-import com.example.finallaptrinhweb.model.Product;
+import com.example.finallaptrinhweb.model.Cart;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.util.*;
 
-@WebServlet("/user/shoppingcart")
-public class Cart extends HttpServlet {
+@WebServlet("/user/cart")
+public class ShoppingCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -18,7 +16,17 @@ public class Cart extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Cart cart = (Cart) session.getAttribute("cart");
 
+
+//        get totalPrice after aplly coupon by coupon id
+//        int coupon = cart.getCoupon_code_id();
+//        double totalPrice = cart.getPriceSaled(coupon);
+
+//        request.setAttribute("totalPrice", totalPrice);
+        session.setAttribute("cart", cart);
+        request.getRequestDispatcher("./cart.jsp").forward(request, response);
     }
 
 }
