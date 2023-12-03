@@ -7,8 +7,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet("/user/addtocart")
-public class AddToCart extends HttpServlet {
+@WebServlet("/user/cart")
+public class ShoppingCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -16,19 +16,17 @@ public class AddToCart extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int productId = Integer.parseInt(request.getParameter("id"));
-
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
-        // If the cart doesn't exist, create a new one
-        if (cart == null) {
-            cart = new Cart();
-            session.setAttribute("cart", cart);
-        }
 
-        cart.add(productId);
 
+//        get totalPrice after aplly coupon by coupon id
+//        int coupon = cart.getCoupon_code_id();
+//        double totalPrice = cart.getPriceSaled(coupon);
+
+//        request.setAttribute("totalPrice", totalPrice);
         session.setAttribute("cart", cart);
-        response.sendRedirect("./home");
+        request.getRequestDispatcher("./cart.jsp").forward(request, response);
     }
+
 }
