@@ -248,6 +248,7 @@
                                                                         thoáng mát, tránh ánh sáng trực tiếp.<br/>–
                                                                         Bảo quản ở nhiệt độ phòng, dưới 30oC.
                                                                     </h2>
+                                                                    <h2>Hạn sử dụng: </h2>
                                                                 </div>
                                                             </div>
                                                         </div>
