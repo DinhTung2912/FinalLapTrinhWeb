@@ -207,14 +207,9 @@
                                                                  data-widget_type="text-editor.default">
                                                                 <div class="elementor-widget-container">
                                                                     <p>
-                                                                        DIPROMAX-J là sản phẩm điều trị viêm da
-                                                                        Tiết Bã Do Vi Khuẩn (Staphylococcus
-                                                                        Pseudintermedius),&nbsp; Nấm Men
-                                                                        (Malassezia Pachydermatis) Và Nấm Ngoài
-                                                                        Da (Dermatophytosis). các triệu chứng
-                                                                        viêm da cấp trên chó mèo.
+                                                                        ${product.purpose}
                                                                     </p>
-                                                                    <h1>Thành phần: 1g Dipomax-J chứa</h1>
+                                                                    <h1>Thành phần: ${product.ingredients}</h1>
                                                                     <p>
                                                                         Betamethasone Dipropionate:….0,64
                                                                         mg<br/>Gentamicin
@@ -222,7 +217,7 @@
                                                                         mg<br/>Clotrimazole:……………………………10,0
                                                                         mg<br/>Tá dược vừa đủ:……………………………..1 g
                                                                     </p>
-                                                                    <h2>Hướng dẫn sử dụng:</h2>
+                                                                    <h2>Hướng dẫn sử dụng:${product.instructions}</h2>
                                                                     <p>
                                                                         Liều lượng sử dụng tùy thuộc vào mức độ
                                                                         vùng da bị bệnh.
