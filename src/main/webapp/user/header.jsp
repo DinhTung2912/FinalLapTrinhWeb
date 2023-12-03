@@ -66,7 +66,7 @@
                 </button>
             </form>
             <div class="action">
-                <div class="cart">
+                <div class="cart" style="margin: 0 30px 0 30px;">
                     <%
                         Cart cart = (Cart) session.getAttribute("cart");
                         if (cart != null) {
