@@ -1,4 +1,5 @@
 <%@ page import="com.example.finallaptrinhweb.model.User" %>
+<%@ page import="com.example.finallaptrinhweb.model.Cart" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <% User user = (User) session.getAttribute("auth");%>
@@ -65,9 +66,14 @@
                 </button>
             </form>
             <div class="action">
-                <div class="cart">
-                    <span class="count">${totalItem}</span>
-                    <a href="shoppingcart">
+                <div class="cart" style="margin: 0 30px 0 30px;">
+                    <%
+                        Cart cart = (Cart) session.getAttribute("cart");
+                        if (cart != null) {
+                    %>
+                    <span class="count"><%=cart.getTotalQuantity()%></span>
+                    <%}%>
+                    <a href="cart">
                         <i class="fa-solid fa-cart-shopping material-icons"></i>
                     </a>
                 </div>

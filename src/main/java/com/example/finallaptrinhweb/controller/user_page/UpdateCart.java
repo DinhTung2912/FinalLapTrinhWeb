@@ -1,5 +1,6 @@
 package com.example.finallaptrinhweb.controller.user_page;
 
+import com.example.finallaptrinhweb.model.Cart;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -17,32 +18,43 @@ public class UpdateCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        HashMap<Integer, Integer> cart = (HashMap<Integer, Integer>) session.getAttribute("cart");
 
         String action = request.getParameter("action");
-        int productId = Integer.parseInt(request.getParameter("id"));
-        System.out.println(action);
-        System.out.println(productId);
+        int amount = 0;
+        int productId = 0;
+        try {
+            productId = Integer.parseInt(request.getParameter("id"));
+            amount = Integer.parseInt(request.getParameter("amount"));
+        } catch (NumberFormatException e) {
 
+        }
 
+        Cart cart = (Cart) session.getAttribute("cart");
         // Ensure the product is in the cart
-        if (cart.containsKey(productId)) {
-            int quantity = cart.get(productId);
+        if (cart.getProducts().containsKey(productId)) {
+            int quantity = cart.getProducts().get(productId).getQuantity();
 
             // Perform the requested action
             switch (action) {
                 case "increment":
-                    cart.put(productId, quantity + 1);
+                    cart.getProducts().get(productId).setQuantity(quantity + 1);
                     break;
                 case "decrement":
                     if (quantity > 1) {
-                        cart.put(productId, quantity - 1);
+                        cart.getProducts().get(productId).setQuantity(quantity - 1);
                     } else {
-                        cart.remove(productId);
+                        cart.getProducts().remove(productId);
+                    }
+                    break;
+                case "update":
+                    if (amount > 0) {
+                        cart.getProducts().get(productId).setQuantity(amount);
+                    } else if (amount == 0) {
+                        cart.getProducts().remove(productId);
                     }
                     break;
                 case "delete":
-                    cart.remove(productId);
+                    cart.getProducts().remove(productId);
                     break;
             }
 
@@ -51,7 +63,7 @@ public class UpdateCart extends HttpServlet {
         }
 
         // Redirect back to the cart page
-        response.sendRedirect(request.getContextPath() + "/user/shoppingcart");
+        request.getRequestDispatcher("./cart.jsp").forward(request, response);
     }
 
 }

@@ -178,7 +178,7 @@
                                     </div>
                                     <div class="wd-buttons wd-pos-r-t">
                                         <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a
-                                                href="addtocart?action=increment&id=${product.id}"
+                                                href="addtocart?id=${product.id}"
                                                 class="button product_type_simple add-to-cart-loop" aria-label="">
                         <span>
                           <i class="fa-solid fa-cart-shopping"></i>

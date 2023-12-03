@@ -1,3 +1,5 @@
+<%@ page import="com.example.finallaptrinhweb.model.Cart" %>
+<%@ page import="com.example.finallaptrinhweb.model.CartItem" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -38,7 +40,10 @@
     <!-- Breadcrumb Section End -->
     <!-- Shoping Cart Section Begin -->
     <section class="shoping-cart spad">
-        <%if (request.getAttribute("items") == null) {%>
+        <%
+            Cart cart = (Cart) session.getAttribute("cart");
+            if (cart == null) {
+        %>
         <h1 style="text-align: center">Vui lòng mua sắm</h1>
         <%} else {%>
         <div class="container">
@@ -56,34 +61,45 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="item" items="${items}">
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="${item.imageUrl}" alt="">
+                            <%
+                                System.out.println(cart);
+                                for (CartItem item : cart.getProducts().values()) {
+                            %>
+                            <tr>
+                                <td class="shoping__cart__item">
+                                    <img src="<%=item.getProduct().getImageUrl()%>" alt="">
 
-                                        <h5>${item.productName}</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                            ${item.price} VNĐ
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <a href="updatecart?action=decrement&id=${item.id}">-</a>
-                                                <input type="text" value="${cart[item.id]}">
-                                                <a href="updatecart?action=increment&id=${item.id}">+</a>
-                                            </div>
+                                    <h5><%=item.getProduct().getProductName()%>
+                                    </h5>
+                                </td>
+                                <td class="shoping__cart__price">
+                                    <%=item.getProduct().getPrice()%> VNĐ
+                                </td>
+                                <td class="shoping__cart__quantity">
+                                    <div class="quantity"
+                                         style="align-items: center;display: flex;justify-content: center;">
+                                        <div class="pro-qty"
+                                             style="display: flex;justify-content: center;align-items: center;">
+                                            <a style="padding: 0 10px;"
+                                               href="updatecart?action=decrement&id=<%=item.getProduct().getId()%>">-</a>
+                                            <form action="updatecart?action=update&id=<%=item.getProduct().getId()%>"
+                                                  method="post">
+                                                <input type="text" name="amount" value="<%=item.getQuantity()%>">
+                                            </form>
+                                            <a style="padding: 0 10px;"
+                                               href="updatecart?action=increment&id=<%=item.getProduct().getId()%>">+</a>
                                         </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                            ${item.price * cart[item.id]} VNĐ
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <a style="font-size: 18px;background-color: white"
-                                           href="updatecart?action=delete&id=${item.id}">X</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                                    </div>
+                                </td>
+                                <td class="shoping__cart__total">
+                                    <%=item.getTotalPrice()%> VNĐ
+                                </td>
+                                <td class="shoping__cart__item__close">
+                                    <a style="font-size: 18px;background-color: white"
+                                       href="updatecart?action=delete&id=<%=item.getProduct().getId()%>">X</a>
+                                </td>
+                            </tr>
+                            <%}%>
                             </tbody>
                         </table>
                     </div>
@@ -113,7 +129,7 @@
                         <div class="shoping__checkout">
                             <h5>TỔNG TIỀN GIỎ HÀNG</h5>
                             <ul>
-                                <li>Tổng<span>${totalAmount}VNĐ</span></li>
+                                <li>Tổng<span>${cart.totalPrice}VNĐ</span></li>
                             </ul>
                             <a href="check_out.html" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>
                         </div>
