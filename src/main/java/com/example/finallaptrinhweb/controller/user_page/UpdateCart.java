@@ -20,7 +20,14 @@ public class UpdateCart extends HttpServlet {
         HttpSession session = request.getSession();
 
         String action = request.getParameter("action");
-        int productId = Integer.parseInt(request.getParameter("id"));
+        int amount = 0;
+        int productId = 0;
+        try {
+            productId = Integer.parseInt(request.getParameter("id"));
+            amount = Integer.parseInt(request.getParameter("amount"));
+        } catch (NumberFormatException e) {
+
+        }
 
         Cart cart = (Cart) session.getAttribute("cart");
         // Ensure the product is in the cart
@@ -36,6 +43,13 @@ public class UpdateCart extends HttpServlet {
                     if (quantity > 1) {
                         cart.getProducts().get(productId).setQuantity(quantity - 1);
                     } else {
+                        cart.getProducts().remove(productId);
+                    }
+                    break;
+                case "update":
+                    if (amount > 0) {
+                        cart.getProducts().get(productId).setQuantity(amount);
+                    } else if (amount == 0) {
                         cart.getProducts().remove(productId);
                     }
                     break;

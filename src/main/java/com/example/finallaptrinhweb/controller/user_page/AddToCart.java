@@ -29,6 +29,6 @@ public class AddToCart extends HttpServlet {
         cart.add(productId);
 
         session.setAttribute("cart", cart);
-        response.sendRedirect("./home");
+        response.sendRedirect("./cart");
     }
 }

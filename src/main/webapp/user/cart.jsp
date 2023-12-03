@@ -76,11 +76,18 @@
                                     <%=item.getProduct().getPrice()%> VNĐ
                                 </td>
                                 <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <a href="updatecart?action=decrement&id=<%=item.getProduct().getId()%>">-</a>
-                                            <input type="text" value="<%=item.getQuantity()%>">
-                                            <a href="updatecart?action=increment&id=<%=item.getProduct().getId()%>">+</a>
+                                    <div class="quantity"
+                                         style="align-items: center;display: flex;justify-content: center;">
+                                        <div class="pro-qty"
+                                             style="display: flex;justify-content: center;align-items: center;">
+                                            <a style="padding: 0 10px;"
+                                               href="updatecart?action=decrement&id=<%=item.getProduct().getId()%>">-</a>
+                                            <form action="updatecart?action=update&id=<%=item.getProduct().getId()%>"
+                                                  method="post">
+                                                <input type="text" name="amount" value="<%=item.getQuantity()%>">
+                                            </form>
+                                            <a style="padding: 0 10px;"
+                                               href="updatecart?action=increment&id=<%=item.getProduct().getId()%>">+</a>
                                         </div>
                                     </div>
                                 </td>
