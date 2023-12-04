@@ -118,18 +118,21 @@ public class ProductDAO {
         product.setProductCode(resultSet.getString("productCode"));
         product.setProductName(resultSet.getString("productName"));
         product.setCategoryId(resultSet.getInt("category_id"));
-        product.setPrice(resultSet.getBigDecimal("price"));
+        product.setPrice(resultSet.getDouble("price"));
         product.setDiscountPrice(resultSet.getBigDecimal("discountPrice"));
         product.setQuantity(resultSet.getInt("quantity"));
+        product.setPurpose(resultSet.getString("purpose"));
+        product.setContraindications(resultSet.getString("contraindications"));
         product.setStockQuantity(resultSet.getInt("stockQuantity"));
         product.setIngredients(resultSet.getString("ingredients"));
         product.setDosage(resultSet.getString("dosage"));
         product.setInstructions(resultSet.getString("instructions"));
-        product.setWarrantyPeriod(resultSet.getInt("warrantyPeriod"));
+        product.setWarrantyPeriod(resultSet.getString("warrantyPeriod"));
         product.setProductType(resultSet.getString("productType"));
         product.setSupplierId(resultSet.getInt("supplier_id"));
         product.setImageUrl(resultSet.getString("imageUrl"));
         product.setActive(resultSet.getBoolean("active"));
+
 
         // Bổ sung các trường thông tin khác nếu cần
 

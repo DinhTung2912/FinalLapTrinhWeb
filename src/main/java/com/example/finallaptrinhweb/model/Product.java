@@ -8,14 +8,16 @@ public class Product {
     private String productCode;
     private String productName;
     private int categoryId;
-    private BigDecimal price;
+    private double price;
     private BigDecimal discountPrice;
     private int quantity;
+    private String purpose;
+    private String contraindications;
     private int stockQuantity;
     private String ingredients;
     private String dosage;
     private String instructions;
-    private int warrantyPeriod;
+    private String warrantyPeriod;
     private String productType;
     private int supplierId;
     private String imageUrl;
@@ -24,7 +26,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String productCode, String productName, int categoryId, BigDecimal price, BigDecimal discountPrice, int quantity, int stockQuantity, String ingredients, String dosage, String instructions, int warrantyPeriod, String productType, int supplierId, String imageUrl, boolean active) {
+    public Product(int id, String productCode, String productName, int categoryId, double price, BigDecimal discountPrice, int quantity, String purpose, String contraindications, int stockQuantity, String ingredients, String dosage, String instructions, String warrantyPeriod, String productType, int supplierId, String imageUrl, boolean active) {
         this.id = id;
         this.productCode = productCode;
         this.productName = productName;
@@ -32,6 +34,8 @@ public class Product {
         this.price = price;
         this.discountPrice = discountPrice;
         this.quantity = quantity;
+        this.purpose = purpose;
+        this.contraindications = contraindications;
         this.stockQuantity = stockQuantity;
         this.ingredients = ingredients;
         this.dosage = dosage;
@@ -42,6 +46,7 @@ public class Product {
         this.imageUrl = imageUrl;
         this.active = active;
     }
+
 
     public int getId() {
         return this.id;
@@ -75,11 +80,11 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public BigDecimal getPrice() {
+    public double getPrice() {
         return this.price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -131,16 +136,33 @@ public class Product {
         this.instructions = instructions;
     }
 
-    public int getWarrantyPeriod() {
-        return this.warrantyPeriod;
+
+    public String getWarrantyPeriod() {
+        return warrantyPeriod;
     }
 
-    public void setWarrantyPeriod(int warrantyPeriod) {
+    public void setWarrantyPeriod(String warrantyPeriod) {
         this.warrantyPeriod = warrantyPeriod;
     }
 
     public String getProductType() {
         return this.productType;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public String getContraindications() {
+        return contraindications;
+    }
+
+    public void setContraindications(String contraindications) {
+        this.contraindications = contraindications;
     }
 
     public void setProductType(String productType) {
@@ -171,7 +193,27 @@ public class Product {
         this.active = active;
     }
 
+    @Override
     public String toString() {
-        return "ProductServlet{id=" + this.id + ", productCode='" + this.productCode + "', productName='" + this.productName + "', categoryId=" + this.categoryId + ", price=" + this.price + ", discountPrice=" + this.discountPrice + ", quantity=" + this.quantity + ", stockQuantity=" + this.stockQuantity + ", ingredients='" + this.ingredients + "', dosage='" + this.dosage + "', instructions='" + this.instructions + "', warrantyPeriod=" + this.warrantyPeriod + ", productType='" + this.productType + "', supplierId=" + this.supplierId + ", imageUrl='" + this.imageUrl + "', active=" + this.active + "}";
+        return "Product{" +
+                "id=" + id +
+                ", productCode='" + productCode + '\'' +
+                ", productName='" + productName + '\'' +
+                ", categoryId=" + categoryId +
+                ", price=" + price +
+                ", discountPrice=" + discountPrice +
+                ", quantity=" + quantity +
+                ", purpose='" + purpose + '\'' +
+                ", contraindications='" + contraindications + '\'' +
+                ", stockQuantity=" + stockQuantity +
+                ", ingredients='" + ingredients + '\'' +
+                ", dosage='" + dosage + '\'' +
+                ", instructions='" + instructions + '\'' +
+                ", warrantyPeriod=" + warrantyPeriod +
+                ", productType='" + productType + '\'' +
+                ", supplierId=" + supplierId +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", active=" + active +
+                '}';
     }
 }

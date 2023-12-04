@@ -1,4 +1,5 @@
 <%@ page import="com.example.finallaptrinhweb.model.User" %>
+<%@ page import="com.example.finallaptrinhweb.model.Cart" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <% User user = (User) session.getAttribute("auth");%>
@@ -65,15 +66,20 @@
                 </button>
             </form>
             <div class="action">
-                <%if (user == null) { %>
-                <a class="sign-in" href="signIn.jsp" style="margin-left: 20px">Đăng nhập</a>
-                <%} else {%>
-                <div class="cart">
-                    <span class="count">3</span>
-                    <a href="cart.jsp">
+                <div class="cart" style="margin: 0 30px 0 30px;">
+                    <%
+                        Cart cart = (Cart) session.getAttribute("cart");
+                        if (cart != null) {
+                    %>
+                    <span class="count"><%=cart.getTotalQuantity()%></span>
+                    <%}%>
+                    <a href="cart">
                         <i class="fa-solid fa-cart-shopping material-icons"></i>
                     </a>
                 </div>
+                <%if (user == null) { %>
+                <a class="sign-in" href="signIn.jsp">Đăng nhập</a>
+                <%} else {%>
                 <div class="user-dropdown">
                     <i class="fas fa-user fa-2x" style="color: #66b840" id="user-icon"></i>
                     <div class="user-dropdown-content" id="user-dropdown-content">

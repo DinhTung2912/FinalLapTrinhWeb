@@ -1,3 +1,6 @@
+<%@ page import="com.example.finallaptrinhweb.model.Cart" %>
+<%@ page import="com.example.finallaptrinhweb.model.CartItem" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -37,6 +40,12 @@
     <!-- Breadcrumb Section End -->
     <!-- Shoping Cart Section Begin -->
     <section class="shoping-cart spad">
+        <%
+            Cart cart = (Cart) session.getAttribute("cart");
+            if (cart == null) {
+        %>
+        <h1 style="text-align: center">Vui lòng mua sắm</h1>
+        <%} else {%>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -52,87 +61,45 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <%
+                                System.out.println(cart);
+                                for (CartItem item : cart.getProducts().values()) {
+                            %>
                             <tr>
                                 <td class="shoping__cart__item">
-                                    <img src="https://tienthangvet.vn/wp-content/uploads/Dipomax-J.jpg" alt="">
+                                    <img src="<%=item.getProduct().getImageUrl()%>" alt="">
 
-                                    <h5>Thuốc trị viêm da</h5>
+                                    <h5><%=item.getProduct().getProductName()%>
+                                    </h5>
                                 </td>
                                 <td class="shoping__cart__price">
-                                    45.000 VNĐ
+                                    <%=item.getProduct().getPrice()%> VNĐ
                                 </td>
                                 <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <span class="dec qtybtn">-</span>
-                                            <input type="text" value="1">
-                                            <span class="inc qtybtn">+</span>
-
+                                    <div class="quantity"
+                                         style="align-items: center;display: flex;justify-content: center;">
+                                        <div class="pro-qty"
+                                             style="display: flex;justify-content: center;align-items: center;">
+                                            <a style="padding: 0 10px;"
+                                               href="updatecart?action=decrement&id=<%=item.getProduct().getId()%>">-</a>
+                                            <form action="updatecart?action=update&id=<%=item.getProduct().getId()%>"
+                                                  method="post">
+                                                <input type="text" name="amount" value="<%=item.getQuantity()%>">
+                                            </form>
+                                            <a style="padding: 0 10px;"
+                                               href="updatecart?action=increment&id=<%=item.getProduct().getId()%>">+</a>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="shoping__cart__total">
-                                    45.000 VNĐ
+                                    <%=item.getTotalPrice()%> VNĐ
                                 </td>
                                 <td class="shoping__cart__item__close">
-                                            <span class="icon_close">
-
-                                            </span>
+                                    <a style="font-size: 18px;background-color: white"
+                                       href="updatecart?action=delete&id=<%=item.getProduct().getId()%>">X</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="https://tienthangvet.vn/wp-content/uploads/AP125RX-2.jpg" alt="">
-                                    <h5>Vắc xin vô hoạt</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    29.000 VNĐ
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <span class="dec qtybtn">-</span>
-                                            <input type="text" value="1">
-                                            <span class="inc qtybtn">+</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    29.000 VNĐ
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                            <span class="icon_close">
-
-                                            </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="https://tienthangvet.vn/wp-content/uploads/Danoguard-khang-sinh-tiem-tri-cac-benh-ho-hap-va-duong-ruot-600x600.jpg"
-                                         alt="">
-                                    <h5>Thuốc kháng sinh tiêm</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    36.000 VNĐ
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <span class="dec qtybtn">-</span>
-                                            <input type="text" value="1">
-                                            <span class="inc qtybtn">+</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    36.000 VNĐ
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                            <span class="icon_close">
-
-                                            </span>
-                                </td>
-                            </tr>
+                            <%}%>
                             </tbody>
                         </table>
                     </div>
@@ -162,7 +129,7 @@
                         <div class="shoping__checkout">
                             <h5>TỔNG TIỀN GIỎ HÀNG</h5>
                             <ul>
-                                <li>Tổng<span>110.000VNĐ</span></li>
+                                <li>Tổng<span>${cart.totalPrice}VNĐ</span></li>
                             </ul>
                             <a href="check_out.html" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>
                         </div>
@@ -171,6 +138,7 @@
 
             </div>
         </div>
+        <%}%>
     </section>
 
 

@@ -17,11 +17,13 @@ public class User {
     private String phone;
     private String verifyStatus;
     private int roleId;
+    private Date date_created;
+
 
     public User() {
     }
 
-    public User(int id, String username, String email, String password, String fullName, Date dateOfBirth, String city, String district, String ward, String detail_address, String phone, String verifyStatus, int roleId) {
+    public User(int id, String username, String email, String password, String fullName, Date dateOfBirth, String city, String district, String ward, String detail_address, String phone, String verifyStatus, int roleId, Date date_created) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -35,6 +37,7 @@ public class User {
         this.phone = phone;
         this.verifyStatus = verifyStatus;
         this.roleId = roleId;
+        this.date_created = date_created;
     }
 
     public int getId() {
@@ -141,6 +144,14 @@ public class User {
         this.roleId = roleId;
     }
 
+    public Date getDate_created() {
+        return date_created;
+    }
+
+    public void setDate_created(Date date_created) {
+        this.date_created = date_created;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -157,6 +168,7 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", verifyStatus='" + verifyStatus + '\'' +
                 ", roleId=" + roleId +
+                ", date_created=" + date_created +
                 '}';
     }
 }

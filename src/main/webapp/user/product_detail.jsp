@@ -134,32 +134,34 @@
                                             thú y</a></span>
                             </div>
                             <div class="container">
-                                <button class="add-to-cart-button">
-                                    <svg class="add-to-cart-box box-1" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="24" height="24" rx="2" fill="#ffffff"/>
-                                    </svg>
-                                    <svg class="add-to-cart-box box-2" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="24" height="24" rx="2" fill="#ffffff"/>
-                                    </svg>
-                                    <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                         viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
-                                         stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="9" cy="21" r="1"></circle>
-                                        <circle cx="20" cy="21" r="1"></circle>
-                                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6">
-                                        </path>
-                                    </svg>
-                                    <svg class="tick" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                         viewBox="0 0 24 24">
-                                        <path fill="none" d="M0 0h24v24H0V0z"/>
-                                        <path fill="#ffffff"
-                                              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.29 16.29L5.7 12.7c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L10 14.17l6.88-6.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-7.59 7.59c-.38.39-1.02.39-1.41 0z"/>
-                                    </svg>
-                                    <span class="add-to-cart">Thêm vào giỏ hàng</span>
-                                    <span class="added-to-cart">Đã thêm</span>
-                                </button>
+                                <a style="color: #fff;" href="addtocart?id=${product.id}">
+                                    <button class="add-to-cart-button">
+                                        <svg class="add-to-cart-box box-1" width="24" height="24" viewBox="0 0 24 24"
+                                             fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="24" height="24" rx="2" fill="#ffffff"/>
+                                        </svg>
+                                        <svg class="add-to-cart-box box-2" width="24" height="24" viewBox="0 0 24 24"
+                                             fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="24" height="24" rx="2" fill="#ffffff"/>
+                                        </svg>
+                                        <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="9" cy="21" r="1"></circle>
+                                            <circle cx="20" cy="21" r="1"></circle>
+                                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6">
+                                            </path>
+                                        </svg>
+                                        <svg class="tick" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24">
+                                            <path fill="none" d="M0 0h24v24H0V0z"/>
+                                            <path fill="#ffffff"
+                                                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.29 16.29L5.7 12.7c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L10 14.17l6.88-6.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-7.59 7.59c-.38.39-1.02.39-1.41 0z"/>
+                                        </svg>
+                                        <span class="add-to-cart">Thêm vào giỏ hàng</span>
+                                        <span class="added-to-cart">Đã thêm</span>
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -205,14 +207,9 @@
                                                                  data-widget_type="text-editor.default">
                                                                 <div class="elementor-widget-container">
                                                                     <p>
-                                                                        DIPROMAX-J là sản phẩm điều trị viêm da
-                                                                        Tiết Bã Do Vi Khuẩn (Staphylococcus
-                                                                        Pseudintermedius),&nbsp; Nấm Men
-                                                                        (Malassezia Pachydermatis) Và Nấm Ngoài
-                                                                        Da (Dermatophytosis). các triệu chứng
-                                                                        viêm da cấp trên chó mèo.
+                                                                        ${product.purpose}
                                                                     </p>
-                                                                    <h1>Thành phần: 1g Dipomax-J chứa</h1>
+                                                                    <h1>Thành phần: ${product.ingredients}</h1>
                                                                     <p>
                                                                         Betamethasone Dipropionate:….0,64
                                                                         mg<br/>Gentamicin
@@ -220,7 +217,7 @@
                                                                         mg<br/>Clotrimazole:……………………………10,0
                                                                         mg<br/>Tá dược vừa đủ:……………………………..1 g
                                                                     </p>
-                                                                    <h2>Hướng dẫn sử dụng:</h2>
+                                                                    <h2>Hướng dẫn sử dụng:${product.instructions}</h2>
                                                                     <p>
                                                                         Liều lượng sử dụng tùy thuộc vào mức độ
                                                                         vùng da bị bệnh.
@@ -248,6 +245,7 @@
                                                                         thoáng mát, tránh ánh sáng trực tiếp.<br/>–
                                                                         Bảo quản ở nhiệt độ phòng, dưới 30oC.
                                                                     </h2>
+                                                                    <h2>Hạn sử dụng: </h2>
                                                                 </div>
                                                             </div>
                                                         </div>
