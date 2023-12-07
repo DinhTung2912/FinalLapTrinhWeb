@@ -67,7 +67,7 @@
                                                   aria-required="true"></textarea>
                                     </div>
                                     <div class="elementor-field-group">
-                                        <button type="submit" class="elementor-button">
+                                        <button type="submit" class="elementor-button" onclick="showErrorMessage()">
                                         <span>
                                             <span class="elementor-button-icon">
                                             </span>
@@ -76,6 +76,12 @@
                                         </button>
                                     </div>
                                 </form>
+                                <c:if test="${not empty feedbackMessage}">
+                                    <div id="feedbackMessage" class="feedback-message">${feedbackMessage}</div>
+                                </c:if>
+                                <c:if test="${not empty errorMessage}">
+                                    <div id="errorMessage" class="error-message"  style="color: red;">${errorMessage}</div>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -159,6 +165,20 @@
 
     </div>
     <jsp:include page="footer.jsp"/>
+    <script>
+        // Ẩn thông báo lỗi khi trang được tải
+        window.onload = function() {
+            var errorMessage = document.getElementById('errorMessage');
+            errorMessage.style.display = 'none';
+        }
+
+        // Hàm hiển thị thông báo lỗi khi cần thiết
+        function showErrorMessage() {
+            var errorMessage = document.getElementById('errorMessage');
+            errorMessage.style.display = 'block';
+        }
+    </script>
+
 
 
 

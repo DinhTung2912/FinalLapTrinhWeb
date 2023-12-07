@@ -23,22 +23,30 @@ public class FeedbackServlet extends HttpServlet {
         String email = request.getParameter("email");
         String content = request.getParameter("form_fields[message]");
 
-        // Tạo đối tượng Feedback
-        Feedback feedback = new Feedback();
-        feedback.setName(name);
-        feedback.setEmail(email);
-        feedback.setContent(content);
-        feedback.setSubmissionDate(new Timestamp(new Date().getTime()));
 
-        // Gọi DAO để thêm dữ liệu vào cơ sở dữ liệu
-        boolean success = FeedbackDAO.addFeedback(feedback);
-
-        // Xử lý kết quả
-        if (success) {
-            request.setAttribute("feedbackMessage", "Phản hồi của bạn đã được gửi thành công!");
+        // Kiểm tra dữ liệu đầu vào
+        if (name == null || email == null || content == null || name.isEmpty() || email.isEmpty() || content.isEmpty()) {
+            // Trường dữ liệu không hợp lệ, hiển thị thông báo lỗi
+            request.setAttribute("errorMessage", "Vui lòng nhập đầy đủ thông tin.");
         } else {
-            request.setAttribute("errorMessage", "Có lỗi xảy ra khi gửi phản hồi. Vui lòng thử lại sau.");
+            // Dữ liệu hợp lệ, tiếp tục xử lý
+            Feedback feedback = new Feedback();
+            feedback.setName(name);
+            feedback.setEmail(email);
+            feedback.setContent(content);
+            feedback.setSubmissionDate(new Timestamp(new Date().getTime()));
+
+            // Gọi DAO để thêm dữ liệu vào cơ sở dữ liệu
+            boolean success = FeedbackDAO.addFeedback(feedback);
+
+            // Xử lý kết quả
+            if (success) {
+                request.setAttribute("feedbackMessage", "Phản hồi của bạn đã được gửi thành công!");
+            } else {
+                request.setAttribute("errorMessage", "Có lỗi xảy ra khi gửi phản hồi. Vui lòng thử lại sau.");
+            }
         }
+
 
         // Ví dụ: Hiển thị một trang form
         request.getRequestDispatcher("./contact.jsp").forward(request, response);
