@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en">
 
 <head>
@@ -45,7 +46,7 @@
                         </div>
                         <div class="elementor-element elementor">
                             <div class="elementor-widget-container">
-                                 <form class="elementor-form" method="post" action="${pageContext.request.contextPath}/feedback">
+                                 <form class="elementor-form" method="post" action="${pageContext.request.contextPath}/user/feedback">
                                     <div class="elementor-field-type-text">
                                         <label for="form-name" class="elementor-label">
                                             Họ tên </label>
@@ -57,12 +58,6 @@
                                             Email </label>
                                         <input size="1" type="email" name="email" id="form-email" class="elementor-field"
                                                placeholder="Email" required="required" aria-required="true">
-                                    </div>
-                                    <div class="elementor-field-type-text">
-                                        <label for="form-field" class="elementor-label">
-                                            Tiêu đề </label>
-                                        <input size="1" type="text" name="text" id="form-field" class="elementor-field"
-                                               placeholder="Tiêu đề" required="required" aria-required="true">
                                     </div>
                                     <div class="elementor-field-type-textarea">
                                         <label for="form-message" class="elementor-label">
@@ -164,6 +159,8 @@
 
     </div>
     <jsp:include page="footer.jsp"/>
+
+
 
     <script>
         window.addEventListener('scroll', () => {
