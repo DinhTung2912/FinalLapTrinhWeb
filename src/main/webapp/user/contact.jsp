@@ -45,7 +45,7 @@
                         </div>
                         <div class="elementor-element elementor">
                             <div class="elementor-widget-container">
-                                <form class="elementor-form" method="post" name="Cơ hội hợp tác với chúng tôi">
+                                 <form class="elementor-form" method="post" action="${pageContext.request.contextPath}/feedback">
                                     <div class="elementor-field-type-text">
                                         <label for="form-name" class="elementor-label">
                                             Họ tên </label>
