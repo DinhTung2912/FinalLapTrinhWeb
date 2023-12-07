@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en">
 
 <head>
@@ -45,7 +46,7 @@
                         </div>
                         <div class="elementor-element elementor">
                             <div class="elementor-widget-container">
-                                <form class="elementor-form" method="post" name="Cơ hội hợp tác với chúng tôi">
+                                 <form class="elementor-form" method="post" action="${pageContext.request.contextPath}/user/feedback">
                                     <div class="elementor-field-type-text">
                                         <label for="form-name" class="elementor-label">
                                             Họ tên </label>
@@ -58,12 +59,6 @@
                                         <input size="1" type="email" name="email" id="form-email" class="elementor-field"
                                                placeholder="Email" required="required" aria-required="true">
                                     </div>
-                                    <div class="elementor-field-type-text">
-                                        <label for="form-field" class="elementor-label">
-                                            Tiêu đề </label>
-                                        <input size="1" type="text" name="text" id="form-field" class="elementor-field"
-                                               placeholder="Tiêu đề" required="required" aria-required="true">
-                                    </div>
                                     <div class="elementor-field-type-textarea">
                                         <label for="form-message" class="elementor-label">
                                             Nội dung liên hệ </label>
@@ -72,7 +67,7 @@
                                                   aria-required="true"></textarea>
                                     </div>
                                     <div class="elementor-field-group">
-                                        <button type="submit" class="elementor-button">
+                                        <button type="submit" class="elementor-button" onclick="showErrorMessage()">
                                         <span>
                                             <span class="elementor-button-icon">
                                             </span>
@@ -81,6 +76,12 @@
                                         </button>
                                     </div>
                                 </form>
+                                <c:if test="${not empty feedbackMessage}">
+                                    <div id="feedbackMessage" class="feedback-message">${feedbackMessage}</div>
+                                </c:if>
+                                <c:if test="${not empty errorMessage}">
+                                    <div id="errorMessage" class="error-message"  style="color: red;">${errorMessage}</div>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -164,6 +165,22 @@
 
     </div>
     <jsp:include page="footer.jsp"/>
+    <script>
+        // Ẩn thông báo lỗi khi trang được tải
+        window.onload = function() {
+            var errorMessage = document.getElementById('errorMessage');
+            errorMessage.style.display = 'none';
+        }
+
+        // Hàm hiển thị thông báo lỗi khi cần thiết
+        function showErrorMessage() {
+            var errorMessage = document.getElementById('errorMessage');
+            errorMessage.style.display = 'block';
+        }
+    </script>
+
+
+
 
     <script>
         window.addEventListener('scroll', () => {

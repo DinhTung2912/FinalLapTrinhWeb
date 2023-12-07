@@ -50,7 +50,7 @@
                         </div>
                     </li>
                     <li class="menu-item">
-                        <a href="contact.jsp"><span class="nav-link-text">Liên hệ</span></a>
+                        <a href="feedback"><span class="nav-link-text">Liên hệ</span></a>
                     </li>
                 </ul>
             </div>
