@@ -50,7 +50,7 @@
                         </div>
                     </li>
                     <li class="menu-item">
-                        <a href="./pages/contact.html"><span class="nav-link-text">Liên hệ</span></a>
+                        <a href="contact.jsp"><span class="nav-link-text">Liên hệ</span></a>
                     </li>
                 </ul>
             </div>
