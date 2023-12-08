@@ -58,13 +58,19 @@
                                             Email </label>
                                         <input size="1" type="email" name="email" id="form-email" class="elementor-field"
                                                placeholder="Email" required="required" aria-required="true">
+                                        <c:if test="${not empty emailError}">
+                                            <div id="emailError" class="error-message" style="color: red;">${emailError}</div>
+                                        </c:if>
                                     </div>
-                                    <div class="elementor-field-type-textarea">
+                                     <div class="elementor-field-type-textarea">
                                         <label for="form-message" class="elementor-label">
-                                            Nội dung liên hệ </label>
+                                            Đóng góp ý kiến </label>
                                         <textarea class="elementor-field-textual" name="form_fields[message]"
-                                                  id="form-message" rows="4" placeholder="Nội dung liên hệ" required="required"
+                                                  id="form-message" rows="4" placeholder="Nội dung đóng góp" required="required"
                                                   aria-required="true"></textarea>
+                                         <c:if test="${not empty contentError}">
+                                             <div id="contentError" class="error-message" style="color: red;">${contentError}</div>
+                                         </c:if>
                                     </div>
                                     <div class="elementor-field-group">
                                         <button type="submit" class="elementor-button" onclick="showErrorMessage()">
@@ -77,7 +83,7 @@
                                     </div>
                                 </form>
                                 <c:if test="${not empty feedbackMessage}">
-                                    <div id="feedbackMessage" class="feedback-message">${feedbackMessage}</div>
+                                    <div id="feedbackMessage" class="feedback-message" style="color: Green;">${feedbackMessage}</div>
                                 </c:if>
                                 <c:if test="${not empty errorMessage}">
                                     <div id="errorMessage" class="error-message"  style="color: red;">${errorMessage}</div>
@@ -165,6 +171,31 @@
 
     </div>
     <jsp:include page="footer.jsp"/>
+
+
+    <script>
+        // Ẩn thông báo lỗi khi trang được tải
+        window.onload = function() {
+            var errorMessage = document.getElementById('errorMessage');
+            errorMessage.innerHTML = "${emailError}";
+            errorMessage.style.display = '${not empty emailError ? "block" : "none"}';
+
+            var contentError = document.getElementById('contentError');
+            contentError.innerHTML = "${contentError}";
+            contentError.style.display = '${not empty contentError ? "block" : "none"}';
+        }
+
+        // Hàm ẩn thông báo lỗi
+        function hideErrorMessage() {
+            var errorMessage = document.getElementById('errorMessage');
+            errorMessage.style.display = 'none';
+
+            var contentError = document.getElementById('contentError');
+            contentError.style.display = 'none';
+        }
+    </script>
+
+
     <script>
         // Ẩn thông báo lỗi khi trang được tải
         window.onload = function() {

@@ -91,8 +91,6 @@ public class ProductDAO {
         return product;
     }
 
-
-
     public List<Product> getAllProductsByCategory(int categoryId) {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM products WHERE category_id = ?";
