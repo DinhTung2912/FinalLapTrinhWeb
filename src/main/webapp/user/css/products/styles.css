@@ -180,7 +180,7 @@
     color: #777;
 }
 
-.woocommerce-breadcrumb a:first-child::after {
+.woocommerce-breadcrumb :after {
     content: "/";
     margin: 0 5px;
 }

@@ -1,12 +1,14 @@
 package com.example.finallaptrinhweb.dao;
 
 import com.example.finallaptrinhweb.connection_pool.DBCPDataSource;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.example.finallaptrinhweb.model.Product;
 
 public class ProductDAO {
@@ -15,6 +17,7 @@ public class ProductDAO {
     public ProductDAO() {
         // Không cần thiết lập kết nối ở đây, sử dụng getConnection khi cần
     }
+
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM products";
@@ -33,6 +36,7 @@ public class ProductDAO {
 
         return products;
     }
+
     public List<Product> getAllProductsLimited(int start, int limit) {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM products LIMIT ?, ?";
@@ -53,6 +57,7 @@ public class ProductDAO {
 
         return products;
     }
+
     public int getTotalProducts() {
         int total = 0;
         String query = "SELECT COUNT(*) FROM products";
@@ -70,6 +75,7 @@ public class ProductDAO {
 
         return total;
     }
+
     public Product getProductById(int productId) {
         Product product = null;
         String query = "SELECT * FROM products WHERE id = ?";
@@ -91,6 +97,27 @@ public class ProductDAO {
         return product;
     }
 
+    public List<Product> searchProducts(String searchTerm) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM products WHERE productName LIKE ?";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setString(1, "%" + searchTerm + "%");
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Product product = mapResultSetToProduct(resultSet);
+                    products.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return products;
+    }
+
+
     public List<Product> getAllProductsByCategory(int categoryId) {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM products WHERE category_id = ?";
@@ -109,6 +136,7 @@ public class ProductDAO {
 
         return products;
     }
+
 
     private Product mapResultSetToProduct(ResultSet resultSet) throws SQLException {
         Product product = new Product();
