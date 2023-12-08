@@ -206,29 +206,25 @@
                                                                  data-id="1400a071" data-element_type="widget"
                                                                  data-widget_type="text-editor.default">
                                                                 <div class="elementor-widget-container">
+                                                                    <h1>Công dụng:</h1>
                                                                     <p>
-                                                                        DIPROMAX-J là sản phẩm điều trị viêm da
-                                                                        Tiết Bã Do Vi Khuẩn (Staphylococcus
-                                                                        Pseudintermedius),&nbsp; Nấm Men
-                                                                        (Malassezia Pachydermatis) Và Nấm Ngoài
-                                                                        Da (Dermatophytosis). các triệu chứng
-                                                                        viêm da cấp trên chó mèo.
+                                                                        ${product.purpose}
                                                                     </p>
-                                                                    <h1>Thành phần: 1g Dipomax-J chứa</h1>
-                                                                    <p>
+                                                                    <h1>Thành phần: ${product.ingredients}</h1>
+                                                          <%--          <p>
                                                                         Betamethasone Dipropionate:….0,64
                                                                         mg<br/>Gentamicin
                                                                         Sulfate:……………………1,0
                                                                         mg<br/>Clotrimazole:……………………………10,0
                                                                         mg<br/>Tá dược vừa đủ:……………………………..1 g
-                                                                    </p>
+                                                                    </p> --%>
+                                                                    <h2>Liều lượng: ${product.dosage} </h2>
                                                                     <h2>Hướng dẫn sử dụng:</h2>
                                                                     <p>
-                                                                        Liều lượng sử dụng tùy thuộc vào mức độ
-                                                                        vùng da bị bệnh.
+                                                                        ${product.instructions}
                                                                     </p>
-                                                                    <p>
-                                                                        ► Bôi kem vào vùng da bị bệnh, nên cắt
+                                                                    <%--          <p>
+                                                                       ► Bôi kem vào vùng da bị bệnh, nên cắt
                                                                         tỉa lông trước khi thoa thuốc.<br/>►
                                                                         Liều lượng sử dụng tùy thuộc vào mức độ
                                                                         vùng da bị bệnh.<br/>► Thoa 2 lần/ngày
@@ -236,10 +232,11 @@
                                                                         triệu chứng viêm da, nấm da (tối đa 2 –
                                                                         4 tuần).<br/>► Lặp lại nếu cần thiết
                                                                         sau 20 ngày.
-                                                                    </p>
-                                                                    <h2>Dạng bào chế: Kem bôi ngoài da</h2>
+                                                                    </p> --%>
+                                                                    <h2>Dạng bào chế: ${product.productType} </h2>
                                                                     <h2>CHỐNG CHỈ ĐỊNH:</h2>
                                                                     <p>
+                                                                        - ${product.contraindications}<br/>
                                                                         – Không để thuốc dính vào mắt hoặc bôi
                                                                         lên vết thương hở.<br/>– Không dùng cho
                                                                         vật nuôi quá mẫn cảm với bất kỳ thành
@@ -250,6 +247,7 @@
                                                                         thoáng mát, tránh ánh sáng trực tiếp.<br/>–
                                                                         Bảo quản ở nhiệt độ phòng, dưới 30oC.
                                                                     </h2>
+                                                                    <h2>Hạn sử dụng: ${product.warrantyPeriod}</h2>
                                                                 </div>
                                                             </div>
                                                         </div>

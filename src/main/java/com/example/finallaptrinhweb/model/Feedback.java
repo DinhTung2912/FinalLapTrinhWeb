@@ -1,32 +1,21 @@
-
 package com.example.finallaptrinhweb.model;
 
 import java.sql.Timestamp;
 
 public class Feedback {
-    private int id;
     private String email;
-    private int userId;
+    private String name;
     private String content;
     private Timestamp submissionDate;
 
     public Feedback() {
     }
 
-    public Feedback(int id, String email, int userId, String content, Timestamp submissionDate) {
-        this.id = id;
+    public Feedback(String email, String name, String content, Timestamp submissionDate) {
         this.email = email;
-        this.userId = userId;
+        this.name = name;
         this.content = content;
         this.submissionDate = submissionDate;
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getEmail() {
@@ -37,12 +26,12 @@ public class Feedback {
         this.email = email;
     }
 
-    public int getUserId() {
-        return this.userId;
+    public String getName() {
+        return this.name;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getContent() {
@@ -62,6 +51,6 @@ public class Feedback {
     }
 
     public String toString() {
-        return "Feedback{id=" + this.id + ", email='" + this.email + "', userId=" + this.userId + ", content='" + this.content + "', submissionDate=" + this.submissionDate + "}";
+        return "Feedback{ email='" + this.email + "', name='" + this.name + "', content='" + this.content + "', submissionDate=" + this.submissionDate + "}";
     }
 }
