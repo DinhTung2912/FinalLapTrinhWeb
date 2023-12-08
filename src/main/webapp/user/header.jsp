@@ -50,15 +50,15 @@
                         </div>
                     </li>
                     <li class="menu-item">
-                        <a href="./pages/contact.html"><span class="nav-link-text">Liên hệ</span></a>
+                        <a href="feedback"><span class="nav-link-text">Liên hệ</span></a>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="header-right">
-            <form role="search" method="get" class="searchform" action="" data-thumbnail="1" data-price="1"
+            <form role="search" method="get" class="searchform" action=products?action=search data-thumbnail="1" data-price="1"
                   data-post_type="product" data-count="20" data-sku="0" data-symbols_count="3">
-                <input type="text" class="s" placeholder="Tìm kiếm sản phẩm" value="" name="s" aria-label="Search"
+                <input type="text" id="searchTerm" name="searchTerm" class="s" placeholder="Tìm kiếm sản phẩm" value="" aria-label="Search"
                        title="Search for products" required=""/>
                 <input type="hidden" name="post_type" value="product"/>
                 <button type="submit" class="searchsubmit">

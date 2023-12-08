@@ -22,7 +22,7 @@
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="/css/header&footer.css"/>
-    <link rel="stylesheet" href="css/products/styles.css"/>
+    <link rel="stylesheet" href="css/products/styles.css?v=2"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
           integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -135,7 +135,9 @@
                             <div class="wd-breadcrumbs">
                                 <nav class="woocommerce-breadcrumb">
                                     <a href="" class="breadcrumb-link"> Trang chủ </a>
-                                    <a href="" class="breadcrumb-link breadcrumb-link-last">Sản phẩm</a>
+                                    <a href="" class="breadcrumb-link ${param.searchTerm == null ? 'breadcrumb-link-last' : ''}">Sản phẩm</a>
+                                    <p ${param.searchTerm == null ?  'style="display: none"' : 'style="font-weight: bold"'}>Kết quả tìm kiếm cho "${param.searchTerm}" </p>
+
                                 </nav>
                             </div>
                         </div>
