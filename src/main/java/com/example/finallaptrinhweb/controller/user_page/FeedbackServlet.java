@@ -10,6 +10,9 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 @WebServlet("/user/feedback")
 public class FeedbackServlet extends HttpServlet {
@@ -28,6 +31,12 @@ public class FeedbackServlet extends HttpServlet {
         if (name == null || email == null || content == null || name.isEmpty() || email.isEmpty() || content.isEmpty()) {
             // Trường dữ liệu không hợp lệ, hiển thị thông báo lỗi
             request.setAttribute("errorMessage", "Vui lòng nhập đầy đủ thông tin.");
+        } else if (!isValidEmail(email)) {
+            // Kiểm tra email có đúng định dạng không
+            request.setAttribute("emailError", "Địa chỉ email không hợp lệ. Vui lòng nhập lại");
+        } else if (content.length() < 10) {
+            // Kiểm tra nội dung đóng góp có ít nhất 10 ký tự không
+            request.setAttribute("contentError", "Nội dung đóng góp phải có ít nhất 10 ký tự.");
         } else {
             // Dữ liệu hợp lệ, tiếp tục xử lý
             Feedback feedback = new Feedback();
@@ -50,5 +59,12 @@ public class FeedbackServlet extends HttpServlet {
 
         // Ví dụ: Hiển thị một trang form
         request.getRequestDispatcher("./contact.jsp").forward(request, response);
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 }
