@@ -20,13 +20,23 @@ public class ProductServlet extends HttpServlet {
         // Số sản phẩm mỗi trang
         int pageSize = 9;
 
+        //get search term
+        String searchTerm = request.getParameter("searchTerm");
+
         // Tính vị trí bắt đầu của trang hiện tại
         int start = (pageNumber - 1) * pageSize;
 
         // Lấy danh sách sản phẩm từ ProductDAO
         ProductDAO productDAO = new ProductDAO();
-        List<Product> products = productDAO.getAllProductsLimited(start, pageSize);
+        List<Product> products;
 
+        if (searchTerm == null || searchTerm.isEmpty()) {
+            products = productDAO.getAllProductsLimited(start, pageSize);
+        } else {
+            products = productDAO.searchProducts(searchTerm);
+        }
+        //cái này anh tý nữa xử lý phân trang lại nhé, sau khi search nó cũng cần phân trang
+        //lấy đc ra r đó anh
         // Chuyển danh sách sản phẩm và thông tin phân trang đến trang JSP
         request.setAttribute("product", products);
 
@@ -39,6 +49,9 @@ public class ProductServlet extends HttpServlet {
         // Truyền thông tin phân trang đến trang JSP
         request.setAttribute("totalPages", totalPages);
         request.setAttribute("currentPage", pageNumber);
+
+
+
 
         // Chuyển hướng đến trang JSP để hiển thị danh sách và phân trang
         request.getRequestDispatcher("./product.jsp").forward(request, response);
