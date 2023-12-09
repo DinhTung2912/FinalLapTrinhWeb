@@ -35,8 +35,6 @@ public class ProductServlet extends HttpServlet {
         } else {
             products = productDAO.searchProducts(searchTerm);
         }
-        //cái này anh tý nữa xử lý phân trang lại nhé, sau khi search nó cũng cần phân trang
-        //lấy đc ra r đó anh
         // Chuyển danh sách sản phẩm và thông tin phân trang đến trang JSP
         request.setAttribute("product", products);
 
