@@ -94,7 +94,7 @@
                                     <a href="" class="breadcrumb-link">Sản phẩm</a>
                                     <% String url = (String) request.getAttribute("url");%>
                                     <%if(url != null) {%>
-                                    <a href="" class="breadcrumb-link"><%=url%></a>
+                                    <a href="" class="breadcrumb-link">Kết quả tìm kiếm cho: <%=url%></a>
                                     <%}%>
                                 </nav>
                             </div>
