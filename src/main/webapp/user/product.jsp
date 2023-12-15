@@ -54,13 +54,10 @@
                         <div id="categories-1" class="widget">
                             <span class="widget-title">Danh mục sản phẩm</span>
                             <ul class="product-categories">
-                                <li class="item"><a href="">Vắc xin</a></li>
-                                <li class="item"><a href="">Kháng sinh</a></li>
-                                <li class="item"><a href="">Sát trùng</a></li>
-                                <li class="item"><a href="">Hooc môn</a></li>
-                                <li class="item"><a href="">Dinh dưỡng</a></li>
-                                <li class="item"><a href="">Dầu tắm</a></li>
-                                <!-- Các danh mục khác -->
+                                <li class="item"><a href="${pageContext.request.contextPath}/user/products">Tất cả</a></li>
+                                <c:forEach var="object" items="${objects}">
+                                    <li class="item"><a href="${pageContext.request.contextPath}/user/products?category=${object.key}">${object.key}</a></li>
+                                </c:forEach>
                             </ul>
                         </div>
                         <!-- Lọc theo đối tượng -->
