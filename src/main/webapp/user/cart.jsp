@@ -131,7 +131,8 @@
                             <ul>
                                 <li>Tổng<span>${cart.totalPrice}VNĐ</span></li>
                             </ul>
-                            <a href="check_out.html" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>
+                            <% session.setAttribute("cart", cart); %>
+                            <a href="check_out.jsp" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>
                         </div>
                     </div>
                 </div>

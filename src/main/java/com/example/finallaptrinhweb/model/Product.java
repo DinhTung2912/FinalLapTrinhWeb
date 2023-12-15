@@ -193,6 +193,21 @@ public class Product {
         this.active = active;
     }
 
+    public int getTypeWeight() {
+        // Assuming productType is a String field indicating the type of the product.
+        // You can customize this logic based on your specific requirements.
+
+        if ("TypeA".equals(productType)) {
+            return 1;
+        } else if ("TypeB".equals(productType)) {
+            return 2;
+        } else if ("TypeC".equals(productType)) {
+            return 3;
+        } else {
+            // Default type weight if none of the conditions are met.
+            return 0;
+        }
+    }
     @Override
     public String toString() {
         return "Product{" +
