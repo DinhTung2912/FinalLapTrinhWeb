@@ -12,6 +12,8 @@
 <%@ page import="com.example.finallaptrinhweb.model.Product" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.text.DecimalFormat" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.Set" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
@@ -21,8 +23,7 @@
 
 <head>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="/css/header&footer.css"/>
-    <link rel="stylesheet" href="css/products/styles.css?v=2"/>
+    <link rel="stylesheet" href="css/products/styles.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
           integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -65,64 +66,19 @@
                         <!-- Lọc theo đối tượng -->
                         <div id="categories-2" class="widget">
                             <span class="widget-title">Lọc theo đối tượng</span>
-                            <ul
-                                    class="wd-swatches-filter wd-filter-list wd-labels-on wd-size-normal wd-layout-list wd-text-style-1 wd-bg-style-4 wd-shape-round wd-scroll-content">
-                                <li class="wc-layered-nav-term wd-swatch-wrap">
-                                    <a rel="nofollow noopener" href="" class="layered-nav-link"><span
-                                            class="wd-swatch wd-bg"><span
-                                            class="wd-swatch-bg"><img
-                                            src="https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-cho.jpg"
-                                            alt="Swatch image"/></span></span><span
-                                            class="wd-filter-lable layer-term-lable">Chó</span></a>
-                                    <span class="count">55</span>
-                                </li>
-                                <li class="wc-layered-nav-term wd-swatch-wrap">
-                                    <a rel="nofollow noopener" href="" class="layered-nav-link"><span
-                                            class="wd-swatch wd-bg"><span
-                                            class="wd-swatch-bg"><img
-                                            src="https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-gia-cam.jpg"
-                                            alt="Swatch image"/></span></span><span
-                                            class="wd-filter-lable layer-term-lable">Gia
-                        cầm</span></a>
-                                    <span class="count">43</span>
-                                </li>
-                                <li class="wc-layered-nav-term wd-swatch-wrap">
-                                    <a rel="nofollow noopener" href="" class="layered-nav-link"><span
-                                            class="wd-swatch wd-bg"><span
-                                            class="wd-swatch-bg"><img
-                                            src="https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-gia-suc.jpg"
-                                            alt="Swatch image"/></span></span><span
-                                            class="wd-filter-lable layer-term-lable">Gia
-                        súc</span></a>
-                                    <span class="count">28</span>
-                                </li>
-                                <li class="wc-layered-nav-term wd-swatch-wrap">
-                                    <a rel="nofollow noopener" href="" class="layered-nav-link"><span
-                                            class="wd-swatch wd-bg"><span
-                                            class="wd-swatch-bg"><img
-                                            src="https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-heo.jpg"
-                                            alt="Swatch image"/></span></span><span
-                                            class="wd-filter-lable layer-term-lable">Heo</span></a>
-                                    <span class="count">16</span>
-                                </li>
-                                <li class="wc-layered-nav-term wd-swatch-wrap">
-                                    <a rel="nofollow noopener" href="" class="layered-nav-link"><span
-                                            class="wd-swatch wd-bg"><span
-                                            class="wd-swatch-bg"><img
-                                            src="https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-nhung-dong-vat-khac.jpg"
-                                            alt="Swatch image"/></span></span><span
-                                            class="wd-filter-lable layer-term-lable">Khác</span></a>
-                                    <span class="count">2</span>
-                                </li>
-                                <li class="wc-layered-nav-term wd-swatch-wrap">
-                                    <a rel="nofollow noopener" href="" class="layered-nav-link"><span
-                                            class="wd-swatch wd-bg"><span
-                                            class="wd-swatch-bg"><img
-                                            src="https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-meo.jpg"
-                                            alt="Swatch image"/></span></span><span
-                                            class="wd-filter-lable layer-term-lable">Mèo</span></a>
-                                    <span class="count">9</span>
-                                </li>
+                            <ul class="wd-swatches-filter wd-filter-list wd-labels-on wd-size-normal wd-layout-list wd-text-style-1 wd-bg-style-4 wd-shape-round wd-scroll-content">
+                                <c:forEach var="object" items="${objects}">
+                                    <li class="wc-layered-nav-term wd-swatch-wrap">
+                                        <a href="products?category=${object.key}" class="layered-nav-link"><span
+                                                class="wd-swatch wd-bg"><span
+                                                class="wd-swatch-bg"><img
+                                                data-key="${object.key}"
+                                                alt="Swatch image"/></span></span><span
+                                                class="wd-filter-lable layer-term-lable">${object.key}</span></a>
+                                        <span class="count">${object.value}</span>
+                                    </li>
+                                </c:forEach>
+
                             </ul>
                         </div>
                     </div>
@@ -134,10 +90,12 @@
                         <div class="wd-shop-tools">
                             <div class="wd-breadcrumbs">
                                 <nav class="woocommerce-breadcrumb">
-                                    <a href="" class="breadcrumb-link"> Trang chủ </a>
-                                    <a href="" class="breadcrumb-link ${param.searchTerm == null ? 'breadcrumb-link-last' : ''}">Sản phẩm</a>
-                                    <p ${param.searchTerm == null ?  'style="display: none"' : 'style="font-weight: bold"'}>Kết quả tìm kiếm cho "${param.searchTerm}" </p>
-
+                                    <a href="" class="breadcrumb-link">Trang chủ</a>
+                                    <a href="" class="breadcrumb-link">Sản phẩm</a>
+                                    <% String url = (String) request.getAttribute("url");%>
+                                    <%if(url != null) {%>
+                                    <a href="" class="breadcrumb-link"><%=url%></a>
+                                    <%}%>
                                 </nav>
                             </div>
                         </div>
@@ -224,7 +182,34 @@
         window.addEventListener("scroll", () => {
             var header = document.querySelector(".container");
             header.classList.toggle("sticky", window.scrollY > 100);
+        })
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var images = document.querySelectorAll("[data-key]");
+            images.forEach(function (img) {
+                var key = img.getAttribute("data-key");
+                img.src = mapKeyToUrl(key);
+            });
         });
+
+        function mapKeyToUrl(key) {
+            switch (key) {
+                case "Heo":
+                    return "https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-heo.jpg";
+                case "Gia súc":
+                    return "https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-gia-suc.jpg";
+                case "Mèo":
+                    return "https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-meo.jpg";
+                case "Gia cầm":
+                    return "https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-gia-cam.jpg";
+                case "Khác":
+                    return "https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-nhung-dong-vat-khac.jpg";
+                case "Chó":
+                    return "https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-cho.jpg";
+                default:
+                    return "";
+            }
+        }
     </script>
 </body>
 

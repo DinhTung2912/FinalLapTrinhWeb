@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.example.finallaptrinhweb.model.Product;
 
@@ -137,6 +139,46 @@ public class ProductDAO {
         return products;
     }
 
+    public Map<String, Integer> getListObject() {
+        Map<String, Integer> products = new HashMap<>();
+        String query = "SELECT pc.productType, COUNT(p.id) AS productCount\n" +
+                "FROM product_categories pc\n" +
+                "LEFT JOIN products p ON pc.id = p.category_id\n" +
+                "GROUP BY pc.productType";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    products.put(resultSet.getString(1), resultSet.getInt(2));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return products;
+    }
+
+    public List<Product> getProductByCategory(String object) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM products\n" +
+                "JOIN product_categories ON products.category_id = product_categories.id\n" +
+                "WHERE product_categories.productType = ?";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setString(1, object);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Product product = mapResultSetToProduct(resultSet);
+                    products.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return products;
+    }
 
     private Product mapResultSetToProduct(ResultSet resultSet) throws SQLException {
         Product product = new Product();
