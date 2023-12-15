@@ -49,7 +49,16 @@ public class CartItem {
         }
         return true;
     }
+    public OrderProduct toOrderProduct() {
+        OrderProduct orderProduct = new OrderProduct();
+        orderProduct.setProductId(product.getId());
+        orderProduct.setProductName(product.getProductName());
+        orderProduct.setQuantity(quantity);
+        orderProduct.setPrice(product.getPrice());
+        // Set other properties as needed
 
+        return orderProduct;
+    }
     @Override
     public String toString() {
         return "CartItem{" +

@@ -1,5 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
+<%@ page import="com.example.finallaptrinhweb.model.Cart" %>
+<%@ page import="com.example.finallaptrinhweb.model.CartItem" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+  Cart cart = (Cart) session.getAttribute("cart");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,237 +34,197 @@
 </head>
 
 <body>
-<div class="website-wrapper">
-  <header class="header">
-    <div class="container-2" >
-      <div class="header-left">
-        <a href="../index.html">
-          <img src="https://tienthangvet.vn/wp-content/uploads/logo-tien-thang-vet.jpg" alt="" />
-        </a>
-      </div>
-      <div class="header-center">
-        <div class="header-nav" role="navigation" aria-label="Main navigation">
-          <ul class="menu-2 m-0 p-0">
-            <li class="menu-item">
-              <a href="../index.html"><span class="nav-link-text">Thuốc Y
+<header class="header">
+  <div class="container-2" >
+    <div class="header-left">
+      <a href="../index.html">
+        <img src="https://tienthangvet.vn/wp-content/uploads/logo-tien-thang-vet.jpg" alt="" />
+      </a>
+    </div>
+    <div class="header-center">
+      <div class="header-nav" role="navigation" aria-label="Main navigation">
+        <ul class="menu-2 m-0 p-0">
+          <li class="menu-item">
+            <a href="../index.html"><span class="nav-link-text">Thuốc Y
                               The Pet</span></a>
-            </li>
-            <li class="menu-item">
-              <a href="introduce.html"><span class="nav-link-text">Giới
+          </li>
+          <li class="menu-item">
+            <a href="introduce.html"><span class="nav-link-text">Giới
                               thiệu</span></a>
 
-            </li>
-            <li class="menu-item">
-              <a href="products.html" class="d-flex"><span class="nav-link-text ">Sản
+          </li>
+          <li class="menu-item">
+            <a href="products.html" class="d-flex"><span class="nav-link-text ">Sản
                               phẩm</span></a>
-              <div class="">
-                <ul class="sub-menu">
-                  <li class="menu-item">
-                    <a href="">Thức ăn chăn nuôi</a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="">Chăm sóc thú cưng</a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="">Thuốc thú y<i class="fa-solid fa-angle-right"></i></a>
-                    <ul class="sub-sub-menu">
-                      <li class="menu-item">
-                        <a href="">Thuốc kháng sinh</a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="">Thuốc sát trùng</a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="">Vắc xin phòng bệnh</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="menu-item">
-              <a href="contact.html"><span class="nav-link-text">Liên
+            <div class="">
+              <ul class="sub-menu">
+                <li class="menu-item">
+                  <a href="">Thức ăn chăn nuôi</a>
+                </li>
+                <li class="menu-item">
+                  <a href="">Chăm sóc thú cưng</a>
+                </li>
+                <li class="menu-item">
+                  <a href="">Thuốc thú y<i class="fa-solid fa-angle-right"></i></a>
+                  <ul class="sub-sub-menu">
+                    <li class="menu-item">
+                      <a href="">Thuốc kháng sinh</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="">Thuốc sát trùng</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="">Vắc xin phòng bệnh</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="menu-item">
+            <a href="contact.html"><span class="nav-link-text">Liên
                               hệ</span></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="header-right">
-        <form role="search" method="get" class="searchform" action="" data-thumbnail="1" data-price="1"
-              data-post_type="product" data-count="20" data-sku="0" data-symbols_count="3">
-          <input type="text" class="s" placeholder="Tìm kiếm sản phẩm" value="" name="s" aria-label="Search"
-                 title="Search for products" required="" />
-          <input type="hidden" name="post_type" value="product" />
-          <button type="submit" class="searchsubmit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
-        <div class="action">
-          <div class="cart">
-            <span class="count">3</span>
-            <i class="fa-solid fa-cart-shopping material-icons" onclick="location.href='cart.html'"></i>
-          </div>
-          <button class="sign-in" onclick="location.href='signIn.html'">Đăng nhập</button>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
-  </header>
-  <div class="page-title" style="
-            background-image: url(https://tienthangvet.vn/wp-content/uploads/title-tag-tien-thang-vet-tsd1.jpg);
-          ">
-    <div class="container">
-      <h1 class="title">Thanh toán</h1>
+    <div class="header-right">
+      <form role="search" method="get" class="searchform" action="" data-thumbnail="1" data-price="1"
+            data-post_type="product" data-count="20" data-sku="0" data-symbols_count="3">
+        <input type="text" class="s" placeholder="Tìm kiếm sản phẩm" value="" name="s" aria-label="Search"
+               title="Search for products" required="" />
+        <input type="hidden" name="post_type" value="product" />
+        <button type="submit" class="searchsubmit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+      <div class="action">
+        <div class="cart">
+          <span class="count">3</span>
+          <i class="fa-solid fa-cart-shopping material-icons" onclick="location.href='cart.jsp'"></i>
+        </div>
+        <button class="sign-in" onclick="location.href='signIn.html'">Đăng nhập</button>
+      </div>
     </div>
   </div>
+</header>
+<div class="page-title" style="
+            background-image: url(https://tienthangvet.vn/wp-content/uploads/title-tag-tien-thang-vet-tsd1.jpg);
+          ">
+  <div class="container">
+    <h1 class="title">Thanh toán</h1>
+  </div>
+</div>
 
-  <section class="checkout spad">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h6>
-            <span class="icon_tag_alt"></span> Đã có mã giảm giá?
-            <a href="cart.html">nhấn tại đây</a> để lấy mã giảm giá
-          </h6>
-        </div>
+<section class="checkout spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h6>
+          <span class="icon_tag_alt"></span> Đã có mã giảm giá?
+          <a href="cart.jsp">nhấn tại đây</a> để lấy mã giảm giá
+        </h6>
       </div>
-      <div class="checkout__form">
-        <h4>Chi tiết đơn hàng</h4>
-        <form id="checkoutForm" action="#" method="post">
+    </div>
+    <h4>Chi tiết đơn hàng</h4>
+    <form id="checkoutForm" action="#" method="post">
+      <div class="row">
+        <div class="col-lg-8 col-md-6">
           <div class="row">
-            <div class="col-lg-8 col-md-6">
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="checkout__input">
-                    <p>Họ và tên đệm<span>*</span></p>
-                    <input type="text" required />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="checkout__input">
-                    <p>Tên<span>*</span></p>
-                    <input type="text" required />
-                  </div>
-                </div>
-              </div>
+            <div class="col-lg-6">
               <div class="checkout__input">
-                <p>Địa chỉ<span>*</span></p>
-                <input type="text" placeholder="Số nhà / Đường" class="checkout__input__add" required />
-                <input type="text" placeholder required="Xã / Phường / Thị trấn" />
-              </div>
-              <div class="checkout__input">
-                <p>Tỉnh / Thành phố<span>*</span></p>
+                <p>Họ và tên đệm<span>*</span></p>
                 <input type="text" required />
-              </div>
-              <div class="checkout__input">
-                <p>Huyện / Quận<span>*</span></p>
-                <input type="text" required />
-              </div>
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="checkout__input">
-                    <p>Điện thoại<span>*</span></p>
-                    <input type="number" required />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="checkout__input">
-                    <p>Email<span>*</span></p>
-                    <input type="email" required />
-                  </div>
-                </div>
-              </div>
-
-              <!-- Tao tai khoan -->
-              <!--                <div class="checkout__input__checkbox">-->
-              <!--                  <label for="acc">-->
-              <!--                    Tạo tài khoản?-->
-              <!--                    <input type="checkbox" id="acc" data-toggle="collapse" data-target="#create_account"-->
-              <!--                      aria-expanded="false" aria-controls="create_account" required />-->
-              <!--                    <span class="checkmark"></span>-->
-              <!--                  </label>-->
-              <!--                </div>-->
-
-
-              <!--                <div class="collapse" id="create_account">-->
-              <!--                  <p>-->
-              <!--                    Để tạo tạo khoản vui lòng nhập thông tin bên dưới. Nếu khách-->
-              <!--                    hàng đã có tài khoản vui lòng đăng nhập-->
-              <!--                  </p>-->
-              <!--                  <div class="checkout__input">-->
-              <!--                    <p>Mật khẩu tài khoản<span>*</span></p>-->
-              <!--                    <input type="password" required />-->
-              <!--                  </div>-->
-              <!--                </div>-->
-              <!-- Ket thuc tao tai khoan -->
-
-              <!-- Van chuuyen den dia chi khac -->
-              <!--                <div class="checkout__input__checkbox">-->
-              <!--                  <label for="diff-acc">-->
-              <!--                    Vận chuyển đơn hàng đến địa chỉ khác?-->
-              <!--                    <input type="checkbox" id="diff-acc" data-toggle="collapse" data-target="#other_place_ship"-->
-              <!--                      aria-expanded="false" aria-controls="collapseExample" />-->
-              <!--                    <span class="checkmark" id="order-place"></span>-->
-              <!--                  </label>-->
-              <!--                </div>-->
-              <!--                <div class="checkout__input collapse" id="other_place_ship">-->
-              <!--                  <p>Địa chỉ<span>*</span></p>-->
-              <!--                  <input id="order-place-input-required" type="text" placeholder="Ghi đầy đủ địa chỉ" />-->
-              <!--                </div>-->
-
-              <!-- Ket thuc van chuyen den dia chi khac -->
-
-              <div class="checkout__input">
-                <p>Lưu ý khi vận chuyển<span>*</span></p>
-                <input type="text" placeholder="Lưu ý về đơn hàng hoặc lưu ý khi vận chuyển." />
               </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="checkout__order">
-                <h4>Đơn hàng</h4>
-                <div class="checkout__order__products">
-                  Sản phẩm <span>Giá</span>
-                </div>
-                <ul>
-                  <li>Thuốc trị viêm da <span>45.000 VNĐ</span></li>
-                  <li>Vắc xin vô hoạt <span>29.000 VNĐ</span></li>
-                  <li>Thuốc kháng tiêm <span>36.000 VNĐ</span></li>
-                </ul>
-                <div class="checkout__order__subtotal">
-                  Tổng:<span>110.000 VNĐ</span>
-                </div>
-                <div class="checkout__order__subtotal">
-                  Phí vận chuyển: <span>26.000 VNĐ</span>
-                </div>
-
-                <div class="checkout__order__total">
-                  Thành tiền:<span>126.000 VNĐ</span>
-                </div>
-                <p>Vui lòng chọn hình thức thanh toán</p>
-                <div class="checkout__input__checkbox">
-                  <label for="cash">
-                    Cash on delivery (COD)
-                    <input type="checkbox" id="cash" class="payment-option" />
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-                <div class="checkout__input__checkbox">
-                  <label for="momo">
-                    MOMO
-                    <input type="checkbox" id="momo" class="payment-option" data-toggle="collapse" data-target="#momo-code" />
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-                <!-- Add this div for the validation message -->
-                <div id="paymentValidationMessage" class="payment-validation-message"></div>
-
-                <button id="validateAndSubmitBtn" type="button" class="site-btn">Thanh toán</button>
+            <div class="col-lg-6">
+              <div class="checkout__input">
+                <p>Tên<span>*</span></p>
+                <input type="text" required />
               </div>
             </div>
           </div>
-        </form>
+          <div class="checkout__input">
+            <p>Địa chỉ<span>*</span></p>
+            <input type="text" placeholder="Số nhà / Đường" class="checkout__input__add" required />
+            <input type="text" placeholder required="Xã / Phường / Thị trấn" />
+          </div>
+          <div class="checkout__input">
+            <p>Tỉnh / Thành phố<span>*</span></p>
+            <input type="text" required />
+          </div>
+          <div class="checkout__input">
+            <p>Huyện / Quận<span>*</span></p>
+            <input type="text" required />
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="checkout__input">
+                <p>Điện thoại<span>*</span></p>
+                <input type="number" required />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="checkout__input">
+                <p>Email<span>*</span></p>
+                <input type="email" required />
+              </div>
+            </div>
+          </div>
+
+
+          <div class="checkout__input">
+            <p>Lưu ý khi vận chuyển<span>*</span></p>
+            <input type="text" placeholder="Lưu ý về đơn hàng hoặc lưu ý khi vận chuyển." />
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div>
+            <h2>Thông tin sản phẩm trong giỏ hàng:</h2>
+
+            <c:forEach var="item" items="${cart.products.values()}">
+              <div>
+                <p>Tên sản phẩm: ${item.product.productName}</p>
+                <p>Giá bán: ${item.product.price} VNĐ</p>
+                <p>Số lượng: ${item.quantity}</p>
+                <p>Tổng: ${item.totalPrice} VNĐ</p>
+              </div>
+            </c:forEach>
+          </div>
+
+
+          <p>Vui lòng chọn hình thức thanh toán</p>
+          <div class="checkout__input__checkbox">
+            <label for="cash">
+              Cash on delivery (COD)
+              <input type="checkbox" id="cash" class="payment-option" />
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div class="checkout__input__checkbox">
+            <label for="momo">
+              MOMO
+              <input type="checkbox" id="momo" class="payment-option" data-toggle="collapse" data-target="#momo-code" />
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <!-- Add this div for the validation message -->
+          <div>
+            <form action="<c:url value='/user/checkout' />" method="post" id="paymentValidationMessage" class="payment-validation-message">
+              <!-- ... Form content ... -->
+              <button id="validateAndSubmitBtn" type="button" type="submit" class="site-btn">Thanh toán</button>
+            </form>
+          </div>
+        </div>
+
+
+
+
       </div>
-    </div>
-  </section>
+
+    </form>
+  </div>
+</section>
   <!-- Checkout Section End -->
   <!-- Modal -->
   <div class="modal fade" id="momo-payment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
