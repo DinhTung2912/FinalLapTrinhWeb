@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,55 +42,42 @@
     </div>
 
     <section class="follow spad">
+        <%--    <c:set var="or" value="${order}"></c:set>--%>
         <div class="container">
             <div class="row">
                 <div class="col-lg">
                     <div class="Account__Style">
                         <div class="heading">
-                            <span>Chi tiết đơn hàng #673617832</span>
+                            <span>Chi tiết đơn hàng #${order.id}</span>
                             <span class="split">-</span>
                             <span class="status">Giao hàng thành công</span>
                         </div>
-                        <div class="created-date">Ngày đặt hàng: 07:46 30/10/2023</div>
-
-                        <div class="styles_section-1">
-                            <div class="title">Thông báo</div>
-                            <div class="content">
-                                <div class="notifications">
-                                    <div class="notifications__item">
-                                        <div class="date">05:44 31/10/2023</div>
-                                        <div class="comment">Chúng tôi vừa bàn giao đơn hàng của quý khách đến đối
-                                            tác vận chuyển. Đơn hàng của quý khách sẽ được giao trong ngày hôm nay
-                                            31/10/2023</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="created-date">Ngày đặt hàng: ${order.dateCreated}</div>
                         <div class="styles_section-2">
                             <div class="styles_group_1">
                                 <div class="title">Địa chỉ người nhận</div>
                                 <div class="content">
-                                    <p class="name">Nguyễn Đình Tùng</p>
+                                    <p class="name">${order.username}</p>
                                     <p class="address">
-                                        <span>Địa chỉ: </span>KTX Đại Học Quốc Gia (Cổng sau), Phường Linh Trung,
-                                        Quận Thủ Đức, Hồ Chí Minh, Việt Nam
+                                        <span>Địa chỉ: </span>
+                                        ${order.detailAddress}
                                     </p>
                                     <p class="phone">
-                                        <span>Điện thoại: </span>0828008612
+                                        <span>Điện thoại: </span>0${order.phone}
                                     </p>
                                 </div>
                             </div>
                             <div class="styles_group_1">
                                 <div class="title">Hình thức giao hàng</div>
                                 <div class="content">
-                                    <p>Giao vào Thứ bảy, 31/10</p>
-                                    <p>Phí vận chuyển: 12.000đ</p>
+                                    <p>Vận chuyển</p>
                                 </div>
                             </div>
                             <div class="styles_group_1">
                                 <div class="title">Hình thức thanh toán</div>
                                 <div class="content">
-                                    <p class="">Thanh toán tiền mặt khi nhận hàng</p>
+                                    <c:if test="${order.payment==true}"><p class="">Thanh toán tiền mặt khi nhận hàng</p></c:if>
+                                    <c:if test="${order.payment==false}"><p class="">Thanh toán qua ví Momo</p></c:if>
                                 </div>
                             </div>
                         </div>
@@ -104,54 +92,61 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <c:forEach items="${p_list}" var="pl">
+                                            <c:set var="price" value="${pl.price}"></c:set>
+                                            <c:set var="sale" value="${pl.sale}"></c:set>
+                                            <c:set var="total" value="${pl.total}"></c:set>
                             <tr>
                                 <td>
                                     <div class="product-item">
-                                        <img src="https://tienthangvet.vn/wp-content/uploads/APM-1.jpg"
-                                             alt="Vắc xin vô hoạt">
+                                        <img src="${pl.imageUrl}" alt="${pl.productName}">
                                         <div class="product-info">
-                                            <a class="product-name" href="#">Vắc xin vô hoạt</a>
-                                            <p class="product-seller">Cung cấp bởi Thú y The Pet</p>
+                                            <a class="product-name" href="shop-detail?id=${pl.id}">${pl.productName}</a>
+                                            <p class="product-seller">Cung cấp bởi Thú Y The Pet </p>
                                             <div class="product-review">
                                                 <a id="btn-comment" href="#" data-toggle="modal"
                                                    data-target="#exampleModalCenter">Viết nhận xét</a>
-                                                <a href="" target="_blank">Bảo hành</a>
-                                                <button disabled>Hủy Đơn Hàng</button>
+                                                <a href="warranty?order_id=${order.id}&pro_id=${pl.productId}&user_id=${sessionScope.user_id}" target="_blank">Bảo hành</a>
                                             </div>
                                         </div>
                                     </div>
-                                </td>
-                                <td class="price">109.000 VNĐ</td>
-                                <td class="quantity">2</td>
-                                <td class="discount-amount">0 VNĐ</td>
-                                <td class="raw-total">218.000 VNĐ</td>
-                            </tr>
+
+                                    </td>
+                                    <td class="price"> pageContext.getAttribute("price")%></td>
+                                    <td class="quantity">${pl.quantity}</td>
+                                    <td class="discount-amount"> pageContext.getAttribute("sale")%></td>
+                                    <td class="raw-total"> pageContext.getAttribute("total")%></td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                             <tfoot>
+                            <c:set var="sum" value="${sum}"></c:set>
+                            <c:set var="ship" value="${ship}"></c:set>
+                            <c:set var="total_money" value="${total_money}"></c:set>
                             <tr>
                                 <td colspan="4">
                                     <span>Tạm tính</span>
                                 </td>
-                                <td>218.000 VNĐ</td>
+                                <td><%= pageContext.getAttribute("sum")%></td>
                             </tr>
                             <tr>
                                 <td colspan="4">
                                     <span>Phí vận chuyển</span>
                                 </td>
-                                <td>12.000 VNĐ</td>
+                                <td><%=  pageContext.getAttribute("ship")%></td>
                             </tr>
                             <tr>
                                 <td colspan="4">
                                     <span>Tổng cộng</span>
                                 </td>
                                 <td>
-                                    <span class="sum">230.000 VNĐ</span>
+                                    <span class="sum"> <%= pageContext.getAttribute("total_money")%></span>
                                 </td>
                             </tr>
                             </tfoot>
                         </table>
-                        <a class="view-list-order" href="">Quay lại đơn hàng của tôi</a>
-                        <a class="view-tracking-detail" href="order_manage.html">Theo dõi đơn hàng</a>
+                        <a class="view-list-order" href="user">Quay lại đơn hàng của tôi</a>
+                        <button class="cancel-order" disabled="">Hủy Đơn Hàng</button>
                     </div>
                 </div>
             </div>
