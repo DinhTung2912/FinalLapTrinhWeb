@@ -15,23 +15,16 @@
     <link rel="icon" href="https://tienthangvet.vn/wp-content/uploads/cropped-favicon-Tien-Thang-Vet-192x192.png"
           sizes="192x192" />
 
-
-
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-
     <!-- Datatables CSS -->
     <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
-
     <!-- Datepicker CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
-
     <!-- Animate CSS -->
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <!-- Select CSS -->
@@ -48,7 +41,6 @@
     <jsp:include page="menu.jsp"></jsp:include>
     <div class="page-wrapper">
         <div class="content container-fluid">
-
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row">
@@ -93,7 +85,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover table-center mb-0 datatable">
-                                    <!-- Thay đổi code ở đây Thay đổi theo file word -->
+
                                     <thead>
                                     <tr>
                                         <th>id</th>
@@ -113,10 +105,9 @@
                                             <td>${p.username}</td>
                                             <td>${p.email}</td>
                                             <td>${p.date_created}</td>
-<%--                                            <td><%= Util.dateFormatNoTime((Date) pageContext.getAttribute("date_created"))%></td>--%>
+
                                             <td class="text-right">
                                                 <a href="edit_user?type=enteredit&id=${p.id}" class="btn btn-sm bg-success-light ">	<i class="far fa-edit mr-1"></i> Sửa</a>
-                                                <button type="button" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i> Xóa</button>
 
                                             </td>
                                         </tr>
