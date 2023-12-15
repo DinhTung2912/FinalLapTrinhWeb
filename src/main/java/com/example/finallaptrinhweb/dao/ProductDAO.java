@@ -118,6 +118,48 @@ public class ProductDAO {
 
         return products;
     }
+    // Trong lớp ProductDAO
+    public List<Product> searchProductsLimited(String searchTerm, int start, int pageSize) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM products WHERE productName LIKE ? LIMIT ?, ?";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setString(1, "%" + searchTerm + "%");
+            preparedStatement.setInt(2, start);
+            preparedStatement.setInt(3, pageSize);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Product product = mapResultSetToProduct(resultSet);
+                    products.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return products;
+    }
+    public int getTotalSearchResults(String searchTerm) {
+        int total = 0;
+        String query = "SELECT COUNT(*) FROM products WHERE productName LIKE ?";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setString(1, "%" + searchTerm + "%");
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    total = resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý muốn
+        }
+
+        return total;
+    }
+
+
 
 
     public List<Product> getAllProductsByCategory(int categoryId) {
@@ -155,7 +197,6 @@ public class ProductDAO {
         } catch (SQLException e) {
             e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
         }
-
         return products;
     }
 
