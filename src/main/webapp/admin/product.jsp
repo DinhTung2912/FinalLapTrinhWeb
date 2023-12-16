@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: DINHTUNG
+  Date: 15/12/2023
+  Time: 8:33 CH
+  To change this template use File | Settings | File Templates.
+--%>
 
 <%@ page import="java.util.Date" %>
 <%@ page import="com.example.finallaptrinhweb.model.Product" %>
@@ -11,7 +18,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Khách hàng</title>
+    <title>Quản lý sản phẩm</title>
     <link rel="icon" href="https://tienthangvet.vn/wp-content/uploads/cropped-favicon-Tien-Thang-Vet-192x192.png"
           sizes="192x192" />
 
@@ -34,50 +41,32 @@
 
 </head>
 <body>
-<%--<c:set var="m" value="users"></c:set>--%>
-<%--<%System.out.println(pageContext.getAttribute("m"));%>--%>
 <% System.out.println("Co dang vao product.jsp");%>
 <div class="main-wrapper">
     <jsp:include page="menu.jsp"></jsp:include>
     <div class="page-wrapper">
         <div class="content container-fluid">
+
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row">
                     <div class="col">
-                        <h3 class="page-title">Khách hàng</h3>
+                        <h3 class="page-title">Sản phẩm</h3>
+                    </div>
+                    <div class="col-auto text-right">
+                        <a class="btn btn-white filter-btn" href="javascript:void(0);" id="filter_search">
+                            <i class="fas fa-filter"></i>
+                        </a>
+                        <a href="add-product?type=enterAdd" class="btn btn-primary add-button ml-3">
+                            <i class="fas fa-plus"></i>
+                        </a>
                     </div>
                 </div>
             </div>
             <!-- /Page Header -->
 
             <!-- Search Filter -->
-            <div class="card filter-card" id="filter_inputs">
-                <div class="card-body pb-0">
-                    <form action="admin-page/product" method="post">
-                        <div class="row filter-row">
-                            <div class="col-sm-6 col-md-3">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input class="form-control" type="text" name="product-id">
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="form-group">
-                                    <label>Tên</label>
-                                    <input class="form-control" type="text" name="product-name">
-                                </div>
-                            </div>
-                            <!-- Thay đổi theo danh sách đề mục -->
-                            <div class="col-sm-6 col-md-3">
-                                <div class="form-group">
-                                    <button class="btn btn-primary btn-block" type="submit">Chọn</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+
             <!-- /Search Filter -->
             <div class="row">
                 <div class="col-md-12">
@@ -85,30 +74,49 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover table-center mb-0 datatable">
-
+                                    <!-- Thay đổi code ở đây Thay đổi theo file word -->
                                     <thead>
                                     <tr>
-                                        <th>id</th>
-                                        <th>Tên</th>
-                                        <th>Email</th>
-                                        <th>Ngày tạo</th>
+                                        <th>ID</th>
+                                        <th>Ảnh</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Giá bán</th>
+                                        <th>Số lượng</th>
+                                        <th>ID nhà cung cấp</th>
                                         <th class="text-right">Hành Động</th>
                                     </tr>
                                     </thead>
 
                                     <!-- Thêm vào nội dung ở đây -->
                                     <tbody>
-                                    <c:forEach var="p" items="${users}">
-                                        <c:set var="date_created" value="${p.date_created}"></c:set>
+                                    <c:forEach var="p" items="${product}">
+                                        <c:set var="price" value="${p.price}"></c:set>
+
+
                                         <tr>
                                             <td>${p.id}</td>
-                                            <td>${p.username}</td>
-                                            <td>${p.email}</td>
-                                            <td>${p.date_created}</td>
+                                            <td><img class="rounded service-img mr-1"
 
+                                            <c:if test="${fn:startsWith(p.imageUrl, 'imgs')}"> src="../${p.imageUrl}"</c:if>
+                                                     <c:if test="${fn:startsWith(p.imageUrl, 'http')}">src="${p.imageUrl}"</c:if>
+
+                                                     alt="Hình ảnh danh mục"></td>
+                                            <td>${p.productName}</td>
+
+                                            </td>
+
+                                            <td><%= pageContext.getAttribute("price")%>
+                                            </td>
+                                            <td>${p.quantity}</td>
+
+                                            <td>${p.supplierId}</td>
                                             <td class="text-right">
-                                                <a href="edit_user?type=enteredit&id=${p.id}" class="btn btn-sm bg-success-light ">	<i class="far fa-edit mr-1"></i> Sửa</a>
-
+                                                <a href="add-product?type=enterEdit&id=${p.id}"
+                                                   class="btn btn-sm bg-success-light "> <i
+                                                        class="far fa-edit mr-1"></i> Sửa</a>
+                                                    <%--                                                <a href="edit-product.html" style="margin-top: 5px;color: red "--%>
+                                                    <%--                                                   class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i>--%>
+                                                    <%--                                                    Xóa</a>--%>
                                             </td>
                                         </tr>
                                     </c:forEach>

@@ -2,7 +2,10 @@ package com.example.finallaptrinhweb.model;
 
 import com.example.finallaptrinhweb.dao.ProductDAO;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Cart {
@@ -95,6 +98,57 @@ public class Cart {
         if (product == null) return false;
         products.put(proId, new CartItem(product, quantity));
         return true;
+    }
+    public List<OrderProduct> getOrderProducts() {
+        List<OrderProduct> orderProducts = new ArrayList<>();
+
+        for (CartItem cartItem : products.values()) {
+            orderProducts.add(cartItem.toOrderProduct());
+        }
+
+        return orderProducts;
+    }
+    private Discount appliedDiscount;
+
+    // ... existing code ...
+
+    public Discount getAppliedDiscount() {
+        return appliedDiscount;
+    }
+
+    public void setAppliedDiscount(Discount discount) {
+        this.appliedDiscount = discount;
+    }
+
+    // ... existing code ...
+
+    public double getPriceSaled() {
+        double totalBeforeDiscount = getTotalPrice();
+
+        if (appliedDiscount != null) {
+            BigDecimal discountValue = appliedDiscount.getDiscountValue();
+            double discount = totalBeforeDiscount * (discountValue.doubleValue() / 100);
+            return totalBeforeDiscount - discount;
+        } else {
+            return totalBeforeDiscount;
+        }
+    }
+
+    public int getMaxTypeWeight() {
+        int maxTypeWeight = 0;
+
+        for (CartItem cartItem : products.values()) {
+            int typeWeight = cartItem.getProduct().getTypeWeight();
+            if (typeWeight > maxTypeWeight) {
+                maxTypeWeight = typeWeight;
+            }
+        }
+
+        return maxTypeWeight;
+    }
+
+    public boolean isEmpty() {
+        return products.isEmpty();
     }
 
     public boolean add(int proId) {
