@@ -98,16 +98,18 @@ public class OrderProduct {
         return sale;
     }
 
-    public void setSale(double sale) {
-        this.sale = sale;
+
+    public void setSale(double price, int discountsId, int quantity) {
+        this.sale = price * discountsId * quantity/100;
     }
 
     public double getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+
+    public void setTotal(double price, int discountsId, int quantity  ) {
+        this.total = price * quantity - (price * discountsId * quantity/100);
     }
 
     @Override
