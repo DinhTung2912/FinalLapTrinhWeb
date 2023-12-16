@@ -437,12 +437,9 @@
       $("#orderSuccessModal").modal("show");
     });
 
-    // Implement the MOMO QR code scanning logic here
+
     function startCountdownTimer() {
-      // You can implement the countdown timer logic here
-      // For example, decrement a variable every second until it reaches 0
-      // Once the timer reaches 0, you can hide the MOMO QR code modal
-      // and show the order success modal
+
     }
   });
 </script>
