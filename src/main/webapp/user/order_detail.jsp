@@ -112,10 +112,10 @@
                                     </div>
 
                                     </td>
-                                    <td class="price"> pageContext.getAttribute("price")%></td>
+                                    <td class="price"> ${pl.price}</td>
                                     <td class="quantity">${pl.quantity}</td>
-                                    <td class="discount-amount"> pageContext.getAttribute("sale")%></td>
-                                    <td class="raw-total"> pageContext.getAttribute("total")%></td>
+                                    <td class="discount-amount"> ${pl.sale} </td>
+                                    <td class="raw-total"> ${pl.total}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
