@@ -135,7 +135,7 @@
               <span class="checkmark"></span>
             </label>
           </div>
-          <!-- Add this div for the validation message -->
+
           <div>
             <form action="<c:url value='/user/checkout' />" method="post" id="paymentValidationMessage" class="payment-validation-message">
               <!-- ... Form content ... -->
@@ -152,8 +152,7 @@
     </form>
   </div>
 </section>
-  <!-- Checkout Section End -->
-  <!-- Modal -->
+
   <div class="modal fade" id="momo-payment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
        aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
