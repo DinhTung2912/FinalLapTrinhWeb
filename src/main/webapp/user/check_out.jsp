@@ -37,7 +37,7 @@
 <header class="header">
   <div class="container-2" >
     <div class="header-left">
-      <a href="../index.html">
+      <a href="index.jsp">
         <img src="https://tienthangvet.vn/wp-content/uploads/logo-tien-thang-vet.jpg" alt="" />
       </a>
     </div>
@@ -45,16 +45,16 @@
       <div class="header-nav" role="navigation" aria-label="Main navigation">
         <ul class="menu-2 m-0 p-0">
           <li class="menu-item">
-            <a href="../index.html"><span class="nav-link-text">Thuốc Y
+            <a href="index.jsp"><span class="nav-link-text">Thuốc Y
                               The Pet</span></a>
           </li>
           <li class="menu-item">
-            <a href="introduce.html"><span class="nav-link-text">Giới
+            <a href="introduce.jsp"><span class="nav-link-text">Giới
                               thiệu</span></a>
 
           </li>
           <li class="menu-item">
-            <a href="products.html" class="d-flex"><span class="nav-link-text ">Sản
+            <a href="product.jsp" class="d-flex"><span class="nav-link-text ">Sản
                               phẩm</span></a>
             <div class="">
               <ul class="sub-menu">
@@ -82,7 +82,7 @@
             </div>
           </li>
           <li class="menu-item">
-            <a href="contact.html"><span class="nav-link-text">Liên
+            <a href="contact.jsp"><span class="nav-link-text">Liên
                               hệ</span></a>
           </li>
         </ul>
@@ -103,7 +103,7 @@
           <span class="count">3</span>
           <i class="fa-solid fa-cart-shopping material-icons" onclick="location.href='cart.jsp'"></i>
         </div>
-        <button class="sign-in" onclick="location.href='signIn.html'">Đăng nhập</button>
+        <button class="sign-in" onclick="location.href='signIn.jsp'">Đăng nhập</button>
       </div>
     </div>
   </div>
@@ -316,27 +316,27 @@
                       style="color: #ffffff;"><strong>THÔNG
                                             TIN
                                             CHUNG</strong></span></p>
-              <p><a href="introduce.html" rel="nofollow"><span
+              <p><a href="introduce.jsp" rel="nofollow"><span
                       style="color: rgba(236, 236, 236, 0.4);">Giới
                                             thiệu</span></a></p>
               <p><span style="color: rgba(236, 236, 236, 0.4);"><a
                       style="color: rgba(236, 236, 236, 0.4);"
-                      href="privacyPolicy.html" rel="nofollow">Chính sách
+                      href="privacyPolicy.jsp" rel="nofollow">Chính sách
                                             bảo mật</a></span></p>
               <p><span style="color: rgba(236, 236, 236, 0.4);"><a
                       style="color: rgba(236, 236, 236, 0.4);"
-                      href="partnerPolicy.html" rel="nofollow">Chính sách
+                      href="partnerPolicy.jsp" rel="nofollow">Chính sách
                                             đối tác</a></span></p>
               <p><span style="color: rgba(236, 236, 236, 0.4);"><a
                       style="color: rgba(236, 236, 236, 0.4);"
-                      href="agencyPolicy.html" rel="nofollow">Chính sách
+                      href="agencyPolicy.jsp" rel="nofollow">Chính sách
                                             đại lý</a></span></p>
               <p><span style="color: rgba(236, 236, 236, 0.4);"><a
                       style="color: rgba(236, 236, 236, 0.4);"
-                      href="termsPolicy.html" rel="nofollow">Chính sách điều khoản và điều kiện</a></span></p>
+                      href="termsPolicy.jsp" rel="nofollow">Chính sách điều khoản và điều kiện</a></span></p>
               <p><span style="color: rgba(236, 236, 236, 0.4);"><a
                       style="color: rgba(236, 236, 236, 0.4);"
-                      href="contact.html" rel="nofollow">Thông tin liên
+                      href="contact.jsp" rel="nofollow">Thông tin liên
                                             hệ</a></span></p>
             </div>
           </div>
