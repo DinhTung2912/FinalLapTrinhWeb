@@ -6,8 +6,54 @@ import com.example.finallaptrinhweb.model.Order;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDAO {
+
+
+    public static List<Order> loadOrderByUserId(int user_id) {
+        List<Order> orderList = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM `orders` WHERE user_id = ?";
+
+            try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+                preparedStatement.setInt(1, user_id);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Order order = getOrder(resultSet);
+                        orderList.add(order);
+                    }
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return orderList;
+    }
+    private static Order getOrder(ResultSet resultSet) {
+        if (resultSet == null)
+            return null;
+        Order order = new Order();
+        try {
+            order.setId(resultSet.getInt("id"));
+            order.setUserId(resultSet.getInt("user_id"));
+            order.setDiscountsId(resultSet.getInt("discounts_id"));
+            order.setShipId(resultSet.getInt("ship_id"));
+            order.setPayment(resultSet.getInt("payment") == 1 );
+            order.setPhone(resultSet.getLong("phone"));
+            order.setDetailAddress(resultSet.getString("detail_address"));
+            order.setStatus(resultSet.getString("status"));
+            order.setDateCreated(resultSet.getTimestamp("date_created"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return order;
+    }
+
+
     public static Order loadOrder_view(int order_id) {
         Order order = new Order();
         try {
@@ -45,5 +91,10 @@ public class OrderDAO {
             throwables.printStackTrace();
         }
         return order;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(loadOrderByUserId(1));
+
     }
 }

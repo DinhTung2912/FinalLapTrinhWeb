@@ -3,6 +3,7 @@
 <%@ page import="com.example.finallaptrinhweb.dao.UserDAO" %>
 <% User user = (User) session.getAttribute("auth");%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -247,53 +248,36 @@
                                 <tr>
                                     <th>Mã đơn hàng</th>
                                     <th>Ngày mua</th>
-                                    <th>Sản phẩm</th>
-                                    <th>Tổng tiền</th>
+                                    <th>Thanh toán</th>
                                     <th>Trạng thái đơn hàng</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="order_detail.html">673617832</a>
-                                    </td>
-                                    <td>30/10/2023</td>
-                                    <td>Vắc xin vô hoạt</td>
-                                    <td>230.000 VNĐ</td>
-                                    <td>Giao hàng thành công</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">219844147</a>
-                                    </td>
-                                    <td>12/10/2023</td>
-                                    <td>Thuốc kháng viêm</td>
-                                    <td>156.000 VNĐ</td>
-                                    <td>Giao hàng thành công</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">972084147</a>
-                                    </td>
-                                    <td>09/10/2013</td>
-                                    <td>Sát trùng</td>
-                                    <td>350.000 VNĐ</td>
-                                    <td>Đã hủy</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">404252736</a>
-                                    </td>
-                                    <td>05/10/2013</td>
-                                    <td>Dinh Dưỡng</td>
-                                    <td>172.000 VNĐ</td>
-                                    <td>Đã hủy</td>
-                                </tr>
+                                <c:forEach items="${order}" var="o">
+                                    <tr>
+                                        <td>
+                                            <a href="/user/order_detail?id=${o.id}">${o.id}</a>
+                                        </td>
+                                        <td>${o.date_created}</td>
+                                        <td>
+                                            <c:if test="${o.payment==true}">Tiền mặt</c:if>
+                                            <c:if test="${o.payment==false}">Ví momo</c:if>
+                                        </td>
+                                        <td>
+                                            <c:if test="${o.status eq 'Cancelled'}">Đã hủy </c:if>
+                                            <c:if test="${o.status eq 'Rejected'}">Bị từ chối </c:if>
+                                            <c:if test="${o.status eq 'Processing'}">Đang xử lí </c:if>
+                                            <c:if test="${o.status eq 'Packaging'}">Đang đóng gói </c:if>
+                                            <c:if test="${o.status eq 'Shipping'}">Đang vận chuyển </c:if>
+                                            <c:if test="${o.status eq 'Success'}">Thành công </c:if>
+
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
 
                     <!--/row-->
                 </div>
