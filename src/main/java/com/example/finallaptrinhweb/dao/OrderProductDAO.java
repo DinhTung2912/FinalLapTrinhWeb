@@ -54,6 +54,6 @@ public class OrderProductDAO {
         return productList;
     }
     public static void main(String[] args) {
-        System.out.println(loadOrderProductByOrderId(1));
+        System.out.println(loadOrderProductByOrderId(3));
     }
 }
