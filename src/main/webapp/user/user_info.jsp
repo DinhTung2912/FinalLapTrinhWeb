@@ -258,7 +258,7 @@
                                         <td>
                                             <a href="/user/order_detail?id=${o.id}">${o.id}</a>
                                         </td>
-                                        <td>${o.date_created}</td>
+                                        <td>${o.dateCreated}</td>
                                         <td>
                                             <c:if test="${o.payment==true}">Tiền mặt</c:if>
                                             <c:if test="${o.payment==false}">Ví momo</c:if>

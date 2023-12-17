@@ -10,6 +10,7 @@
 <%@ page import="com.example.finallaptrinhweb.model.Product" %>
 <%@ page import="com.example.finallaptrinhweb.dao.ProductDAO" %>
 <%@ page import="com.example.finallaptrinhweb.model.Product" %>
+<%@ page import="com.example.finallaptrinhweb.model.Util" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.util.Map" %>
@@ -123,8 +124,7 @@
                                             </div>
                                             <div class="product-element">
                                                 <div class="price-wrap">
-                                                    <div class="unit">₫</div>
-                                                    <div class="price">${product.price}</div>
+                                                    <div class="price">${Util.formatCurrency(product.price)}</div>
                                                 </div>
                                                 <div class="rating">
                                                     <div class="stars" data-stars="4">
