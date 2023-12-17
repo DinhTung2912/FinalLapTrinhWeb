@@ -37,11 +37,28 @@ public class ProductServlet extends HttpServlet {
         // Lấy danh sách sản phẩm từ ProductDAO
         ProductDAO productDAO = new ProductDAO();
         List<Product> products;
+        int totalProducts = 0;
 
         // Lấy danh sách đối tượng
         Map<String, Integer> listObject = productDAO.getListObject();
         Set<Map.Entry<String, Integer>> objects = listObject.entrySet();
-
+        // Thực hiện tìm kiếm với phân trang
+        if (searchTerm != null) {
+            int totalSearchResults = productDAO.getTotalSearchResults(searchTerm);
+            int totalPagesSearch = (int) Math.ceil((double) totalSearchResults / pageSize);
+            // Nếu có searchTerm, sử dụng phân trang
+            products = productDAO.searchProductsLimited(searchTerm, start, pageSize);
+            // Cập nhật tổng số sản phẩm cho phân trang
+            totalProducts = totalSearchResults;
+            // Thêm thông báo khi không tìm thấy sản phẩm
+            if (products.isEmpty()) {
+                request.setAttribute("noProductsFound", true);
+            }
+        } else {
+            // Nếu không có searchTerm, sử dụng phân trang như cũ
+            products = productDAO.getAllProductsLimited(start, pageSize);
+            totalProducts = productDAO.getTotalProducts(); // Cập nhật totalProducts ở đây
+        }
 
         if (object != null) {
             products = productDAO.getProductByCategory(object);
@@ -53,8 +70,7 @@ public class ProductServlet extends HttpServlet {
         // Chuyển danh sách sản phẩm và thông tin phân trang đến trang JSP
         request.setAttribute("product", products);
 
-        // Tổng số sản phẩm (cần để tính toán số trang)
-        int totalProducts = productDAO.getTotalProducts();
+
 
         // Tổng số trang
         int totalPages = (int) Math.ceil((double) totalProducts / pageSize);

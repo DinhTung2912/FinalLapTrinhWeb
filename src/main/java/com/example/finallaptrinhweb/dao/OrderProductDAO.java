@@ -14,11 +14,17 @@ public class OrderProductDAO {
     public static List<OrderProduct> loadOrderProductByOrderId(int orderId) {
         List<OrderProduct> productList = new ArrayList<>();
         try {
-            String query = "SELECT p.id, p.productName, op.quantity, p.price, p.discountPrice, p.imageUrl " +
+            String query = "SELECT p.id, p.productName, op.quantity,p.price, o.id, o.date_created, u.id, o.status, (SUM(p.price * op.quantity) + s.shippingCost) AS total, " +
+                    "o.payment, o.detail_address, o.phone, u.username, s.shippingCost, p.discountPrice, p.imageUrl " +
                     "FROM orders o " +
                     "JOIN order_products op ON o.id = op.order_id " +
+                    "JOIN shipping_info s ON s.id = o.ship_id " +
+                    "JOIN users u ON u.id = o.user_id " +
                     "JOIN products p ON op.product_id = p.id " +
-                    "WHERE o.id = ?";
+                    "WHERE o.id = ? " +
+                    "GROUP BY o.id, o.date_created, u.id, o.status, o.payment, " +
+                    "o.detail_address, o.phone, u.username, s.shippingCost, p.discountPrice, p.imageUrl;";
+
             PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query);
             preparedStatement.setInt(1, orderId);
 
@@ -30,8 +36,11 @@ public class OrderProductDAO {
                     orderProduct.setProductName(resultSet.getString("productName"));
                     orderProduct.setQuantity(resultSet.getInt("quantity"));
                     orderProduct.setPrice(resultSet.getDouble("price"));
-                    orderProduct.setSale(resultSet.getDouble("sale"));
+                    orderProduct.setDiscountsId(resultSet.getInt("discountPrice"));
                     orderProduct.setImageUrl(resultSet.getString("imageUrl"));
+                    orderProduct.setSale(resultSet.getDouble("price"),resultSet.getInt("discountPrice"),resultSet.getInt("quantity"));
+                    orderProduct.setTotal(resultSet.getDouble("price"),resultSet.getInt("discountPrice"),resultSet.getInt("quantity"));
+
 
                     productList.add(orderProduct);
                 }
@@ -44,6 +53,7 @@ public class OrderProductDAO {
         }
         return productList;
     }
-
-
+    public static void main(String[] args) {
+        System.out.println(loadOrderProductByOrderId(1));
+    }
 }
