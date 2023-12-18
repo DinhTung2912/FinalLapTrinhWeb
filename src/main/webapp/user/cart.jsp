@@ -2,6 +2,7 @@
 <%@ page import="com.example.finallaptrinhweb.model.CartItem" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.finallaptrinhweb.model.Util" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +74,7 @@
                                     </h5>
                                 </td>
                                 <td class="shoping__cart__price">
-                                    <%=item.getProduct().getPrice()%> VNĐ
+                                    <%= Util.formatCurrency(item.getProduct().getPrice()) %> VND
                                 </td>
                                 <td class="shoping__cart__quantity">
                                     <div class="quantity"
@@ -92,7 +93,7 @@
                                     </div>
                                 </td>
                                 <td class="shoping__cart__total">
-                                    <%=item.getTotalPrice()%> VNĐ
+                                    <%= Util.formatCurrency(item.getTotalPrice()) %> VND
                                 </td>
                                 <td class="shoping__cart__item__close">
                                     <a style="font-size: 18px;background-color: white"
@@ -129,7 +130,7 @@
                         <div class="shoping__checkout">
                             <h5>TỔNG TIỀN GIỎ HÀNG</h5>
                             <ul>
-                                <li>Tổng<span>${cart.totalPrice}VNĐ</span></li>
+                                <li>Tổng<span>${ Util.formatCurrency(cart.totalPrice) } VND</span></li>
                             </ul>
                             <% session.setAttribute("cart", cart); %>
                             <a href="check_out.jsp" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>

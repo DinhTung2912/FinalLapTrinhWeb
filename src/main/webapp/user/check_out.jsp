@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
+<%@ page import="com.example.finallaptrinhweb.model.Util" %>
 <%@ page import="com.example.finallaptrinhweb.model.Cart" %>
 <%@ page import="com.example.finallaptrinhweb.model.CartItem" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -113,9 +113,10 @@
             <c:forEach var="item" items="${cart.products.values()}">
               <div>
                 <p>Tên sản phẩm: ${item.product.productName}</p>
-                <p>Giá bán: ${item.product.price} VNĐ</p>
-<%--                <p>Số lượng: ${item.quantity}</p>--%>
-                <p>Tổng: ${item.totalPrice} VNĐ</p>
+                <p>Giá bán: ${ Util.formatCurrency(item.product.price) } VND</p>
+                <p>Số lượng: ${ item.quantity }</p>
+                <p>Tổng: ${ Util.formatCurrency(item.totalPrice) } VND</p>
+
               </div>
             </c:forEach>
           </div>

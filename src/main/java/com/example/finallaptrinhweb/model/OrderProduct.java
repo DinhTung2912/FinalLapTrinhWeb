@@ -99,8 +99,8 @@ public class OrderProduct {
     }
 
 
-    public void setSale(double price, int discountsId, int quantity) {
-        this.sale = price * discountsId * quantity/100;
+    public void setSale(double price, int sale, int quantity) {
+        this.sale = price * sale * quantity / 100;
     }
 
     public double getTotal() {
@@ -108,10 +108,10 @@ public class OrderProduct {
     }
 
 
-    public void setTotal(double price, int discountsId, int quantity  ) {
-        this.total = price * quantity - (price * discountsId * quantity/100);
+    public void setTotal(double price, int sale, int quantity) {
+        double discountedPrice = price - (price * sale / 100);
+        this.total = discountedPrice * quantity;
     }
-
     @Override
     public String toString() {
         return "OrderProduct{" +
