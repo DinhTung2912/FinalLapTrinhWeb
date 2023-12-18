@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.example.finallaptrinhweb.model.Util" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -112,8 +113,8 @@
                                 ${product.productName}
                             </h1>
                             <div class="price-wrapper">
-                                <div class="unit">₫</div>
-                                <div class="price">${product.price}</div>
+                                <div class="price">${Util.formatCurrency(product.price)}</div>
+                                <div class="unit">VND</div>
                             </div>
                             <div
                                     class="wd-compare-btn product-compare-button wd-action-btn wd-style-text wd-compare-icon">
