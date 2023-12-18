@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.example.finallaptrinhweb.model.Util" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,10 +113,10 @@
                                     </div>
 
                                     </td>
-                                    <td class="price"> ${pl.price}</td>
+                                <td class="price"><%= Util.formatCurrency((double) pageContext.getAttribute("price"))%></td>
                                     <td class="quantity">${pl.quantity}</td>
-                                    <td class="discount-amount"> ${pl.sale} </td>
-                                    <td class="raw-total"> ${pl.total}</td>
+                                <td class="discount-amount"><%= Util.formatCurrency((double) pageContext.getAttribute("sale"))%></td>
+                                <td class="raw-total"><%= Util.formatCurrency((double) pageContext.getAttribute("total"))%></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -127,20 +128,20 @@
                                 <td colspan="4">
                                     <span>Tạm tính</span>
                                 </td>
-                                <td><%= pageContext.getAttribute("sum")%></td>
+                                <td><%= Util.formatCurrency((double) pageContext.getAttribute("sum"))%></td>
                             </tr>
                             <tr>
                                 <td colspan="4">
                                     <span>Phí vận chuyển</span>
                                 </td>
-                                <td><%=  pageContext.getAttribute("ship")%></td>
+                                <td><%= Util.formatCurrency((double) pageContext.getAttribute("ship"))%></td>
                             </tr>
                             <tr>
                                 <td colspan="4">
                                     <span>Tổng cộng</span>
                                 </td>
                                 <td>
-                                    <span class="sum"> <%= pageContext.getAttribute("total_money")%></span>
+                                    <span class="sum"><%= Util.formatCurrency((double) pageContext.getAttribute("total_money"))%></span>
                                 </td>
                             </tr>
                             </tfoot>
