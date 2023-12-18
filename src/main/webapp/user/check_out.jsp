@@ -167,6 +167,7 @@
           <div class="container">
             <img src="assets/img/qr_code/qr_code1.jpg" alt="" style="max-width: 100%; height: auto;">
             <p>Vui lòng mở momo và quét QR code trong vòng <span id="count-down-time">60</span> giây</p>
+
           </div>
         </div>
       </div>
@@ -221,7 +222,6 @@
       }
     });
 
-    // Handle MOMO checkbox change
     $("#momo").change(function () {
       // Uncheck COD if MOMO is selected
       if ($(this).prop("checked")) {
@@ -230,9 +230,7 @@
       }
     });
 
-    // Handle COD checkbox change
     $("#cash").change(function () {
-      // Uncheck MOMO if COD is selected
       if ($(this).prop("checked")) {
         $("#momo").prop("checked", false);
         $("#paymentValidationMessage").hide();
@@ -251,8 +249,35 @@
 
 
     function startCountdownTimer() {
+      // Set the countdown duration in seconds
+      var countdownDuration = 60;
 
+      // Get the countdown element by its ID
+      var countdownElement = $("#count-down-time");
+
+      // Update the countdown every second
+      var countdownInterval = setInterval(function () {
+        // Update the countdown element with the remaining time
+        countdownElement.text(countdownDuration);
+
+        // Decrease the countdown duration
+        countdownDuration--;
+
+        // Check if the countdown has reached zero
+        if (countdownDuration < 0) {
+          // Clear the interval when the countdown is complete
+          clearInterval(countdownInterval);
+
+          // You can add logic here when the countdown reaches zero,
+          // such as hiding the MOMO modal or displaying a message.
+
+          // For example:
+          // $("#momo-payment").modal("hide");
+          // alert("Time's up! Please try again.");
+        }
+      }, 1000); // Update every 1000 milliseconds (1 second)
     }
+
   });
 </script>
 
