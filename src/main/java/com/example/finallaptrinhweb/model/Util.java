@@ -2,23 +2,21 @@ package com.example.finallaptrinhweb.model;
 
 import java.text.NumberFormat;
 import java.util.*;
+
 public class Util {
     public static String formatCurrency(double price) {
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
-        return numberFormat.format(price);
+        String formattedPrice = numberFormat.format(price);
+
+        // Loại bỏ dấu "đ" và gạch từ chuỗi
+        formattedPrice = formattedPrice.replaceAll("[đ₫,]", "");
+
+        return formattedPrice.trim(); // Loại bỏ khoảng trắng thừa
     }
+
     public static void main(String[] args) {
-        // Test case 1: Giá trị dương
-        double price1 = 1234.56;
-        testFormatCurrency(price1);
-
-        // Test case 2: Giá trị âm
-        double price2 = 45.000;
-        testFormatCurrency(price2);
-    }
-
-    public static void testFormatCurrency(double price) {
-        String formattedPrice = Util.formatCurrency(price);
-        System.out.println("Formatted Price for " + price + ": " + formattedPrice);
+        double price = 1234567.89;
+        String formattedCurrency = formatCurrency(price);
+        System.out.println(formattedCurrency);
     }
 }

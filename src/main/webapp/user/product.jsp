@@ -125,6 +125,7 @@
                                             <div class="product-element">
                                                 <div class="price-wrap">
                                                     <div class="price">${Util.formatCurrency(product.price)}</div>
+                                                    <div class="unit">VND</div>
                                                 </div>
                                                 <div class="rating">
                                                     <div class="stars" data-stars="4">
