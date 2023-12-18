@@ -106,14 +106,15 @@
           </div>
         </div>
         <div class="col-lg-4 col-md-6">
-          <div>
+          <div class="checkout__order">
+          <div >
             <h2>Thông tin sản phẩm trong giỏ hàng:</h2>
 
             <c:forEach var="item" items="${cart.products.values()}">
               <div>
                 <p>Tên sản phẩm: ${item.product.productName}</p>
                 <p>Giá bán: ${item.product.price} VNĐ</p>
-                <p>Số lượng: ${item.quantity}</p>
+<%--                <p>Số lượng: ${item.quantity}</p>--%>
                 <p>Tổng: ${item.totalPrice} VNĐ</p>
               </div>
             </c:forEach>
@@ -143,7 +144,7 @@
             </form>
           </div>
         </div>
-
+          </div>
 
 
 
