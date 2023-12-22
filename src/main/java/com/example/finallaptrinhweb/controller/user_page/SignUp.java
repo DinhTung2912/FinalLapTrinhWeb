@@ -30,9 +30,11 @@ public class SignUp extends HttpServlet {
         String repass = request.getParameter("repassword");
         SendEmail send = new SendEmail();
         String code = send.getRandomVerifyCode();
+
         if (repass.equals(pass)) {
             try {
-                if (!UserDAO.getInstance().CheckExistUser(email) ) {
+                // Kiểm tra độ dài và thành phần của mật khẩu
+                if (isStrongPassword(pass) && !UserDAO.getInstance().CheckExistUser(email)) {
                     UserDAO.getInstance().SignUp(name, email, pass, code);
                     if (send.sendVerifyCode(email, code)) {
                         HttpSession session = request.getSession();
@@ -40,17 +42,41 @@ public class SignUp extends HttpServlet {
                         response.sendRedirect("./verify.jsp");
                     }
                 } else {
-                    request.setAttribute("wrongInfor", "Tài khoản đã tồn tại !");
+                    request.setAttribute("wrongInfor", "Mật khẩu phải có ít nhất 8 ký tự, bao gồm số, chữ in hoa và ký tự đặc biệt!");
                     request.getRequestDispatcher("./signUp.jsp").forward(request, response);
                 }
             } catch (SQLException var10) {
                 throw new RuntimeException(var10);
             }
         } else {
-            request.setAttribute("wrongInfor", "Mật khẩu không trùng khớp !");
+            request.setAttribute("wrongInfor", "Mật khẩu không trùng khớp!");
             request.getRequestDispatcher("./signUp.jsp").forward(request, response);
         }
+    }
 
+    // Phương thức kiểm tra xem mật khẩu có đủ mạnh không
+    private boolean isStrongPassword(String s) {
+        // Kiểm tra độ dài
+        if (s.length() < 8) {
+            return false;
+        }
+
+        // Kiểm tra chứa số
+        if (!s.matches(".*\\d.*")) {
+            return false;
+        }
+
+        // Kiểm tra chứa chữ in hoa
+        if (!s.matches(".*[A-Z].*")) {
+            return false;
+        }
+
+        // Kiểm tra chứa ký tự đặc biệt
+        if (!s.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*")) {
+            return false;
+        }
+
+        return true;
     }
 }
 
