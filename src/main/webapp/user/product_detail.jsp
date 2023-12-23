@@ -55,13 +55,13 @@
                                 <div class="owl-stage">
                                     <div class="item" style="width: 575px; height: 575px">
                                         <div class="product-image-wrap">
-                                            <img src="${product.imageUrl}"
+                                            <img src="${pageContext.request.contextPath}/${listImg[0]}"
                                                  class="wp-post-image wp-post-image"/>
                                         </div>
                                     </div>
                                     <div class="product-additional-galleries">
                                         <a id="see-more"
-                                           href="${product.imageUrl}"
+                                           href="${pageContext.request.contextPath}/${listImg[0]}"
                                            class="woodmart-show-product-gallery">
                                             <i class="fa-solid fa-compress"></i>
                                             <span class="see-more">Click to enlarge</span>
@@ -72,30 +72,14 @@
                             <div class="col-12">
                                 <div class="owl-stage-outer" style="margin-top: 10px">
                                     <div class="owl-stage">
-                                        <div class="item" style="width: 145.25px">
-                                            <div class="product-image-thumbnail">
-                                                <img width="150" height="150"
-                                                     src="${product.imageUrl}"/>
+                                        <c:forEach var="url" items="${listImg}">
+                                            <div class="item" style="width: 145.25px">
+                                                <div class="product-image-thumbnail">
+                                                    <img width="150" height="150"
+                                                         src="${pageContext.request.contextPath}/${url}"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="item" style="width: 145.25px">
-                                            <div class="product-image-thumbnail">
-                                                <img width="150" height="150"
-                                                     src="${product.imageUrl}"/>
-                                            </div>
-                                        </div>
-                                        <div class="item" style="width: 145.25px">
-                                            <div class="product-image-thumbnail">
-                                                <img width="150" height="150"
-                                                     src="${product.imageUrl}"/>
-                                            </div>
-                                        </div>
-                                        <div class="item" style="width: 145.25px">
-                                            <div class="product-image-thumbnail">
-                                                <img width="150" height="150"
-                                                     src="${product.imageUrl}"/>
-                                            </div>
-                                        </div>
+                                        </c:forEach>
                                     </div>
                                 </div>
                             </div>
@@ -212,13 +196,13 @@
                                                                         ${product.purpose}
                                                                     </p>
                                                                     <h1>Thành phần: ${product.ingredients}</h1>
-                                                          <%--          <p>
-                                                                        Betamethasone Dipropionate:….0,64
-                                                                        mg<br/>Gentamicin
-                                                                        Sulfate:……………………1,0
-                                                                        mg<br/>Clotrimazole:……………………………10,0
-                                                                        mg<br/>Tá dược vừa đủ:……………………………..1 g
-                                                                    </p> --%>
+                                                                    <%--          <p>
+                                                                                  Betamethasone Dipropionate:….0,64
+                                                                                  mg<br/>Gentamicin
+                                                                                  Sulfate:……………………1,0
+                                                                                  mg<br/>Clotrimazole:……………………………10,0
+                                                                                  mg<br/>Tá dược vừa đủ:……………………………..1 g
+                                                                              </p> --%>
                                                                     <h2>Liều lượng: ${product.dosage} </h2>
                                                                     <h2>Hướng dẫn sử dụng:</h2>
                                                                     <p>
