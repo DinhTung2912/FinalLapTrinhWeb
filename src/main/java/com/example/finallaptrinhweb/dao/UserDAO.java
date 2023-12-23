@@ -6,6 +6,7 @@ import com.example.finallaptrinhweb.model.User;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Date;
 
 public class UserDAO {
     private static UserDAO instance;
@@ -77,16 +78,21 @@ public class UserDAO {
     }
 
     public void SignUp(String username, String email, String password, String code) throws SQLException {
+        Date dateCreated = new Date();
+
         JDBIConnector.me().get().withHandle((handle) -> {
-            return handle.createUpdate("INSERT INTO users (id, username, email, password, verify_status, role_id) VALUES ( ?, ?, ?, ?, ?, 1)")
+            return handle.createUpdate("INSERT INTO users (id, username, email, password, verify_status, date_created, role_id) VALUES (?, ?, ?, ?, ?, ?, 1)")
                     .bind(0, this.GetId() + 1)
                     .bind(1, username)
                     .bind(2, email)
                     .bind(3, password)
                     .bind(4, code)
+                    .bind(5, dateCreated)
                     .execute();
         });
     }
+
+
 
     public void SetVerifiedStatus(String authcode) throws SQLException {
         JDBIConnector.me().get().useHandle((handle) -> {
