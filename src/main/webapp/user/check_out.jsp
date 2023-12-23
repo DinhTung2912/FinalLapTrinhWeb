@@ -106,15 +106,17 @@
           </div>
         </div>
         <div class="col-lg-4 col-md-6">
-          <div>
+          <div class="checkout__order">
+          <div >
             <h2>Thông tin sản phẩm trong giỏ hàng:</h2>
 
             <c:forEach var="item" items="${cart.products.values()}">
               <div>
                 <p>Tên sản phẩm: ${item.product.productName}</p>
                 <p>Giá bán: ${ Util.formatCurrency(item.product.price) } VND</p>
-                <p>Số lượng: ${ item.quantity }</p>
+<%--                <p>Số lượng: ${ item.quantity }</p>--%>
                 <p>Tổng: ${ Util.formatCurrency(item.totalPrice) } VND</p>
+
               </div>
             </c:forEach>
           </div>
@@ -143,7 +145,7 @@
             </form>
           </div>
         </div>
-
+          </div>
 
 
 
@@ -205,25 +207,18 @@
 
 <script>
   $(document).ready(function () {
-    // Handle button click for validation and submission
     $("#validateAndSubmitBtn").click(function () {
-      // Check if either COD or MOMO is selected
       if ($("#cash").prop("checked") && !$("#momo").prop("checked")) {
-        // If only COD is selected, proceed with form submission
         $("#checkoutForm").submit();
       } else if ($("#momo").prop("checked") && !$("#cash").prop("checked")) {
-        // If only MOMO is selected, display MOMO QR code modal
         $("#momo-payment").modal("show");
-        // Start countdown timer (you can implement this logic)
         startCountdownTimer();
       } else {
-        // Show validation message if both or neither is selected
         $("#paymentValidationMessage").text("Vui lòng chọn một phương thức thanh toán (COD hoặc MOMO).").show();
       }
     });
 
     $("#momo").change(function () {
-      // Uncheck COD if MOMO is selected
       if ($(this).prop("checked")) {
         $("#cash").prop("checked", false);
         $("#paymentValidationMessage").hide();
@@ -237,45 +232,29 @@
       }
     });
 
-    // Handle form submission for COD
     $("#checkoutForm").submit(function (event) {
-      // Prevent the default form submission
       event.preventDefault();
 
-      // Perform any necessary form validation or AJAX request here
-      // Show the order success modal
+
       $("#orderSuccessModal").modal("show");
     });
 
 
     function startCountdownTimer() {
-      // Set the countdown duration in seconds
       var countdownDuration = 60;
 
-      // Get the countdown element by its ID
       var countdownElement = $("#count-down-time");
 
-      // Update the countdown every second
       var countdownInterval = setInterval(function () {
-        // Update the countdown element with the remaining time
+
         countdownElement.text(countdownDuration);
-
-        // Decrease the countdown duration
         countdownDuration--;
-
-        // Check if the countdown has reached zero
         if (countdownDuration < 0) {
-          // Clear the interval when the countdown is complete
           clearInterval(countdownInterval);
-
-          // You can add logic here when the countdown reaches zero,
-          // such as hiding the MOMO modal or displaying a message.
-
-          // For example:
-          // $("#momo-payment").modal("hide");
-          // alert("Time's up! Please try again.");
+          $("#momo-payment").modal("hide");
+          alert("Time's up! Please try again.");
         }
-      }, 1000); // Update every 1000 milliseconds (1 second)
+      }, 1000);
     }
 
   });
