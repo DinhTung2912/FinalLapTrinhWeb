@@ -17,11 +17,6 @@ import java.util.regex.Pattern;
 @WebServlet("/user/feedback")
 public class FeedbackServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Lấy dữ liệu từ form
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String content = request.getParameter("form_fields[message]");
@@ -66,5 +61,12 @@ public class FeedbackServlet extends HttpServlet {
         Pattern pattern = Pattern.compile(emailRegex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+        // Lấy dữ liệu từ form
+
     }
 }
