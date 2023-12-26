@@ -54,17 +54,23 @@
                     <div class="widget-area">
                         <div id="categories-1" class="widget">
                             <span class="widget-title">Danh mục sản phẩm</span>
-                            <ul class="product-categories">
-                                <li class="item"><a href="${pageContext.request.contextPath}/user/products">Tất cả</a></li>
-                                <c:forEach var="object" items="${objects}">
-                                    <li class="item"><a href="${pageContext.request.contextPath}/user/products?category=${object.key}">${object.key}</a></li>
+                            <ul class="wd-swatches-filter wd-filter-list wd-labels-on wd-size-normal wd-layout-list wd-text-style-1 wd-bg-style-4 wd-shape-round wd-scroll-content">
+                                <c:forEach var="group" items="${groups}">
+                                    <li class="wc-layered-nav-term wd-swatch-wrap">
+                                        <a href="products?group=${group.key}" class="layered-nav-link">
+                                            <span class="wd-swatch wd-bg"></span>
+                                            <span class="wd-filter-lable layer-term-lable">${group.key}</span>
+                                        </a>
+                                        <span class="count">${group.value}</span>
+                                    </li>
                                 </c:forEach>
                             </ul>
                         </div>
+
                         <!-- Lọc theo đối tượng -->
                         <div id="categories-2" class="widget">
                             <span class="widget-title">Lọc theo đối tượng</span>
-                            <ul class="wd-swatches-filter wd-filter-list wd-labels-on wd-size-normal wd-layout-list wd-text-style-1 wd-bg-style-4 wd-shape-round wd-scroll-content">
+                            <ul class="wd-swatches-filter wd-filter-list wd-labels-on wd-size-normal wd-layout-list wd-text-style-1 wd-bg-style-4    wd-shape-round wd-scroll-content">
                                 <c:forEach var="object" items="${objects}">
                                     <li class="wc-layered-nav-term wd-swatch-wrap">
                                         <a href="products?category=${object.key}" class="layered-nav-link"><span

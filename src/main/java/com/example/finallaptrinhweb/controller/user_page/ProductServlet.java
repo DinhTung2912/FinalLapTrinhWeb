@@ -69,8 +69,27 @@ public class ProductServlet extends HttpServlet {
         }
         // Chuyển danh sách sản phẩm và thông tin phân trang đến trang JSP
         request.setAttribute("product", products);
+        /////////// DANH MUC 1//////
+// Lấy danh sách danh mục sản phẩm
+        Map<String, Integer> listGroups = productDAO.getGroupListObject();
+        Set<Map.Entry<String, Integer>> groups = listGroups.entrySet();
 
+// Lấy danh mục sản phẩm từ tham số yêu cầu
+        String group = request.getParameter("group");
 
+// Kiểm tra xem có tham số group không
+        if (group != null) {
+            // Nếu có, gọi phương thức getProductByGroup từ ProductDAO
+            products = productDAO.getProductByGroup(group);
+        } else {
+            // Nếu không có, sử dụng phương thức hiện tại (ví dụ: getAllProductsLimited)
+            products = productDAO.getAllProductsLimited(start, pageSize);
+        }
+        request.setAttribute("groups", groups);
+
+// Chuyển danh sách sản phẩm và thông tin phân trang đến trang JSP
+        request.setAttribute("product", products);
+//////////////////DANH MUC 1///////////
 
         // Tổng số trang
         int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
