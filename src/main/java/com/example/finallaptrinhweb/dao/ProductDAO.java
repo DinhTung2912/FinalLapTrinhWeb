@@ -221,6 +221,49 @@ public class ProductDAO {
         return products;
     }
 
+
+    public Map<String, Integer> getGroupListObject() {
+        Map<String, Integer> groups = new HashMap<>();
+        String query = "SELECT pg.groupName, COUNT(pc.id) AS productCount " +
+                "FROM product_groups pg " +
+                "LEFT JOIN product_categories pc ON pg.id = pc.group_id " +
+                "GROUP BY pg.groupName";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    groups.put(resultSet.getString(1), resultSet.getInt(2));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+        return groups;
+    }
+
+    public List<Product> getProductByGroup(String groupName) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM products " +
+                "JOIN product_categories ON products.category_id = product_categories.id " +
+                "JOIN product_groups ON product_categories.group_id = product_groups.id " +
+                "WHERE product_groups.groupName = ?";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setString(1, groupName);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Product product = mapResultSetToProduct(resultSet);
+                    products.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return products;
+    }
+
+
     private Product mapResultSetToProduct(ResultSet resultSet) throws SQLException {
         Product product = new Product();
         product.setId(resultSet.getInt("id"));
