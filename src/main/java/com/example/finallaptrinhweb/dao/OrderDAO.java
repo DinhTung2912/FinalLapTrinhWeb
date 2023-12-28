@@ -2,7 +2,9 @@ package com.example.finallaptrinhweb.dao;
 
 import com.example.finallaptrinhweb.connection_pool.DBCPDataSource;
 import com.example.finallaptrinhweb.model.Order;
-
+import com.example.finallaptrinhweb.model.ShippingInfo;
+import com.example.finallaptrinhweb.model.OrderProduct;
+import com.example.finallaptrinhweb.dao.ShipmentDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -247,12 +249,56 @@ public class OrderDAO {
     }
 
 
-
-
     public static void main(String[] args) {
         int userId = 1; // Đặt user_id tương ứng với người dùng bạn muốn tìm đơn hàng
         List<Order> orders = loadOrderByUserId(userId);
         System.out.println(orders);
+    }
+    public static int addOrder(int user_id,String phone,
+                               String address, int status, String date_created, double total_price) {
+        int updated = 0;
+        int id = getNextOrderId();
+        String sql = "INSERT INTO `orders` (user_id,payment, phone, detail_address, status, date_created, total_pay, id) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(sql);
+            preparedStatement.setInt(1, user_id);
+            preparedStatement.setInt(2, 0);
+            preparedStatement.setString(3, phone);
+            preparedStatement.setString(4, address);
+            preparedStatement.setInt(5, status);
+            preparedStatement.setString(6, date_created);
+            preparedStatement.setDouble(7, total_price);
+            preparedStatement.setInt(8, id);
+
+            synchronized (preparedStatement) {
+                updated = preparedStatement.executeUpdate();
+            }
+
+            preparedStatement.close();
+            if (updated == 1)
+                return id;
+            else
+                return 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static int getNextOrderId() {
+        int result = 0;
+        try {
+            String query = "SELECT MAX(id) FROM `orders`";
+            try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next())
+                    result = resultSet.getInt(1) + 1;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
     }
 
 
