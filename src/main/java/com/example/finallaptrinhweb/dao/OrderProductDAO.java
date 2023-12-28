@@ -41,7 +41,6 @@ public class OrderProductDAO {
                     orderProduct.setSale(resultSet.getDouble("price"),resultSet.getInt("discountPrice"),resultSet.getInt("quantity"));
                     orderProduct.setTotal(resultSet.getDouble("price"),resultSet.getInt("discountPrice"),resultSet.getInt("quantity"));
 
-
                     productList.add(orderProduct);
                 }
                 resultSet.close();
@@ -55,5 +54,27 @@ public class OrderProductDAO {
     }
     public static void main(String[] args) {
         System.out.println(loadOrderProductByOrderId(3));
+    }
+
+    public static int addOrderProduct(int orderId, int productId, int quantity, double price, double totalPrice) {
+        int updated = 0;
+        String sql = "INSERT INTO order_products (order_id, pro_id, quantity, price, status, total_price) VALUES (?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(sql);
+            preparedStatement.setInt(1, orderId);
+            preparedStatement.setInt(2, productId);
+            preparedStatement.setInt(3, quantity);
+            preparedStatement.setDouble(4, price);
+            preparedStatement.setDouble(5, totalPrice);
+            synchronized (preparedStatement) {
+                updated = preparedStatement.executeUpdate();
+            }
+
+            preparedStatement.close();
+            return updated;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return updated;
     }
 }
