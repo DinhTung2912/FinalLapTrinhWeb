@@ -18,10 +18,10 @@
             <div class="header-nav" role="navigation" aria-label="Main navigation">
                 <ul class="menu">
                     <li class="menu-item">
-                        <a href="./index.html"><span class="nav-link-text">Thuốc Y The Pet</span></a>
+                        <a href="./index.jsp"><span class="nav-link-text">Thuốc Y The Pet</span></a>
                     </li>
                     <li class="menu-item">
-                        <a href="./pages/introduce.html"><span class="nav-link-text">Giới thiệu</span></a>
+                        <a href="./pages/introduce.jsp"><span class="nav-link-text">Giới thiệu</span></a>
                     </li>
                     <li class="menu-item">
                         <a href="products"><span class="nav-link-text">Sản phẩm</span></a>

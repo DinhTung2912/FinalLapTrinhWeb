@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 
 public class Product {
     private int id;
-    private String productCode;
     private String productName;
     private int categoryId;
     private double price;
@@ -27,7 +26,6 @@ public class Product {
 
     public Product(int id, String productCode, String productName, int categoryId, double price, int quantity, String purpose, String contraindications, int stockQuantity, String ingredients, String dosage, String instructions, String warrantyPeriod, String productType, int supplierId, String imageUrl, boolean active) {
         this.id = id;
-        this.productCode = productCode;
         this.productName = productName;
         this.categoryId = categoryId;
         this.price = price;
@@ -54,13 +52,6 @@ public class Product {
         this.id = id;
     }
 
-    public String getProductCode() {
-        return this.productCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
-    }
 
     public String getProductName() {
         return this.productName;
@@ -202,7 +193,6 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", productCode='" + productCode + '\'' +
                 ", productName='" + productName + '\'' +
                 ", categoryId=" + categoryId +
                 ", price=" + price +
