@@ -9,7 +9,6 @@ public class Product {
     private String productName;
     private int categoryId;
     private double price;
-    private BigDecimal discountPrice;
     private int quantity;
     private String purpose;
     private String contraindications;
@@ -26,13 +25,12 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String productCode, String productName, int categoryId, double price, BigDecimal discountPrice, int quantity, String purpose, String contraindications, int stockQuantity, String ingredients, String dosage, String instructions, String warrantyPeriod, String productType, int supplierId, String imageUrl, boolean active) {
+    public Product(int id, String productCode, String productName, int categoryId, double price, int quantity, String purpose, String contraindications, int stockQuantity, String ingredients, String dosage, String instructions, String warrantyPeriod, String productType, int supplierId, String imageUrl, boolean active) {
         this.id = id;
         this.productCode = productCode;
         this.productName = productName;
         this.categoryId = categoryId;
         this.price = price;
-        this.discountPrice = discountPrice;
         this.quantity = quantity;
         this.purpose = purpose;
         this.contraindications = contraindications;
@@ -86,14 +84,6 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public BigDecimal getDiscountPrice() {
-        return this.discountPrice;
-    }
-
-    public void setDiscountPrice(BigDecimal discountPrice) {
-        this.discountPrice = discountPrice;
     }
 
     public int getQuantity() {
@@ -216,7 +206,6 @@ public class Product {
                 ", productName='" + productName + '\'' +
                 ", categoryId=" + categoryId +
                 ", price=" + price +
-                ", discountPrice=" + discountPrice +
                 ", quantity=" + quantity +
                 ", purpose='" + purpose + '\'' +
                 ", contraindications='" + contraindications + '\'' +

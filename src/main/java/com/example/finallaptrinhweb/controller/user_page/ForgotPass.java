@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet("/user/forgotpassword")
 public class ForgotPass extends HttpServlet {
@@ -27,8 +28,15 @@ public class ForgotPass extends HttpServlet {
 
         try {
             if (UserDAO.getInstance().CheckExistUser(email)) {
-                String pass = UserDAO.getInstance().GetPassword(email);
-                if (send.sendPassword(email, pass)) {
+                // Tạo mật khẩu ngẫu nhiên
+                String newPassword = generateRandomPassword();
+
+                // Lưu mật khẩu mới đã mã hóa vào CSDL
+                String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+                UserDAO.getInstance().resetPassword(email, hashedPassword);
+
+                // Gửi mật khẩu mới đến email của người dùng
+                if (send.sendPassword(email, newPassword)) {
                     response.sendRedirect("./signIn.jsp");
                 }
             } else {
@@ -39,6 +47,18 @@ public class ForgotPass extends HttpServlet {
         } catch (SQLException var6) {
             throw new RuntimeException(var6);
         }
+    }
+
+    // Phương thức tạo mật khẩu ngẫu nhiên
+    private String generateRandomPassword() {
+        // Đây chỉ là một cách đơn giản, bạn có thể thay đổi theo nhu cầu
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder password = new StringBuilder();
+        for (int i = 0; i < 10; i++) {
+            int index = (int) (Math.random() * chars.length());
+            password.append(chars.charAt(index));
+        }
+        return password.toString();
     }
 }
 
