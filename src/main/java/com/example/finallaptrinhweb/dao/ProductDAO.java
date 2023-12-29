@@ -271,7 +271,6 @@ public class ProductDAO {
         product.setProductName(resultSet.getString("productName"));
         product.setCategoryId(resultSet.getInt("category_id"));
         product.setPrice(resultSet.getDouble("price"));
-        product.setDiscountPrice(resultSet.getBigDecimal("discountPrice"));
         product.setQuantity(resultSet.getInt("quantity"));
         product.setPurpose(resultSet.getString("purpose"));
         product.setContraindications(resultSet.getString("contraindications"));
