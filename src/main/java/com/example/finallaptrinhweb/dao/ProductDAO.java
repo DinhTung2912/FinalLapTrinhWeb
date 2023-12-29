@@ -267,7 +267,6 @@ public class ProductDAO {
     private Product mapResultSetToProduct(ResultSet resultSet) throws SQLException {
         Product product = new Product();
         product.setId(resultSet.getInt("id"));
-        product.setProductCode(resultSet.getString("productCode"));
         product.setProductName(resultSet.getString("productName"));
         product.setCategoryId(resultSet.getInt("category_id"));
         product.setPrice(resultSet.getDouble("price"));

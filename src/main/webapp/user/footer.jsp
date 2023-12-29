@@ -71,28 +71,28 @@
                                 style="color: #ffffff;"><strong>THÔNG
                                             TIN
                                             CHUNG</strong></span></p>
-                        <p><a href="pages/introduce.jsp" rel="nofollow"><span
+                        <p><a href="introduce.jsp" rel="nofollow"><span
                                 style="color: rgba(236, 236, 236, 0.4);">Giới
                                             thiệu</span></a></p>
                         <p><span style="color: rgba(236, 236, 236, 0.4);"><a
                                 style="color: rgba(236, 236, 236, 0.4);"
-                                href="pages/privacyPolicy.jsp" rel="nofollow">Chính sách
+                                href="privacyPolicy.jsp" rel="nofollow">Chính sách
                                             bảo mật</a></span></p>
                         <p><span style="color: rgba(236, 236, 236, 0.4);"><a
                                 style="color: rgba(236, 236, 236, 0.4);"
-                                href="pages/partnerPolicy.jsp" rel="nofollow">Chính sách
+                                href="partnerPolicy.jsp" rel="nofollow">Chính sách
                                             đối tác</a></span></p>
                         <p><span style="color: rgba(236, 236, 236, 0.4);"><a
                                 style="color: rgba(236, 236, 236, 0.4);"
-                                href="pages/agencyPolicy.jsp" rel="nofollow">Chính sách
+                                href="agencyPolicy.jsp" rel="nofollow">Chính sách
                                             đại lý</a></span></p>
                         <p><span style="color: rgba(236, 236, 236, 0.4);"><a
                                 style="color: rgba(236, 236, 236, 0.4);"
-                                href="pages/termsPolicy.jsp"
+                                href="termsPolicy.jsp"
                                 rel="nofollow">Chính sách điều khoản và điều kiện</a></span></p>
                         <p><span style="color: rgba(236, 236, 236, 0.4);"><a
                                 style="color: rgba(236, 236, 236, 0.4);"
-                                href="pages/contact.jsp" rel="nofollow">Thông tin liên
+                                href="contact.jsp" rel="nofollow">Thông tin liên
                                             hệ</a></span></p>
                     </div>
                 </div>
