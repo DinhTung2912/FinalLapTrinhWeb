@@ -215,7 +215,7 @@
                             <div>
                                 <div class="product-element-top">
                                     <a href="${pageContext.request.contextPath}/user/product?id=${p.id}">
-                                        <img src="${p.imageUrl}" alt="">
+                                        <img src="${pageContext.request.contextPath}/${p.imageUrl}" alt="">
                                     </a>
                                 </div>
                                 <div class="product-element-bottom">
@@ -262,7 +262,7 @@
                         <div class="slider">
                             <c:forEach var="img_banner" items="${products}">
                                 <div>
-                                    <img src="${img_banner.imageUrl}" alt=""/>
+                                    <img src="${pageContext.request.contextPath}/${img_banner.imageUrl}" alt="">
                                 </div>
                             </c:forEach>
                         </div>
@@ -272,7 +272,7 @@
                             <div>
                                 <div class="product-element-top">
                                     <a href="${pageContext.request.contextPath}/user/product?id=${p.id}">
-                                        <img src="${p.imageUrl}" alt="">
+                                        <img src="${pageContext.request.contextPath}/${p.imageUrl}" alt="">
                                     </a>
                                 </div>
                                 <div class="product-element-bottom">
@@ -318,7 +318,7 @@
                         <div class="slider">
                             <c:forEach var="img_banner" items="${products}">
                                 <div>
-                                    <img src="${img_banner.imageUrl}" alt=""/>
+                                    <img src="${pageContext.request.contextPath}/${img_banner.imageUrl}" alt="">
                                 </div>
                             </c:forEach>
                         </div>
@@ -328,7 +328,7 @@
                             <div>
                                 <div class="product-element-top">
                                     <a href="${pageContext.request.contextPath}/user/product?id=${p.id}">
-                                        <img src="${p.imageUrl}" alt="">
+                                        <img src="${pageContext.request.contextPath}/${p.imageUrl}" alt="">
                                     </a>
                                 </div>
                                 <div class="product-element-bottom">
