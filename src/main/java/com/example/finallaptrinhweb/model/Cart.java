@@ -159,6 +159,14 @@ public class Cart {
         products.remove(proId);
     }
 
+    // Trong lớp com.example.finallaptrinhweb.model.Cart
+    public void clear() {
+        // Implement logic để xóa các mục trong giỏ hàng
+        // Ví dụ: this.cartItems.clear();
+        this.products.clear();
+    }
+
+
     @Override
     public String toString() {
         return "Cart{" +

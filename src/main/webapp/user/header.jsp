@@ -24,7 +24,7 @@
                         <a href="./introduce.jsp"><span class="nav-link-text">Giới thiệu</span></a>
                     </li>
                     <li class="menu-item">
-                        <a href="product.jsp"><span class="nav-link-text">Sản phẩm</span></a>
+                        <a href="products"><span class="nav-link-text">Sản phẩm</span></a>
                         <div class="container">
                             <ul class="sub-menu">
                                 <li class="menu-item">
@@ -51,7 +51,7 @@
                         </div>
                     </li>
                     <li class="menu-item">
-                        <a href="contact.jsp"><span class="nav-link-text">Liên hệ</span></a>
+                        <a href="contact"><span class="nav-link-text">Liên hệ</span></a>
                     </li>
                 </ul>
             </div>
