@@ -4,12 +4,15 @@ import com.example.finallaptrinhweb.connection_pool.DBCPDataSource;
 import com.example.finallaptrinhweb.model.Order;
 import com.example.finallaptrinhweb.model.ShippingInfo;
 import com.example.finallaptrinhweb.model.OrderProduct;
+import com.example.finallaptrinhweb.model.Util;
 import com.example.finallaptrinhweb.dao.ShipmentDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class OrderDAO {
 
@@ -254,11 +257,10 @@ public class OrderDAO {
         List<Order> orders = loadOrderByUserId(userId);
         System.out.println(orders);
     }
-    public static int addOrder(int user_id,String phone,
-                               String address, int status, String date_created, double total_price) {
+    public static int addOrder(int user_id, String phone, String address, int status, Timestamp date_created, double total_price) {
         int updated = 0;
         int id = getNextOrderId();
-        String sql = "INSERT INTO `orders` (user_id,payment, phone, detail_address, status, date_created, total_pay, id) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `orders` (user_id, payment, phone, detail_address, status, date_created, total_pay, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(sql);
@@ -267,7 +269,7 @@ public class OrderDAO {
             preparedStatement.setString(3, phone);
             preparedStatement.setString(4, address);
             preparedStatement.setInt(5, status);
-            preparedStatement.setString(6, date_created);
+            preparedStatement.setString(6, Util.formatTimestamp(date_created));
             preparedStatement.setDouble(7, total_price);
             preparedStatement.setInt(8, id);
 
@@ -285,6 +287,8 @@ public class OrderDAO {
         }
         return 0;
     }
+
+
 
     public static int getNextOrderId() {
         int result = 0;
