@@ -263,6 +263,19 @@ public class ProductDAO {
         return products;
     }
 
+    public void updateImgUrl(int id, String imgUrl) {
+        String query = "UPDATE `products` SET imageUrl = ? WHERE id = ?";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setString(1, imgUrl);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     private Product mapResultSetToProduct(ResultSet resultSet) throws SQLException {
         Product product = new Product();

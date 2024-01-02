@@ -9,6 +9,8 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+import static com.example.finallaptrinhweb.controller.user_page.ImageService.Service.*;
+
 @WebServlet("/user/home")
 public class Home extends HttpServlet {
     @Override
@@ -18,10 +20,29 @@ public class Home extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ProductDAO productDAO = new ProductDAO();
+        List<Product> allProduct = productDAO.getAllProducts();
+
+        // Cập nhật url của tất cả sản phẩm vào csdl
+        // Duyệt qua danh sách sản phẩm và cập nhật imageUrl
+        String basePath = getServletContext().getRealPath("data\\sp_");
+        for (Product product : allProduct) {
+            int productId = product.getId();
+            String imageUrl = basePath + productId;
+
+            // Lấy đường dẫn của hình ảnh đầu tiên
+            String firstImagePath = getFirstImagePath(imageUrl);
+
+            // Lưu đường dẫn vào csdl
+            productDAO.updateImgUrl(productId, firstImagePath);
+
+        }
 
         // Danh sách sản phẩm
-        ProductDAO productDAO = new ProductDAO();
         List<Product> products = productDAO.getAllProductsLimited(0, 3);
+
+
+        System.out.println(products);
         request.setAttribute("products", products);
 
         //Danh sách banner
@@ -30,4 +51,5 @@ public class Home extends HttpServlet {
 
         request.getRequestDispatcher("./index.jsp").forward(request, response);
     }
+
 }
