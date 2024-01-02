@@ -144,7 +144,7 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <a href="product">Tất cả sản phẩm</a>
+                                    <a href="product.jsp">Tất cả sản phẩm</a>
                                 </div>
                             </div>
                             <div class="service">
@@ -207,7 +207,7 @@
                             <img src="https://tienthangvet.vn/wp-content/uploads/nokodemaseb-tri-nam-dang-xit.jpg"
                                  alt=""/>
                         </div>
-                        <a href="products" class="button">Xem ngay</a>
+                        <a href="product.jsp" class="button">Xem ngay</a>
                     </div>
 
                     <c:forEach var="p" items="${products}">

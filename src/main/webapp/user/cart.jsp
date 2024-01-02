@@ -133,7 +133,7 @@
                                 <li>Tổng<span>${ Util.formatCurrency(cart.totalPrice) } VND</span></li>
                             </ul>
                             <% session.setAttribute("cart", cart); %>
-                            <a href="check_out.jsp" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>
+                            <a href="checkout" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>
                         </div>
                     </div>
                 </div>

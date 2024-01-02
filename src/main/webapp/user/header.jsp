@@ -10,7 +10,7 @@
 <header class="header">
     <div class="container">
         <div class="header-left">
-            <a href="home">
+            <a href="index.jsp">
                 <img src="https://tienthangvet.vn/wp-content/uploads/logo-tien-thang-vet.jpg" alt=""/>
             </a>
         </div>
@@ -18,10 +18,10 @@
             <div class="header-nav" role="navigation" aria-label="Main navigation">
                 <ul class="menu">
                     <li class="menu-item">
-                        <a href="./index.html"><span class="nav-link-text">Thuốc Y The Pet</span></a>
+                        <a href="./index.jsp"><span class="nav-link-text">Thuốc Y The Pet</span></a>
                     </li>
                     <li class="menu-item">
-                        <a href="./pages/introduce.html"><span class="nav-link-text">Giới thiệu</span></a>
+                        <a href="./introduce.jsp"><span class="nav-link-text">Giới thiệu</span></a>
                     </li>
                     <li class="menu-item">
                         <a href="products"><span class="nav-link-text">Sản phẩm</span></a>
@@ -51,7 +51,7 @@
                         </div>
                     </li>
                     <li class="menu-item">
-                        <a href="feedback"><span class="nav-link-text">Liên hệ</span></a>
+                        <a href="contact"><span class="nav-link-text">Liên hệ</span></a>
                     </li>
                 </ul>
             </div>
@@ -74,7 +74,7 @@
                     %>
                     <span class="count"><%=cart.getTotalQuantity()%></span>
                     <%}%>
-                    <a href="cart">
+                    <a href="cart.jsp">
                         <i class="fa-solid fa-cart-shopping material-icons"></i>
                     </a>
                 </div>
@@ -90,7 +90,7 @@
                                                 nhân</span></a>
                             </li>
                             <li class="user-menu-item">
-                                <a href="signout"><span class="nav-link-text">Đăng xuất</span></a>
+                                <a href="signIn.jsp"><span class="nav-link-text">Đăng xuất</span></a>
                             </li>
                         </ul>
                     </div>

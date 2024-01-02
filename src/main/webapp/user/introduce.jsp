@@ -1,10 +1,11 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="css/contact/introduce.css" />
-
     <link rel="stylesheet" href="css/header&footer.css" />
     <link rel="stylesheet" href="css/HomePage/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -24,7 +25,7 @@
         <header class="header">
             <div class="container-2">
                 <div class="header-left">
-                    <a href="../index.jsp">
+                    <a href="index.jsp">
                         <img src="https://tienthangvet.vn/wp-content/uploads/logo-tien-thang-vet.jpg" alt />
                     </a>
                 </div>
@@ -32,7 +33,7 @@
                     <div class="header-nav" role="navigation" aria-label="Main navigation">
                         <ul class="menu-2 m-0 p-0">
                             <li class="menu-item">
-                                <a href="../index.jsp"><span class="nav-link-text">Thuốc Y
+                                <a href="index.jsp"><span class="nav-link-text">Thuốc Y
                                         The Pet</span></a>
                             </li>
                             <li class="menu-item">
@@ -41,7 +42,7 @@
 
                             </li>
                             <li class="menu-item">
-                                <a href="products.jsp" class="d-flex"><span class="nav-link-text ">Sản
+                                <a href="product.jsp" class="d-flex"><span class="nav-link-text ">Sản
                                         phẩm</span></a>
                                 <div class="">
                                     <ul class="sub-menu">

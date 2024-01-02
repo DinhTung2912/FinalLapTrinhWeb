@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Date;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class UserDAO {
     private static UserDAO instance;
@@ -33,7 +34,8 @@ public class UserDAO {
             return null;
         } else {
             User user = (User) users.get(0);
-            return email.equals(user.getEmail()) && password.equals(user.getPassword()) ? user : null;
+            String hashedPasswordFromDatabase = user.getPassword();
+            return email.equals(user.getEmail()) &&  BCrypt.checkpw(password, hashedPasswordFromDatabase) ? user : null;
         }
     }
 
@@ -79,20 +81,23 @@ public class UserDAO {
 
     public void SignUp(String username, String email, String password, String code) throws SQLException {
         Date dateCreated = new Date();
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
         JDBIConnector.me().get().withHandle((handle) -> {
             return handle.createUpdate("INSERT INTO users (id, username, email, password, verify_status, date_created, role_id) VALUES (?, ?, ?, ?, ?, ?, 1)")
                     .bind(0, this.GetId() + 1)
                     .bind(1, username)
                     .bind(2, email)
-                    .bind(3, password)
+                    .bind(3, hashedPassword)
                     .bind(4, code)
                     .bind(5, dateCreated)
                     .execute();
         });
     }
 
-
+    public boolean checkPassword(String candidatePassword, String hashedPasswordFromDatabase) {
+        return BCrypt.checkpw(candidatePassword, hashedPasswordFromDatabase);
+    }
 
     public void SetVerifiedStatus(String authcode) throws SQLException {
         JDBIConnector.me().get().useHandle((handle) -> {
@@ -102,14 +107,21 @@ public class UserDAO {
         });
     }
 
-    public String GetPassword(String email) throws SQLException {
-        List<User> users = JDBIConnector.me().get().withHandle((handle) -> {
-            return handle.createQuery("SELECT password FROM users WHERE email = ?").bind(0, email)
-                    .mapToBean(User.class)
+    public String getPassword(String email) throws SQLException {
+        List<String> passwords = JDBIConnector.me().get().withHandle((handle) -> {
+            return handle.createQuery("SELECT password FROM users WHERE email = ?")
+                    .bind(0, email)
+                    .mapTo(String.class)
                     .collect(Collectors.toList());
         });
-        return users.get(0).getPassword();
+
+        if (!passwords.isEmpty()) {
+            return passwords.get(0);
+        } else {
+            return null; // Hoặc giá trị mặc định khác tùy thuộc vào logic của bạn
+        }
     }
+
 
     public void updateUserInfor(String email, String fullName, String birthday, String city, String district, String ward, String detail_address, String phone) throws SQLException {
         JDBIConnector.me().get().useHandle((handle) -> {
@@ -126,12 +138,25 @@ public class UserDAO {
         });
     }
 
-    public void updatePassword(String email, String pass) throws SQLException {
+    public void updatePassword(String email, String password) throws SQLException {
+        // Mã hóa mật khẩu trước khi cập nhật vào cơ sở dữ liệu
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
         JDBIConnector.me().get().useHandle((handle) -> {
             handle.createUpdate("UPDATE users SET password = ? WHERE email = ?")
-                    .bind(0, pass)
+                    .bind(0, hashedPassword)
                     .bind(1, email)
                     .execute();
         });
     }
+    // Trong UserDAO
+    public void resetPassword(String email, String hashedPassword) throws SQLException {
+        JDBIConnector.me().get().useHandle((handle) -> {
+            handle.createUpdate("UPDATE users SET password = ? WHERE email = ?")
+                    .bind(0, hashedPassword)
+                    .bind(1, email)
+                    .execute();
+        });
+    }
+
 }
