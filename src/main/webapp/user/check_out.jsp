@@ -10,10 +10,8 @@
   %>
   <!DOCTYPE html>
   <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
-
     <link rel="stylesheet" href="css/thuvien/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="css/thuvien/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/thuvien/elegant-icons.css" type="text/css">
@@ -29,10 +27,8 @@
     <link rel="icon" href="https://tienthangvet.vn/wp-content/uploads/cropped-favicon-Tien-Thang-Vet-192x192.png"
           sizes="192x192" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <title>Checkout</title>
   </head>
-
   <body>
   <jsp:include page="header.jsp"/>
   <div class="page-title" style="
@@ -49,12 +45,12 @@
         <div class="col-lg-12">
           <h6>
             <span class="icon_tag_alt"></span> Đã có mã giảm giá?
-            <a href="cart.jsp">nhấn tại đây</a> để lấy mã giảm giá
+            <a href="cart">nhấn tại đây</a> để lấy mã giảm giá
           </h6>
         </div>
       </div>
       <h4>Chi tiết đơn hàng</h4>
-      <form id="checkoutForm" action="#" method="post">
+      <form id="checkoutForm" action="order-handle" method="post">
         <div class="row">
           <div class="col-lg-8 col-md-6">
             <div class="row">
@@ -63,7 +59,6 @@
                   <p>Họ và tên đệm<span>*</span></p>
                   <input type="text" id="firstName" name="firstName" required />
                   <span class="error-message"></span>
-
                 </div>
               </div>
               <div class="col-lg-6">
@@ -107,6 +102,21 @@
                 </div>
               </div>
             </div>
+            <c:if test="${sessionScope.user_id==null}">
+              <div class="checkout__input">
+                <p>
+                  Để mua hàng khách hàng phải tạo tài khoản. Nếu khách
+                  hàng đã có tài khoản vui lòng đăng nhập hoặc nhập mật khẩu để tạo tài khoản
+                  với thông tin bên trên.
+                </p>
+                <div class="checkout__input">
+                  <p>Mật khẩu tài khoản<span>*</span></p>
+                  <input style="color:black" id="pass" type="password" name="password"
+
+                         required/>
+                </div>
+              </div>
+            </c:if>
 
 
             <div class="checkout__input">
@@ -156,9 +166,6 @@
             </div>
           </div>
             </div>
-
-
-
         </div>
         <!-- Modal -->
         <div class="modal" id="orderSuccessModal" tabindex="-1" role="dialog">
