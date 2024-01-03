@@ -52,6 +52,80 @@ public class UserDAOT {
         return list;
     }
 
+    public static User loadUserById(int id) {
+        String sql = "SELECT * FROM users WHERE id = " + id;
+        List<User> userList = loadUserFromSql(sql);
+        if (!userList.isEmpty()) {
+            return userList.get(0);
+        }
+        return null;
+    }
+
+    public static boolean updateUser(String name, String birthday, int phone, String email, String city, String district, String ward, String detailaddress, int user_id) {
+        String sql = "UPDATE users SET address = ?, fullName = ?, phone = ?, email = ?, dateOfBirth = ? WHERE id = ?";
+        int update = 0;
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, detailaddress + "," + ward + "," + district + "," + city);
+            preparedStatement.setString(2, name);
+            preparedStatement.setInt(3, phone);
+            preparedStatement.setString(4, email);
+            preparedStatement.setString(5, birthday);
+            preparedStatement.setInt(6, user_id);
+            synchronized (preparedStatement) {
+                update = preparedStatement.executeUpdate();
+            }
+            return update == 1;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updateUserInAdimin(int id, String email, String name, String birthday, String address, String datecreated) {
+        String sql = "UPDATE users SET email = ?, fullName = ?, dateOfBirth = ?, detail_address = ?, date_created = ? WHERE id = ?";
+        int update = 0;
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, birthday);
+            preparedStatement.setString(4, address);
+            preparedStatement.setString(5, datecreated);
+            preparedStatement.setInt(6, id);
+            synchronized (preparedStatement) {
+                update = preparedStatement.executeUpdate();
+            }
+            return update == 1;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean deleteUserById(int userId) {
+        String sql = "DELETE FROM users WHERE id = ?";
+        int deleteResult = 0;
+
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, userId);
+            synchronized (preparedStatement) {
+                deleteResult = preparedStatement.executeUpdate();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return deleteResult == 1;
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(loadUserById(1));
+
+    }
+
     public static int getMaxUserId() {
         int id = 0;
         try (Statement statement = DBCPDataSource.getStatement()) {
