@@ -1,4 +1,3 @@
-
 package com.example.finallaptrinhweb.model;
 
 public class Supplier {
@@ -7,19 +6,21 @@ public class Supplier {
     private String contactName;
     private String email;
     private String phone;
-    private String address;
+    private String detailAddress; // Thay đổi tên từ "address" thành "detailAddress"
+    private String imageUrl;
     private int productId;
 
     public Supplier() {
     }
 
-    public Supplier(int id, String supplierName, String contactName, String email, String phone, String address, int productId) {
+    public Supplier(int id, String supplierName, String contactName, String email, String phone, String detailAddress, String imageUrl, int productId) {
         this.id = id;
         this.supplierName = supplierName;
         this.contactName = contactName;
         this.email = email;
         this.phone = phone;
-        this.address = address;
+        this.detailAddress = detailAddress;
+        this.imageUrl = imageUrl;
         this.productId = productId;
     }
 
@@ -63,12 +64,20 @@ public class Supplier {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return this.address;
+    public String getDetailAddress() {
+        return this.detailAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
+    }
+
+    public String getImageUrl() {
+        return this.imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public int getProductId() {
@@ -79,7 +88,8 @@ public class Supplier {
         this.productId = productId;
     }
 
+    @Override
     public String toString() {
-        return "Supplier{id=" + this.id + ", supplierName='" + this.supplierName + "', contactName='" + this.contactName + "', email='" + this.email + "', phone='" + this.phone + "', address='" + this.address + "', productId=" + this.productId + "}";
+        return "Supplier{id=" + this.id + ", supplierName='" + this.supplierName + "', contactName='" + this.contactName + "', email='" + this.email + "', phone='" + this.phone + "', detailAddress='" + this.detailAddress + "', imageUrl='" + this.imageUrl + "', productId=" + this.productId + "}";
     }
 }

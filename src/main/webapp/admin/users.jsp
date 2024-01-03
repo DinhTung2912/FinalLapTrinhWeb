@@ -108,6 +108,10 @@
 
                                             <td class="text-right">
                                                 <a href="edit_user?type=enteredit&id=${p.id}" class="btn btn-sm bg-success-light ">	<i class="far fa-edit mr-1"></i> Sửa</a>
+                                                <a href="#" style="margin-top: 5px;color: red" class="btn btn-outline-danger btn-sm"
+                                                   onclick="confirmDelete(${p.id})">
+                                                    <i class="fa fa-trash-o"></i> Xóa
+                                                </a>
 
                                             </td>
                                         </tr>
@@ -142,5 +146,13 @@
 
 <!-- Custom JS -->
 <script src="assets/js/admin.js"></script>
+<script>
+    function confirmDelete(userId) {
+        if (confirm("Bạn có chắc chắn muốn xóa người dùng này không?")) {
+            // Chuyển hướng đến Servlet để xóa người dùng
+            window.location.href = "./delete_user?id=" + userId;
+        }
+    }
+</script>
 </body>
 </html>

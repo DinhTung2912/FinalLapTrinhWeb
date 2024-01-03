@@ -18,7 +18,6 @@ public class Users_direct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("current_page","users");
         List<User> users = UserDAOT.loadUserFromSql("select * from users");
