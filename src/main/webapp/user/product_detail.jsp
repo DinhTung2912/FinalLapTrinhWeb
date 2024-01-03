@@ -260,7 +260,7 @@
                                         <div>
                                             <div class="product-element-top">
                                                 <a href="${pageContext.request.contextPath}/user/product?id=${product.id}">
-                                                    <img src="${product.imageUrl}"
+                                                    <img src="${pageContext.request.contextPath}/${product.imageUrl}"
                                                          alt="">
                                                 </a>
                                             </div>

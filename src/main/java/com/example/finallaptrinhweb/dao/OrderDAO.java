@@ -2,17 +2,13 @@ package com.example.finallaptrinhweb.dao;
 
 import com.example.finallaptrinhweb.connection_pool.DBCPDataSource;
 import com.example.finallaptrinhweb.model.Order;
-import com.example.finallaptrinhweb.model.ShippingInfo;
-import com.example.finallaptrinhweb.model.OrderProduct;
-import com.example.finallaptrinhweb.model.Util;
-import com.example.finallaptrinhweb.dao.ShipmentDAO;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class OrderDAO {
 
@@ -257,37 +253,81 @@ public class OrderDAO {
         List<Order> orders = loadOrderByUserId(userId);
         System.out.println(orders);
     }
-    public static int addOrder(int user_id, String phone, String address, int status, Timestamp date_created, double total_price) {
+    public static int addOrder(String username, int user_id, Integer discounts_id, int ship_id, int quantity, String status,
+                               double totalAmount, int phone, String detail_address, int payment, Timestamp date_created,
+                               double total_pay, double ship_price) {
+
         int updated = 0;
-        int id = getNextOrderId();
-        String sql = "INSERT INTO `orders` (user_id, payment, phone, detail_address, status, date_created, total_pay, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `orders`(`id`, `username`, `user_id`, `discounts_id`, `ship_id`, `quantity`, `status`, `totalAmount`, `phone`, `detail_address`, `payment`, `date_created`, `total_pay`, `ship_price`) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(sql);
-            preparedStatement.setInt(1, user_id);
-            preparedStatement.setInt(2, 0);
-            preparedStatement.setString(3, phone);
-            preparedStatement.setString(4, address);
-            preparedStatement.setInt(5, status);
-            preparedStatement.setString(6, Util.formatTimestamp(date_created));
-            preparedStatement.setDouble(7, total_price);
-            preparedStatement.setInt(8, id);
 
-            synchronized (preparedStatement) {
-                updated = preparedStatement.executeUpdate();
-            }
+            preparedStatement.setInt(1, getNextOrderId());
+            preparedStatement.setString(2, username);
+            preparedStatement.setInt(3, user_id);
+            preparedStatement.setInt(4, discounts_id);
+            preparedStatement.setInt(5, ship_id);
+            preparedStatement.setInt(6, quantity);
+            preparedStatement.setString(7, status);
+            preparedStatement.setDouble(8, totalAmount);
+            preparedStatement.setInt(9, phone);
+            preparedStatement.setString(10, detail_address);
+            preparedStatement.setInt(11, payment);
+            preparedStatement.setTimestamp(12, date_created);
+            preparedStatement.setDouble(13, total_pay);
+            preparedStatement.setDouble(14, ship_price);
+
+            updated = preparedStatement.executeUpdate();
 
             preparedStatement.close();
-            if (updated == 1)
-                return id;
-            else
-                return 0;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return 0;
+        return updated;
     }
 
+    public static int addOrderProduct(int discountsId, String productName, String imageUrl,
+                                      int quantity, double price) {
+        int updated = 0;
+        String sql = "INSERT INTO `order_products`(`id`,`order_id`, `discounts_id`, `productName`, `imageUrl`, `quantity`, `price`) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(sql);
+
+            preparedStatement.setInt(1, getNextOrderProId());
+            preparedStatement.setInt(2, getNextOrderId() - 1);
+            preparedStatement.setInt(3, discountsId);
+            preparedStatement.setString(4, productName);
+            preparedStatement.setString(5, imageUrl);
+            preparedStatement.setInt(6, quantity);
+            preparedStatement.setDouble(7, price);
+
+            updated = preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return updated;
+    }
+
+    private static int getNextOrderProId() {
+        int result = 0;
+        try {
+            String query = "SELECT MAX(id) FROM `order_products`";
+            try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next())
+                    result = resultSet.getInt(1) + 1;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
 
 
     public static int getNextOrderId() {
@@ -304,6 +344,5 @@ public class OrderDAO {
         }
         return result;
     }
-
 
 }
