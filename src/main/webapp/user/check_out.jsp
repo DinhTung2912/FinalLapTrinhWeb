@@ -146,14 +146,14 @@
 
               <label for="cash">
                 Cash on delivery (COD)
-                <input type="checkbox" id="cash" class="payment-option" />
+                <input type="checkbox" id="cash" name="cash" class="payment-option" />
                 <span class="checkmark"></span>
               </label>
             </div>
             <div class="checkout__input__checkbox">
               <label for="momo">
                 MOMO
-                <input type="checkbox" id="momo" class="payment-option" data-toggle="collapse" data-target="#momo-code" />
+                <input type="checkbox" id="momo" name="momo" class="payment-option" data-toggle="collapse" data-target="#momo-code" />
                 <span class="checkmark"  ></span>
               </label>
             </div>
