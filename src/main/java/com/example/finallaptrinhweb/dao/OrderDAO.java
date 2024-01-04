@@ -59,13 +59,12 @@ public class OrderDAO {
     public static Order loadOrder_view(int order_id) {
         Order order = new Order();
         try {
-            String query = "SELECT o.id, o.date_created, u.id AS user_id, o.quantity, o.status, o.totalAmount, o.phone, o.detail_address, o.payment, o.date_created AS order_date, o.total_pay, o.ship_price, o.name_product, o.number_product, " +
-                    "u.username, (SUM(p.price * op.quantity) + s.shippingCost) AS total " +
+            String query = "SELECT o.id, o.date_created, u.id AS user_id, o.quantity, o.status, o.totalAmount, o.phone, o.detail_address, o.payment, o.date_created AS order_date, o.total_pay, o.ship_price," +
+                    "u.username, (SUM(op.price * op.quantity) + s.shippingCost) AS total " +
                     "FROM orders o " +
                     "JOIN order_products op ON o.id = op.order_id " +
                     "JOIN shipping_info s ON s.id = o.ship_id " +
                     "JOIN users u ON o.user_id = u.id " +
-                    "JOIN products p ON op.product_id = p.id " +
                     "WHERE o.id = ?";
 
             try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
@@ -82,10 +81,6 @@ public class OrderDAO {
                         order.setPhone(resultSet.getLong("phone"));
                         order.setUsername(resultSet.getString("username"));
                         order.setShipPrice(resultSet.getDouble("ship_price"));
-
-                        // Thêm thông tin sản phẩm
-                        order.setNameProduct(resultSet.getString("name_product"));
-                        order.setNumberProduct(resultSet.getInt("number_product"));
                     }
                 }
             }
@@ -93,6 +88,10 @@ public class OrderDAO {
             throwables.printStackTrace();
         }
         return order;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(loadOrder_view(1));
     }
 
     // Bổ sung phương thức để tải danh sách đơn hàng dựa trên trạng thái
@@ -248,11 +247,7 @@ public class OrderDAO {
     }
 
 
-    public static void main(String[] args) {
-        int userId = 1; // Đặt user_id tương ứng với người dùng bạn muốn tìm đơn hàng
-        List<Order> orders = loadOrderByUserId(userId);
-        System.out.println(orders);
-    }
+
     public static int addOrder(String username, int user_id, Integer discounts_id, int ship_id, int quantity, String status,
                                double totalAmount, int phone, String detail_address, int payment, Timestamp date_created,
                                double total_pay, double ship_price) {

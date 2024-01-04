@@ -122,6 +122,21 @@ public class SupplierDAO {
         }
         return update == 1;
     }
+    public Supplier getSupplierById(int id) {
+        String query = "SELECT * FROM suppliers WHERE id=?";
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return getSupplier(resultSet);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         // Test loadSupplierList

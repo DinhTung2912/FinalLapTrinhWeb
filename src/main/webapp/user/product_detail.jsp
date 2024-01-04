@@ -89,8 +89,8 @@
                         <div class="summary-inner set-mb-l reset-last-child">
                             <div class="wd-product-brands">
                                 <a href="">
-                                    <img src="https://tienthangvet.vn/wp-content/uploads/logo-APA.jpg" title="APA"
-                                         alt="APA"/>
+                                    <img src="${supplierImgUrl}"
+                                         alt="Supplier Image"/>
                                 </a>
                             </div>
                             <h1 class="product_title entry-title wd-entities-title">
