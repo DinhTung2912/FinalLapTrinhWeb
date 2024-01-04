@@ -21,11 +21,12 @@ public class Product {
     private int supplierId;
     private String imageUrl;
     private boolean active;
+    private String supplierImageUrl;
 
     public Product() {
     }
 
-    public Product(int id, String productName, int categoryId, double price, int quantity, String purpose, String contraindications, int stockQuantity, String ingredients, String dosage, String instructions, String warrantyPeriod, String productType, String storageCondition, int supplierId, String imageUrl, boolean active) {
+    public Product(int id, String productName, int categoryId, double price, int quantity, String purpose, String contraindications, int stockQuantity, String ingredients, String dosage, String instructions, String warrantyPeriod, String productType, String storageCondition, int supplierId, String imageUrl, boolean active, String supplierImageUrl) {
         this.id = id;
         this.productName = productName;
         this.categoryId = categoryId;
@@ -43,6 +44,7 @@ public class Product {
         this.supplierId = supplierId;
         this.imageUrl = imageUrl;
         this.active = active;
+        this.supplierImageUrl = supplierImageUrl;
     }
 
     public int getId() {
@@ -181,6 +183,13 @@ public class Product {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+    public String getSupplierImageUrl() {
+        return this.supplierImageUrl;
+    }
+
+    public void setSupplierImageUrl(String supplierImageUrl) {
+        this.supplierImageUrl = supplierImageUrl;
     }
 
     public int getTypeWeight() {
