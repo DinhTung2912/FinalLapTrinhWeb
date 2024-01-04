@@ -2,6 +2,7 @@ package com.example.finallaptrinhweb.dao;
 
 import com.example.finallaptrinhweb.connection_pool.DBCPDataSource;
 import com.example.finallaptrinhweb.model.Supplier;
+
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,7 +37,7 @@ public class SupplierDAO {
         return supplierList;
     }
 
-    public static boolean insertSupplier(String name,String address,int phone,String email) {
+    public static boolean insertSupplier(String name, String address, int phone, String email) {
         String sql = "INSERT INTO suppliers (supplierName,detail_address,phone,email) VALUES (?, ?, ?, ?)";
         int update = 0;
         try (Connection connection = DBCPDataSource.getConnection();
@@ -86,6 +87,7 @@ public class SupplierDAO {
         }
         return null;
     }
+
     public static Supplier getSupplier(ResultSet resultSet) {
         if (resultSet == null) {
             return null;
@@ -106,12 +108,27 @@ public class SupplierDAO {
         }
         return null;
     }
+
+    public static boolean deleteSupplier(int id) {
+        String sql = "DELETE FROM suppliers WHERE id=?";
+        int update = 0;
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+
+            update = preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return update == 1;
+    }
+
     public static void main(String[] args) {
         // Test loadSupplierList
         System.out.println("Load Supplier List:");
         SupplierDAO.loadSupplierList().forEach(System.out::println);
 
 
-        }
     }
+}
 

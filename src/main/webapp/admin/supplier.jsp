@@ -135,10 +135,10 @@
                                             <td>${su.email}</td>
                                             <td class="text-right">
                                                 <a href="add-supplier?type=enterEdit&id=${su.id}" class="btn btn-sm bg-success-light mr-2">	<i class="far fa-edit mr-1"></i> Sửa</a>
-                                                    <%--&lt;%&ndash;											<button type="button" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i> Xóa</button>&ndash;%&gt;--%>
-                                                    <%--											<a href="add-supplier?type=delete&id=${r.id}" style="margin-top: 5px;color: red "--%>
-                                                    <%--											   class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i>--%>
-                                                    <%--												Xóa</a>--%>
+                                                <a href="#" style="margin-top: 5px;color: red" class="btn btn-outline-danger btn-sm"
+                                                   onclick="confirmDelete(${su.id})">
+                                                    <i class="fa fa-trash-o"></i> Xóa
+                                                </a>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -169,7 +169,14 @@
 
 <!-- Custom JS -->
 <script src="assets/js/admin.js"></script>
-
+<script>
+    function confirmDelete(supplierId) {
+        if (confirm("Bạn có chắc chắn muốn xóa nhà cung cấp này không?")) {
+            // Chuyển hướng đến Servlet để xóa nhà cung cấp
+            window.location.href = "./delete-supplier?id=" + supplierId;
+        }
+    }
+</script>
 </body>
 
 </html>

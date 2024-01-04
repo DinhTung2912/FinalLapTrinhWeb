@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import com.example.finallaptrinhweb.dao.SupplierDAO;
 import com.example.finallaptrinhweb.model.Supplier;
 
 @WebServlet(urlPatterns = "/admin/supplier")
-public class   Supplier_direct extends HttpServlet {
+public class Supplier_direct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }

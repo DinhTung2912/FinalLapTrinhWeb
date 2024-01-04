@@ -6,7 +6,7 @@ public class Supplier {
     private String contactName;
     private String email;
     private String phone;
-    private String detailAddress; // Thay đổi tên từ "address" thành "detailAddress"
+    private String detailAddress;
     private String imageUrl;
     private int productId;
 
