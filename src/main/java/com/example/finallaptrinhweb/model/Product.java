@@ -17,6 +17,7 @@ public class Product {
     private String instructions;
     private String warrantyPeriod;
     private String productType;
+    private String storageCondition;
     private int supplierId;
     private String imageUrl;
     private boolean active;
@@ -24,7 +25,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String productCode, String productName, int categoryId, double price, int quantity, String purpose, String contraindications, int stockQuantity, String ingredients, String dosage, String instructions, String warrantyPeriod, String productType, int supplierId, String imageUrl, boolean active) {
+    public Product(int id, String productName, int categoryId, double price, int quantity, String purpose, String contraindications, int stockQuantity, String ingredients, String dosage, String instructions, String warrantyPeriod, String productType, String storageCondition, int supplierId, String imageUrl, boolean active) {
         this.id = id;
         this.productName = productName;
         this.categoryId = categoryId;
@@ -38,11 +39,11 @@ public class Product {
         this.instructions = instructions;
         this.warrantyPeriod = warrantyPeriod;
         this.productType = productType;
+        this.storageCondition = storageCondition;
         this.supplierId = supplierId;
         this.imageUrl = imageUrl;
         this.active = active;
     }
-
 
     public int getId() {
         return this.id;
@@ -158,6 +159,14 @@ public class Product {
         this.supplierId = supplierId;
     }
 
+    public void setStorageCondition(String storageCondition) {
+        this.storageCondition = storageCondition;
+    }
+
+    public String getStorageCondition() {
+        return storageCondition;
+    }
+
     public String getImageUrl() {
         return this.imageUrl;
     }
@@ -189,6 +198,7 @@ public class Product {
             return 0;
         }
     }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -203,8 +213,9 @@ public class Product {
                 ", ingredients='" + ingredients + '\'' +
                 ", dosage='" + dosage + '\'' +
                 ", instructions='" + instructions + '\'' +
-                ", warrantyPeriod=" + warrantyPeriod +
+                ", warrantyPeriod='" + warrantyPeriod + '\'' +
                 ", productType='" + productType + '\'' +
+                ", storageCondition='" + storageCondition + '\'' +
                 ", supplierId=" + supplierId +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", active=" + active +

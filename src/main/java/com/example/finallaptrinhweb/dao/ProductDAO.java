@@ -291,6 +291,7 @@ public class ProductDAO {
         product.setDosage(resultSet.getString("dosage"));
         product.setInstructions(resultSet.getString("instructions"));
         product.setWarrantyPeriod(resultSet.getString("warrantyPeriod"));
+        product.setStorageCondition(resultSet.getString("storageCondition"));
         product.setProductType(resultSet.getString("productType"));
         product.setSupplierId(resultSet.getInt("supplier_id"));
         product.setImageUrl(resultSet.getString("imageUrl"));

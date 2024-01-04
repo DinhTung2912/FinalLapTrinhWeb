@@ -228,9 +228,7 @@
                                                                         phần nào của thuốc.
                                                                     </p>
                                                                     <h2>
-                                                                        BẢO QUẢN<br/>– Bảo quản nơi khô ráo,
-                                                                        thoáng mát, tránh ánh sáng trực tiếp.<br/>–
-                                                                        Bảo quản ở nhiệt độ phòng, dưới 30oC.
+                                                                        BẢO QUẢN<br/>– ${product.storageCondition}<br/>
                                                                     </h2>
                                                                     <h2>Hạn sử dụng: ${product.warrantyPeriod}</h2>
                                                                 </div>
