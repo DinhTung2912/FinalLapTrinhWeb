@@ -21,9 +21,13 @@ public class Util {
         return formattedPrice.trim(); // Loại bỏ khoảng trắng thừa
     }
     public static String formatTimestamp(Timestamp timestamp) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.format(timestamp);}
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(new Date(timestamp.getTime()));
+    }
+    public static String formatTimestampWithoutTime(Timestamp timestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(new Date(timestamp.getTime()));
+    }
     public static String dateFormat(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(date);

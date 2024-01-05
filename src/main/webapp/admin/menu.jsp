@@ -89,7 +89,6 @@
                                <c:if test="${current_page=='review-report'}">class="active"</c:if>>Đánh giá sản phẩm</a>
                         </li>
 
-
                     </ul>
                 </li>
 
