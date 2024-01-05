@@ -89,8 +89,8 @@
                         <div class="summary-inner set-mb-l reset-last-child">
                             <div class="wd-product-brands">
                                 <a href="">
-                                    <img src="https://tienthangvet.vn/wp-content/uploads/logo-APA.jpg" title="APA"
-                                         alt="APA"/>
+                                    <img src="${supplierImgUrl}"
+                                         alt="Supplier Image"/>
                                 </a>
                             </div>
                             <h1 class="product_title entry-title wd-entities-title">
@@ -228,9 +228,7 @@
                                                                         phần nào của thuốc.
                                                                     </p>
                                                                     <h2>
-                                                                        BẢO QUẢN<br/>– Bảo quản nơi khô ráo,
-                                                                        thoáng mát, tránh ánh sáng trực tiếp.<br/>–
-                                                                        Bảo quản ở nhiệt độ phòng, dưới 30oC.
+                                                                        BẢO QUẢN<br/>– ${product.storageCondition}<br/>
                                                                     </h2>
                                                                     <h2>Hạn sử dụng: ${product.warrantyPeriod}</h2>
                                                                 </div>
@@ -260,7 +258,7 @@
                                         <div>
                                             <div class="product-element-top">
                                                 <a href="${pageContext.request.contextPath}/user/product?id=${product.id}">
-                                                    <img src="${product.imageUrl}"
+                                                    <img src="${pageContext.request.contextPath}/${product.imageUrl}"
                                                          alt="">
                                                 </a>
                                             </div>

@@ -102,22 +102,6 @@
                 </div>
               </div>
             </div>
-            <c:if test="${sessionScope.user_id==null}">
-              <div class="checkout__input">
-                <p>
-                  Để mua hàng khách hàng phải tạo tài khoản. Nếu khách
-                  hàng đã có tài khoản vui lòng đăng nhập hoặc nhập mật khẩu để tạo tài khoản
-                  với thông tin bên trên.
-                </p>
-                <div class="checkout__input">
-                  <p>Mật khẩu tài khoản<span>*</span></p>
-                  <input style="color:black" id="pass" type="password" name="password"
-
-                         required/>
-                </div>
-              </div>
-            </c:if>
-
 
             <div class="checkout__input">
               <p>Lưu ý khi vận chuyển<span>*</span></p>
@@ -146,14 +130,14 @@
 
               <label for="cash">
                 Cash on delivery (COD)
-                <input type="checkbox" id="cash" class="payment-option" />
+                <input type="checkbox" id="cash" name="cash" class="payment-option" />
                 <span class="checkmark"></span>
               </label>
             </div>
             <div class="checkout__input__checkbox">
               <label for="momo">
                 MOMO
-                <input type="checkbox" id="momo" class="payment-option" data-toggle="collapse" data-target="#momo-code" />
+                <input type="checkbox" id="momo" name="momo" class="payment-option" data-toggle="collapse" data-target="#momo-code" />
                 <span class="checkmark"  ></span>
               </label>
             </div>

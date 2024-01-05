@@ -1,7 +1,8 @@
 
 package com.example.finallaptrinhweb.model;
+import java.util.Date;
+import com.example.finallaptrinhweb.model.Util;
 
-import java.sql.Date;
 
 public class User {
     private int id;
@@ -150,6 +151,9 @@ public class User {
 
     public void setDate_created(Date date_created) {
         this.date_created = date_created;
+    }
+    public String getFormattedDateOfBirth() {
+        return Util.dateFormatNoTime(this.dateOfBirth);
     }
 
     @Override

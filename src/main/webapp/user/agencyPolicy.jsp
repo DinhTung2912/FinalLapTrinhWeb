@@ -2,7 +2,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="css/sign/form.css"/>
@@ -45,8 +44,6 @@
         <p>Số điện thoại / Zalo: 029 999 9999</p>
        
     </div>
-
-
     <jsp:include page="footer.jsp"/>
 </div>
 

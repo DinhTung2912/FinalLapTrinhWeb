@@ -98,10 +98,8 @@
                     <ul style="display: none;">
                         <li><a href="users"
                                <c:if test="${current_page=='user'}">class="active"</c:if>>Khách hàng</a></li>
-                        <c:if test="${sessionScope.role_id==1}">
                         <li><a href="list-admin"
                                <c:if test="${current_page=='admin-list'}">class="active"</c:if>>Danh sách admin</a></li>
-                        </c:if>
                             <li><a href="supplier"
                                <c:if test="${current_page=='supplier'}">class="active"</c:if>>Nhà cung cấp</a></li>
 

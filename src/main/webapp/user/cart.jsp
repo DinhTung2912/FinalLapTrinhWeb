@@ -68,7 +68,7 @@
                             %>
                             <tr>
                                 <td class="shoping__cart__item">
-                                    <img src="<%=item.getProduct().getImageUrl()%>" alt="">
+                                    <img src="${pageContext.request.contextPath}/<%=item.getProduct().getImageUrl()%>" alt="">
 
                                     <h5><%=item.getProduct().getProductName()%>
                                     </h5>

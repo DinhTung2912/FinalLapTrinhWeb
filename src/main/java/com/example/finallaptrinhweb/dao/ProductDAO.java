@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.finallaptrinhweb.model.Product;
-
+import com.example.finallaptrinhweb.model.Supplier;
+import com.example.finallaptrinhweb.dao.SupplierDAO;
 public class ProductDAO {
     private static Connection connection = null;
 
@@ -118,6 +119,7 @@ public class ProductDAO {
 
         return products;
     }
+
     // Trong lớp ProductDAO
     public List<Product> searchProductsLimited(String searchTerm, int start, int pageSize) {
         List<Product> products = new ArrayList<>();
@@ -140,6 +142,7 @@ public class ProductDAO {
 
         return products;
     }
+
     public int getTotalSearchResults(String searchTerm) {
         int total = 0;
         String query = "SELECT COUNT(*) FROM products WHERE productName LIKE ?";
@@ -158,8 +161,6 @@ public class ProductDAO {
 
         return total;
     }
-
-
 
 
     public List<Product> getAllProductsByCategory(int categoryId) {
@@ -263,6 +264,45 @@ public class ProductDAO {
         return products;
     }
 
+    public void updateImgUrl(int id, String imgUrl) {
+        String query = "UPDATE `products` SET imageUrl = ? WHERE id = ?";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setString(1, imgUrl);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public Product getProductByIdWithSupplierInfo(int productId) {
+        Product product = null;
+        String query = "SELECT * FROM products WHERE id = ?";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setInt(1, productId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    product = mapResultSetToProduct(resultSet);
+
+                    // Lấy thông tin của nhà cung cấp từ SupplierDAO hoặc bất kỳ nguồn dữ liệu nào khác
+                    SupplierDAO supplierDAO = new SupplierDAO();
+                    Supplier supplier = supplierDAO.getSupplierById(product.getSupplierId());
+
+                    // Set giá trị cho supplierImageUrl sử dụng phương thức setSupplierImageUrl trong Product
+                    if (supplier != null) {
+                        product.setSupplierImageUrl(supplier.getImageUrl());
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return product;
+    }
+
 
     private Product mapResultSetToProduct(ResultSet resultSet) throws SQLException {
         Product product = new Product();
@@ -278,6 +318,7 @@ public class ProductDAO {
         product.setDosage(resultSet.getString("dosage"));
         product.setInstructions(resultSet.getString("instructions"));
         product.setWarrantyPeriod(resultSet.getString("warrantyPeriod"));
+        product.setStorageCondition(resultSet.getString("storageCondition"));
         product.setProductType(resultSet.getString("productType"));
         product.setSupplierId(resultSet.getInt("supplier_id"));
         product.setImageUrl(resultSet.getString("imageUrl"));
