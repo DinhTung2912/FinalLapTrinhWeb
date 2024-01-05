@@ -122,6 +122,7 @@ public class SupplierDAO {
         }
         return update == 1;
     }
+
     public Supplier getSupplierById(int id) {
         String query = "SELECT * FROM suppliers WHERE id=?";
         try (Connection connection = DBCPDataSource.getConnection();
@@ -137,6 +138,21 @@ public class SupplierDAO {
         }
         return null;
     }
+
+    public static int sumOfSupplier(String sql) {
+        int sum = 0;
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(sql)) {
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    sum = rs.getInt(1);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return sum;
+    }
+
 
     public static void main(String[] args) {
         // Test loadSupplierList

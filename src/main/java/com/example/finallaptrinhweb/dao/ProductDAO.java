@@ -14,6 +14,7 @@ import java.util.Map;
 import com.example.finallaptrinhweb.model.Product;
 import com.example.finallaptrinhweb.model.Supplier;
 import com.example.finallaptrinhweb.dao.SupplierDAO;
+
 public class ProductDAO {
     private static Connection connection = null;
 
@@ -275,6 +276,7 @@ public class ProductDAO {
             e.printStackTrace();
         }
     }
+
     public Product getProductByIdWithSupplierInfo(int productId) {
         Product product = null;
         String query = "SELECT * FROM products WHERE id = ?";
@@ -301,6 +303,20 @@ public class ProductDAO {
         }
 
         return product;
+    }
+
+    public static int sumOfProduct(String sql) {
+        int sum = 0;
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(sql)) {
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    sum = rs.getInt(1);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return sum;
     }
 
 
