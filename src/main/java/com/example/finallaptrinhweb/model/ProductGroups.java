@@ -3,13 +3,11 @@ package com.example.finallaptrinhweb.model;
 public class ProductGroups {
     private int id;
     private String groupName;
-    private String description;
     private boolean active;
 
-    public ProductGroups(int id, String groupName, String description, boolean active) {
+    public ProductGroups(int id, String groupName, boolean active) {
         this.id = id;
         this.groupName = groupName;
-        this.description = description;
         this.active = active;
     }
 
@@ -32,14 +30,6 @@ public class ProductGroups {
         this.groupName = groupName;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public boolean isActive() {
         return active;
     }
@@ -53,7 +43,6 @@ public class ProductGroups {
         return "ProductGroups{" +
                 "id=" + id +
                 ", groupName='" + groupName + '\'' +
-                ", description='" + description + '\'' +
                 ", active=" + active +
                 '}';
     }
