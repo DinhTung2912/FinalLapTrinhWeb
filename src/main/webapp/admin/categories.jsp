@@ -58,7 +58,7 @@
                         <h3 class="page-title">Danh mục</h3>
                     </div>
                     <div class="col-auto text-right">
-                        <a href="add-category?type=enterAdd" class="btn btn-primary add-button ml-3">
+                        <a href="add-category" class="btn btn-primary add-button ml-3">
                             <i class="fas fa-plus"></i>
                         </a>
                     </div>
@@ -77,17 +77,31 @@
                                         <th>ID</th>
                                         <th>Danh mục</th>
                                         <th>Số Lượng</th>
+                                        <th>Hiển Thị</th>
                                         <th class="text-right">Hành Động</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach var="c_view" items="${c_view}">
+                                    <c:forEach var="category" items="${categories}">
                                         <tr>
-                                            <td>${c_view.id}</td>
-                                            <td>${c_view.name}</td>
-                                            <td>${c_view.numOfProduct}</td>
+                                            <td>${category.id}</td>
+                                            <td>${category.categoryName}</td>
+                                            <c:set var="currentQuantity" value=""/>
+                                            <c:forEach var="quantity" items="${quantities}">
+                                                <c:if test="${quantity.categoryId eq category.id}">
+                                                    <c:set var="currentQuantity" value="${quantity.totalQuantity}"/>
+                                                </c:if>
+                                            </c:forEach>
+
+                                            <td>${currentQuantity}</td>
+                                            <td>
+                                                <div class="status-toggle">
+                                                    <input id="${category.id}" class="check" type="checkbox" ${category.active ? 'checked' : ''}>
+                                                    <label for="${category.id}" class="checktoggle" onclick="window.location.href ='set-status?active=${!category.active}&id=${category.id}'">checkbox</label>
+                                                </div>
+                                            </td>
                                             <td class="text-right">
-                                                <a href="add-category?type=enterEdit&id=${c_view.id}"
+                                                <a href="edit-category?id=${category.id}&name=${category.categoryName}"
                                                    class="btn btn-sm bg-success-light mr-2">
                                                     <i class="far fa-edit mr-1"></i> Sửa</a>
                                             </td>

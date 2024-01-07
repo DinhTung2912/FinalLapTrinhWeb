@@ -5,10 +5,11 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+import javax.naming.Context;
 import java.io.IOException;
 
-@WebServlet("set-status")
-public class SetStatusCatogory extends HttpServlet {
+@WebServlet("/admin/set-status")
+public class SetStatusCategory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -22,6 +23,7 @@ public class SetStatusCatogory extends HttpServlet {
         CategoryDao dao = new CategoryDao();
 
         dao.setStatus(status, id);
-        request.getRequestDispatcher("./categories.jsp").forward(request, response);
+
+        response.sendRedirect(request.getContextPath()+"/admin/category");
     }
 }
