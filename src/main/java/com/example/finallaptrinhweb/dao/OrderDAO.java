@@ -130,9 +130,7 @@ public class OrderDAO {
 
 
 
-    public static void main(String[] args) {
-        System.out.println(loadOrderNear(5));
-    }
+
 
     // Bổ sung phương thức để tải danh sách đơn hàng dựa trên trạng thái
     public static List<Order> loadOrderByStatus(String status, String from_date, String to_date) {
@@ -234,20 +232,21 @@ public class OrderDAO {
         }
         return orderList;
     }
+    public static void main(String[] args) {
+        System.out.println(loadOrderByUserId(6));
+    }
 
     public static List<Order> loadOrderByUserId(int user_id) {
         List<Order> orderList = new ArrayList<>();
         try {
             String query = "SELECT o.id, o.date_created, u.username, o.status, " +
-                    "(SUM(p.price * op.quantity) + s.shippingCost) AS total, COUNT(o.id) AS countOr " +
+                    "(SUM(op.price * op.quantity) + s.shippingCost) AS total, COUNT(o.id) AS countOr " +
                     "FROM orders o " +
                     "JOIN order_products op ON o.id = op.order_id " +
                     "JOIN shipping_info s ON s.id = o.ship_id " +
                     "JOIN users u ON o.user_id = u.id " +
-                    "JOIN products p ON op.product_id = p.id " +
                     "WHERE o.user_id = ? " +
                     "GROUP BY o.id, o.date_created, o.user_id, o.status";
-
 
             try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
                 preparedStatement.setInt(1, user_id);
@@ -261,7 +260,6 @@ public class OrderDAO {
                         order.setStatus(resultSet.getString("status"));
                         order.setTotalPay(resultSet.getDouble("total"));
                         orderList.add(order);
-
                     }
                 }
             }
