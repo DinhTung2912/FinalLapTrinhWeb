@@ -1,42 +1,47 @@
 
-<%@ page import="java.util.Date" %>
-<%@ page import="com.example.finallaptrinhweb.model.Product" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="vi-VN">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Quản lý sản phẩm</title>
-    <link rel="icon" href="https://tienthangvet.vn/wp-content/uploads/cropped-favicon-Tien-Thang-Vet-192x192.png"
-          sizes="192x192" />
+    <title>${title}</title>
+    <link href="assets/img/icon/icon-logo.png" rel="shortcut icon">
+
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <!-- Datatables CSS -->
-    <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+
     <!-- Datepicker CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+
     <!-- Animate CSS -->
     <link rel="stylesheet" href="assets/css/animate.min.css">
+
     <!-- Select CSS -->
     <link rel="stylesheet" href="assets/css/select2.min.css">
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="assets/css/admin.css">
 
 </head>
+
 <body>
-<% System.out.println("Co dang vao product.jsp");%>
 <div class="main-wrapper">
+
     <jsp:include page="menu.jsp"></jsp:include>
+
     <div class="page-wrapper">
         <div class="content container-fluid">
 
@@ -44,13 +49,10 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col">
-                        <h3 class="page-title">Sản phẩm</h3>
+                        <h3 class="page-title">Danh mục</h3>
                     </div>
                     <div class="col-auto text-right">
-                        <a class="btn btn-white filter-btn" href="javascript:void(0);" id="filter_search">
-                            <i class="fas fa-filter"></i>
-                        </a>
-                        <a href="add-product?type=enterAdd" class="btn btn-primary add-button ml-3">
+                        <a href="add-category" class="btn btn-primary add-button ml-3">
                             <i class="fas fa-plus"></i>
                         </a>
                     </div>
@@ -58,62 +60,47 @@
             </div>
             <!-- /Page Header -->
 
-            <!-- Search Filter -->
-
-            <!-- /Search Filter -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover table-center mb-0 datatable">
-                                    <!-- Thay đổi code ở đây Thay đổi theo file word -->
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Ảnh</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Giá bán</th>
-                                        <th>Số lượng</th>
-                                        <th>ID nhà cung cấp</th>
+                                        <th>Danh mục</th>
+                                        <th>Số Lượng</th>
+                                        <th>Hiển Thị</th>
                                         <th class="text-right">Hành Động</th>
                                     </tr>
                                     </thead>
-
-                                    <!-- Thêm vào nội dung ở đây -->
                                     <tbody>
-                                    <c:forEach var="p" items="${product}">
-                                        <c:set var="price" value="${p.price}"></c:set>
-
-
+                                    <c:forEach var="category" items="${categories}">
                                         <tr>
-                                            <td>${p.id}</td>
-                                            <td><img class="rounded service-img mr-1"
+                                            <td>${category.id}</td>
+                                            <td>${category.categoryName}</td>
+                                            <c:set var="currentQuantity" value=""/>
+                                            <c:forEach var="quantity" items="${quantities}">
+                                                <c:if test="${quantity.categoryId eq category.id}">
+                                                    <c:set var="currentQuantity" value="${quantity.totalQuantity}"/>
+                                                </c:if>
+                                            </c:forEach>
 
-                                            <c:if test="${fn:startsWith(p.imageUrl, 'imgs')}"> src="../${p.imageUrl}"</c:if>
-                                                     <c:if test="${fn:startsWith(p.imageUrl, 'http')}">src="${p.imageUrl}"</c:if>
-
-                                                     alt="Hình ảnh danh mục"></td>
-                                            <td>${p.productName}</td>
-
+                                            <td>${currentQuantity}</td>
+                                            <td>
+                                                <div class="status-toggle">
+                                                    <input id="${category.id}" class="check" type="checkbox" ${category.active ? 'checked' : ''}>
+                                                    <label for="${category.id}" class="checktoggle" onclick="window.location.href ='set-status?active=${!category.active}&id=${category.id}'">checkbox</label>
+                                                </div>
                                             </td>
-
-                                            <td><%= pageContext.getAttribute("price")%>
-                                            </td>
-                                            <td>${p.quantity}</td>
-
-                                            <td>${p.supplierId}</td>
                                             <td class="text-right">
-                                                <a href="add-product?type=enterEdit&id=${p.id}"
-                                                   class="btn btn-sm bg-success-light "> <i
-                                                        class="far fa-edit mr-1"></i> Sửa</a>
-                                                    <%--                                                <a href="edit-product.html" style="margin-top: 5px;color: red "--%>
-                                                    <%--                                                   class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i>--%>
-                                                    <%--                                                    Xóa</a>--%>
+                                                <a href="edit-category?id=${category.id}&name=${category.categoryName}"
+                                                   class="btn btn-sm bg-success-light mr-2">
+                                                    <i class="far fa-edit mr-1"></i> Sửa</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
-                                    <%System.out.println("DA xuong toi day");%>
                                     </tbody>
                                 </table>
                             </div>
@@ -124,6 +111,7 @@
         </div>
     </div>
 </div>
+
 <!-- jQuery -->
 <script src="assets/js/jquery-3.5.0.min.js"></script>
 
@@ -143,5 +131,7 @@
 
 <!-- Custom JS -->
 <script src="assets/js/admin.js"></script>
+
 </body>
+
 </html>

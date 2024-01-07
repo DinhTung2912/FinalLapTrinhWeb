@@ -100,7 +100,7 @@
                             <tr>
                                 <td>
                                     <div class="product-item">
-                                        <img src="${pl.imageUrl}" alt="${pl.productName}">
+                                        <img src="${pageContext.request.contextPath}/${pl.imageUrl}" alt="${pl.productName}">
                                         <div class="product-info">
                                             <a class="product-name" href="shop-detail?id=${pl.id}">${pl.productName}</a>
                                             <p class="product-seller">Cung cấp bởi Thú Y The Pet </p>

@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 
-
 <% System.out.println("Co dang vao menu.jsp");%>
 <!-- Header -->
 <div class="header">
@@ -88,7 +87,6 @@
                         <li><a href="warranty"
                                <c:if test="${current_page=='review-report'}">class="active"</c:if>>Đánh giá sản phẩm</a>
                         </li>
-
 
                     </ul>
                 </li>

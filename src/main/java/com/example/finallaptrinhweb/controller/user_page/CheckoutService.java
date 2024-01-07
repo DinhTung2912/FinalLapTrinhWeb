@@ -26,7 +26,7 @@ public class CheckoutService extends HttpServlet {
             // Add logic to set other attributes as needed
             double price = cart.getPriceSaled() != 0 ? cart.getPriceSaled() : cart.getTotalPrice();
             int typeWeight = cart.getMaxTypeWeight();
-            double priceShipment = calculateShipmentPrice(typeWeight);
+            double priceShipment = calculateShipmentPrice();
             double totalPrice = price + priceShipment;
 
             // Set attributes for the JSP
@@ -44,11 +44,8 @@ public class CheckoutService extends HttpServlet {
         }
     }
 
-    private double calculateShipmentPrice(int typeWeight) {
-        if (typeWeight == 1) return 10000;
-        else if (typeWeight == 2) return 20000;
-        else if (typeWeight == 3) return 50000;
-        else if (typeWeight == 4) return 70000;
-        else return 0; // Add default case or handle other scenarios
+    private double calculateShipmentPrice() {
+        // Phí vận chuyển cố định (ví dụ: 20,000 VND)
+        return 20000;
     }
 }

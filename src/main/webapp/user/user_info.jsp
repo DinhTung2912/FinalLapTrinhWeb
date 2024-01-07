@@ -4,6 +4,7 @@
 <% User user = (User) session.getAttribute("auth");%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.example.finallaptrinhweb.model.Util" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -249,28 +250,22 @@
                                     <th>Mã đơn hàng</th>
                                     <th>Ngày mua</th>
                                     <th>Thanh toán</th>
-                                    <th>Trạng thái đơn hàng</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${order}" var="o">
                                     <tr>
                                         <td>
-                                            <a href="/user/order_detail?id=${o.id}">${o.id}</a>
+                                            <a href="${pageContext.request.contextPath}/user/order_detail?id=${o.id}">${o.id}</a>
                                         </td>
-                                        <td>${o.dateCreated}</td>
+                                        <td>${Util.formatTimestamp(o.dateCreated)}</td>
                                         <td>
-                                            <c:if test="${o.payment==true}">Tiền mặt</c:if>
-                                            <c:if test="${o.payment==false}">Ví momo</c:if>
-                                        </td>
-                                        <td>
-                                            <c:if test="${o.status eq 'Cancelled'}">Đã hủy </c:if>
-                                            <c:if test="${o.status eq 'Rejected'}">Bị từ chối </c:if>
-                                            <c:if test="${o.status eq 'Processing'}">Đang xử lí </c:if>
-                                            <c:if test="${o.status eq 'Packaging'}">Đang đóng gói </c:if>
-                                            <c:if test="${o.status eq 'Shipping'}">Đang vận chuyển </c:if>
-                                            <c:if test="${o.status eq 'Success'}">Thành công </c:if>
-
+                                        <c:if test="${o.payment}">
+                                            Momo
+                                        </c:if>
+                                        <c:if test="${not o.payment}">
+                                            Tiền Mặt
+                                        </c:if>
                                         </td>
                                     </tr>
                                 </c:forEach>
