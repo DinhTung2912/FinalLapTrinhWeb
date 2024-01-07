@@ -114,7 +114,7 @@
               <h2>Thông tin sản phẩm trong giỏ hàng:</h2>
 
               <c:forEach var="item" items="${cart.products.values()}">
-                <div>
+                <div class="checkout__order__subtotal">
                   <p>Tên sản phẩm: ${item.product.productName}</p>
                   <p>Giá bán: ${ Util.formatCurrency(item.product.price) } VND</p>
   <%--                <p>Số lượng: ${ item.quantity }</p>--%>
@@ -122,6 +122,12 @@
 
                 </div>
               </c:forEach>
+              <div class="checkout__order__subtotal">
+                <p>Phí vận chuyển: ${ Util.formatCurrency(priceShipment) } VND</p>
+              </div>
+              <div class="checkout__order__total">
+                <p>Tổng tiền thanh toán: ${ Util.formatCurrency(totalPrice) } VND</p>
+              </div>
             </div>
 
 

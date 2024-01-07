@@ -52,25 +52,6 @@ public class UserDAOT {
         return list;
     }
 
-    public static boolean executeSql(String sql) {
-        try (Statement statement = DBCPDataSource.getStatement()) {
-            synchronized (statement) {
-                System.out.println(sql);
-                statement.executeUpdate(sql);
-                return true;
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return false;
-        }
-    }
-
-    public static boolean updateUser(String name, String birthday, int phone, String email, String city, String district, String ward, String detailaddress, int user_id) {
-        String sql = "UPDATE user SET address = '" + detailaddress + "," + ward + "," + district + "," + city + "', name ='" + name + "', phone= " + phone + ",email='" + email + "',birthday='" + birthday + "' where id=" + user_id;
-        return executeSql(sql);
-    }
-
-
     public static User loadUserById(int id) {
         String sql = "SELECT * FROM users WHERE id = " + id;
         List<User> userList = loadUserFromSql(sql);
@@ -87,23 +68,6 @@ public class UserDAOT {
             return userList.get(0);
         }
         return null;
-    }
-
-    public static void changePassword(int user_id, String email, String pass) {
-        long p = user_id * email.hashCode() * pass.hashCode();
-        try {
-            Connection connection = DBCPDataSource.getConnection();
-            String sql = "UPDATE user SET password=? WHERE id=?";
-            try (PreparedStatement pe = connection.prepareStatement(sql)) {
-                pe.setLong(1, p);
-                pe.setInt(2, user_id);
-                synchronized (pe) {
-                    pe.executeUpdate();
-                }
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 
     private static List<User> loadUserFromSql(String sql, String email) {

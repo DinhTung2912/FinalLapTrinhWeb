@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: DINHTUNG
-  Date: 02/01/2024
-  Time: 9:35 CH
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page import="com.example.finallaptrinhweb.model.Util" %>
 <%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

@@ -196,36 +196,15 @@
                                                                         ${product.purpose}
                                                                     </p>
                                                                     <h1>Thành phần: ${product.ingredients}</h1>
-                                                                    <%--          <p>
-                                                                                  Betamethasone Dipropionate:….0,64
-                                                                                  mg<br/>Gentamicin
-                                                                                  Sulfate:……………………1,0
-                                                                                  mg<br/>Clotrimazole:……………………………10,0
-                                                                                  mg<br/>Tá dược vừa đủ:……………………………..1 g
-                                                                              </p> --%>
                                                                     <h2>Liều lượng: ${product.dosage} </h2>
                                                                     <h2>Hướng dẫn sử dụng:</h2>
                                                                     <p>
                                                                         ${product.instructions}
                                                                     </p>
-                                                                    <%--          <p>
-                                                                       ► Bôi kem vào vùng da bị bệnh, nên cắt
-                                                                        tỉa lông trước khi thoa thuốc.<br/>►
-                                                                        Liều lượng sử dụng tùy thuộc vào mức độ
-                                                                        vùng da bị bệnh.<br/>► Thoa 2 lần/ngày
-                                                                        (sáng &amp; tối) cho đến khi hết các
-                                                                        triệu chứng viêm da, nấm da (tối đa 2 –
-                                                                        4 tuần).<br/>► Lặp lại nếu cần thiết
-                                                                        sau 20 ngày.
-                                                                    </p> --%>
                                                                     <h2>Dạng bào chế: ${product.productType} </h2>
                                                                     <h2>CHỐNG CHỈ ĐỊNH:</h2>
                                                                     <p>
                                                                         - ${product.contraindications}<br/>
-                                                                        – Không để thuốc dính vào mắt hoặc bôi
-                                                                        lên vết thương hở.<br/>– Không dùng cho
-                                                                        vật nuôi quá mẫn cảm với bất kỳ thành
-                                                                        phần nào của thuốc.
                                                                     </p>
                                                                     <h2>
                                                                         BẢO QUẢN<br/>– ${product.storageCondition}<br/>
