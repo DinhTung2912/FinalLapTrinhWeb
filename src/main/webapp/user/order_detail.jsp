@@ -51,7 +51,11 @@
                         <div class="heading">
                             <span>Chi tiết đơn hàng #${order.id}</span>
                             <span class="split">-</span>
-                            <span class="status">Giao hàng thành công</span>
+                            <span class="status">
+                                <c:if test="${order.status eq 'Shipping'}">
+                                    Đang giao
+                                    </c:if>
+                            </span>
                         </div>
                         <div class="created-date">Ngày đặt hàng: ${order.dateCreated}</div>
                         <div class="styles_section-2">
@@ -146,8 +150,8 @@
                             </tr>
                             </tfoot>
                         </table>
-                        <a class="view-list-order" href="user">Quay lại đơn hàng của tôi</a>
-                        <button class="cancel-order" disabled="">Hủy Đơn Hàng</button>
+                        <a class="view-list-order" href="updateinfouser">Quay lại đơn hàng của tôi</a>
+                        <button class="cancel-order" style="color: white; background-color: red;" onclick="confirmCancelOrder()">Hủy Đơn Hàng</button>
                     </div>
                 </div>
             </div>
@@ -197,6 +201,22 @@
 <script src="js/thuvien/jquery-3.3.1.min.js"></script>
 <script src="js/thuvien/bootstrap.min.js"></script>
 <script src="js/thuvien/main.js"></script>
+<script>
+    function confirmCancelOrder() {
+        // Sử dụng hộp thoại xác nhận
+        var confirmation = confirm("Bạn có chắc chắn muốn hủy đơn hàng không?");
+
+        // Nếu người dùng xác nhận, thực hiện hành động hủy đơn hàng
+        if (confirmation) {
+            cancelOrder();
+        }
+    }
+
+    function cancelOrder() {
+        // Thêm logic xử lý khi nút được nhấn
+        // Ví dụ: hiển thị cảnh báo, gửi yêu cầu hủy đơn hàng, v.v.
+    }
+</script>
 
 </body>
 
