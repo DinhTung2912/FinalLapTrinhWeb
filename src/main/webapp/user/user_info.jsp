@@ -250,6 +250,7 @@
                                     <th>Mã đơn hàng</th>
                                     <th>Ngày mua</th>
                                     <th>Thanh toán</th>
+                                    <th>Trạng thái đơn hàng</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -265,6 +266,10 @@
                                         </c:if>
                                         <c:if test="${not o.payment}">
                                             Tiền Mặt
+                                        </c:if>
+                                        </td>
+                                        <td> <c:if test="${o.status eq 'Shipping'}">
+                                            Đang giao
                                         </c:if>
                                         </td>
                                     </tr>
