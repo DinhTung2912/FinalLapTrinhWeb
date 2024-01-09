@@ -51,7 +51,6 @@ public class CartItem {
     }
     public OrderProduct toOrderProduct() {
         OrderProduct orderProduct = new OrderProduct();
-        orderProduct.setProductId(product.getId());
         orderProduct.setProductName(product.getProductName());
         orderProduct.setQuantity(quantity);
         orderProduct.setPrice(product.getPrice());
