@@ -24,7 +24,7 @@ public class UpdateInfoUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Lấy thông tin người dùng từ session
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("auth");
 
         // Kiểm tra xem user có tồn tại không
         if (user == null) {
@@ -48,7 +48,8 @@ public class UpdateInfoUser extends HttpServlet {
 
         try {
             UserDAO.getInstance().updateUserInfor(user.getEmail(), fullName, birthday, city, district, ward, detail_address, phone);
-            response.sendRedirect("./user_info.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./user_info.jsp");
+            dispatcher.forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

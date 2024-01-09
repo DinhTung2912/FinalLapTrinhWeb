@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: DINHTUNG
-  Date: 15/12/2023
-  Time: 8:33 CH
-  To change this template use File | Settings | File Templates.
---%>
 
 <%@ page import="java.util.Date" %>
 <%@ page import="com.example.finallaptrinhweb.model.Product" %>

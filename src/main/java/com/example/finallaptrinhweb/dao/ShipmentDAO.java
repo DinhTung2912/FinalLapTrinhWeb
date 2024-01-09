@@ -2,6 +2,8 @@ package com.example.finallaptrinhweb.dao;
 
 import com.example.finallaptrinhweb.connection_pool.DBCPDataSource;
 import com.example.finallaptrinhweb.model.ShippingInfo;
+import com.example.finallaptrinhweb.dao.OrderDAO;
+import com.example.finallaptrinhweb.model.Order;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,66 +14,29 @@ import java.math.BigDecimal;
 
 public class ShipmentDAO {
 
-    public static List<ShippingInfo> getAllShipments() {
-        List<ShippingInfo> shipmentList = new ArrayList<>();
+    public static int addShipment() {
+        int id = getNextId();
+        int updated = 0;
+        double price = 20000;
+        String sql = "INSERT INTO shipping_info (shippingCost, date_created, id) VALUES (?, ?, ?)";
         try {
-            String sql = "SELECT id, shippingCost, date_created, weight FROM shipping_info";
             PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                ShippingInfo shipment = new ShippingInfo();
-                shipment.setId(resultSet.getInt("id"));
-                shipment.setShippingCost(resultSet.getBigDecimal("shippingCost"));
-                shipment.setDateCreated(resultSet.getDate("date_created"));
-                shipment.setWeight(resultSet.getDouble("weight"));
-                shipmentList.add(shipment);
+            preparedStatement.setBigDecimal(1, BigDecimal.valueOf(price));
+            preparedStatement.setDate(2, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            preparedStatement.setInt(3, id);
+            synchronized (preparedStatement) {
+                updated = preparedStatement.executeUpdate();
             }
 
-            resultSet.close();
             preparedStatement.close();
 
+            if (updated == 1) {
+                return id;
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return shipmentList;
-    }
 
-    public static int addShipment(int typeWeight) {
-        int id = getNextId();
-        int updated = 0;
-        double price = 0;
-
-        // Sử dụng if-else thay thế cho switch với typeWeight
-        if (typeWeight == 1) {
-            price = 10000;
-        } else if (typeWeight == 2) {
-            price = 20000;
-        } else if (typeWeight == 3) {
-            price = 50000;
-        } else if (typeWeight == 4) {
-            price = 70000;
-            String sql = "INSERT INTO shipping_info (shippingCost, date_created, weight, id) VALUES (?, ?, ?, ?)";
-            try {
-                PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(sql);
-                preparedStatement.setBigDecimal(1, BigDecimal.valueOf(price));
-                preparedStatement.setDate(2, java.sql.Date.valueOf(java.time.LocalDate.now()));
-                preparedStatement.setDouble(3, price); // Thay thế price bằng weight nếu weight là giá trị cần lưu
-                preparedStatement.setInt(4, id);
-
-                synchronized (preparedStatement) {
-                    updated = preparedStatement.executeUpdate();
-                }
-
-                preparedStatement.close();
-
-                if (updated == 1) {
-                    return id;
-                }
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
         return 0;
     }
 

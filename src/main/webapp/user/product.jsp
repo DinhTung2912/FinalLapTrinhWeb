@@ -42,7 +42,15 @@
             background-image: url(https://tienthangvet.vn/wp-content/uploads/title-tag-tien-thang-vet-tsd1.jpg);
           ">
             <div class="container">
-                <h1 class="title">Sản phẩm</h1>
+                <h1 class="title">
+                    <%-- Hiển thị thông báo tùy thuộc vào biến từ khóa tìm kiếm --%>
+                    <% String searchTerm = (String) request.getAttribute("searchTerm"); %>
+                    <% if (searchTerm != null && !searchTerm.isEmpty()) { %>
+                    Kết quả tìm kiếm cho: <%= searchTerm %>
+                    <% } else { %>
+                    Sản phẩm
+                    <% } %>
+                </h1>
             </div>
         </div>
 

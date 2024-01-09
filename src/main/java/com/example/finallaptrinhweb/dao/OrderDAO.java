@@ -2,7 +2,8 @@ package com.example.finallaptrinhweb.dao;
 
 import com.example.finallaptrinhweb.connection_pool.DBCPDataSource;
 import com.example.finallaptrinhweb.model.Order;
-
+import com.example.finallaptrinhweb.model.Util;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -59,13 +60,12 @@ public class OrderDAO {
     public static Order loadOrder_view(int order_id) {
         Order order = new Order();
         try {
-            String query = "SELECT o.id, o.date_created, u.id AS user_id, o.quantity, o.status, o.totalAmount, o.phone, o.detail_address, o.payment, o.date_created AS order_date, o.total_pay, o.ship_price, o.name_product, o.number_product, " +
-                    "u.username, (SUM(p.price * op.quantity) + s.shippingCost) AS total " +
+            String query = "SELECT o.id, o.date_created, u.id AS user_id, o.quantity, o.status, o.totalAmount, o.phone, o.detail_address, o.payment, o.date_created AS order_date, o.total_pay, o.ship_price," +
+                    "u.username, (SUM(op.price * op.quantity) + s.ship_price) AS total " +
                     "FROM orders o " +
                     "JOIN order_products op ON o.id = op.order_id " +
                     "JOIN shipping_info s ON s.id = o.ship_id " +
                     "JOIN users u ON o.user_id = u.id " +
-                    "JOIN products p ON op.product_id = p.id " +
                     "WHERE o.id = ?";
 
             try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
@@ -74,7 +74,7 @@ public class OrderDAO {
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
                         order.setId(resultSet.getInt("id"));
-                        order.setDateCreated(resultSet.getTimestamp("date_created"));
+                        order.setDateCreated(Timestamp.valueOf(resultSet.getString("date_created")));
                         order.setStatus(resultSet.getString("status"));
                         order.setTotalPay(resultSet.getDouble("total"));
                         order.setPayment(resultSet.getBoolean("payment"));
@@ -82,10 +82,6 @@ public class OrderDAO {
                         order.setPhone(resultSet.getLong("phone"));
                         order.setUsername(resultSet.getString("username"));
                         order.setShipPrice(resultSet.getDouble("ship_price"));
-
-                        // Thêm thông tin sản phẩm
-                        order.setNameProduct(resultSet.getString("name_product"));
-                        order.setNumberProduct(resultSet.getInt("number_product"));
                     }
                 }
             }
@@ -94,13 +90,52 @@ public class OrderDAO {
         }
         return order;
     }
+    public static List<Order> loadOrderNear(int limit) {
+        List<Order> orderList = new ArrayList<>();
+        try {
+            String query = "SELECT o.id, o.date_created, u.id AS user_id, o.quantity, o.status, o.totalAmount, o.phone, o.detail_address, o.payment, o.date_created AS order_date, o.total_pay, o.ship_price," +
+                    "o.username, (SUM(op.price * op.quantity) + s.ship_price) AS total " +
+                    "FROM orders o " +
+                    "JOIN order_products op ON o.id = op.order_id " +
+                    "JOIN shipping_info s ON s.id = o.ship_id " +
+                    "JOIN users u ON o.user_id = u.id " +
+                    "GROUP BY o.id, o.date_created, o.username, o.status " +
+                    "ORDER BY o.date_created DESC " +
+                    "LIMIT ?";
+
+            try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+                preparedStatement.setInt(1, limit);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Order order = new Order();
+                        order.setId(resultSet.getInt("id"));
+                        order.setDateCreated(resultSet.getTimestamp("date_created"));
+                        order.setStatus(resultSet.getString("status"));
+                        order.setTotalPay(resultSet.getDouble("total"));
+                        order.setPayment(resultSet.getBoolean("payment"));
+                        order.setDetailAddress(resultSet.getString("detail_address"));
+                        order.setPhone(resultSet.getLong("phone"));
+                        order.setUsername(resultSet.getString("o.username"));
+                        order.setShipPrice(resultSet.getDouble("ship_price"));
+                        orderList.add(order);
+                    }
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return orderList;
+    }
+
+
 
     // Bổ sung phương thức để tải danh sách đơn hàng dựa trên trạng thái
     public static List<Order> loadOrderByStatus(String status, String from_date, String to_date) {
         List<Order> orderList = new ArrayList<>();
         try {
             String query = "SELECT o.id, o.date_created, u.username, o.status, " +
-                    "(SUM(p.price * op.quantity) + s.shippingCost) AS total, COUNT(o.id) AS countOr " +
+                    "(SUM(p.price * op.quantity) + s.ship_price) AS total, COUNT(o.id) AS countOr " +
                     "FROM orders o " +
                     "JOIN order_products op ON o.id = op.order_id " +
                     "JOIN shipping_info s ON s.id = o.ship_id " +
@@ -195,20 +230,21 @@ public class OrderDAO {
         }
         return orderList;
     }
+    public static void main(String[] args) {
+        System.out.println(loadOrderByUserId(6));
+    }
 
     public static List<Order> loadOrderByUserId(int user_id) {
         List<Order> orderList = new ArrayList<>();
         try {
             String query = "SELECT o.id, o.date_created, u.username, o.status, " +
-                    "(SUM(p.price * op.quantity) + s.shippingCost) AS total, COUNT(o.id) AS countOr " +
+                    "(SUM(op.price * op.quantity) + s.ship_price) AS total, COUNT(o.id) AS countOr " +
                     "FROM orders o " +
                     "JOIN order_products op ON o.id = op.order_id " +
                     "JOIN shipping_info s ON s.id = o.ship_id " +
                     "JOIN users u ON o.user_id = u.id " +
-                    "JOIN products p ON op.product_id = p.id " +
                     "WHERE o.user_id = ? " +
                     "GROUP BY o.id, o.date_created, o.user_id, o.status";
-
 
             try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
                 preparedStatement.setInt(1, user_id);
@@ -222,7 +258,6 @@ public class OrderDAO {
                         order.setStatus(resultSet.getString("status"));
                         order.setTotalPay(resultSet.getDouble("total"));
                         orderList.add(order);
-
                     }
                 }
             }
@@ -248,11 +283,7 @@ public class OrderDAO {
     }
 
 
-    public static void main(String[] args) {
-        int userId = 1; // Đặt user_id tương ứng với người dùng bạn muốn tìm đơn hàng
-        List<Order> orders = loadOrderByUserId(userId);
-        System.out.println(orders);
-    }
+
     public static int addOrder(String username, int user_id, Integer discounts_id, int ship_id, int quantity, String status,
                                double totalAmount, int phone, String detail_address, int payment, Timestamp date_created,
                                double total_pay, double ship_price) {
@@ -277,7 +308,7 @@ public class OrderDAO {
             preparedStatement.setInt(11, payment);
             preparedStatement.setTimestamp(12, date_created);
             preparedStatement.setDouble(13, total_pay);
-            preparedStatement.setDouble(14, ship_price);
+            preparedStatement.setDouble(14, 20000);
 
             updated = preparedStatement.executeUpdate();
 
