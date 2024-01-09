@@ -17,10 +17,7 @@ public class Order {
     private boolean payment;
     private Timestamp dateCreated;
     private double totalPay;
-    private int countId;
     private double shipPrice;
-    private String nameProduct;
-    private int numberProduct;
 
 
     public Order() {
@@ -29,7 +26,7 @@ public class Order {
 
     public Order(int id, String username, int userId, int discountsId, int shipId, int quantity, String status,
                  double totalAmount, long phone, String detailAddress, boolean payment, Timestamp dateCreated,
-                 double totalPay, int countId, double shipPrice, String nameProduct, int numberProduct) {
+                 double totalPay, double shipPrice) {
         this.id = id;
         this.username = username;
         this.userId = userId;
@@ -43,10 +40,7 @@ public class Order {
         this.payment = payment;
         this.dateCreated = dateCreated;
         this.totalPay = totalPay;
-        this.countId = countId;
         this.shipPrice = shipPrice;
-        this.nameProduct = nameProduct;
-        this.numberProduct = numberProduct;
     }
 
     public int getId() {
@@ -153,13 +147,6 @@ public class Order {
         this.totalPay = totalPay;
     }
 
-    public int getCountId() {
-        return countId;
-    }
-
-    public void setCountId(int countId) {
-        this.countId = countId;
-    }
 
     public double getShipPrice() {
         return shipPrice;
@@ -169,21 +156,6 @@ public class Order {
         this.shipPrice = shipPrice;
     }
 
-    public String getNameProduct() {
-        return nameProduct;
-    }
-
-    public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
-    }
-
-    public int getNumberProduct() {
-        return numberProduct;
-    }
-
-    public void setNumberProduct(int numberProduct) {
-        this.numberProduct = numberProduct;
-    }
 
     @Override
     public String toString() {
@@ -201,10 +173,7 @@ public class Order {
                 ", payment=" + payment +
                 ", dateCreated=" + dateCreated +
                 ", totalPay=" + totalPay +
-                ", countId=" + countId +
                 ", shipPrice=" + shipPrice +
-                ", nameProduct='" + nameProduct + '\'' +
-                ", numberProduct=" + numberProduct +
                 '}';
     }
 }

@@ -31,14 +31,11 @@ public class OrderProductDAO {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     OrderProduct orderProduct = new OrderProduct();
-                    orderProduct.setProductId(resultSet.getInt("id"));
                     orderProduct.setProductName(resultSet.getString("productName"));
                     orderProduct.setQuantity(resultSet.getInt("quantity"));
                     orderProduct.setPrice(resultSet.getDouble("price"));
                     orderProduct.setImageUrl(resultSet.getString("imageUrl"));
-                    orderProduct.setSale(resultSet.getDouble("price"), 0, resultSet.getInt("quantity"));
                     orderProduct.setTotal(resultSet.getDouble("price"), 0, resultSet.getInt("quantity"));
-
                     productList.add(orderProduct);
                 }
                 resultSet.close();

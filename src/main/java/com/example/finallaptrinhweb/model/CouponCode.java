@@ -1,19 +1,17 @@
-
 package com.example.finallaptrinhweb.model;
 
-import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
-public class Discount {
+public class CouponCode {
     private int id;
     private String discountType;
-    private BigDecimal discountValue;
+    private double discountValue;
     private Date expirationDate;
 
-    public Discount() {
+    public CouponCode() {
     }
 
-    public Discount(int id, String discountType, BigDecimal discountValue, Date expirationDate) {
+    public CouponCode(int id, String discountType, double discountValue, Date expirationDate) {
         this.id = id;
         this.discountType = discountType;
         this.discountValue = discountValue;
@@ -21,7 +19,7 @@ public class Discount {
     }
 
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(int id) {
@@ -29,30 +27,36 @@ public class Discount {
     }
 
     public String getDiscountType() {
-        return this.discountType;
+        return discountType;
     }
 
     public void setDiscountType(String discountType) {
         this.discountType = discountType;
     }
 
-    public BigDecimal getDiscountValue() {
-        return this.discountValue;
+    public double getDiscountValue() {
+        return discountValue;
     }
 
-    public void setDiscountValue(BigDecimal discountValue) {
+    public void setDiscountValue(double discountValue) {
         this.discountValue = discountValue;
     }
 
     public Date getExpirationDate() {
-        return this.expirationDate;
+        return expirationDate;
     }
 
     public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
     }
 
+    @Override
     public String toString() {
-        return "Discount{id=" + this.id + ", discountType='" + this.discountType + "', discountValue=" + this.discountValue + ", expirationDate=" + this.expirationDate + "}";
+        return "CouponCode{" +
+                "id=" + id +
+                ", discountType='" + discountType + '\'' +
+                ", discountValue=" + discountValue +
+                ", expirationDate=" + expirationDate +
+                '}';
     }
 }

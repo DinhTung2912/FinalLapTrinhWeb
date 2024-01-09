@@ -130,34 +130,91 @@ public class OrderDAO {
 
 
 
-    // Bổ sung phương thức để tải danh sách đơn hàng dựa trên trạng thái
-    public static List<Order> loadOrderByStatus(String status, String from_date, String to_date) {
+    public static List<String> getAllStatus() {
+        List<String> orderList = new ArrayList<>();
+        try {
+            String query = "SELECT DISTINCT status FROM `orders`";
+
+            try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        orderList.add(resultSet.getString(1));
+                    }
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return orderList;
+    }
+
+    public static List<Order> loadAllOrder() {
         List<Order> orderList = new ArrayList<>();
         try {
-            String query = "SELECT o.id, o.date_created, u.username, o.status, " +
-                    "(SUM(p.price * op.quantity) + s.ship_price) AS total, COUNT(o.id) AS countOr " +
-                    "FROM orders o " +
-                    "JOIN order_products op ON o.id = op.order_id " +
-                    "JOIN shipping_info s ON s.id = o.ship_id " +
-                    "JOIN users u ON o.user_id = u.id " +
-                    "JOIN products p ON op.product_id = p.id " +
-                    "WHERE o.status LIKE ? AND o.date_created BETWEEN ? AND ? " +
-                    "GROUP BY o.id, o.date_created, u.username, o.status";
+            String query = "SELECT \n" +
+                    "    orders.id AS order_id,\n" +
+                    "    orders.date_created,\n" +
+                    "    orders.username,\n" +
+                    "    orders.total_pay,\n" +
+                    "    orders.status\n" +
+                    "FROM \n" +
+                    "    orders\n" +
+                    "INNER JOIN \n" +
+                    "    order_products ON orders.id = order_products.order_id\n" +
+                    "GROUP BY \n" +
+                    "    orders.id";
+
+            try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Order order = new Order();
+                        order.setId(resultSet.getInt("order_id"));
+                        order.setDateCreated(resultSet.getTimestamp("date_created"));
+                        order.setUsername(resultSet.getString("username"));
+                        order.setTotalPay(resultSet.getDouble("total_pay"));
+                        order.setStatus(resultSet.getString("status"));
+                        orderList.add(order);
+                    }
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return orderList;
+    }
+
+    // Bổ sung phương thức để tải danh sách đơn hàng dựa trên trạng thái
+    public static List<Order> loadOrderByStatus(String status) {
+        List<Order> orderList = new ArrayList<>();
+        try {
+            String query = "SELECT \n" +
+                    "    orders.id AS order_id,\n" +
+                    "    orders.date_created,\n" +
+                    "    orders.username,\n" +
+                    "    orders.total_pay,\n" +
+                    "    orders.status\n" +
+                    "FROM \n" +
+                    "    orders\n" +
+                    "INNER JOIN \n" +
+                    "    order_products ON orders.id = order_products.order_id\n" +
+                    "WHERE \n" +
+                    "    orders.status = ?\n" +
+                    "GROUP BY \n" +
+                    "    orders.id;\n";
 
             try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
                 preparedStatement.setString(1, status);
-                preparedStatement.setString(2, from_date);
-                preparedStatement.setString(3, to_date);
 
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     while (resultSet.next()) {
                         Order order = new Order();
-                        order.setId(resultSet.getInt("id"));
+                        order.setId(resultSet.getInt("order_id"));
                         order.setDateCreated(resultSet.getTimestamp("date_created"));
                         order.setUsername(resultSet.getString("username"));
+                        order.setTotalPay(resultSet.getDouble("total_pay"));
                         order.setStatus(resultSet.getString("status"));
-                        order.setTotalPay(resultSet.getDouble("total"));
-                        order.setCountId(resultSet.getInt("countOr"));
                         orderList.add(order);
                     }
                 }
@@ -168,36 +225,6 @@ public class OrderDAO {
         return orderList;
     }
 
-    public static List<Order> loadOrderByIdUser(int idUser) {
-        List<Order> orderList = new ArrayList<>();
-        try {
-            String query = "SELECT DISTINCT op.order_id id, p.productName, od.date_created, SUM(op.quantity) soluong " +
-                    "FROM order_product op " +
-                    "JOIN product p ON op.pro_id = p.id " +
-                    "JOIN `order` od ON od.id = op.order_id " +
-                    "JOIN `user` us ON us.id = od.user_id " +
-                    "WHERE us.id = ? " +
-                    "GROUP BY p.name, op.order_id, od.date_created";
-
-            try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
-                preparedStatement.setInt(1, idUser);
-
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    while (resultSet.next()) {
-                        Order order = new Order();
-                        order.setId(resultSet.getInt("id"));
-                        order.setNameProduct(resultSet.getString("productName"));
-                        order.setDateCreated(resultSet.getTimestamp("date_created"));
-                        order.setCountId(resultSet.getInt("soluong"));
-                        orderList.add(order);
-                    }
-                }
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return orderList;
-    }
 
     public static List<Order> loadOrderStatusByIdUser(int idUser) {
         List<Order> orderList = new ArrayList<>();
@@ -217,7 +244,6 @@ public class OrderDAO {
                     while (resultSet.next()) {
                         Order order = new Order();
                         order.setId(resultSet.getInt("id"));
-                        order.setNameProduct(resultSet.getString("productName"));
                         order.setStatus(resultSet.getString("status"));
                         order.setTotalPay(resultSet.getDouble("total"));
                         order.setDateCreated(resultSet.getTimestamp("date_created"));
@@ -375,5 +401,6 @@ public class OrderDAO {
         }
         return result;
     }
+    
 
 }
