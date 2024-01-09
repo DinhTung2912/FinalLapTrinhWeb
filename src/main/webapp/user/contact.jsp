@@ -109,13 +109,12 @@
                                                             <div class="info-box-inner"
                                                                  data-elementor-setting-key="content">
                                                                 <p><span style="color: #333333;"><strong>Địa
-                                                                        chỉ:</strong></span> Khu phố 6, Linh Trung, Thủ
-                                                                    Đức, TPHCM</p>
+                                                                        chỉ:</strong></span> ${applicationScope.address.get(0).address}</p>
                                                                 <p><span style="color: #333333;"><strong>Điện
-                                                                        thoại:</strong></span> 0999 999 999</p>
+                                                                        thoại:</strong></span> 0${applicationScope.address.get(0).phone}</p>
                                                                 <p><span
                                                                         style="color: #333333;"><strong>Email:</strong></span>
-                                                                    doanwebnhom30@gmail.com</p>
+                                                                    ${applicationScope.address.get(0).email}</p>
                                                             </div>
                                                         </div>
                                                     </div>
