@@ -102,6 +102,8 @@
             request.setAttribute("currentPage", pageNumber);
             request.setAttribute("objects", objects);
             request.setAttribute("groups", groups);
+            request.setAttribute("searchTerm", searchTerm);
+            request.setAttribute("isSearchPage", searchTerm != null);
 
             String contextPath = request.getContextPath();
             if (decodedQueryString.startsWith(contextPath)) {

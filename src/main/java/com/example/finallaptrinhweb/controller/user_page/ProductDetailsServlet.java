@@ -10,6 +10,8 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+import com.example.finallaptrinhweb.model.Supplier;
+import com.example.finallaptrinhweb.dao.SupplierDAO;
 
 @WebServlet("/user/product")
 public class ProductDetailsServlet extends HttpServlet {
@@ -36,12 +38,25 @@ public class ProductDetailsServlet extends HttpServlet {
                 // Hình ảnh sản phẩm
                 String folderUrl = getServletContext().getRealPath("data\\sp_") + idParameter;
                 List<String> imgUrl = Service.getImgUrlById(folderUrl);
+                // Hình ảnh của nhà cung cấp
+                String supplierImgUrl = ""; // Khởi tạo một biến chuỗi để lưu trữ URL của nhà cung cấp
+
+                // Lấy thông tin sản phẩm với thông tin nhà cung cấp
+                Product productWithSupplierInfo = productDAO.getProductByIdWithSupplierInfo(productId);
+
+                if (productWithSupplierInfo != null) {
+                    // Lấy URL của nhà cung cấp từ đối tượng Product
+                    supplierImgUrl = productWithSupplierInfo.getSupplierImageUrl();
+                }
+
 
                 if (product != null) {
                     // Đặt đối tượng Product vào request để hiển thị trên trang JSP
                     request.setAttribute("product", product);
                     request.setAttribute("products", products);
                     request.setAttribute("listImg", imgUrl);
+                    request.setAttribute("supplierImgUrl", supplierImgUrl);
+
 
                     // Chuyển hướng đến trang product-detail.jsp
                     RequestDispatcher dispatcher = request.getRequestDispatcher("./product_detail.jsp");

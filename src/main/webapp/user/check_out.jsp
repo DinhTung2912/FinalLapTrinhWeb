@@ -102,22 +102,6 @@
                 </div>
               </div>
             </div>
-            <c:if test="${sessionScope.user_id==null}">
-              <div class="checkout__input">
-                <p>
-                  Để mua hàng khách hàng phải tạo tài khoản. Nếu khách
-                  hàng đã có tài khoản vui lòng đăng nhập hoặc nhập mật khẩu để tạo tài khoản
-                  với thông tin bên trên.
-                </p>
-                <div class="checkout__input">
-                  <p>Mật khẩu tài khoản<span>*</span></p>
-                  <input style="color:black" id="pass" type="password" name="password"
-
-                         required/>
-                </div>
-              </div>
-            </c:if>
-
 
             <div class="checkout__input">
               <p>Lưu ý khi vận chuyển<span>*</span></p>
@@ -130,7 +114,7 @@
               <h2>Thông tin sản phẩm trong giỏ hàng:</h2>
 
               <c:forEach var="item" items="${cart.products.values()}">
-                <div>
+                <div class="checkout__order__subtotal">
                   <p>Tên sản phẩm: ${item.product.productName}</p>
                   <p>Giá bán: ${ Util.formatCurrency(item.product.price) } VND</p>
   <%--                <p>Số lượng: ${ item.quantity }</p>--%>
@@ -138,6 +122,12 @@
 
                 </div>
               </c:forEach>
+              <div class="checkout__order__subtotal">
+                <p>Phí vận chuyển: ${ Util.formatCurrency(priceShipment) } VND</p>
+              </div>
+              <div class="checkout__order__total">
+                <p>Tổng tiền thanh toán: ${ Util.formatCurrency(totalPrice) } VND</p>
+              </div>
             </div>
 
 

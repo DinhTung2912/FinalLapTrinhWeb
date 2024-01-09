@@ -1,5 +1,6 @@
 package com.example.finallaptrinhweb.controller.user_page;
 
+import com.example.finallaptrinhweb.controller.user_page.ImageService.Service;
 import com.example.finallaptrinhweb.dao.OrderProductDAO;
 import com.example.finallaptrinhweb.dao.OrderDAO;
 import com.example.finallaptrinhweb.model.OrderProduct;
@@ -35,6 +36,7 @@ public class OrderDetailServlet extends HttpServlet {
 
                 // Gọi hàm loadOrderProductByOrderId để lấy danh sách sản phẩm trong đơn hàng
                 List<OrderProduct> productList = OrderProductDAO.loadOrderProductByOrderId(order_id);
+
 
                 // Tính tổng tiền sản phẩm
                 double sum = 0;

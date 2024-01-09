@@ -10,7 +10,7 @@
 <header class="header">
     <div class="container">
         <div class="header-left">
-            <a href="index.jsp">
+            <a href="home">
                 <img src="https://tienthangvet.vn/wp-content/uploads/logo-tien-thang-vet.jpg" alt=""/>
             </a>
         </div>
@@ -18,7 +18,7 @@
             <div class="header-nav" role="navigation" aria-label="Main navigation">
                 <ul class="menu">
                     <li class="menu-item">
-                        <a href="./index.jsp"><span class="nav-link-text">Thuốc Y The Pet</span></a>
+                        <a href="home"><span class="nav-link-text">Thuốc Y The Pet</span></a>
                     </li>
                     <li class="menu-item">
                         <a href="./introduce.jsp"><span class="nav-link-text">Giới thiệu</span></a>
@@ -51,7 +51,7 @@
                         </div>
                     </li>
                     <li class="menu-item">
-                        <a href="contact"><span class="nav-link-text">Liên hệ</span></a>
+                        <a href="feedback"><span class="nav-link-text">Liên hệ</span></a>
                     </li>
                 </ul>
             </div>
@@ -86,7 +86,7 @@
                     <div class="user-dropdown-content" id="user-dropdown-content">
                         <ul class="user-menu">
                             <li class="user-menu-item">
-                                <a href="user_info.jsp"><span class="nav-link-text">Quản lý thông tin cá
+                                <a href="updateinfouser"><span class="nav-link-text">Quản lý thông tin cá
                                                 nhân</span></a>
                             </li>
                             <li class="user-menu-item">

@@ -51,17 +51,6 @@ public class Util {
         return year+"-"+month+"-"+day;
     }
 
-    public static void main (String[]args){
-        double price = 1234567.89;
-        Date currentDate = new Date();
-
-        // Sử dụng phương thức dateFormatNoTime
-        String formattedDate = Util.dateFormatNoTime(currentDate);
-
-        // Hiển thị kết quả
-        System.out.println("Original Date: " + currentDate);
-        System.out.println("Formatted Date (No Time): " + formattedDate);
-
-    }
 
 }
+

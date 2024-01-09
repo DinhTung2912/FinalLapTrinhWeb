@@ -14,15 +14,15 @@ public class OrderProductDAO {
     public static List<OrderProduct> loadOrderProductByOrderId(int orderId) {
         List<OrderProduct> productList = new ArrayList<>();
         try {
-            String query = "SELECT op.id, op.productName, op.quantity, op.price, o.id, o.date_created, u.id, o.status, (SUM(op.price * op.quantity) + s.shippingCost) AS total, " +
-                    "o.payment, o.detail_address, o.phone, u.username, s.shippingCost, op.imageUrl " +
+            String query = "SELECT op.id, op.productName, op.quantity, op.price, o.id, o.date_created, u.id, o.status, (SUM(op.price * op.quantity) + s.ship_price) AS total, " +
+                    "o.payment, o.detail_address, o.phone, u.username, s.ship_price, op.imageUrl " +
                     "FROM orders o " +
                     "JOIN order_products op ON o.id = op.order_id " +
                     "JOIN shipping_info s ON s.id = o.ship_id " +
                     "JOIN users u ON u.id = o.user_id " +
                     "WHERE o.id = ? " +
                     "GROUP BY o.id, o.date_created, u.id, o.status, o.payment, " +
-                    "o.detail_address, o.phone, u.username, s.shippingCost, op.imageUrl;";
+                    "o.detail_address, o.phone, u.username, s.ship_price, op.imageUrl;";
 
             PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query);
             preparedStatement.setInt(1, orderId);
@@ -48,7 +48,7 @@ public class OrderProductDAO {
         return productList;
     }
     public static void main(String[] args) {
-        System.out.println(loadOrderProductByOrderId(3));
+        System.out.println(loadOrderProductByOrderId(1));
     }
 
     public static int addOrderProduct(int orderId, int productId, int quantity, double price, double totalPrice) {
