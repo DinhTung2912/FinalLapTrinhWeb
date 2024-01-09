@@ -185,10 +185,10 @@ public class ProductDAO {
 
     public Map<String, Integer> getListObject() {
         Map<String, Integer> products = new HashMap<>();
-        String query = "SELECT pc.productType, COUNT(p.id) AS productCount\n" +
+        String query = "SELECT pc.categoryName, COUNT(p.id) AS productCount\n" +
                 "FROM product_categories pc\n" +
                 "LEFT JOIN products p ON pc.id = p.category_id\n" +
-                "GROUP BY pc.productType";
+                "GROUP BY pc.id, pc.categoryName;\n";
 
         try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -205,11 +205,30 @@ public class ProductDAO {
     public List<Product> getProductByCategory(String object) {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM products\n" +
-                "JOIN product_categories ON products.category_id = product_categories.id\n" +
-                "WHERE product_categories.productType = ?";
+                "                JOIN product_categories ON products.category_id = product_categories.id\n" +
+                "                WHERE product_categories.categoryName = ?";
 
         try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
             preparedStatement.setString(1, object);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Product product = mapResultSetToProduct(resultSet);
+                    products.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return products;
+    }
+
+    public List<Product> getProductByType(String productType) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM `products` WHERE productType = ?";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setString(1, productType);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Product product = mapResultSetToProduct(resultSet);
@@ -230,6 +249,24 @@ public class ProductDAO {
                 "FROM product_groups pg " +
                 "LEFT JOIN product_categories pc ON pg.id = pc.group_id " +
                 "GROUP BY pg.groupName";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    groups.put(resultSet.getString(1), resultSet.getInt(2));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+        return groups;
+    }
+
+    public Map<String, Integer> getListProductType() {
+        Map<String, Integer> groups = new HashMap<>();
+        String query = "SELECT productType, COUNT(id) AS productCount\n" +
+                "FROM products\n" +
+                "GROUP BY productType;\n";
 
         try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {

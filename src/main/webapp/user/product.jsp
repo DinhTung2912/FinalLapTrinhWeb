@@ -75,23 +75,40 @@
                             </ul>
                         </div>
 
-                        <!-- Lọc theo đối tượng -->
                         <div id="categories-2" class="widget">
-                            <span class="widget-title">Lọc theo đối tượng</span>
-                            <ul class="wd-swatches-filter wd-filter-list wd-labels-on wd-size-normal wd-layout-list wd-text-style-1 wd-bg-style-4    wd-shape-round wd-scroll-content">
-                                <c:forEach var="object" items="${objects}">
-                                    <li class="wc-layered-nav-term wd-swatch-wrap">
-                                        <a href="products?category=${object.key}" class="layered-nav-link"><span
-                                                class="wd-swatch wd-bg"><span
-                                                class="wd-swatch-bg"><img
-                                                data-key="${object.key}"
-                                                alt="Swatch image"/></span></span><span
-                                                class="wd-filter-lable layer-term-lable">${object.key}</span></a>
-                                        <span class="count">${object.value}</span>
-                                    </li>
-                                </c:forEach>
+                            <span class="widget-title">Nhóm sản phẩm</span>
+                            <div class="wd-scroll" style="max-height: 280px;overflow: auto;">
+                                <ul class="wd-swatches-filter wd-filter-list wd-labels-on wd-size-normal wd-layout-list wd-text-style-1 wd-bg-style-4 wd-shape-round wd-scroll-content">
+                                    <c:forEach var="object" items="${objects}">
+                                        <li class="wc-layered-nav-term">
+                                            <a rel="nofollow noopener"
+                                               href="products?category=${object.key}"
+                                               class="layered-nav-link">
+                                                <span class="wd-filter-lable layer-term-lable">${object.key}</span>
+                                            </a>
+                                            <span class="count">${object.value}</span>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                        </div>
 
-                            </ul>
+                        <div id="categories-3" class="widget">
+                            <span class="widget-title">Đối tượng</span>
+                            <div class="wd-scroll" style="max-height: 280px;overflow: auto;">
+                                <ul class="wd-swatches-filter wd-filter-list wd-labels-on wd-size-normal wd-layout-list wd-text-style-1 wd-bg-style-4 wd-shape-round wd-scroll-content">
+                                    <c:forEach var="type" items="${proTypes}">
+                                        <li class="wc-layered-nav-term">
+                                            <a rel="nofollow noopener"
+                                               href="products?type=${type.key}"
+                                               class="layered-nav-link">
+                                                <span class="wd-filter-lable layer-term-lable">${type.key}</span>
+                                            </a>
+                                            <span class="count">${type.value}</span>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </aside>
@@ -105,8 +122,9 @@
                                     <a href="" class="breadcrumb-link">Trang chủ</a>
                                     <a href="" class="breadcrumb-link">Sản phẩm</a>
                                     <% String url = (String) request.getAttribute("url");%>
-                                    <%if(url != null) {%>
-                                    <a href="" class="breadcrumb-link">Kết quả tìm kiếm cho: <%=url%></a>
+                                    <%if (url != null) {%>
+                                    <a href="" class="breadcrumb-link">Kết quả tìm kiếm cho: <%=url%>
+                                    </a>
                                     <%}%>
                                 </nav>
                             </div>
@@ -117,64 +135,66 @@
                         <div class="container">
                             <c:choose>
                                 <c:when test="${not empty noProductsFound}">
-                                    <div class="no-products-found" >
+                                    <div class="no-products-found">
                                         <p>Xin lỗi, không tìm thấy sản phẩm nào có tên này.</p>
                                     </div>
                                 </c:when>
                                 <c:otherwise>
                                     <c:forEach var="product" items="${product}">
-                                    <div class="item">
-                                        <!-- Hiển thị thông tin sản phẩm -->
-                                        <div>
-                                            <div class="product-element-top">
-                                                <a href="${pageContext.request.contextPath}/user/product?id=${product.id}">
-                                                    <img src="${pageContext.request.contextPath}/${product.imageUrl}" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-element-bottom">
-                                                <a href="${pageContext.request.contextPath}/user/product?id=${product.id}">
-                                                        ${product.productName}
-                                                </a>
-                                            </div>
-                                            <div class="product-element">
-                                                <div class="price-wrap">
-                                                    <div class="price">${Util.formatCurrency(product.price)}</div>
-                                                    <div class="unit">VND</div>
+                                        <div class="item">
+                                            <!-- Hiển thị thông tin sản phẩm -->
+                                            <div>
+                                                <div class="product-element-top">
+                                                    <a href="${pageContext.request.contextPath}/user/product?id=${product.id}">
+                                                        <img src="${pageContext.request.contextPath}/${product.imageUrl}"
+                                                             alt="">
+                                                    </a>
                                                 </div>
-                                                <div class="rating">
-                                                    <div class="stars" data-stars="4">
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star-half-stroke"></i>
-                                                        <i class="fa-regular fa-star"></i>
+                                                <div class="product-element-bottom">
+                                                    <a href="${pageContext.request.contextPath}/user/product?id=${product.id}">
+                                                            ${product.productName}
+                                                    </a>
+                                                </div>
+                                                <div class="product-element">
+                                                    <div class="price-wrap">
+                                                        <div class="price">${Util.formatCurrency(product.price)}</div>
+                                                        <div class="unit">VND</div>
+                                                    </div>
+                                                    <div class="rating">
+                                                        <div class="stars" data-stars="4">
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star-half-stroke"></i>
+                                                            <i class="fa-regular fa-star"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="wd-buttons wd-pos-r-t">
-                                            <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a
-                                                    href="addtocart?id=${product.id}"
-                                                    class="button product_type_simple add-to-cart-loop" aria-label="">
+                                            <div class="wd-buttons wd-pos-r-t">
+                                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a
+                                                        href="addtocart?id=${product.id}"
+                                                        class="button product_type_simple add-to-cart-loop"
+                                                        aria-label="">
                         <span>
                           <i class="fa-solid fa-cart-shopping"></i>
                         </span></a></div>
-                                            <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
-                                                <a href="" class="open-quick-view quick-view-button">
+                                                <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
+                                                    <a href="" class="open-quick-view quick-view-button">
                         <span>
                           <i class="fa-solid fa-magnifying-glass"></i>
                         </span></a>
-                                            </div>
-                                            <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
-                                                <a class="wd-tltp wd-tooltip-inited" href=""
-                                                   data-added-text="Browse Wishlist">
+                                                </div>
+                                                <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
+                                                    <a class="wd-tltp wd-tooltip-inited" href=""
+                                                       data-added-text="Browse Wishlist">
                         <span class="wd-tooltip-label">
                           <i class="fa-regular fa-heart"></i>
                         </span></a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </c:forEach>
+                                    </c:forEach>
                                 </c:otherwise>
                             </c:choose>
 
@@ -203,33 +223,6 @@
             var header = document.querySelector(".container");
             header.classList.toggle("sticky", window.scrollY > 100);
         })
-
-        document.addEventListener("DOMContentLoaded", function () {
-            var images = document.querySelectorAll("[data-key]");
-            images.forEach(function (img) {
-                var key = img.getAttribute("data-key");
-                img.src = mapKeyToUrl(key);
-            });
-        });
-
-        function mapKeyToUrl(key) {
-            switch (key) {
-                case "Heo":
-                    return "https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-heo.jpg";
-                case "Gia súc":
-                    return "https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-gia-suc.jpg";
-                case "Mèo":
-                    return "https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-meo.jpg";
-                case "Gia cầm":
-                    return "https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-gia-cam.jpg";
-                case "Khác":
-                    return "https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-nhung-dong-vat-khac.jpg";
-                case "Chó":
-                    return "https://tienthangvet.vn/wp-content/uploads/icon-thuoc-thu-y-cho-cho.jpg";
-                default:
-                    return "";
-            }
-        }
     </script>
 </body>
 
