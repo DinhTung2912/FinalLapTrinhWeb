@@ -83,7 +83,7 @@
                                                 <a href="add-admin?type=enterEdit&id=${user.id}"
                                                    class="btn btn-sm bg-success-light "> <i
                                                         class="far fa-edit mr-1"></i> Sửa</a>
-                                                    <%--                                            <a href="edit-product.html" style="margin-top: 5px;color: red "--%>
+                                                    <%--                                            <a href="edit-product.jsp" style="margin-top: 5px;color: red "--%>
                                                     <%--                                               class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i>--%>
                                                     <%--                                                Xóa</a>--%>
                                             </td>

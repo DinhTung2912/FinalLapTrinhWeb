@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.finallaptrinhweb.db.JDBIConnector;
 import com.example.finallaptrinhweb.model.Product;
 import com.example.finallaptrinhweb.model.Supplier;
 import com.example.finallaptrinhweb.dao.SupplierDAO;
@@ -354,6 +355,33 @@ public class ProductDAO {
             throwables.printStackTrace();
         }
         return sum;
+    }
+    public void addProduct(Product product) {
+        try {
+            JDBIConnector.me().get().useHandle((handle) -> {
+                handle.createUpdate("INSERT INTO `products`(`id`, `productName`, `categoryId`, `price`, `quantity`, `supplierId`, `purpose`, `contraindications`, `stockQuantity`, `ingredients`, `dosage`, `instructions`, `warrantyPeriod`, `productType`, `storageCondition`, `supplierId`, `imageUrl`, `active`, `supplierImageUrl`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+                        .bind(0, product.getId())
+                        .bind(1, product.getProductName())
+                        .bind(2, product.getCategoryId())
+                        .bind(3, product.getPrice())
+                        .bind(4, product.getQuantity())
+                        .bind(5, product.getPurpose())
+                        .bind(6, product.getContraindications())
+                        .bind(7, product.getStockQuantity())
+                        .bind(8, product.getIngredients())
+                        .bind(9, product.getDosage())
+                        .bind(10, product.getInstructions())
+                        .bind(11, product.getWarrantyPeriod())
+                        .bind(12, product.getSupplierId())
+                        .bind(13, product.getImageUrl())
+                        .bind(14, product.isActive() ? 1 : 0) // Chuyển đổi giá trị boolean thành 0 hoặc 1
+                        .bind(15, product.getSupplierImageUrl())
+
+                        .execute();
+            });
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

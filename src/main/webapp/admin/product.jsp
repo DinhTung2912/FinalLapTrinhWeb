@@ -50,7 +50,7 @@
                         <a class="btn btn-white filter-btn" href="javascript:void(0);" id="filter_search">
                             <i class="fas fa-filter"></i>
                         </a>
-                        <a href="add-product?type=enterAdd" class="btn btn-primary add-button ml-3">
+                        <a href="add-product.jsp" class="btn btn-primary add-button ml-3">
                             <i class="fas fa-plus"></i>
                         </a>
                     </div>
@@ -107,7 +107,7 @@
                                                 <a href="add-product?type=enterEdit&id=${p.id}"
                                                    class="btn btn-sm bg-success-light "> <i
                                                         class="far fa-edit mr-1"></i> Sửa</a>
-                                                    <%--                                                <a href="edit-product.html" style="margin-top: 5px;color: red "--%>
+                                                    <%--                                                <a href="edit-product.jsp" style="margin-top: 5px;color: red "--%>
                                                     <%--                                                   class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i>--%>
                                                     <%--                                                    Xóa</a>--%>
                                             </td>
