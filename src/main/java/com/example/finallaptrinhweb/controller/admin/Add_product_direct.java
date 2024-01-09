@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-@WebServlet(urlPatterns = "/admin_page/add-product")
+@WebServlet(urlPatterns = "/admin/add-product")
 public class Add_product_direct extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
