@@ -30,7 +30,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="/user">Thông tin cá nhân</a>
-                <a class="dropdown-item" href="/handle-login?logout=true">Đăng xuất</a>
+                <a class="dropdown-item" href="signIn.jsp">Đăng xuất</a>
             </div>
         </li>
         <!-- /User Menu -->
