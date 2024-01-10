@@ -1,4 +1,4 @@
-package com.example.finallaptrinhweb.controller.user_page;
+package com.example.finallaptrinhweb.controller.admin;
 
 
 import com.example.finallaptrinhweb.controller.user_page.MailService.SendEmail;
@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/user/signup"
+@WebServlet("/admin/signup"
 )
 public class SignUp extends HttpServlet {
     public SignUp() {

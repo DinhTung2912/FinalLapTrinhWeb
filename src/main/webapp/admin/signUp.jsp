@@ -4,7 +4,8 @@
 
 <head>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="css/sign/form.css"/>
+    <link rel="stylesheet" href="assets/css/form.css"/>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
           integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -15,7 +16,6 @@
 
 <body>
 <div class="website-wrapper">
-    <jsp:include page="header.jsp"/>
 
     <div class="body">
         <div class="form-container">
@@ -43,19 +43,16 @@
                     <input type="checkbox" id="agree-terms" name="agree-terms" required>
                     <label for="agree-terms">Tôi đồng ý với điều khoản dịch vụ và chính sách bảo mật</label>
                 </div>
-                <input type="hidden" name="role" value="1">
-
+                <input type="hidden" name="role" value="2">
                 <button>Đăng Ký</button>
                 <div class="login-link">Bạn đã có tài khoản? <a href="signIn.jsp">Đăng nhập</a></div>
             </form>
         </div>
 
     </div>
-    <jsp:include page="footer.jsp"/>
 </div>
 
 
-<script src="js/sign/scipts.js"></script>
 </body>
 
 </html>
