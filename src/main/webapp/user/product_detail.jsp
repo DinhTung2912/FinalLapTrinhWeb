@@ -195,19 +195,20 @@
                                                                     <p>
                                                                         ${product.purpose}
                                                                     </p>
-                                                                    <h1>Thành phần: ${product.ingredients}</h1>
+                                                                    <h1>Thành phần:</h1>
+                                                                    <p>${product.ingredients}</p>
                                                                     <h2>Liều lượng: ${product.dosage} </h2>
                                                                     <h2>Hướng dẫn sử dụng:</h2>
                                                                     <p>
                                                                         ${product.instructions}
                                                                     </p>
-                                                                    <h2>Dạng bào chế: ${product.productType} </h2>
+                                                                    <h2>Đối tượng: ${product.productType} </h2>
                                                                     <h2>CHỐNG CHỈ ĐỊNH:</h2>
                                                                     <p>
-                                                                        - ${product.contraindications}<br/>
+                                                                         ${product.contraindications}<br/>
                                                                     </p>
                                                                     <h2>
-                                                                        BẢO QUẢN<br/>– ${product.storageCondition}<br/>
+                                                                        BẢO QUẢN<br/> ${product.storageCondition}<br/>
                                                                     </h2>
                                                                     <h2>Hạn sử dụng: ${product.warrantyPeriod}</h2>
                                                                 </div>
