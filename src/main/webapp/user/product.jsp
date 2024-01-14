@@ -69,7 +69,6 @@
                                             <span class="wd-swatch wd-bg"></span>
                                             <span class="wd-filter-lable layer-term-lable">${group.key}</span>
                                         </a>
-                                        <span class="count">${group.value}</span>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -124,7 +123,7 @@
 
                                     <c:choose>
                                         <c:when test="${isFilteringByGroup}">
-                                            <a href="" class="breadcrumb-link">Đã lọc theo nhóm sản phẩm</a>
+                                            <a href="" class="breadcrumb-link">Đã lọc theo danh mục sản phẩm</a>
                                         </c:when>
                                         <c:when test="${not empty filteredProducts}">
                                             <a href="" class="breadcrumb-link">Đã lọc theo đối tượng: ${filteredProducts[0].productType}</a>

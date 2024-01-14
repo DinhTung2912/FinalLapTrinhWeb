@@ -27,13 +27,10 @@ public class OrderDetailServlet extends HttpServlet {
             try {
                 // Chuyển đổi giá trị "id" sang kiểu int
                 int order_id = Integer.parseInt(orderIdParam);
-
                 // Gọi hàm loadOrder_view để lấy thông tin đơn hàng
                 Order order = OrderDAO.loadOrder_view(order_id);
-
                 // Thêm đối tượng Order vào request để sử dụng trong JSP
                 request.setAttribute("order", order);
-
                 // Gọi hàm loadOrderProductByOrderId để lấy danh sách sản phẩm trong đơn hàng
                 List<OrderProduct> productList = OrderProductDAO.loadOrderProductByOrderId(order_id);
 
@@ -67,5 +64,6 @@ public class OrderDetailServlet extends HttpServlet {
             // Xử lý nếu tham số id không tồn tại hoặc rỗng
             response.getWriter().println("Order ID is missing or empty.");
         }
+
     }
 }
