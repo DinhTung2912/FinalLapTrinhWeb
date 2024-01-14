@@ -255,25 +255,41 @@
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${order}" var="o">
-                                    <tr>
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/user/order_detail?id=${o.id}">${o.id}</a>
-                                        </td>
-                                        <td>${Util.formatTimestamp(o.dateCreated)}</td>
-                                        <td>
-                                        <c:if test="${o.payment}">
-                                            Momo
-                                        </c:if>
-                                        <c:if test="${not o.payment}">
-                                            Tiền Mặt
-                                        </c:if>
-                                        </td>
-                                        <td> <c:if test="${o.status eq 'Shipping'}">
-                                            Đang giao
-                                        </c:if>
-                                        </td>
-                                    </tr>
+                                    <c:if test="${not (o.status eq 'Đã hủy' or o.status eq 'Bị từ chối')}">
+                                        <tr>
+                                            <td>
+                                                <a href="${pageContext.request.contextPath}/user/order_detail?id=${o.id}">${o.id}</a>
+                                            </td>
+                                            <td>${Util.formatTimestamp(o.dateCreated)}</td>
+                                            <td>
+                                                <c:if test="${o.payment}">
+                                                    Momo
+                                                </c:if>
+                                                <c:if test="${not o.payment}">
+                                                    Tiền Mặt
+                                                </c:if>
+                                            </td>
+                                            <td>
+                                                <c:if test="${o.status eq 'Chờ xử lý'}">
+                                                    Chờ xử lý
+                                                </c:if>
+                                                <c:if test="${o.status eq 'Bị từ chối'}">
+                                                    Bị từ chối
+                                                </c:if>
+                                                <c:if test="${o.status eq 'Đã hủy'}">
+                                                    Đã hủy
+                                                </c:if>
+                                                <c:if test="${o.status eq 'Đang giao hàng'}">
+                                                    Đang giao hàng
+                                                </c:if>
+                                                <c:if test="${o.status eq 'Giao hàng thành công'}">
+                                                    Giao hàng thành công
+                                                </c:if>
+                                            </td>
+                                        </tr>
+                                    </c:if>
                                 </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>

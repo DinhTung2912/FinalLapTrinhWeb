@@ -110,9 +110,12 @@
                                         <tr>
                                             <td>${ol.username}</td>
                                             <td class="text-nowrap">${Util.formatTimestamp(ol.dateCreated)}</td>
-                                           <td> <c:if test="${ol.status eq 'Shipping'}">
-                                                <span class="badge badge-info">Đang giao</span>
-                                            </c:if>
+                                           <td>
+                                               <c:if test="${ol.status eq 'Đang giao hàng'}"><span class="badge badge-info">Đang giao hàng</span></c:if>
+                                               <c:if test="${ol.status eq 'Đã hủy'}"><span class="badge badge-danger">Đã hủy</span></c:if>
+                                               <c:if test="${ol.status eq 'Bị từ chối'}"><span class="badge badge-warning">Bị từ chối</span></c:if>
+                                               <c:if test="${ol.status eq 'Chờ xử lý'}"><span class="badge badge-dark"> Chờ xử lý</span></c:if>
+                                               <c:if test="${ol.status eq 'Giao hàng thành công'}"><span class="badge badge-success"> Giao hàng thành công</span></c:if>
                                            </td>
                                             <td>
                                                 <div class="font-weight-600"><%= Util.formatCurrency((double)pageContext.getAttribute("totalPay")) %>VND</div>

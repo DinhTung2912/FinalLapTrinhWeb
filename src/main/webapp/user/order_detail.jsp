@@ -52,8 +52,20 @@
                             <span>Chi tiết đơn hàng #${order.id}</span>
                             <span class="split">-</span>
                             <span class="status">
-                                <c:if test="${order.status eq 'Shipping'}">
-                                    Đang giao
+                             <c:if test="${order.status eq 'Chờ xử lý'}">
+                                  Chờ xử lý
+                                     </c:if>
+                                <c:if test="${order.status eq 'Bị từ chối'}">
+                                    Bị từ chối
+                                         </c:if>
+                                <c:if test="${order.status eq 'Đã hủy'}">
+                                    Đã hủy
+                                        </c:if>
+                                 <c:if test="${order.status eq 'Đang giao hàng'}">
+                                     Đang giao hàng
+                                 </c:if>
+                                        <c:if test="${order.status eq 'Giao hàng thành công'}">
+                                            Giao hàng thành công
                                     </c:if>
                             </span>
                         </div>
@@ -81,8 +93,12 @@
                             <div class="styles_group_1">
                                 <div class="title">Hình thức thanh toán</div>
                                 <div class="content">
-                                    <c:if test="${order.payment==true}"><p class="">Thanh toán tiền mặt khi nhận hàng</p></c:if>
-                                    <c:if test="${order.payment==false}"><p class="">Thanh toán qua ví Momo</p></c:if>
+                                    <c:if test="${order.payment}">
+                                        <p class="">Momo</p>
+                                    </c:if>
+                                    <c:if test="${not order.payment}">
+                                        <p class="">Tiền Mặt</p>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -92,14 +108,12 @@
                                 <th>Sản phẩm</th>
                                 <th>Giá</th>
                                 <th>Số lượng</th>
-                                <th>Giảm giá</th>
                                 <th>Tạm tính</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${p_list}" var="pl">
                                             <c:set var="price" value="${pl.price}"></c:set>
-                                            <c:set var="sale" value="${pl.sale}"></c:set>
                                             <c:set var="total" value="${pl.total}"></c:set>
                             <tr>
                                 <td>
@@ -111,7 +125,6 @@
                                             <div class="product-review">
                                                 <a id="btn-comment" href="#" data-toggle="modal"
                                                    data-target="#exampleModalCenter">Viết nhận xét</a>
-                                                <a href="warranty?order_id=${order.id}&pro_id=${pl.productId}&user_id=${sessionScope.user_id}" target="_blank">Bảo hành</a>
                                             </div>
                                         </div>
                                     </div>
@@ -119,7 +132,6 @@
                                     </td>
                                 <td class="price"><%= Util.formatCurrency((double) pageContext.getAttribute("price"))%> VND</td>
                                     <td class="quantity">${pl.quantity}</td>
-                                <td class="discount-amount"><%= Util.formatCurrency((double) pageContext.getAttribute("sale"))%> VND</td>
                                 <td class="raw-total"><%= Util.formatCurrency((double) pageContext.getAttribute("total"))%>VND</td>
                                 </tr>
                             </c:forEach>
@@ -209,6 +221,30 @@
         // Nếu người dùng xác nhận, thực hiện hành động hủy đơn hàng
         if (confirmation) {
             cancelOrder();
+        }
+    }
+
+    function cancelOrder() {
+        // Thêm logic xử lý khi nút được nhấn
+        // Ví dụ: hiển thị cảnh báo, gửi yêu cầu hủy đơn hàng, v.v.
+    }
+</script>
+<script>
+    function confirmCancelOrder() {
+        // Kiểm tra trạng thái đơn hàng
+        var status = "${order.status}";
+
+        // Nếu đơn hàng đang ở trạng thái "Đang giao hàng" hoặc "Giao hàng thành công", không cho phép hủy
+        if (status === "Đang giao hàng" || status === "Giao hàng thành công") {
+            alert("Không thể hủy đơn hàng ở trạng thái " + status);
+        } else {
+            // Nếu không ở trạng thái trên, hiển thị hộp thoại xác nhận
+            var confirmation = confirm("Bạn có chắc chắn muốn hủy đơn hàng không?");
+
+            // Nếu người dùng xác nhận, thực hiện hành động hủy đơn hàng
+            if (confirmation) {
+                cancelOrder();
+            }
         }
     }
 

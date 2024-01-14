@@ -1,4 +1,4 @@
-
+<%@ page import="com.example.finallaptrinhweb.model.Util" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="com.example.finallaptrinhweb.model.Product" %>
 <%@ page import="java.util.List" %>
@@ -85,7 +85,6 @@
                                     <c:forEach var="p" items="${product}">
                                         <c:set var="price" value="${p.price}"></c:set>
 
-
                                         <tr>
                                             <td>${p.id}</td>
                                             <td><c:choose>
@@ -101,7 +100,7 @@
 
                                             </td>
 
-                                            <td><%= pageContext.getAttribute("price")%>
+                                            <td><%= Util.formatCurrency((double) pageContext.getAttribute("price"))%>VND
                                             </td>
                                             <td>${p.quantity}</td>
 
