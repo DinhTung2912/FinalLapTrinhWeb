@@ -80,7 +80,7 @@
                                             <td>${user.phone}</td>
 
                                             <td class="text-right">
-                                                <a href="add-admin?type=enterEdit&id=${user.id}"
+                                                <a href="edit-admin?type=enterEdit&id=${user.id}"
                                                    class="btn btn-sm bg-success-light "> <i
                                                         class="far fa-edit mr-1"></i> Sửa</a>
                                                     <%--                                            <a href="edit-product.jsp" style="margin-top: 5px;color: red "--%>

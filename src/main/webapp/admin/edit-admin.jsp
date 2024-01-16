@@ -1,4 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.finallaptrinhweb.model.Util" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="com.example.finallaptrinhweb.model.Util" %>
+<%@ page import="java.util.Date" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
@@ -31,7 +36,6 @@
 <body>
 <div class="main-wrapper">
     <jsp:include page="menu.jsp"></jsp:include>
-
     <div class="page-wrapper">
         <div class="content container-fluid">
             <div class="row">
@@ -43,19 +47,17 @@
                             <div class="col">
                                 <h3 class="page-title">${title}</h3>
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="admin-profile.html">Thông tin cá nhân</a></li>
+                                    <li class="breadcrumb-item"><a href="">Thông tin cá nhân</a></li>
                                     <li class="breadcrumb-item active">${title}</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <!-- /Page Header -->
-
                     <div class="card">
                         <div class="card-body">
                             <!-- Form -->
-                            <form action="edit-admin" method="post" enctype="multipart/form-data"
-                                  accept-charset="UTF-8">
+                            <form action="edit-admin" method="post" accept-charset="UTF-8">
+                                <c:set var="bd" value="${user.getDateOfBirth()}"></c:set>
                                 <c:if test="${type=='edit'}">
                                     <div class="form-group" style="display: none">
                                         <input class="form-control" type="text" value="edit" name="type">
@@ -63,72 +65,20 @@
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Họ tên</label>
                                         <div class="col-md-10">
-                                            <input type="text" class="form-control" name="name" value="${user.name}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label col-md-2">Ảnh</label>
-                                        <div class="col-md-10">
-                                            <input class="form-control" type="file" name="img"
-                                                   value="${user.avatar}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label col-md-2">Nơi làm việc</label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" value="Thế Giới Cây Cảnh" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label col-md-2">Ngày sinh</label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" name="birthdate" value="${user.birthday}">
+                                            <input type="text" class="form-control" name="name" value="${user.username}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Địa chỉ Email</label>
                                         <div class="col-md-10">
-                                            <input type="email" class="form-control" name="email"
-                                                   value="${user.email}">
+                                            <input type="email" class="form-control" name="email" value="${user.email}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Điện thoại</label>
                                         <div class="col-md-10">
-                                            <input type="text"
-                                                   value="+84 ${user.phone}" name="phone"
+                                            <input type="text" value="0 ${user.phone}" name="phone"
                                                    class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <h5 class="form-title"><span>Địa chỉ</span></h5>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label col-md-2">Số nhà</label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" name="detail"
-                                                   value="${sessionScope.detail}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label col-md-2">Phường/ Xã</label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" name="ward"
-                                                   value="${sessionScope.ward}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label col-md-2">Quận/ Huyện</label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" name="district"
-                                                   value="${sessionScope.district}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label col-md-2">Tỉnh/ Thành phố</label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" name="city"
-                                                   value="${sessionScope.city}">
                                         </div>
                                     </div>
                                     <div class="mt-4">
@@ -137,7 +87,6 @@
                                     </div>
                                 </c:if>
                             </form>
-                            <!-- /Form -->
                         </div>
                     </div>
                 </div>

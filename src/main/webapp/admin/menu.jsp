@@ -63,11 +63,6 @@
                                <c:if test="${current_page=='product'}">class="active"</c:if>>Sản phẩm</a></li>
                         <li><a href="coupon-code"
                                <c:if test="${current_page=='coupon-code'}">class="active"</c:if>>Mã giảm giá</a></li>
-                        <li><a href="ratingstype"
-                               <c:if test="${current_page=='rating-type'}">class="active"</c:if>>Loại đánh giá</a></li>
-                        <li><a href="email"
-                               <c:if test="${current_page=='email'}">class="active"</c:if>>Email</a></li>
-
                     </ul>
                 </li>
 
@@ -78,8 +73,6 @@
                         <li><a href="total-report"
                                <c:if test="${current_page=='total-report'}">class="active"</c:if>>Danh sách đặt hàng</a>
                         </li>
-                        <li><a href="shipment"
-                               <c:if test="${current_page=='shipment'}">class="active"</c:if>>Vận chuyển</a></li>
                     </ul>
                 </li>
 

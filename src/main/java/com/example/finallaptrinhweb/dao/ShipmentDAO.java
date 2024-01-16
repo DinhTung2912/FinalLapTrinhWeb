@@ -13,7 +13,6 @@ import java.util.List;
 import java.math.BigDecimal;
 
 public class ShipmentDAO {
-
     public static int addShipment() {
         int id = getNextId();
         int updated = 0;
@@ -39,7 +38,6 @@ public class ShipmentDAO {
 
         return 0;
     }
-
     public static int getNextId() {
         int nextId = 0;
         try {
