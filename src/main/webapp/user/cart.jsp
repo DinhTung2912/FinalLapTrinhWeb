@@ -109,7 +109,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn">TIẾP TỤC MUA SẮM</a>
+                        <a href="products" class="primary-btn cart-btn">TIẾP TỤC MUA SẮM</a>
                         <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
                             CẬP NHẬT GIỎ HÀNG</a>
                     </div>

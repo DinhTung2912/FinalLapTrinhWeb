@@ -165,6 +165,32 @@ public class UserDAOT {
         return deleteResult == 1;
     }
 
+    public static boolean updateUserById(int id, String name, String birthday, int phone, String email,
+                                         String detailaddress) {
+        String sql = "UPDATE users SET fullName = ?, dateOfBirth = ?, phone = ?, email = ?, " +
+                "detail_address = ? WHERE id = ?";
+        int update = 0;
+
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, birthday);
+            preparedStatement.setInt(3, phone);
+            preparedStatement.setString(4, email);
+            preparedStatement.setString(5, detailaddress);
+            preparedStatement.setInt(6, id);
+
+            synchronized (preparedStatement) {
+                update = preparedStatement.executeUpdate();
+            }
+            return update == 1;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
+
     public static int getMaxUserId() {
         int id = 0;
         try (Statement statement = DBCPDataSource.getStatement()) {
