@@ -88,10 +88,11 @@
 
                                     <thead>
                                     <tr>
-                                        <th>id</th>
+                                        <th>Id</th>
                                         <th>Tên</th>
                                         <th>Email</th>
                                         <th>Ngày tạo</th>
+                                        <th>Hoạt động</th>
                                         <th class="text-right">Hành Động</th>
                                     </tr>
                                     </thead>
@@ -105,9 +106,15 @@
                                             <td>${p.username}</td>
                                             <td>${p.email}</td>
                                             <td>${p.date_created}</td>
+                                            <td>
+                                                <div class="status-toggle">
+                                                    <input id="service_${p.id}" class="check" type="checkbox" ${p.verifyStatus eq 'verified' ? 'checked' : ''}>
+                                                    <label for="service_${p.id}" class="checktoggle">checkbox</label>
+                                                </div>
+                                            </td>
 
                                             <td class="text-right">
-                                                <a href="edit_user?type=enteredit&id=${p.id}" class="btn btn-sm bg-success-light ">	<i class="far fa-edit mr-1"></i> Sửa</a>
+                                                    <%-- <a href="edit_user?type=enteredit&id=${p.id}" class="btn btn-sm bg-success-light ">	<i class="far fa-edit mr-1"></i> Sửa</a>--%>
                                                 <a href="#" style="margin-top: 5px;color: red" class="btn btn-outline-danger btn-sm"
                                                    onclick="confirmDelete(${p.id})">
                                                     <i class="fa fa-trash-o"></i> Xóa

@@ -20,29 +20,24 @@ public class Edit_admin_direct extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("current_page", "admin");
+        request.setAttribute("title", "Sửa thông tin admin");
         String type = request.getParameter("type");
-        if (type != null) {
-            if (type.equalsIgnoreCase("enterEdit")) {
-                request.setAttribute("type", "edit");
-                request.setAttribute("title", "Sửa thông tin admin");
-                int id = Integer.parseInt(request.getParameter("id"));
-                User user = UserDAOT.loadUserById(id);
-                request.setAttribute("user", user);
-                request.getRequestDispatcher("edit-admin.jsp").forward(request, response);
-                return;
-            }
-        }
-        String name = request.getParameter("name");
-        String birthday = request.getParameter("birthday");
-        String email = request.getParameter("email");
-        int phone = Integer.parseInt(request.getParameter("phone"));
-        String address = request.getParameter("address");
-        int user_id = Integer.parseInt(request.getParameter("id"));
-        if (type != null && type.equalsIgnoreCase("edit")) {
-            boolean isUpdate = UserDAOT.updateUserById(user_id, name, birthday, phone, email, address);
-            User user = UserDAOT.loadUserById(user_id);
+        if (type.equalsIgnoreCase("enterEdit")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            User user = UserDAOT.loadUserById(id);
             request.setAttribute("user", user);
             request.getRequestDispatcher("edit-admin.jsp").forward(request, response);
+            return;
+        }
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        if (type.equalsIgnoreCase("edit")) {
+            int id = Integer.parseInt(request.getParameter("usercode"));
+            boolean isUpdate = UserDAOT.updateUserById(id, name, phone, email);
+            User user = UserDAOT.loadUserById(id);
+            request.setAttribute("user", user);
+            request.getRequestDispatcher("./edit-admin.jsp").forward(request, response);
         }
     }
 }

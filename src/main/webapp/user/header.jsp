@@ -31,7 +31,7 @@
                                     <a href="">Thức ăn chăn nuôi</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="">Chăm sóc thú cưng</a>
+                                    <a href="products?group=Chăm%20sóc%20thú%20cưng">Chăm sóc thú cưng</a>
                                 </li>
                                 <li class="menu-item">
                                     <a href="">Thuốc thú y<i class="fa-solid fa-angle-right"></i></a>

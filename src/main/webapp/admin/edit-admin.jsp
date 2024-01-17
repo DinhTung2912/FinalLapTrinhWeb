@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.finallaptrinhweb.model.Util" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="com.example.finallaptrinhweb.model.Util" %>
+
 <%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -57,10 +57,15 @@
                         <div class="card-body">
                             <!-- Form -->
                             <form action="edit-admin" method="post" accept-charset="UTF-8">
-                                <c:set var="bd" value="${user.getDateOfBirth()}"></c:set>
                                 <c:if test="${type=='edit'}">
                                     <div class="form-group" style="display: none">
                                         <input class="form-control" type="text" value="edit" name="type">
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-2">Mã người dùng</label>
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" name="usercode" value="${user.id}" readonly>
+                                        </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Họ tên</label>
@@ -77,13 +82,13 @@
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Điện thoại</label>
                                         <div class="col-md-10">
-                                            <input type="text" value="0 ${user.phone}" name="phone"
+                                            <input type="text" value="0${user.phone}" name="phone"
                                                    class="form-control">
                                         </div>
                                     </div>
                                     <div class="mt-4">
-                                        <button class="btn btn-primary" type="submit">Lưu</button>
-                                        <a href="admin-profile.html" class="btn btn-link">Hủy</a>
+                                        <button class="btn btn-primary" type="submit">Cập nhật</button>
+                                        <a href="list-admin" class="btn btn-link">Hủy</a>
                                     </div>
                                 </c:if>
                             </form>
