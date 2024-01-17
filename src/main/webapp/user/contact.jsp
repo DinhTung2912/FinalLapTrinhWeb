@@ -146,12 +146,12 @@
                             </div>
                         </section>
                         <div class="icon-infor d-flex px-5 py-5 my-3 border-top justify-content-center">
-                            <a href="${applicationScope.social_media.facebook}" class="icon-link"><span><i class="fab fa-facebook-f"></i></span></a>
-                            <a href="${applicationScope.social_media.twitter}" class="icon-link"><span><i class="fab fa-twitter"></i></span></a>
-                            <a href="${applicationScope.social_media.instagram}" class="icon-link"><span><i class="fab fa-instagram"></i></span></a>
-                            <a href="${applicationScope.social_media.youtube}" class="icon-link"><span><i class="fab fa-youtube"></i></span></a>
-                            <a href="${applicationScope.social_media.pinterest}" class="icon-link"><span><i class="fab fa-pinterest"></i></span></a>
-                            <a href="${applicationScope.social_media.linkedin}"class="icon-link"><span><i class="fab fa-linkedin"></i></span></a>
+                            <a href="${applicationScope.social_media.facebook}" class="icon-link"><span><i class="fab fa-facebook-f fa-lg"></i></span></a>
+                            <a href="${applicationScope.social_media.twitter}" class="icon-link"><span><i class="fab fa-twitter fa-lg"></i></span></a>
+                            <a href="${applicationScope.social_media.instagram}" class="icon-link"><span><i class="fab fa-instagram fa-lg"></i></span></a>
+                            <a href="${applicationScope.social_media.youtube}" class="icon-link"><span><i class="fab fa-youtube fa-lg"></i></span></a>
+                            <a href="${applicationScope.social_media.pinterest}" class="icon-link"><span><i class="fab fa-pinterest fa-lg"></i></span></a>
+                            <a href="${applicationScope.social_media.linkedin}"class="icon-link"><span><i class="fab fa-linkedin fa-lg"></i></span></a>
                         </div>
 
 

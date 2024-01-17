@@ -53,7 +53,6 @@
                 </h1>
             </div>
         </div>
-
         <div class="container">
             <div class="columns">
                 <!-- Sidebar -->
@@ -93,7 +92,7 @@
                         </div>
 
                         <div id="categories-3" class="widget">
-                            <span class="widget-title">Đối tượng</span>
+                            <span class="widget-title">Lọc theo đối tượng</span>
                             <div class="wd-scroll" style="max-height: 280px;overflow: auto;">
                                 <ul class="wd-swatches-filter wd-filter-list wd-labels-on wd-size-normal wd-layout-list wd-text-style-1 wd-bg-style-4 wd-shape-round wd-scroll-content">
                                     <c:forEach var="type" items="${proTypes}">
@@ -142,9 +141,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
 
                     <!-- Danh sách sản phẩm -->
                     <div class="wrapper-container">
@@ -213,8 +209,6 @@
                                     </c:forEach>
                                 </c:otherwise>
                             </c:choose>
-
-
                         </div>
                     </div>
                     <!-- Phân trang -->

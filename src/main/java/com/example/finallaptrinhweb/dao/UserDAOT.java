@@ -27,6 +27,7 @@ public class UserDAOT {
             user.setWard(rs.getString("ward"));
             user.setDetail_address(rs.getString("detail_address"));
             user.setPhone(rs.getString("phone"));
+            user.setVerifyStatus(rs.getString("verify_status"));
             user.setRoleId(rs.getInt("role_id"));
             user.setDate_created(rs.getDate("date_created"));
             return user;
@@ -165,20 +166,16 @@ public class UserDAOT {
         return deleteResult == 1;
     }
 
-    public static boolean updateUserById(int id, String name, String birthday, int phone, String email,
-                                         String detailaddress) {
-        String sql = "UPDATE users SET fullName = ?, dateOfBirth = ?, phone = ?, email = ?, " +
-                "detail_address = ? WHERE id = ?";
+    public static boolean updateUserById(int id, String name, String phone, String email) {
+        String sql = "UPDATE users SET fullName = ?, phone = ?, email = ? WHERE id = ?";
         int update = 0;
 
         try (Connection connection = DBCPDataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, name);
-            preparedStatement.setString(2, birthday);
-            preparedStatement.setInt(3, phone);
-            preparedStatement.setString(4, email);
-            preparedStatement.setString(5, detailaddress);
-            preparedStatement.setInt(6, id);
+            preparedStatement.setString(2, phone);
+            preparedStatement.setString(3, email);
+            preparedStatement.setInt(4, id);
 
             synchronized (preparedStatement) {
                 update = preparedStatement.executeUpdate();

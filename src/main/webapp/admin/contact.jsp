@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: DINHTUNG
+  Date: 17/01/2024
+  Time: 8:36 CH
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page import="com.example.finallaptrinhweb.model.Util" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="com.example.finallaptrinhweb.model.Product" %>
@@ -11,9 +18,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Quản lý sản phẩm</title>
+    <title>Ý kiến đóng góp</title>
     <link rel="icon" href="https://tienthangvet.vn/wp-content/uploads/cropped-favicon-Tien-Thang-Vet-192x192.png"
-          sizes="192x192" />
+          sizes="192x192"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
@@ -34,32 +41,21 @@
 
 </head>
 <body>
+<%--<c:set var="m" value="users"></c:set>--%>
+<%--<%System.out.println(pageContext.getAttribute("m"));%>--%>
 <% System.out.println("Co dang vao product.jsp");%>
 <div class="main-wrapper">
     <jsp:include page="menu.jsp"></jsp:include>
     <div class="page-wrapper">
         <div class="content container-fluid">
-
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row">
                     <div class="col">
-                        <h3 class="page-title">Sản phẩm</h3>
-                    </div>
-                    <div class="col-auto text-right">
-                        <a class="btn btn-white filter-btn" href="javascript:void(0);" id="filter_search">
-                            <i class="fas fa-filter"></i>
-                        </a>
-                        <a href="add-product?type=enterAdd" class="btn btn-primary add-button ml-3">
-                            <i class="fas fa-plus"></i>
-                        </a>
+                        <h3 class="page-title">Ý kiến khách hàng</h3>
                     </div>
                 </div>
             </div>
-            <!-- /Page Header -->
-
-            <!-- Search Filter -->
-
             <!-- /Search Filter -->
             <div class="row">
                 <div class="col-md-12">
@@ -67,52 +63,26 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover table-center mb-0 datatable">
-                                    <!-- Thay đổi code ở đây Thay đổi theo file word -->
+
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Ảnh</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Giá bán</th>
-                                        <th>Số lượng</th>
-                                        <th>ID nhà cung cấp</th>
-                                        <th class="text-right">Hành Động</th>
+                                        <th>Id</th>
+                                        <th>Tên</th>
+                                        <th>Email</th>
+                                        <th>Nội dung</th>
+                                        <th>Ngày gởi</th>
                                     </tr>
                                     </thead>
 
                                     <!-- Thêm vào nội dung ở đây -->
                                     <tbody>
-                                    <c:forEach var="p" items="${product}">
-                                        <c:set var="price" value="${p.price}"></c:set>
-
+                                    <c:forEach var="f" items="${feedbackList}">
                                         <tr>
-                                            <td>${p.id}</td>
-                                            <td><c:choose>
-                                                <c:when test="${not empty p.imageUrl}">
-                                                    <img class="rounded service-img mr-1" src="${pageContext.request.contextPath}/${p.imageUrl}" alt="Hình ảnh sản phẩm">
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <img class="rounded service-img mr-1" src="${pageContext.request.contextPath}/${p.imageUrl}" alt="Hình ảnh mặc định">
-                                                </c:otherwise>
-                                            </c:choose>
-                                            </td>
-                                            <td>${p.productName}</td>
-
-                                            </td>
-
-                                            <td><%= Util.formatCurrency((double) pageContext.getAttribute("price"))%>VND
-                                            </td>
-                                            <td>${p.quantity}</td>
-
-                                            <td>${p.supplierId}</td>
-                                            <td class="text-right">
-                                                <a href="edit-product?type=enterEdit&id=${p.id}"
-                                                   class="btn btn-sm bg-success-light "> <i
-                                                        class="far fa-edit mr-1"></i> Sửa</a>
-                                                    <%--                                                <a href="edit-product.jsp" style="margin-top: 5px;color: red "--%>
-                                                    <%--                                                   class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i>--%>
-                                                    <%--                                                    Xóa</a>--%>
-                                            </td>
+                                            <td>${f.id}</td>
+                                            <td>${f.name}</td>
+                                            <td>${f.email}</td>
+                                            <td>${f.content}</td>
+                                            <td>${Util.formatTimestamp(f.submissionDate)}</td>
                                         </tr>
                                     </c:forEach>
                                     <%System.out.println("DA xuong toi day");%>
@@ -145,5 +115,7 @@
 
 <!-- Custom JS -->
 <script src="assets/js/admin.js"></script>
+
 </body>
 </html>
+

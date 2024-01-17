@@ -126,8 +126,9 @@
                 <p>Phí vận chuyển: ${ Util.formatCurrency(priceShipment) } VND</p>
               </div>
               <div class="checkout__order__total">
-                <p>Tổng tiền thanh toán: ${ Util.formatCurrency(totalPrice) } VND</p>
+                <p style="color: red;">Tổng tiền thanh toán: ${ Util.formatCurrency(totalPrice) } VND</p>
               </div>
+
             </div>
 
 
@@ -151,7 +152,7 @@
             <div>
               <form action="<c:url value='/user/checkout' />" method="post" id="paymentValidationMessage" class="payment-validation-message">
                 <!-- ... Form content ... -->
-                <button id="validateAndSubmitBtn" type="button" type="submit"  class="site-btn">Thanh toán</button>
+                <button id="validateAndSubmitBtn" type="button" type="submit"  class="site-btn">Đặt hàng</button>
               </form>
             </div>
           </div>

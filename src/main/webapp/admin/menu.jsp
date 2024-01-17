@@ -85,6 +85,8 @@
                                <c:if test="${current_page=='admin-list'}">class="active"</c:if>>Danh sách admin</a></li>
                             <li><a href="supplier"
                                <c:if test="${current_page=='supplier'}">class="active"</c:if>>Nhà cung cấp</a></li>
+                        <li><a href="contact"
+                               <c:if test="${current_page=='feedbackList'}">class="active"</c:if>>Ý kiến khách hàng</a></li>
                     </ul>
                 </li>
                 <li <c:if test="${current_page=='setting'}">class="active"</c:if>>

@@ -356,6 +356,76 @@ public class ProductDAO {
         }
         return sum;
     }
+
+    public static Product loadProductById(int id) {
+        Product product = null;
+        String query = "SELECT * FROM products WHERE id = ?";
+
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, id);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    product = mapResultSetToProduct(resultSet);
+
+                    // Lấy thông tin của nhà cung cấp từ SupplierDAO hoặc bất kỳ nguồn dữ liệu nào khác
+                    SupplierDAO supplierDAO = new SupplierDAO();
+                    Supplier supplier = supplierDAO.getSupplierById(product.getSupplierId());
+
+                    // Set giá trị cho supplierImageUrl sử dụng phương thức setSupplierImageUrl trong Product
+                    if (supplier != null) {
+                        product.setSupplierImageUrl(supplier.getImageUrl());
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return product;
+    }
+
+    public static boolean updateProduct(int id, String productName, int categoryId, double price, int quantity,
+                                        String purpose, String contraindications, int stockQuantity, String ingredients, String dosage,
+                                        String instructions, String warrantyPeriod, String storageCondition, String productType,
+                                        int supplierId, String imageUrl, boolean active) {
+
+        String sql = "UPDATE products SET productName=?, category_id=?, price=?, quantity=?, purpose=?, "
+                + "contraindications=?, stockQuantity=?, ingredients=?, dosage=?, instructions=?, warrantyPeriod=?, "
+                + "storageCondition=?, productType=?, supplier_id=?, imageUrl=?, active=? WHERE id=?";
+
+        int update = 0;
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(sql)) {
+            preparedStatement.setString(1, productName);
+            preparedStatement.setInt(2, categoryId);
+            preparedStatement.setDouble(3, price);
+            preparedStatement.setInt(4, quantity);
+            preparedStatement.setString(5, purpose);
+            preparedStatement.setString(6, contraindications);
+            preparedStatement.setInt(7, stockQuantity);
+            preparedStatement.setString(8, ingredients);
+            preparedStatement.setString(9, dosage);
+            preparedStatement.setString(10, instructions);
+            preparedStatement.setString(11, warrantyPeriod);
+            preparedStatement.setString(12, storageCondition);
+            preparedStatement.setString(13, productType);
+            preparedStatement.setInt(14, supplierId);
+            preparedStatement.setString(15, imageUrl);
+            preparedStatement.setBoolean(16, active);
+            preparedStatement.setInt(17, id);
+
+            update = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return update == 1;
+    }
+
     public void addProduct(Product product) {
         try {
             JDBIConnector.me().get().useHandle((handle) -> {
@@ -385,7 +455,7 @@ public class ProductDAO {
     }
 
 
-    private Product mapResultSetToProduct(ResultSet resultSet) throws SQLException {
+    private static Product mapResultSetToProduct(ResultSet resultSet) throws SQLException {
         Product product = new Product();
         product.setId(resultSet.getInt("id"));
         product.setProductName(resultSet.getString("productName"));
