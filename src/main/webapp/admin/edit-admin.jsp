@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.finallaptrinhweb.model.Util" %>
 <%@ page import="java.util.Date" %>
-
-<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -57,8 +55,8 @@
                         <div class="card-body">
                             <!-- Form -->
                             <form action="edit-admin" method="post" accept-charset="UTF-8">
-                                <c:if test="${type=='edit'}">
                                     <div class="form-group" style="display: none">
+                                        <c:set var="bd" value="${user.getDateOfBirth()}"></c:set>
                                         <input class="form-control" type="text" value="edit" name="type">
                                     </div>
                                     <div class="form-group row">
@@ -70,7 +68,7 @@
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Họ tên</label>
                                         <div class="col-md-10">
-                                            <input type="text" class="form-control" name="name" value="${user.username}">
+                                            <input type="text" class="form-control" name="fullName" value="${user.fullName}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -82,15 +80,22 @@
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Điện thoại</label>
                                         <div class="col-md-10">
-                                            <input type="text" value="0${user.phone}" name="phone"
+                                            <input type="text" value="${user.phone}" name="phone"
                                                    class="form-control">
                                         </div>
                                     </div>
+
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">Địa chỉ</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" name="address" value="${user.detail_address}">
+                                    </div>
+                                </div>
                                     <div class="mt-4">
                                         <button class="btn btn-primary" type="submit">Cập nhật</button>
                                         <a href="list-admin" class="btn btn-link">Hủy</a>
                                     </div>
-                                </c:if>
+
                             </form>
                         </div>
                     </div>

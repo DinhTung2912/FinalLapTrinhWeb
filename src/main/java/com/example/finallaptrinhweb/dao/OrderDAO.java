@@ -74,6 +74,7 @@ public class OrderDAO {
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
                         order.setId(resultSet.getInt("id"));
+                        order.setUserId(resultSet.getInt("user_id"));
                         order.setDateCreated(Timestamp.valueOf(resultSet.getString("date_created")));
                         order.setStatus(resultSet.getString("status"));
                         order.setTotalPay(resultSet.getDouble("total"));
@@ -257,7 +258,7 @@ public class OrderDAO {
         return orderList;
     }
     public static void main(String[] args) {
-        System.out.println(loadOrderByUserId(6));
+        System.out.println(loadOrderNear(1));
     }
 
     public static List<Order> loadOrderByUserId(int user_id) {
@@ -401,6 +402,5 @@ public class OrderDAO {
         }
         return result;
     }
-    
 
 }
