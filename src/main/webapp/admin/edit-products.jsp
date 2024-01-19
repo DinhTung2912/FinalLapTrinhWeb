@@ -63,7 +63,12 @@
                     <div class="card">
                         <div class="card-body">
                             <form action="edit-product" method="post" enctype="multipart/form-data">
-                                <c:if test="${type=='edit'}">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">Mã sản phẩm</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" name="usercode" value="${product.id}" readonly>
+                                    </div>
+                                </div>
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Tên sản phẩm</label>
                                         <div class="col-md-10">
@@ -166,7 +171,6 @@
                                         <button class="btn btn-primary">Lưu thay đổi</button>
                                         <a href="product" class="btn btn-link">Hủy</a>
                                     </div>
-                                </c:if>
                             </form>
                         </div>
                     </div>

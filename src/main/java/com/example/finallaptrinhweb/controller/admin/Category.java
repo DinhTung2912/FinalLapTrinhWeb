@@ -21,6 +21,7 @@ public class Category extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("current_page", "category");
         HttpSession session = request.getSession();
         User admin = (User) session.getAttribute("admin");
 

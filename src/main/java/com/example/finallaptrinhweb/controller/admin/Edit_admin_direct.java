@@ -29,17 +29,19 @@ public class Edit_admin_direct extends HttpServlet {
             request.getRequestDispatcher("edit-admin.jsp").forward(request, response);
             return;
         }
-        String name = request.getParameter("name");
+        String name = request.getParameter("fullName");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
         if (type.equalsIgnoreCase("edit")) {
+            request.setAttribute("type", "edit");
+            request.setAttribute("title", "Chỉnh sửa admin");
             int id = Integer.parseInt(request.getParameter("usercode"));
-            boolean isUpdate = UserDAOT.updateUserById(id, name, phone, email);
+            boolean isUpdate = UserDAOT.updateUserById(id, name, phone, email, address);
             User user = UserDAOT.loadUserById(id);
             request.setAttribute("user", user);
-            request.getRequestDispatcher("./edit-admin.jsp").forward(request, response);
+            request.getRequestDispatcher("edit-admin.jsp").forward(request, response);
         }
     }
 }
-
 
