@@ -31,6 +31,7 @@ public class OrderProductDAO {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     OrderProduct orderProduct = new OrderProduct();
+                    orderProduct.setId(resultSet.getInt("id"));
                     orderProduct.setProductName(resultSet.getString("productName"));
                     orderProduct.setQuantity(resultSet.getInt("quantity"));
                     orderProduct.setPrice(resultSet.getDouble("price"));

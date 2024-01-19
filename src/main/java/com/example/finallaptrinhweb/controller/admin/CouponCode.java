@@ -17,6 +17,7 @@ public class CouponCode extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("current_page", "coupon-code");
         request.setAttribute("title","Mã giảm giá");
 
         CouponCodeDAO dao = new CouponCodeDAO();

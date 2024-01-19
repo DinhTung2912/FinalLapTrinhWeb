@@ -54,13 +54,14 @@
                     </div>
                     <div class="elementor-widget-container">
                         <div class="social-icons">
-                            <a href=""><i class="icon fa-brands fa-square-facebook"></i></a>
-                            <a href=""><i class="icon fa-brands fa-square-x-twitter"></i></a>
-                            <a href=""><i class="icon fa-brands fa-square-instagram"></i></a>
-                            <a href=""><i class="icon fa-brands fa-square-youtube"></i></a>
-                            <a href=""><i class="icon fa-brands fa-square-pinterest"></i></a>
-                            <a href=""><i class="icon fa-brands fa-linkedin"></i></a>
+                            <a href="${applicationScope.social_media.facebook}"><i class="icon fa-brands fa-square-facebook"></i></a>
+                            <a href="${applicationScope.social_media.twitter}"><i class="icon fa-brands fa-square-x-twitter"></i></a>
+                            <a href="${applicationScope.social_media.instagram}"><i class="icon fa-brands fa-square-instagram"></i></a>
+                            <a href="${applicationScope.social_media.youtube}"><i class="icon fa-brands fa-square-youtube"></i></a>
+                            <a href="${applicationScope.social_media.pinterest}"><i class="icon fa-brands fa-square-pinterest"></i></a>
+                            <a href="${applicationScope.social_media.linkedin}"><i class="icon fa-brands fa-linkedin"></i></a>
                         </div>
+
                     </div>
                 </div>
             </div>

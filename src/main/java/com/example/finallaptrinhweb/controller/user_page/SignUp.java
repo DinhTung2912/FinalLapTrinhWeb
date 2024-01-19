@@ -30,12 +30,13 @@ public class SignUp extends HttpServlet {
         String repass = request.getParameter("repassword");
         SendEmail send = new SendEmail();
         String code = send.getRandomVerifyCode();
-
+        String roleParam = request.getParameter("role");
+        int roleId = Integer.parseInt(roleParam);
         if (repass.equals(pass)) {
             try {
                 // Kiểm tra độ dài và thành phần của mật khẩu
                 if (isStrongPassword(pass) && !UserDAO.getInstance().CheckExistUser(email)) {
-                    UserDAO.getInstance().SignUp(name, email, pass, code);
+                    UserDAO.getInstance().SignUp(name, email, pass, code, roleId);
                     if (send.sendVerifyCode(email, code)) {
                         HttpSession session = request.getSession();
                         session.setAttribute("authcode", code);

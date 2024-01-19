@@ -7,11 +7,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @WebServlet("/user/products")
 public class ProductServlet extends HttpServlet {
@@ -19,7 +16,7 @@ public class ProductServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int pageSize = 9;
+        int pageSize = 12;
         int pageNumber = Integer.parseInt(request.getParameter("page") != null ? request.getParameter("page") : "1");
         int start = (pageNumber - 1) * pageSize;
 
@@ -32,7 +29,14 @@ public class ProductServlet extends HttpServlet {
         String group = request.getParameter("group");
         String productType = request.getParameter("type");
 
-        if (searchTerm != null) {
+        // Kiểm tra xem đã lọc theo nhóm sản phẩm hay không
+        boolean isFilteringByGroup = group != null;
+        request.setAttribute("isFilteringByGroup", isFilteringByGroup);
+
+        if (productType != null) {
+            products = productDAO.getProductByType(productType);
+            request.setAttribute("filteredProducts", products);
+        } else if (searchTerm != null) {
             products = productDAO.searchProductsLimited(searchTerm, start, pageSize);
             totalProducts = productDAO.getTotalSearchResults(searchTerm);
             if (products.isEmpty()) {
@@ -40,10 +44,9 @@ public class ProductServlet extends HttpServlet {
             }
         } else if (object != null) {
             products = productDAO.getProductByCategory(object);
-        } else if (group != null) {
+            request.setAttribute("selectedCategory", object);
+        } else if (isFilteringByGroup) { // Nếu đang lọc theo nhóm sản phẩm
             products = productDAO.getProductByGroup(group);
-        } else if (productType != null) {
-            products = productDAO.getProductByType(productType);
         } else {
             products = productDAO.getAllProductsLimited(start, pageSize);
             totalProducts = productDAO.getTotalProducts();
@@ -64,7 +67,7 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("searchTerm", searchTerm);
         request.setAttribute("isSearchPage", searchTerm != null);
 
-        String decodedQueryString = buildQueryString(request, object, group, productType , searchTerm);
+        String decodedQueryString = buildQueryString(request, object, group, productType, searchTerm);
 
         String contextPath = request.getContextPath();
         if (decodedQueryString.startsWith(contextPath)) {

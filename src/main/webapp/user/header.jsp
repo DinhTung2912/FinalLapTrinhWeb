@@ -31,7 +31,7 @@
                                     <a href="">Thức ăn chăn nuôi</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="">Chăm sóc thú cưng</a>
+                                    <a href="products?group=Chăm%20sóc%20thú%20cưng">Chăm sóc thú cưng</a>
                                 </li>
                                 <li class="menu-item">
                                     <a href="">Thuốc thú y<i class="fa-solid fa-angle-right"></i></a>
@@ -90,7 +90,7 @@
                                                 nhân</span></a>
                             </li>
                             <li class="user-menu-item">
-                                <a href="signIn.jsp"><span class="nav-link-text">Đăng xuất</span></a>
+                                <a href="signout"><span class="nav-link-text">Đăng xuất</span></a>
                             </li>
                         </ul>
                     </div>

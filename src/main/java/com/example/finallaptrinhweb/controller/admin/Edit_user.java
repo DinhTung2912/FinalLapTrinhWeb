@@ -16,7 +16,6 @@ public class Edit_user extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("current_page", "user");
         request.setAttribute("title", "Sửa thông tin người dùng");

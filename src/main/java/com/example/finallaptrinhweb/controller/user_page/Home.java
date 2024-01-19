@@ -41,7 +41,6 @@ public class Home extends HttpServlet {
         // Danh sách sản phẩm
         List<Product> products = productDAO.getAllProductsLimited(0, 3);
 
-
         System.out.println(products);
         request.setAttribute("products", products);
 

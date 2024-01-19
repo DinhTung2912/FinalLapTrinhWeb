@@ -79,18 +79,19 @@ public class UserDAO {
         return users.get(0);
     }
 
-    public void SignUp(String username, String email, String password, String code) throws SQLException {
+    public void SignUp(String username, String email, String password, String code, int roleId) throws SQLException {
         Date dateCreated = new Date();
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
         JDBIConnector.me().get().withHandle((handle) -> {
-            return handle.createUpdate("INSERT INTO users (id, username, email, password, verify_status, date_created, role_id) VALUES (?, ?, ?, ?, ?, ?, 1)")
+            return handle.createUpdate("INSERT INTO users (id, username, email, password, verify_status, date_created, role_id) VALUES (?, ?, ?, ?, ?, ?, ?)")
                     .bind(0, this.GetId() + 1)
                     .bind(1, username)
                     .bind(2, email)
                     .bind(3, hashedPassword)
                     .bind(4, code)
                     .bind(5, dateCreated)
+                    .bind(6, roleId)
                     .execute();
         });
     }

@@ -47,11 +47,6 @@
                     <div class="col">
                         <h3 class="page-title">Danh sách admin</h3>
                     </div>
-                    <div class="col-auto text-right">
-                        <a href="add-admin?type=enterAdd" class="btn btn-primary add-button ml-3">
-                            <i class="fas fa-plus"></i>
-                        </a>
-                    </div>
                 </div>
             </div>
             <!-- /Page Header -->
@@ -68,6 +63,7 @@
                                         <th>Tên</th>
                                         <th>Email</th>
                                         <th>Điện thoại</th>
+                                        <th>Quyền</th>
                                         <th class="text-right">Hành động</th>
                                     </tr>
                                     </thead>
@@ -75,15 +71,21 @@
                                     <c:forEach var="user" items="${admins}">
                                         <tr>
                                             <td>${user.id}</td>
-                                            <td>${user.username}</td>
+                                            <td>${user.fullName}</td>
                                             <td>${user.email}</td>
                                             <td>${user.phone}</td>
+                                            <td>
+                                                <div class="status-toggle">
+                                                    <input id="service_${user.id}" class="check" type="checkbox" ${user.verifyStatus eq 'verified' ? 'checked' : ''}>
+                                                    <label for="service_${user.id}" class="checktoggle">checkbox</label>
+                                                </div>
+                                            </td>
 
                                             <td class="text-right">
-                                                <a href="add-admin?type=enterEdit&id=${user.id}"
+                                                <a href="edit-admin?type=enterEdit&id=${user.id}"
                                                    class="btn btn-sm bg-success-light "> <i
                                                         class="far fa-edit mr-1"></i> Sửa</a>
-                                                    <%--                                            <a href="edit-product.html" style="margin-top: 5px;color: red "--%>
+                                                    <%--                                            <a href="edit-product.jsp" style="margin-top: 5px;color: red "--%>
                                                     <%--                                               class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i>--%>
                                                     <%--                                                Xóa</a>--%>
                                             </td>

@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.finallaptrinhweb.db.JDBIConnector;
 import com.example.finallaptrinhweb.model.Product;
 import com.example.finallaptrinhweb.model.Supplier;
 import com.example.finallaptrinhweb.dao.SupplierDAO;
@@ -356,8 +357,117 @@ public class ProductDAO {
         return sum;
     }
 
+    public static Product loadProductById(int id) {
+        Product product = null;
+        String query = "SELECT * FROM products WHERE id = ?";
 
-    private Product mapResultSetToProduct(ResultSet resultSet) throws SQLException {
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, id);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    product = mapResultSetToProduct(resultSet);
+
+                    // Lấy thông tin của nhà cung cấp từ SupplierDAO hoặc bất kỳ nguồn dữ liệu nào khác
+                    SupplierDAO supplierDAO = new SupplierDAO();
+                    Supplier supplier = supplierDAO.getSupplierById(product.getSupplierId());
+
+                    // Set giá trị cho supplierImageUrl sử dụng phương thức setSupplierImageUrl trong Product
+                    if (supplier != null) {
+                        product.setSupplierImageUrl(supplier.getImageUrl());
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return product;
+    }
+
+    public static boolean updateProduct(int id, String productName, int categoryId, double price, int quantity,
+                                        String purpose, String contraindications, int stockQuantity, String ingredients, String dosage,
+                                        String instructions, String warrantyPeriod, String storageCondition, String productType,
+                                        int supplierId) {
+
+        String sql = "UPDATE products SET productName=?, category_id=?, price=?, quantity=?, purpose=?, "
+                + "contraindications=?, stockQuantity=?, ingredients=?, dosage=?, instructions=?, warrantyPeriod=?, "
+                + "storageCondition=?, productType=?, supplier_id=? WHERE id=?";
+
+        int update = 0;
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(sql)) {
+            preparedStatement.setString(1, productName);
+            preparedStatement.setInt(2, categoryId);
+            preparedStatement.setDouble(3, price);
+            preparedStatement.setInt(4, quantity);
+            preparedStatement.setString(5, purpose);
+            preparedStatement.setString(6, contraindications);
+            preparedStatement.setInt(7, stockQuantity);
+            preparedStatement.setString(8, ingredients);
+            preparedStatement.setString(9, dosage);
+            preparedStatement.setString(10, instructions);
+            preparedStatement.setString(11, warrantyPeriod);
+            preparedStatement.setString(12, storageCondition);
+            preparedStatement.setString(13, productType);
+            preparedStatement.setInt(14, supplierId);
+            preparedStatement.setInt(15, id);
+
+            update = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return update == 1;
+    }
+
+    public static boolean deleteProductById(int productId) {
+        String query = "DELETE FROM products WHERE id = ?";
+        int deletedRows = 0;
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setInt(1, productId);
+            deletedRows = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return deletedRows > 0;
+    }
+
+    public void addProduct(Product product) {
+        try {
+            JDBIConnector.me().get().useHandle((handle) -> {
+                handle.createUpdate("INSERT INTO `products`(`id`, `productName`, `categoryId`, `price`, `quantity`, `supplierId`, `purpose`, `contraindications`, `stockQuantity`, `ingredients`, `dosage`, `instructions`, `warrantyPeriod`, `productType`, `storageCondition`, `supplierId`, `imageUrl`, `active`, `supplierImageUrl`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+                        .bind(0, product.getId())
+                        .bind(1, product.getProductName())
+                        .bind(2, product.getCategoryId())
+                        .bind(3, product.getPrice())
+                        .bind(4, product.getQuantity())
+                        .bind(5, product.getPurpose())
+                        .bind(6, product.getContraindications())
+                        .bind(7, product.getStockQuantity())
+                        .bind(8, product.getIngredients())
+                        .bind(9, product.getDosage())
+                        .bind(10, product.getInstructions())
+                        .bind(11, product.getWarrantyPeriod())
+                        .bind(12, product.getSupplierId())
+                        .bind(13, product.getImageUrl())
+                        .bind(14, product.isActive() ? 1 : 0) // Chuyển đổi giá trị boolean thành 0 hoặc 1
+                        .bind(15, product.getSupplierImageUrl())
+
+                        .execute();
+            });
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    private static Product mapResultSetToProduct(ResultSet resultSet) throws SQLException {
         Product product = new Product();
         product.setId(resultSet.getInt("id"));
         product.setProductName(resultSet.getString("productName"));

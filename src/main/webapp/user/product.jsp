@@ -53,7 +53,6 @@
                 </h1>
             </div>
         </div>
-
         <div class="container">
             <div class="columns">
                 <!-- Sidebar -->
@@ -69,7 +68,6 @@
                                             <span class="wd-swatch wd-bg"></span>
                                             <span class="wd-filter-lable layer-term-lable">${group.key}</span>
                                         </a>
-                                        <span class="count">${group.value}</span>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -94,7 +92,7 @@
                         </div>
 
                         <div id="categories-3" class="widget">
-                            <span class="widget-title">Đối tượng</span>
+                            <span class="widget-title">Lọc theo đối tượng</span>
                             <div class="wd-scroll" style="max-height: 280px;overflow: auto;">
                                 <ul class="wd-swatches-filter wd-filter-list wd-labels-on wd-size-normal wd-layout-list wd-text-style-1 wd-bg-style-4 wd-shape-round wd-scroll-content">
                                     <c:forEach var="type" items="${proTypes}">
@@ -121,15 +119,29 @@
                                 <nav class="woocommerce-breadcrumb">
                                     <a href="" class="breadcrumb-link">Trang chủ</a>
                                     <a href="" class="breadcrumb-link">Sản phẩm</a>
-                                    <% String url = (String) request.getAttribute("url");%>
-                                    <%if (url != null) {%>
-                                    <a href="" class="breadcrumb-link">Kết quả tìm kiếm cho: <%=url%>
-                                    </a>
-                                    <%}%>
+
+                                    <c:choose>
+                                        <c:when test="${isFilteringByGroup}">
+                                            <a href="" class="breadcrumb-link">Đã lọc theo danh mục sản phẩm</a>
+                                        </c:when>
+                                        <c:when test="${not empty filteredProducts}">
+                                            <a href="" class="breadcrumb-link">Đã lọc theo đối tượng: ${filteredProducts[0].productType}</a>
+                                        </c:when>
+                                        <c:when test="${not empty selectedCategory}">
+                                            <a href="" class="breadcrumb-link"> ${selectedCategory}</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <% String url = (String) request.getAttribute("url"); %>
+                                            <% if (url != null && !url.isEmpty()) { %>
+                                            <a href="" class="breadcrumb-link">Kết quả tìm kiếm cho: <%= url %></a>
+                                            <% } %>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </nav>
                             </div>
                         </div>
                     </div>
+
                     <!-- Danh sách sản phẩm -->
                     <div class="wrapper-container">
                         <div class="container">
@@ -197,8 +209,6 @@
                                     </c:forEach>
                                 </c:otherwise>
                             </c:choose>
-
-
                         </div>
                     </div>
                     <!-- Phân trang -->

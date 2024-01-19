@@ -1,4 +1,4 @@
-
+<%@ page import="com.example.finallaptrinhweb.model.Util" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="com.example.finallaptrinhweb.model.Product" %>
 <%@ page import="java.util.List" %>
@@ -56,11 +56,6 @@
                     </div>
                 </div>
             </div>
-            <!-- /Page Header -->
-
-            <!-- Search Filter -->
-
-            <!-- /Search Filter -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -85,31 +80,30 @@
                                     <c:forEach var="p" items="${product}">
                                         <c:set var="price" value="${p.price}"></c:set>
 
-
                                         <tr>
                                             <td>${p.id}</td>
-                                            <td><img class="rounded service-img mr-1"
-
-                                            <c:if test="${fn:startsWith(p.imageUrl, 'imgs')}"> src="../${p.imageUrl}"</c:if>
-                                                     <c:if test="${fn:startsWith(p.imageUrl, 'http')}">src="${p.imageUrl}"</c:if>
-
-                                                     alt="Hình ảnh danh mục"></td>
-                                            <td>${p.productName}</td>
-
+                                            <td><c:choose>
+                                                <c:when test="${not empty p.imageUrl}">
+                                                    <img class="rounded service-img mr-1" src="${pageContext.request.contextPath}/${p.imageUrl}" alt="Hình ảnh sản phẩm">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <img class="rounded service-img mr-1" src="${pageContext.request.contextPath}/${p.imageUrl}" alt="Hình ảnh mặc định">
+                                                </c:otherwise>
+                                            </c:choose>
                                             </td>
-
-                                            <td><%= pageContext.getAttribute("price")%>
+                                            <td>${p.productName}</td>
+                                            <td><%= Util.formatCurrency((double) pageContext.getAttribute("price"))%>VND
                                             </td>
                                             <td>${p.quantity}</td>
-
                                             <td>${p.supplierId}</td>
-                                            <td class="text-right">
-                                                <a href="add-product?type=enterEdit&id=${p.id}"
+                                            <td class="text-right"  style="display: flex; gap: 5px;">
+                                                <a href="edit-product?type=enterEdit&id=${p.id}"
                                                    class="btn btn-sm bg-success-light "> <i
                                                         class="far fa-edit mr-1"></i> Sửa</a>
-                                                    <%--                                                <a href="edit-product.html" style="margin-top: 5px;color: red "--%>
-                                                    <%--                                                   class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i>--%>
-                                                    <%--                                                    Xóa</a>--%>
+                                                <a href="#" onclick="confirmDeleteProduct(${p.id});" style="margin-top: 5px; color: red;" class="btn btn-outline-danger btn-sm">
+                                                    <i class="fa fa-trash-o"></i> Xóa
+                                                </a>
+
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -143,5 +137,14 @@
 
 <!-- Custom JS -->
 <script src="assets/js/admin.js"></script>
+<script>
+    function confirmDeleteProduct(productId) {
+        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
+            // Chuyển hướng đến Servlet để xóa sản phẩm
+            window.location.href = "./delete-product?id=" + productId;
+        }
+    }
+
+</script>
 </body>
 </html>

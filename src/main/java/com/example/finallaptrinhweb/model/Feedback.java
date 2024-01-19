@@ -3,6 +3,7 @@ package com.example.finallaptrinhweb.model;
 import java.sql.Timestamp;
 
 public class Feedback {
+    private int id;  // Thêm trường id
     private String email;
     private String name;
     private String content;
@@ -11,11 +12,20 @@ public class Feedback {
     public Feedback() {
     }
 
-    public Feedback(String email, String name, String content, Timestamp submissionDate) {
+    public Feedback(int id, String email, String name, String content, Timestamp submissionDate) {
+        this.id = id;
         this.email = email;
         this.name = name;
         this.content = content;
         this.submissionDate = submissionDate;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -51,6 +61,6 @@ public class Feedback {
     }
 
     public String toString() {
-        return "Feedback{ email='" + this.email + "', name='" + this.name + "', content='" + this.content + "', submissionDate=" + this.submissionDate + "}";
+        return "Feedback{ id=" + this.id + ", email='" + this.email + "', name='" + this.name + "', content='" + this.content + "', submissionDate=" + this.submissionDate + "}";
     }
 }
