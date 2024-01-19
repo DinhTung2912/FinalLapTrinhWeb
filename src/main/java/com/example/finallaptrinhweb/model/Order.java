@@ -147,7 +147,6 @@ public class Order {
         this.totalPay = totalPay;
     }
 
-
     public double getShipPrice() {
         return shipPrice;
     }

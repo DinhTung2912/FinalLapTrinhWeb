@@ -212,16 +212,47 @@
                         </div>
                     </div>
                     <!-- Phân trang -->
+                    <!-- Phân trang -->
                     <div class="pagination">
                         <ul class="pagination-wrapper">
-                            <c:forEach begin="1" end="${totalPages}" var="page">
+
+                            <c:if test="${currentPage > 1}">
+                                <li class="page-item">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/user/products?page=${currentPage - 1}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            </c:if>
+
+                            <c:if test="${currentPage >= 4 && totalPages > 15}">
+                                <li class="page-item disabled">
+                                    <span class="page-link ellipsis" >...</span>
+                                </li>
+                            </c:if>
+
+                            <!-- Hiển thị các trang -->
+                            <c:forEach begin="${currentPage - 2 > 0 ? currentPage - 2 : 1}" end="${currentPage + 2 <= totalPages ? currentPage + 2 : totalPages}" var="page">
                                 <li class="page-item ${page == currentPage ? 'active' : ''}">
-                                    <a class="page-link"
-                                       href="${pageContext.request.contextPath}/user/products?page=${page}">${page}</a>
+                                    <a class="page-link" href="${pageContext.request.contextPath}/user/products?page=${page}">${page}</a>
                                 </li>
                             </c:forEach>
+
+                            <c:if test="${currentPage + 2 < totalPages && totalPages > 15}">
+                                <li class="page-item disabled">
+                                    <span class="page-link ellipsis">...</span>
+                                </li>
+                            </c:if>
+
+                            <c:if test="${currentPage < totalPages}">
+                                <li class="page-item">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/user/products?page=${currentPage + 1}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </c:if>
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -235,5 +266,12 @@
         })
     </script>
 </body>
+<style>
+    span.page-link.ellipsis {
+        text-decoration: none;
+        border: 1px solid #dee2e6;
+        padding: 6px 12px;
+    }
+</style>
 
 </html>

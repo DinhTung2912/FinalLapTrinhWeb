@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3">Thành tiền</label>
+                                    <label class="col-md-3">Tổng tiền phải trả</label>
                                     <div class="col-md-9">
                                         <%=Util.formatCurrency((double)request.getAttribute("total"))%>
 
