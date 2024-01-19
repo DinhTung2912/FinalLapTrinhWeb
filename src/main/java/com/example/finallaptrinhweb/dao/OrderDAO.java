@@ -61,7 +61,7 @@ public class OrderDAO {
         Order order = new Order();
         try {
             String query = "SELECT o.id, o.date_created, u.id AS user_id, o.quantity, o.status, o.totalAmount, o.phone, o.detail_address, o.payment, o.date_created AS order_date, o.total_pay, o.ship_price," +
-                    "u.username, (SUM(op.price * op.quantity) + s.ship_price) AS total " +
+                    "u.username, (SUM(op.price * op.quantity)) AS total " +
                     "FROM orders o " +
                     "JOIN order_products op ON o.id = op.order_id " +
                     "JOIN shipping_info s ON s.id = o.ship_id " +
@@ -95,7 +95,7 @@ public class OrderDAO {
         List<Order> orderList = new ArrayList<>();
         try {
             String query = "SELECT o.id, o.date_created, u.id AS user_id, o.quantity, o.status, o.totalAmount, o.phone, o.detail_address, o.payment, o.date_created AS order_date, o.total_pay, o.ship_price," +
-                    "o.username, (SUM(op.price * op.quantity) + s.ship_price) AS total " +
+                    "o.username, (SUM(op.price * op.quantity)) AS total " +
                     "FROM orders o " +
                     "JOIN order_products op ON o.id = op.order_id " +
                     "JOIN shipping_info s ON s.id = o.ship_id " +
@@ -128,7 +128,6 @@ public class OrderDAO {
         }
         return orderList;
     }
-
 
 
     public static List<String> getAllStatus() {

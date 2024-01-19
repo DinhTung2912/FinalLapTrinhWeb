@@ -45,7 +45,6 @@ public class CheckoutService extends HttpServlet {
     }
 
     private double calculateShipmentPrice() {
-        // Phí vận chuyển cố định (ví dụ: 20,000 VND)
         return 20000;
     }
 }
