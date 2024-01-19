@@ -47,9 +47,9 @@
         <div class="image-box-wrapper">
             <div class="container">
                 <div class="image-box-content">
-                    <h1 class="image-box-title">Tiến Thắng Vet (TSD)</h1>
+                    <h1 class="image-box-title">Thú Y The Pet (TSD)</h1>
                     <p>
-                        Công ty TNHH Thương Mại và Dịch Vụ Phát Triển Tiến Thắng (hay
+                        Công ty TNHH Thương Mại và Dịch Vụ Phát Triển The Pet (hay
                         còn gọi là TSD) được thành lập và chính thức đi vào hoạt động
                         từ năm 2017. Các đối tác của chúng tôi là các nhà sản xuất uy
                         tín trên thế giới từ Mỹ, Canada, Bỉ, Pháp, Hàn Quốc, Thái Lan,
@@ -57,7 +57,7 @@
                     </p>
 
                     <p>
-                        Công ty Tiến Thắng chuyên phân phối chuỗi sản phẩm chăn nuôi,
+                        Công ty Thú Y The Pet chuyên phân phối chuỗi sản phẩm chăn nuôi,
                         thuốc thú y, thủy sản nhập khẩu cho các nhà máy thức ăn, trang
                         trại chăn nuôi, đại lý thú y và hệ thống phòng khám thú cưng
                         tại Việt Nam.
@@ -144,7 +144,7 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <a href="product.jsp">Tất cả sản phẩm</a>
+                                    <a href="products">Tất cả sản phẩm</a>
                                 </div>
                             </div>
                             <div class="service">
@@ -207,7 +207,7 @@
                             <img src="https://tienthangvet.vn/wp-content/uploads/nokodemaseb-tri-nam-dang-xit.jpg"
                                  alt=""/>
                         </div>
-                        <a href="product.jsp" class="button">Xem ngay</a>
+                        <a href="${pageContext.request.contextPath}/user/product?id=1" class="button">Xem ngay</a>
                     </div>
 
                     <c:forEach var="p" items="${products}">

@@ -15,8 +15,6 @@ import java.sql.SQLException;
 
 @WebServlet("/user/signin")
 public class SignIn extends HttpServlet {
-    public SignIn() {
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -27,19 +25,32 @@ public class SignIn extends HttpServlet {
         String pass = request.getParameter("password");
         User user = null;
 
-        boolean VerifiedStatus;
+        boolean verifiedStatus;
         try {
             user = UserDAO.getInstance().CheckLogin(email, pass);
-            VerifiedStatus = UserDAO.getInstance().CheckVerifiedStatus(email);
+            verifiedStatus = UserDAO.getInstance().CheckVerifiedStatus(email);
         } catch (SQLException var8) {
             throw new RuntimeException(var8);
         }
 
         if (user != null) {
-            if (VerifiedStatus) {
+            if (verifiedStatus) {
                 HttpSession session = request.getSession();
                 session.setAttribute("auth", user);
-                response.sendRedirect("./index.jsp");
+
+                // Kiểm tra vai trò (role) của người dùng
+                int roleId = user.getRoleId();
+
+                if (roleId == 1) {
+                    // Vai trò là 1, chuyển hướng đến trang home
+                    response.sendRedirect(request.getContextPath() + "/user/home");
+                } else if (roleId == 2) {
+                    // Vai trò là 2, chuyển hướng đến trang admin
+                    response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+                } else {
+                    // Nếu có thêm các vai trò khác, xử lý tại đây
+                    response.sendRedirect(request.getContextPath() + "user/error-404.html");
+                }
             } else {
                 request.setAttribute("wrongInfor", "Tài khoản chưa kích hoạt");
                 request.getRequestDispatcher("./signIn.jsp").forward(request, response);
@@ -48,6 +59,5 @@ public class SignIn extends HttpServlet {
             request.setAttribute("wrongInfor", "Đăng nhập thất bại");
             request.getRequestDispatcher("./signIn.jsp").forward(request, response);
         }
-
     }
 }

@@ -21,8 +21,9 @@
                       <span class="elementor-icon-list-icon">
                         <i aria-hidden="true" class="fas fa-map-marker-alt"></i>
                       </span>
-                                    <span class="elementor-icon-list-text">Khu phố 6, Phường Linh Trung, Quận Thủ Đức,
-                        TPHCM</span>
+                                    <span class="elementor-icon-list-text">
+                                         ${applicationScope.address.get(0).address}
+                                    </span>
                                 </a>
                             </li>
                             <li class="elementor-icon-list-item">
@@ -30,7 +31,7 @@
                       <span class="elementor-icon-list-icon">
                         <i aria-hidden="true" class="fas fa-phone-volume"></i>
                       </span>
-                                    <span class="elementor-icon-list-text">NVKD SP gia súc - gia cầm: 0999 999 999</span>
+                                    <span class="elementor-icon-list-text"> NVKD SP gia súc - gia cầm: 0${applicationScope.address.get(0).phone}</span>
                                 </a>
                             </li>
                             <li class="elementor-icon-list-item">
@@ -38,7 +39,7 @@
                       <span class="elementor-icon-list-icon">
                         <i aria-hidden="true" class="fas fa-headphones-alt"></i>
                       </span>
-                                    <span class="elementor-icon-list-text">Hotline: 028 999 9999</span>
+                                    <span class="elementor-icon-list-text">Hotline: 0${applicationScope.address.get(0).hotline}</span>
                                 </a>
                             </li>
                             <li class="elementor-icon-list-item">
@@ -46,20 +47,21 @@
                       <span class="elementor-icon-list-icon">
                         <i aria-hidden="true" class="far fa-envelope"></i>
                       </span>
-                                    <span class="elementor-icon-list-text">doanwebnhom30@gmail.com</span>
+                                    <span class="elementor-icon-list-text"> Email: ${applicationScope.address.get(0).email}</span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div class="elementor-widget-container">
                         <div class="social-icons">
-                            <a href=""><i class="icon fa-brands fa-square-facebook"></i></a>
-                            <a href=""><i class="icon fa-brands fa-square-x-twitter"></i></a>
-                            <a href=""><i class="icon fa-brands fa-square-instagram"></i></a>
-                            <a href=""><i class="icon fa-brands fa-square-youtube"></i></a>
-                            <a href=""><i class="icon fa-brands fa-square-pinterest"></i></a>
-                            <a href=""><i class="icon fa-brands fa-linkedin"></i></a>
+                            <a href="${applicationScope.social_media.facebook}"><i class="icon fa-brands fa-square-facebook"></i></a>
+                            <a href="${applicationScope.social_media.twitter}"><i class="icon fa-brands fa-square-x-twitter"></i></a>
+                            <a href="${applicationScope.social_media.instagram}"><i class="icon fa-brands fa-square-instagram"></i></a>
+                            <a href="${applicationScope.social_media.youtube}"><i class="icon fa-brands fa-square-youtube"></i></a>
+                            <a href="${applicationScope.social_media.pinterest}"><i class="icon fa-brands fa-square-pinterest"></i></a>
+                            <a href="${applicationScope.social_media.linkedin}"><i class="icon fa-brands fa-linkedin"></i></a>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -102,7 +104,7 @@
                      data-widget_type="html.default">
                     <div class="elementor-widget-container">
                         <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.214525515988!2d106.78918677590663!3d10.871281657435139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOw7RuZyBMw6JtIFRQLiBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1697118240058!5m2!1svi!2s"
+                                src="${applicationScope.address.get(0).map}"
                                 width="100%" height="250" style="border: 0" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>

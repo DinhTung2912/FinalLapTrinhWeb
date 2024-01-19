@@ -25,7 +25,7 @@
         <div class="col-lg-12">
             <div class="map">
                 <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.258927212624!2d106.78567238152027!3d10.86790033428018!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9672b7efd0893fc4!2zxJDhuqFpIEjhu41jIE7DtG5nIEzDom0!5e0!3m2!1svi!2s!4v1604126585524!5m2!1svi!2s"
+                        src="${applicationScope.address.get(0).map}"
                         height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
             </div>
             <!-- Map End -->
@@ -109,13 +109,12 @@
                                                             <div class="info-box-inner"
                                                                  data-elementor-setting-key="content">
                                                                 <p><span style="color: #333333;"><strong>Địa
-                                                                        chỉ:</strong></span> Khu phố 6, Linh Trung, Thủ
-                                                                    Đức, TPHCM</p>
+                                                                        chỉ:</strong></span> ${applicationScope.address.get(0).address}</p>
                                                                 <p><span style="color: #333333;"><strong>Điện
-                                                                        thoại:</strong></span> 0999 999 999</p>
+                                                                        thoại:</strong></span> 0${applicationScope.address.get(0).phone}</p>
                                                                 <p><span
                                                                         style="color: #333333;"><strong>Email:</strong></span>
-                                                                    doanwebnhom30@gmail.com</p>
+                                                                    ${applicationScope.address.get(0).email}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -147,12 +146,12 @@
                             </div>
                         </section>
                         <div class="icon-infor d-flex px-5 py-5 my-3 border-top justify-content-center">
-                            <a href="https://www.facebook.com/tienthangvetvn" class="icon-link"><span><i class="fab fa-facebook-f"></i></span></a>
-                            <a href="https://twitter.com/i/flow/login?redirect_after_login=%2Ftienthangvet" class="icon-link"><span><i class="fab fa-twitter"></i></span></a>
-                            <a href="https://www.instagram.com/tienthangvet/" class="icon-link"><span><i class="fab fa-instagram"></i></span></a>
-                            <a href="https://www.youtube.com/channel/UCf7LpFLbwvD3hOXn8lVPHQA" class="icon-link"><span><i class="fab fa-youtube"></i></span></a>
-                            <a href="https://www.pinterest.com/tienthangvet/" class="icon-link"><span><i class="fab fa-pinterest"></i></span></a>
-                            <a href="link_linkedin" class="icon-link"><span><i class="fab fa-linkedin"></i></span></a>
+                            <a href="${applicationScope.social_media.facebook}" class="icon-link"><span><i class="fab fa-facebook-f fa-lg"></i></span></a>
+                            <a href="${applicationScope.social_media.twitter}" class="icon-link"><span><i class="fab fa-twitter fa-lg"></i></span></a>
+                            <a href="${applicationScope.social_media.instagram}" class="icon-link"><span><i class="fab fa-instagram fa-lg"></i></span></a>
+                            <a href="${applicationScope.social_media.youtube}" class="icon-link"><span><i class="fab fa-youtube fa-lg"></i></span></a>
+                            <a href="${applicationScope.social_media.pinterest}" class="icon-link"><span><i class="fab fa-pinterest fa-lg"></i></span></a>
+                            <a href="${applicationScope.social_media.linkedin}"class="icon-link"><span><i class="fab fa-linkedin fa-lg"></i></span></a>
                         </div>
 
 

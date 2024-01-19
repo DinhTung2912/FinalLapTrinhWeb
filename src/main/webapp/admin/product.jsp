@@ -1,4 +1,4 @@
-
+<%@ page import="com.example.finallaptrinhweb.model.Util" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="com.example.finallaptrinhweb.model.Product" %>
 <%@ page import="java.util.List" %>
@@ -50,7 +50,7 @@
                         <a class="btn btn-white filter-btn" href="javascript:void(0);" id="filter_search">
                             <i class="fas fa-filter"></i>
                         </a>
-                        <a href="add-product.jsp" class="btn btn-primary add-button ml-3">
+                        <a href="add-product?type=enterAdd" class="btn btn-primary add-button ml-3">
                             <i class="fas fa-plus"></i>
                         </a>
                     </div>
@@ -85,26 +85,28 @@
                                     <c:forEach var="p" items="${product}">
                                         <c:set var="price" value="${p.price}"></c:set>
 
-
                                         <tr>
                                             <td>${p.id}</td>
-                                            <td><img class="rounded service-img mr-1"
-
-                                            <c:if test="${fn:startsWith(p.imageUrl, 'imgs')}"> src="../${p.imageUrl}"</c:if>
-                                                     <c:if test="${fn:startsWith(p.imageUrl, 'http')}">src="${p.imageUrl}"</c:if>
-
-                                                     alt="Hình ảnh danh mục"></td>
+                                            <td><c:choose>
+                                                <c:when test="${not empty p.imageUrl}">
+                                                    <img class="rounded service-img mr-1" src="${pageContext.request.contextPath}/${p.imageUrl}" alt="Hình ảnh sản phẩm">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <img class="rounded service-img mr-1" src="${pageContext.request.contextPath}/${p.imageUrl}" alt="Hình ảnh mặc định">
+                                                </c:otherwise>
+                                            </c:choose>
+                                            </td>
                                             <td>${p.productName}</td>
 
                                             </td>
 
-                                            <td><%= pageContext.getAttribute("price")%>
+                                            <td><%= Util.formatCurrency((double) pageContext.getAttribute("price"))%>VND
                                             </td>
                                             <td>${p.quantity}</td>
 
                                             <td>${p.supplierId}</td>
                                             <td class="text-right">
-                                                <a href="add-product?type=enterEdit&id=${p.id}"
+                                                <a href="edit-product?type=enterEdit&id=${p.id}"
                                                    class="btn btn-sm bg-success-light "> <i
                                                         class="far fa-edit mr-1"></i> Sửa</a>
                                                     <%--                                                <a href="edit-product.jsp" style="margin-top: 5px;color: red "--%>

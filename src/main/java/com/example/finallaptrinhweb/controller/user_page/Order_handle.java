@@ -46,7 +46,7 @@ public class Order_handle extends HttpServlet {
             // Lưu vào order
             insertSta = OrderDAO.addOrder(firstName + " " + lastName, user.getId(),
                     cart.getCoupon_code_id() == 0 ? 1 : cart.getCoupon_code_id(), 1, cart.getTotalQuantity(),
-                    "Shipping", cart.getTotalPrice(), Integer.parseInt(phoneNumber),
+                    "Chờ xử lý", cart.getTotalPrice(), Integer.parseInt(phoneNumber),
                     addressLine1 + ", " + addressLine2 + ", " + district + ", " + city, cash == 0 ? momo : cash,
                     Timestamp.valueOf(currentDateTime.format(formatter)),
                     cart.getTotalPrice(), 0);

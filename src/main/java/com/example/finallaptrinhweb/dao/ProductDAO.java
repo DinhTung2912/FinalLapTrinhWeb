@@ -186,10 +186,10 @@ public class ProductDAO {
 
     public Map<String, Integer> getListObject() {
         Map<String, Integer> products = new HashMap<>();
-        String query = "SELECT pc.productType, COUNT(p.id) AS productCount\n" +
+        String query = "SELECT pc.categoryName, COUNT(p.id) AS productCount\n" +
                 "FROM product_categories pc\n" +
                 "LEFT JOIN products p ON pc.id = p.category_id\n" +
-                "GROUP BY pc.productType";
+                "GROUP BY pc.id, pc.categoryName;\n";
 
         try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -206,11 +206,30 @@ public class ProductDAO {
     public List<Product> getProductByCategory(String object) {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM products\n" +
-                "JOIN product_categories ON products.category_id = product_categories.id\n" +
-                "WHERE product_categories.productType = ?";
+                "                JOIN product_categories ON products.category_id = product_categories.id\n" +
+                "                WHERE product_categories.categoryName = ?";
 
         try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
             preparedStatement.setString(1, object);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Product product = mapResultSetToProduct(resultSet);
+                    products.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return products;
+    }
+
+    public List<Product> getProductByType(String productType) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM `products` WHERE productType = ?";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setString(1, productType);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Product product = mapResultSetToProduct(resultSet);
@@ -231,6 +250,24 @@ public class ProductDAO {
                 "FROM product_groups pg " +
                 "LEFT JOIN product_categories pc ON pg.id = pc.group_id " +
                 "GROUP BY pg.groupName";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    groups.put(resultSet.getString(1), resultSet.getInt(2));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+        return groups;
+    }
+
+    public Map<String, Integer> getListProductType() {
+        Map<String, Integer> groups = new HashMap<>();
+        String query = "SELECT productType, COUNT(id) AS productCount\n" +
+                "FROM products\n" +
+                "GROUP BY productType;\n";
 
         try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -319,6 +356,76 @@ public class ProductDAO {
         }
         return sum;
     }
+
+    public static Product loadProductById(int id) {
+        Product product = null;
+        String query = "SELECT * FROM products WHERE id = ?";
+
+        try (Connection connection = DBCPDataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, id);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    product = mapResultSetToProduct(resultSet);
+
+                    // Lấy thông tin của nhà cung cấp từ SupplierDAO hoặc bất kỳ nguồn dữ liệu nào khác
+                    SupplierDAO supplierDAO = new SupplierDAO();
+                    Supplier supplier = supplierDAO.getSupplierById(product.getSupplierId());
+
+                    // Set giá trị cho supplierImageUrl sử dụng phương thức setSupplierImageUrl trong Product
+                    if (supplier != null) {
+                        product.setSupplierImageUrl(supplier.getImageUrl());
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return product;
+    }
+
+    public static boolean updateProduct(int id, String productName, int categoryId, double price, int quantity,
+                                        String purpose, String contraindications, int stockQuantity, String ingredients, String dosage,
+                                        String instructions, String warrantyPeriod, String storageCondition, String productType,
+                                        int supplierId, String imageUrl, boolean active) {
+
+        String sql = "UPDATE products SET productName=?, category_id=?, price=?, quantity=?, purpose=?, "
+                + "contraindications=?, stockQuantity=?, ingredients=?, dosage=?, instructions=?, warrantyPeriod=?, "
+                + "storageCondition=?, productType=?, supplier_id=?, imageUrl=?, active=? WHERE id=?";
+
+        int update = 0;
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(sql)) {
+            preparedStatement.setString(1, productName);
+            preparedStatement.setInt(2, categoryId);
+            preparedStatement.setDouble(3, price);
+            preparedStatement.setInt(4, quantity);
+            preparedStatement.setString(5, purpose);
+            preparedStatement.setString(6, contraindications);
+            preparedStatement.setInt(7, stockQuantity);
+            preparedStatement.setString(8, ingredients);
+            preparedStatement.setString(9, dosage);
+            preparedStatement.setString(10, instructions);
+            preparedStatement.setString(11, warrantyPeriod);
+            preparedStatement.setString(12, storageCondition);
+            preparedStatement.setString(13, productType);
+            preparedStatement.setInt(14, supplierId);
+            preparedStatement.setString(15, imageUrl);
+            preparedStatement.setBoolean(16, active);
+            preparedStatement.setInt(17, id);
+
+            update = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return update == 1;
+    }
+
     public void addProduct(Product product) {
         try {
             JDBIConnector.me().get().useHandle((handle) -> {
@@ -348,7 +455,7 @@ public class ProductDAO {
     }
 
 
-    private Product mapResultSetToProduct(ResultSet resultSet) throws SQLException {
+    private static Product mapResultSetToProduct(ResultSet resultSet) throws SQLException {
         Product product = new Product();
         product.setId(resultSet.getInt("id"));
         product.setProductName(resultSet.getString("productName"));
