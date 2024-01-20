@@ -466,6 +466,44 @@ public class ProductDAO {
         }
     }
 
+    public static List<Product> getThreePoultryProducts() {
+        List<Product> threePoultryProducts = new ArrayList<>();
+        String query = "SELECT * FROM products WHERE productType = 'Gia cầm' LIMIT 3";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Product giaCam = mapResultSetToProduct(resultSet);
+                threePoultryProducts.add(giaCam);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return threePoultryProducts;
+    }
+
+    public static List<Product> getThreeOtherProducts() {
+        List<Product> threeOtherProducts = new ArrayList<>();
+        String query = "SELECT * FROM products WHERE productType = 'Khác' LIMIT 3";
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Product product = mapResultSetToProduct(resultSet);
+                threeOtherProducts.add(product);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return threeOtherProducts;
+    }
+
 
     private static Product mapResultSetToProduct(ResultSet resultSet) throws SQLException {
         Product product = new Product();
@@ -486,7 +524,6 @@ public class ProductDAO {
         product.setSupplierId(resultSet.getInt("supplier_id"));
         product.setImageUrl(resultSet.getString("imageUrl"));
         product.setActive(resultSet.getBoolean("active"));
-
 
         // Bổ sung các trường thông tin khác nếu cần
 
