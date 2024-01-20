@@ -44,14 +44,20 @@
 //                // Người dùng chưa đăng nhập hoặc không có vai trò 2, chuyển hướng đến trang đăng nhập admin
 //                httpResponse.sendRedirect(httpRequest.getContextPath() + "/user/signIn.jsp");
 //                return;
-//            } else {
-//                // Người dùng đã đăng nhập và có vai trò 2, cho phép tiếp tục chuỗi filter
-//                chain.doFilter(request, response);
 //            }
-//        } else {
-//            // Cho phép tiếp tục chuỗi filter cho các URL khác
-//            chain.doFilter(request, response);
 //        }
+//
+//        // Kiểm tra nếu đang cố truy cập trang người dùng ("/user/") và là admin
+//        HttpSession session = httpRequest.getSession();
+//        User user = (session != null) ? (User) session.getAttribute("auth") : null;
+//        if (requestURI.startsWith(httpRequest.getContextPath() + "/user/") && user != null && user.getRoleId() == 2) {
+//            // Nếu là admin, chuyển hướng hoặc xử lý tùy thuộc vào yêu cầu của bạn
+//            httpResponse.sendRedirect(httpRequest.getContextPath() + "/admin/accessDenied.jsp");
+//            return;
+//        }
+//
+//        // Cho phép tiếp tục chuỗi filter cho các URL khác
+//        chain.doFilter(request, response);
 //    }
 //
 //    @Override
