@@ -1,5 +1,6 @@
 //package com.example.finallaptrinhweb.controller.admin;
 //
+//import com.example.finallaptrinhweb.model.User;
 //import jakarta.servlet.Filter;
 //import jakarta.servlet.FilterChain;
 //import jakarta.servlet.FilterConfig;
@@ -10,7 +11,6 @@
 //import jakarta.servlet.http.HttpServletRequest;
 //import jakarta.servlet.http.HttpServletResponse;
 //import jakarta.servlet.http.HttpSession;
-//import com.example.finallaptrinhweb.model.User;
 //
 //import java.io.IOException;
 //
@@ -42,23 +42,17 @@
 //
 //            if (user == null || user.getRoleId() != 2) {
 //                // Người dùng chưa đăng nhập hoặc không có vai trò 2, chuyển hướng đến trang đăng nhập admin
-//                httpResponse.sendRedirect(httpRequest.getContextPath() + "/user/signIn.jsp");
+//                httpResponse.sendRedirect(httpRequest.getContextPath() + "/admin/login.jsp");
 //                return;
 //            }
-//        }
-//
-//        // Kiểm tra nếu đang cố truy cập trang người dùng ("/user/") và là admin
-//        HttpSession session = httpRequest.getSession();
-//        User user = (session != null) ? (User) session.getAttribute("auth") : null;
-//        if (requestURI.startsWith(httpRequest.getContextPath() + "/user/") && user != null && user.getRoleId() == 2) {
-//            // Nếu là admin, chuyển hướng hoặc xử lý tùy thuộc vào yêu cầu của bạn
-//            httpResponse.sendRedirect(httpRequest.getContextPath() + "/admin/accessDenied.jsp");
-//            return;
+//            // Nếu người dùng đã đăng nhập và có vai trò là admin, thêm thông tin adminUser vào session
+//            session.setAttribute("adminUser", user);
 //        }
 //
 //        // Cho phép tiếp tục chuỗi filter cho các URL khác
 //        chain.doFilter(request, response);
 //    }
+//
 //
 //    @Override
 //    public void destroy() {
