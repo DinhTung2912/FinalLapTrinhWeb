@@ -54,9 +54,6 @@
           <li class="nav-item active">
             <a class="nav-link">Địa chỉ</a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="term-and-condition">Điều khoản điều kiện</a>
-          </li>
         </ul>
       </ul>
 

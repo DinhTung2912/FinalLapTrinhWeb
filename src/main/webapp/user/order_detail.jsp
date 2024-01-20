@@ -94,11 +94,12 @@
                                 <div class="title">Hình thức thanh toán</div>
                                 <div class="content">
                                     <c:if test="${order.payment}">
-                                        <p class="">Momo</p>
+                                        <p class="">Tiền mặt</p>
                                     </c:if>
                                     <c:if test="${not order.payment}">
-                                        <p class="">Tiền Mặt</p>
+                                        <p class="">Momo</p>
                                     </c:if>
+
                                 </div>
                             </div>
                         </div>

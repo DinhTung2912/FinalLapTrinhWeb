@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Date;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 public class UserDAO {
@@ -35,7 +36,7 @@ public class UserDAO {
         } else {
             User user = (User) users.get(0);
             String hashedPasswordFromDatabase = user.getPassword();
-            return email.equals(user.getEmail()) &&  BCrypt.checkpw(password, hashedPasswordFromDatabase) ? user : null;
+            return email.equals(user.getEmail()) && BCrypt.checkpw(password, hashedPasswordFromDatabase) ? user : null;
         }
     }
 
@@ -150,7 +151,8 @@ public class UserDAO {
                     .execute();
         });
     }
-    // Trong UserDAO
+
+
     public void resetPassword(String email, String hashedPassword) throws SQLException {
         JDBIConnector.me().get().useHandle((handle) -> {
             handle.createUpdate("UPDATE users SET password = ? WHERE email = ?")

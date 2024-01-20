@@ -260,14 +260,14 @@
                 <div class="container">
                     <div class="display-item">
                         <div class="slider">
-                            <c:forEach var="img_banner" items="${products}">
+                            <c:forEach var="img_banner" items="${pro}">
                                 <div>
                                     <img src="${pageContext.request.contextPath}/${img_banner.imageUrl}" alt="">
                                 </div>
                             </c:forEach>
                         </div>
                     </div>
-                    <c:forEach var="p" items="${products}">
+                    <c:forEach var="p" items="${pro}">
                         <div class="item">
                             <div>
                                 <div class="product-element-top">
@@ -282,23 +282,26 @@
                                 </div>
                             </div>
                             <div class="wd-buttons wd-pos-r-t">
-                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a
-                                        href="addtocart?id=${p.id}"
-                                        class="button product_type_simple add-to-cart-loop">
-                                        <span>
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </span></a></div>
+                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon">
+                                    <a href="addtocart?id=${p.id}" class="button product_type_simple add-to-cart-loop">
+                                <span>
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </span>
+                                    </a>
+                                </div>
                                 <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
                                     <a href="" class="open-quick-view quick-view-button">
-                                        <span>
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </span></a>
+                                <span>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </span>
+                                    </a>
                                 </div>
                                 <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
                                     <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
-                                        <span class="wd-tooltip-label">
-                                            <i class="fa-regular fa-heart"></i>
-                                        </span></a>
+                                <span class="wd-tooltip-label">
+                                    <i class="fa-regular fa-heart"></i>
+                                </span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -306,6 +309,7 @@
                 </div>
             </div>
         </div>
+
         <div class="wrapper-content">
             <div class="wrapper-heading">
                 <div class="heading">
@@ -316,14 +320,14 @@
                 <div class="container">
                     <div class="display-item">
                         <div class="slider">
-                            <c:forEach var="img_banner" items="${products}">
+                            <c:forEach var="img_banner" items="${pr}">
                                 <div>
                                     <img src="${pageContext.request.contextPath}/${img_banner.imageUrl}" alt="">
                                 </div>
                             </c:forEach>
                         </div>
                     </div>
-                    <c:forEach var="p" items="${products}">
+                    <c:forEach var="p" items="${pr}">
                         <div class="item">
                             <div>
                                 <div class="product-element-top">
@@ -338,23 +342,26 @@
                                 </div>
                             </div>
                             <div class="wd-buttons wd-pos-r-t">
-                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon"><a
-                                        href="addtocart?id=${p.id}"
-                                        class="button product_type_simple add-to-cart-loop">
-                                        <span>
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </span></a></div>
+                                <div class="wd-add-btn wd-action-btn wd-style-icon wd-add-cart-icon">
+                                    <a href="addtocart?id=${p.id}" class="button product_type_simple add-to-cart-loop">
+                                <span>
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </span>
+                                    </a>
+                                </div>
                                 <div class="quick-view wd-action-btn wd-style-icon wd-quick-view-icon">
                                     <a href="" class="open-quick-view quick-view-button">
-                                        <span>
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </span></a>
+                                <span>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </span>
+                                    </a>
                                 </div>
                                 <div class="wd-wishlist-btn wd-action-btn wd-style-icon wd-wishlist-icon">
                                     <a class="wd-tltp wd-tooltip-inited" href="" data-added-text="Browse Wishlist">
-                                        <span class="wd-tooltip-label">
-                                            <i class="fa-regular fa-heart"></i>
-                                        </span></a>
+                                <span class="wd-tooltip-label">
+                                    <i class="fa-regular fa-heart"></i>
+                                </span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -362,6 +369,7 @@
                 </div>
             </div>
         </div>
+
     </section>
 
     <section id="section5">
