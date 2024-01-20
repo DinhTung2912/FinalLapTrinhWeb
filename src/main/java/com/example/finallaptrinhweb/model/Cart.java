@@ -1,6 +1,10 @@
 package com.example.finallaptrinhweb.model;
 
+import com.example.finallaptrinhweb.dao.CouponCodeDAO;
 import com.example.finallaptrinhweb.dao.ProductDAO;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,6 +19,7 @@ public class Cart {
     private int coupon_code_id;
     private double priceSaled;
     private ProductDAO productDAO = new ProductDAO();
+    private CouponCodeDAO couponDAO = new CouponCodeDAO();
 
     public Cart() {
     }
@@ -44,13 +49,13 @@ public class Cart {
     }
 
     public double getTotalPrice() {
-        double total = 0.0;
+        totalPrice = 0.0;
 
         for (CartItem cartItem : products.values()) {
-            total += cartItem.getTotalPrice();
+            totalPrice += cartItem.getTotalPrice();
         }
 
-        return total;
+        return totalPrice;
     }
 
     public void setTotalPrice(double totalPrice) {
@@ -99,6 +104,7 @@ public class Cart {
         products.put(proId, new CartItem(product, quantity));
         return true;
     }
+
     public List<OrderProduct> getOrderProducts() {
         List<OrderProduct> orderProducts = new ArrayList<>();
 
@@ -108,30 +114,15 @@ public class Cart {
 
         return orderProducts;
     }
-    private Discount appliedDiscount;
-
-    // ... existing code ...
-
-    public Discount getAppliedDiscount() {
-        return appliedDiscount;
-    }
-
-    public void setAppliedDiscount(Discount discount) {
-        this.appliedDiscount = discount;
-    }
-
-    // ... existing code ...
 
     public double getPriceSaled() {
-        double totalBeforeDiscount = getTotalPrice();
-
-        if (appliedDiscount != null) {
-            BigDecimal discountValue = appliedDiscount.getDiscountValue();
-            double discount = totalBeforeDiscount * (discountValue.doubleValue() / 100);
-            return totalBeforeDiscount - discount;
-        } else {
-            return totalBeforeDiscount;
+        double priceSaled = getTotalPrice();
+        if (coupon_code_id != 0 && coupon_code_id != -1) {
+            double discountValue = couponDAO.getCouponById(this.coupon_code_id).getDiscountValue();
+            priceSaled = priceSaled * (1 - discountValue / 100);
         }
+
+        return priceSaled;
     }
 
     public int getMaxTypeWeight() {
@@ -164,6 +155,10 @@ public class Cart {
         // Implement logic để xóa các mục trong giỏ hàng
         // Ví dụ: this.cartItems.clear();
         this.products.clear();
+        this.size = 0;
+        this.totalPrice = 0;
+        this.coupon_code_id = 0;
+        this.priceSaled = 0;
     }
 
 
@@ -177,4 +172,6 @@ public class Cart {
                 ", priceSaled=" + priceSaled +
                 '}';
     }
+
+
 }

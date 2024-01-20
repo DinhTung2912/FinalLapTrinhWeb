@@ -74,7 +74,7 @@
                     %>
                     <span class="count"><%=cart.getTotalQuantity()%></span>
                     <%}%>
-                    <a href="cart.jsp">
+                    <a href="cart">
                         <i class="fa-solid fa-cart-shopping material-icons"></i>
                     </a>
                 </div>
