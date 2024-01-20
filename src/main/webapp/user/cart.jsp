@@ -43,7 +43,7 @@
     <section class="shoping-cart spad">
         <%
             Cart cart = (Cart) session.getAttribute("cart");
-            if (cart == null) {
+            if (cart == null || cart.isEmpty()) {
         %>
         <h1 style="text-align: center">Vui lòng mua sắm</h1>
         <%} else {%>
@@ -63,7 +63,6 @@
                             </thead>
                             <tbody>
                             <%
-                                System.out.println(cart);
                                 for (CartItem item : cart.getProducts().values()) {
                             %>
                             <tr>
@@ -110,8 +109,6 @@
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
                         <a href="products" class="primary-btn cart-btn">TIẾP TỤC MUA SẮM</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                            CẬP NHẬT GIỎ HÀNG</a>
                     </div>
                 </div>
                 <div class="custom-row">
@@ -119,9 +116,9 @@
                         <div class="shoping__continue">
                             <div class="shoping__discount">
                                 <h5>Mã giảm giá</h5>
-                                <form action="#">
-                                    <input type="text" placeholder="Nhập mã giãm giá mua hàng">
-                                    <button type="submit" class="site-btn">SỬ DỤNG MÃ</button>
+                                <form action="addtocart">
+                                    <input type="text" name="discount" placeholder="Nhập mã giãm giá mua hàng">
+                                    <button class="site-btn">SỬ DỤNG MÃ</button>
                                 </form>
                             </div>
                         </div>
@@ -130,10 +127,18 @@
                         <div class="shoping__checkout">
                             <h5>TỔNG TIỀN GIỎ HÀNG</h5>
                             <ul>
-                                <li>Tổng<span>${ Util.formatCurrency(cart.totalPrice) } VND</span></li>
+                                <li>Giảm<span>${ Util.formatCurrency(cart.totalPrice - cart.priceSaled) } VND</span></li>
+                                <li>Tổng<span>${ Util.formatCurrency(cart.priceSaled) } VND</span></li>
                             </ul>
-                            <% session.setAttribute("cart", cart); %>
-                            <a href="checkout" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>
+
+                            <c:choose>
+                                <c:when test="${empty sessionScope.auth}">
+                                    <a href="signIn.jsp" class="primary-btn">Vui lòng đăng nhập để thực hiện thanh toán</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="checkout" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </div>

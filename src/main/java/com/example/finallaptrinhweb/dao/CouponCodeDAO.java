@@ -49,6 +49,21 @@ public class CouponCodeDAO {
         }
     }
 
+    public CouponCode getCouponByName(String name) {
+        try {
+            CouponCode coupons = (CouponCode) JDBIConnector.me().get().withHandle((handle) -> {
+                return handle.createQuery("SELECT * FROM discounts WHERE discountType =?")
+                        .bind(0, name)
+                        .mapToBean(CouponCode.class)
+                        .findFirst()
+                        .orElse(null);
+            });
+            return coupons;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void addCoupon(String name, double percent, String dateEnd) {
         try {
             JDBIConnector.me().get().withHandle((handle) -> {

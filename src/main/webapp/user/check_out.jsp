@@ -118,7 +118,7 @@
                   <p>Tên sản phẩm: ${item.product.productName}</p>
                   <p>Giá bán: ${ Util.formatCurrency(item.product.price) } VND</p>
   <%--                <p>Số lượng: ${ item.quantity }</p>--%>
-                  <p>Tổng: ${ Util.formatCurrency(item.totalPrice) } VND</p>
+                  <p>Tổng: ${ Util.formatCurrency(cart.priceSaled) } VND</p>
 
                 </div>
               </c:forEach>
