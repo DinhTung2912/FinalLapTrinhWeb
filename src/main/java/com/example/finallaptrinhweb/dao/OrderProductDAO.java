@@ -36,7 +36,7 @@ public class OrderProductDAO {
                     orderProduct.setQuantity(resultSet.getInt("quantity"));
                     orderProduct.setPrice(resultSet.getDouble("price"));
                     orderProduct.setImageUrl(resultSet.getString("imageUrl"));
-                    orderProduct.setTotal(resultSet.getDouble("price"), 0, resultSet.getInt("quantity"));
+                    orderProduct.setTotal(resultSet.getDouble("price"), resultSet.getInt("quantity"));
                     productList.add(orderProduct);
                 }
                 resultSet.close();

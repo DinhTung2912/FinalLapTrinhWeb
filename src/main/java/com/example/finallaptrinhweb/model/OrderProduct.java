@@ -88,8 +88,8 @@ public class OrderProduct {
     }
 
 
-    public void setTotal(double price, int sale, int quantity) {
-        this.total = (price - (price * sale / 100)) * quantity;
+    public void setTotal(double price, int quantity) {
+        this.total = price*quantity;
     }
     @Override
     public String toString() {

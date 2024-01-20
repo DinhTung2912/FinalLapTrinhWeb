@@ -390,11 +390,11 @@ public class ProductDAO {
     public static boolean updateProduct(int id, String productName, int categoryId, double price, int quantity,
                                         String purpose, String contraindications, int stockQuantity, String ingredients, String dosage,
                                         String instructions, String warrantyPeriod, String storageCondition, String productType,
-                                        int supplierId, String imageUrl, boolean active) {
+                                        int supplierId) {
 
         String sql = "UPDATE products SET productName=?, category_id=?, price=?, quantity=?, purpose=?, "
                 + "contraindications=?, stockQuantity=?, ingredients=?, dosage=?, instructions=?, warrantyPeriod=?, "
-                + "storageCondition=?, productType=?, supplier_id=?, imageUrl=?, active=? WHERE id=?";
+                + "storageCondition=?, productType=?, supplier_id=? WHERE id=?";
 
         int update = 0;
 
@@ -413,9 +413,7 @@ public class ProductDAO {
             preparedStatement.setString(12, storageCondition);
             preparedStatement.setString(13, productType);
             preparedStatement.setInt(14, supplierId);
-            preparedStatement.setString(15, imageUrl);
-            preparedStatement.setBoolean(16, active);
-            preparedStatement.setInt(17, id);
+            preparedStatement.setInt(15, id);
 
             update = preparedStatement.executeUpdate();
 
@@ -424,6 +422,20 @@ public class ProductDAO {
         }
 
         return update == 1;
+    }
+
+    public static boolean deleteProductById(int productId) {
+        String query = "DELETE FROM products WHERE id = ?";
+        int deletedRows = 0;
+
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setInt(1, productId);
+            deletedRows = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
+        }
+
+        return deletedRows > 0;
     }
 
     public void addProduct(Product product) {

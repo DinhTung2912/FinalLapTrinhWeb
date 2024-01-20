@@ -90,7 +90,7 @@
                                                 nhân</span></a>
                             </li>
                             <li class="user-menu-item">
-                                <a href="signIn.jsp"><span class="nav-link-text">Đăng xuất</span></a>
+                                <a href="signout"><span class="nav-link-text">Đăng xuất</span></a>
                             </li>
                         </ul>
                     </div>

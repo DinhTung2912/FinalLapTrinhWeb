@@ -166,8 +166,8 @@ public class UserDAOT {
         return deleteResult == 1;
     }
 
-    public static boolean updateUserById(int id, String name, String phone, String email) {
-        String sql = "UPDATE users SET fullName = ?, phone = ?, email = ? WHERE id = ?";
+    public static boolean updateUserById(int id, String name, String phone, String email, String address) {
+        String sql = "UPDATE users SET fullName = ?, phone = ?, email = ?, detail_address = ? WHERE id = ?";
         int update = 0;
 
         try (Connection connection = DBCPDataSource.getConnection();
@@ -175,7 +175,8 @@ public class UserDAOT {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, phone);
             preparedStatement.setString(3, email);
-            preparedStatement.setInt(4, id);
+            preparedStatement.setString(4, address);
+            preparedStatement.setInt(5, id);
 
             synchronized (preparedStatement) {
                 update = preparedStatement.executeUpdate();

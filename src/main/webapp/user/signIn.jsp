@@ -16,7 +16,6 @@
 <body>
 <div class="website-wrapper">
     <jsp:include page="header.jsp"/>
-
     <div class="body">
         <div class="form-container">
             <form class="sign-in-form" method="post" action="signin">

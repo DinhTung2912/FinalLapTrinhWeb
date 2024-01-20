@@ -92,8 +92,8 @@
                                         <th>Tên</th>
                                         <th>Email</th>
                                         <th>Ngày tạo</th>
+                                        <th>Điện thoại</th>
                                         <th>Hoạt động</th>
-                                        <th class="text-right">Hành Động</th>
                                     </tr>
                                     </thead>
 
@@ -103,36 +103,35 @@
                                         <c:set var="date_created" value="${p.date_created}"></c:set>
                                         <tr>
                                             <td>${p.id}</td>
-                                            <td>${p.username}</td>
+                                            <td>${p.fullName}</td>
                                             <td>${p.email}</td>
                                             <td>${p.date_created}</td>
+                                            <td>${p.phone}</td>
+
                                             <td>
                                                 <div class="status-toggle">
                                                     <input id="service_${p.id}" class="check" type="checkbox" ${p.verifyStatus eq 'verified' ? 'checked' : ''}>
                                                     <label for="service_${p.id}" class="checktoggle">checkbox</label>
                                                 </div>
-                                            </td>
-
-                                            <td class="text-right">
                                                     <%-- <a href="edit_user?type=enteredit&id=${p.id}" class="btn btn-sm bg-success-light ">	<i class="far fa-edit mr-1"></i> Sửa</a>--%>
-                                                <a href="#" style="margin-top: 5px;color: red" class="btn btn-outline-danger btn-sm"
-                                                   onclick="confirmDelete(${p.id})">
-                                                    <i class="fa fa-trash-o"></i> Xóa
-                                                </a>
+                                        <%--   <a href="#" style="margin-top: 5px;color: red" class="btn btn-outline-danger btn-sm"
+                                              onclick="confirmDelete(${p.id})">
+                                               <i class="fa fa-trash-o"></i> Xóa
+                                           </a> --%>
 
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    <%System.out.println("DA xuong toi day");%>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                                       </td>
+                                   </tr>
+                               </c:forEach>
+                               <%System.out.println("DA xuong toi day");%>
+                               </tbody>
+                           </table>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
 </div>
 <!-- jQuery -->
 <script src="assets/js/jquery-3.5.0.min.js"></script>
@@ -154,12 +153,12 @@
 <!-- Custom JS -->
 <script src="assets/js/admin.js"></script>
 <script>
-    function confirmDelete(userId) {
-        if (confirm("Bạn có chắc chắn muốn xóa người dùng này không?")) {
-            // Chuyển hướng đến Servlet để xóa người dùng
-            window.location.href = "./delete_user?id=" + userId;
-        }
-    }
+function confirmDelete(userId) {
+   if (confirm("Bạn có chắc chắn muốn xóa người dùng này không?")) {
+       // Chuyển hướng đến Servlet để xóa người dùng
+       window.location.href = "./delete_user?id=" + userId;
+   }
+}
 </script>
 </body>
 </html>
