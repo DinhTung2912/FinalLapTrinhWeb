@@ -78,9 +78,7 @@ public class UserDAO {
                     .collect(Collectors.toList());
         });
         return users.get(0);
-    }
-
-    public void SignUp(String username, String email, String password, String code, int roleId) throws SQLException {
+    }public void SignUp(String username, String email, String password, String code, int roleId) throws SQLException {
         Date dateCreated = new Date();
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
@@ -144,6 +142,15 @@ public class UserDAO {
         // Mã hóa mật khẩu trước khi cập nhật vào cơ sở dữ liệu
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
+        JDBIConnector.me().get().useHandle((handle) -> {handle.createUpdate("UPDATE users SET password = ? WHERE email = ?")
+                .bind(0, hashedPassword)
+                .bind(1, email)
+                .execute();
+        });
+    }
+
+    // Trong UserDAO
+    public void resetPassword(String email, String hashedPassword) throws SQLException {
         JDBIConnector.me().get().useHandle((handle) -> {
             handle.createUpdate("UPDATE users SET password = ? WHERE email = ?")
                     .bind(0, hashedPassword)
@@ -152,14 +159,22 @@ public class UserDAO {
         });
     }
 
-
-    public void resetPassword(String email, String hashedPassword) throws SQLException {
-        JDBIConnector.me().get().useHandle((handle) -> {
-            handle.createUpdate("UPDATE users SET password = ? WHERE email = ?")
-                    .bind(0, hashedPassword)
-                    .bind(1, email)
-                    .execute();
+    public User CheckLoginAdmin(String username, String password) throws SQLException {
+        List<User> users = JDBIConnector.me().get().withHandle((handle) -> {
+            return handle.createQuery("SELECT * FROM users WHERE username = ? AND role_id = ?")
+                    .bind(0, username)
+                    .bind(1, 2) // 2 là roleId của admin (hoặc giá trị mà bạn gán cho admin)
+                    .mapToBean(User.class)
+                    .collect(Collectors.toList());
         });
+
+        if (users.size() != 1) {
+            return null;
+        } else {
+            User user = users.get(0);
+            String hashedPasswordFromDatabase = user.getPassword();
+            return username.equals(user.getUsername()) && BCrypt.checkpw(password, hashedPasswordFromDatabase) ? user : null;
+        }
     }
 
 }
