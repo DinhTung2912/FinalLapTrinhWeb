@@ -31,20 +31,20 @@ public class Login extends HttpServlet {
             if (adminUser != null) {
                 // Đăng nhập thành công, lưu thông tin người dùng vào session
                 HttpSession session = request.getSession();
-                session.setAttribute("auth", adminUser);
+                session.setAttribute("adminAuth", adminUser);
 
                 // Chuyển hướng đến trang dashboard của admin
                 response.sendRedirect(request.getContextPath() + "/admin/dashboard");
             } else {
                 // Đăng nhập không thành công, chuyển hướng đến trang đăng nhập với thông báo lỗi
-                response.sendRedirect(request.getContextPath() + "/admin/signIn.jsp?error=1");
+                response.sendRedirect(request.getContextPath() + "/user/error-404.html");
             }
         } catch (SQLException e) {
             // Xử lý ngoại lệ SQLException
             e.printStackTrace();
 
             // Chuyển hướng đến trang đăng nhập với thông báo lỗi chung
-            response.sendRedirect(request.getContextPath() + "/admin/signIn.jsp?error=2");
+            response.sendRedirect(request.getContextPath() + "/user/error-404.html");
         }
     }
 }

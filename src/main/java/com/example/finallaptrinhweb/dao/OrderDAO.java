@@ -77,7 +77,7 @@ public class OrderDAO {
                         order.setUserId(resultSet.getInt("user_id"));
                         order.setDateCreated(Timestamp.valueOf(resultSet.getString("date_created")));
                         order.setStatus(resultSet.getString("status"));
-                        order.setTotalPay(resultSet.getDouble("total"));
+                        order.setTotalPay(resultSet.getDouble("total_pay"));
                         order.setPayment(resultSet.getBoolean("payment"));
                         order.setDetailAddress(resultSet.getString("detail_address"));
                         order.setPhone(resultSet.getLong("phone"));
@@ -113,7 +113,7 @@ public class OrderDAO {
                         order.setId(resultSet.getInt("id"));
                         order.setDateCreated(resultSet.getTimestamp("date_created"));
                         order.setStatus(resultSet.getString("status"));
-                        order.setTotalPay(resultSet.getDouble("total"));
+                        order.setTotalPay(resultSet.getDouble("total_pay"));
                         order.setPayment(resultSet.getBoolean("payment"));
                         order.setDetailAddress(resultSet.getString("detail_address"));
                         order.setPhone(resultSet.getLong("phone"));

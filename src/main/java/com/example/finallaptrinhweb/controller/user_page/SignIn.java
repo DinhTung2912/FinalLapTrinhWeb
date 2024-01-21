@@ -29,35 +29,25 @@ public class SignIn extends HttpServlet {
         try {
             user = UserDAO.getInstance().CheckLogin(email, pass);
             verifiedStatus = UserDAO.getInstance().CheckVerifiedStatus(email);
-        } catch (SQLException var8) {
-            throw new RuntimeException(var8);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
-        if (user != null) {
+        if (user != null && user.getRoleId() == 1) {
             if (verifiedStatus) {
                 HttpSession session = request.getSession();
                 session.setAttribute("auth", user);
 
-                // Kiểm tra vai trò (role) của người dùng
-                int roleId = user.getRoleId();
-
-                if (roleId == 1) {
-                    // Vai trò là 1, chuyển hướng đến trang home
-                    response.sendRedirect(request.getContextPath() + "/user/home");
-                } else if (roleId == 2) {
-                    // Vai trò là 2, chuyển hướng đến trang admin
-                    response.sendRedirect(request.getContextPath() + "/admin/dashboard");
-                } else {
-                    // Nếu có thêm các vai trò khác, xử lý tại đây
-                    response.sendRedirect(request.getContextPath() + "user/error-404.html");
-                }
+                // Chuyển hướng đến trang index.jsp
+                response.sendRedirect(request.getContextPath() + "/user/home");
             } else {
                 request.setAttribute("wrongInfor", "Tài khoản chưa kích hoạt");
-                request.getRequestDispatcher("./signIn.jsp").forward(request, response);
+                request.getRequestDispatcher("/user/signIn.jsp").forward(request, response);
             }
         } else {
-            request.setAttribute("wrongInfor", "Đăng nhập thất bại");
-            request.getRequestDispatcher("./signIn.jsp").forward(request, response);
+            request.setAttribute("wrongInfor", "Đăng nhập thất bại hoặc bạn không có quyền truy cập");
+            request.getRequestDispatcher("/user/signIn.jsp").forward(request, response);
         }
     }
 }
+

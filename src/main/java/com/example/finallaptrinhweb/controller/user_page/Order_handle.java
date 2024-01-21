@@ -49,7 +49,7 @@ public class Order_handle extends HttpServlet {
                     "Chờ xử lý", cart.getTotalPrice(), Integer.parseInt(phoneNumber),
                     addressLine1 + ", " + addressLine2 + ", " + district + ", " + city, cash == 0 ? momo : cash,
                     Timestamp.valueOf(currentDateTime.format(formatter)),
-                    cart.getTotalPrice(), 0);
+                    cart.getPriceSaled(), 0);
 
             Map<Integer, CartItem> products = cart.getProducts();
 
