@@ -62,11 +62,11 @@
                     <!-- /Page Header -->
                     <div class="card">
                         <div class="card-body">
-                            <form action="edit-product" method="post" enctype="multipart/form-data">
+                            <form action="edit-product?type=edit&id=${product.id}" method="post">
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2">Mã sản phẩm</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" name="usercode" value="${product.id}" readonly>
+                                        <input type="text" class="form-control" name="productId" value="${product.id}" readonly>
                                     </div>
                                 </div>
                                     <div class="form-group row">

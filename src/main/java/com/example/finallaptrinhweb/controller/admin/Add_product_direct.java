@@ -24,6 +24,7 @@ public class Add_product_direct extends HttpServlet {
         // Lấy giá trị từ form
         String name = request.getParameter("name");
         String category = request.getParameter("cate");
+        String price = request.getParameter("price");
         String quantity = request.getParameter("quantity");
         String purpose = request.getParameter("purpose");
         String contrain = request.getParameter("contrain");
@@ -41,6 +42,7 @@ public class Add_product_direct extends HttpServlet {
         // Tạo đối tượng Product và set giá trị
         Product product = new Product();
         product.setProductName(name);
+        product.setPrice(Double.valueOf(price));
         product.setCategoryId(Integer.parseInt(category));
         product.setQuantity(Integer.parseInt(quantity));
         product.setPurpose(purpose);
@@ -55,13 +57,14 @@ public class Add_product_direct extends HttpServlet {
         product.setSupplierId(Integer.parseInt(idSup));
         product.setImageUrl(img);
         product.setSupplierImageUrl(imgSup);
+        product.setActive(true);
 
         // Thêm sản phẩm vào cơ sở dữ liệu
         ProductDAO dao = new ProductDAO();
         dao.addProduct(product);
 
         // Chuyển hướng về trang sản phẩm sau khi thêm
-        response.sendRedirect("product.jsp");
+        response.sendRedirect("product");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
