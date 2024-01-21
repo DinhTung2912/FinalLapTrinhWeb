@@ -36,10 +36,10 @@ public class OrderDetailServlet extends HttpServlet {
 
 
                 // Tính tổng tiền sản phẩm
-                double sum = 0;
-                for (OrderProduct o : productList) {
-                    sum += o.getTotal();
-                }
+                double sum = order.getTotalPay();
+//                for (OrderProduct o : productList) {
+//                    sum += o.getTotal();
+//                }
 
                 // Lấy phí ship từ đơn hàng
                 double ship = order.getShipPrice();

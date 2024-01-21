@@ -172,15 +172,7 @@
                                                         <div class="price">${Util.formatCurrency(product.price)}</div>
                                                         <div class="unit">VND</div>
                                                     </div>
-                                                    <div class="rating">
-                                                        <div class="stars" data-stars="4">
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star"></i>
-                                                            <i class="fa-solid fa-star-half-stroke"></i>
-                                                            <i class="fa-regular fa-star"></i>
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                             <div class="wd-buttons wd-pos-r-t">
