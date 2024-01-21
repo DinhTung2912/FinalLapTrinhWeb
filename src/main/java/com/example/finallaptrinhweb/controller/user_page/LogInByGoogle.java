@@ -39,7 +39,7 @@ public class LogInByGoogle extends HttpServlet {
 
         try {
             if (user != null && !userExist) {
-                UserDAO.getInstance().SignUp(user.getUsername(), user.getEmail(), (String) null, "verified", user.getRoleId());
+                UserDAO.getInstance().SignUp(user.getUsername(), user.getEmail(), (String) null, "verified", 1);
             }
 
             HttpSession session = request.getSession();
