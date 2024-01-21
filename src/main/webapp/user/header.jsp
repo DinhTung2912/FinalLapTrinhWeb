@@ -28,22 +28,22 @@
                         <div class="container">
                             <ul class="sub-menu">
                                 <li class="menu-item">
-                                    <a href="">Thức ăn chăn nuôi</a>
+                                    <a href="products?group=Thức%20ăn%20chăn%20nuôi">Thức ăn chăn nuôi</a>
                                 </li>
                                 <li class="menu-item">
                                     <a href="products?group=Chăm%20sóc%20thú%20cưng">Chăm sóc thú cưng</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="">Thuốc thú y<i class="fa-solid fa-angle-right"></i></a>
+                                    <a href="products?group=Thuốc%20thú%20y">Thuốc thú y<i class="fa-solid fa-angle-right"></i></a>
                                     <ul class="sub-sub-menu">
                                         <li class="menu-item">
-                                            <a href="">Thuốc kháng sinh</a>
+                                            <a href="products?category=Kháng%20sinh">Thuốc kháng sinh</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="">Thuốc sát trùng</a>
+                                            <a href="products?category=Sát%20trùng">Thuốc sát trùng</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="">Vắc xin phòng bệnh</a>
+                                            <a href="products?category=Vắc%20xin">Vắc xin phòng bệnh</a>
                                         </li>
                                     </ul>
                                 </li>

@@ -103,10 +103,6 @@
               </div>
             </div>
 
-            <div class="checkout__input">
-              <p>Lưu ý khi vận chuyển<span>*</span></p>
-              <input type="text" placeholder="Lưu ý về đơn hàng hoặc lưu ý khi vận chuyển." />
-            </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="checkout__order">
@@ -118,23 +114,21 @@
                   <p>Tên sản phẩm: ${item.product.productName}</p>
                   <p>Giá bán: ${ Util.formatCurrency(item.product.price) } VND</p>
   <%--                <p>Số lượng: ${ item.quantity }</p>--%>
-                  <p>Tổng: ${ Util.formatCurrency(cart.priceSaled) } VND</p>
 
                 </div>
               </c:forEach>
+              <div class="checkout__order__subtotal">
+                <p>Tổng: ${ Util.formatCurrency(cart.priceSaled) } VND</p>
+              </div>
               <div class="checkout__order__subtotal">
                 <p>Phí vận chuyển: ${ Util.formatCurrency(priceShipment) } VND</p>
               </div>
               <div class="checkout__order__total">
                 <p style="color: red;">Tổng tiền thanh toán: ${ Util.formatCurrency(totalPrice) } VND</p>
               </div>
-
             </div>
-
-
             <div class="checkout__input__checkbox" >
               <span  class="payment-validation-message"></span>
-
               <label for="cash">
                 Cash on delivery (COD)
                 <input type="checkbox" id="cash" name="cash" class="payment-option" />
