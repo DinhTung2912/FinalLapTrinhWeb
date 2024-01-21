@@ -123,13 +123,8 @@
                                         <div class="product-info">
                                             <a class="product-name" href="shop-detail?id=${pl.id}">${pl.productName}</a>
                                             <p class="product-seller">Cung cấp bởi Thú Y The Pet </p>
-                                            <div class="product-review">
-                                                <a id="btn-comment" href="#" data-toggle="modal"
-                                                   data-target="#exampleModalCenter">Viết nhận xét</a>
-                                            </div>
                                         </div>
                                     </div>
-
                                     </td>
                                 <td class="price"><%= Util.formatCurrency((double) pageContext.getAttribute("price"))%> VND</td>
                                     <td class="quantity">${pl.quantity}</td>

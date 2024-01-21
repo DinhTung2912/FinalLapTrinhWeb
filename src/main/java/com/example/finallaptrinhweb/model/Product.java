@@ -184,6 +184,7 @@ public class Product {
     public void setActive(boolean active) {
         this.active = active;
     }
+
     public String getSupplierImageUrl() {
         return this.supplierImageUrl;
     }

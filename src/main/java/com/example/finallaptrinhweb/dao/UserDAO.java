@@ -78,7 +78,9 @@ public class UserDAO {
                     .collect(Collectors.toList());
         });
         return users.get(0);
-    }public void SignUp(String username, String email, String password, String code, int roleId) throws SQLException {
+    }
+
+    public void SignUp(String username, String email, String password, String code, int roleId) throws SQLException {
         Date dateCreated = new Date();
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
@@ -142,10 +144,11 @@ public class UserDAO {
         // Mã hóa mật khẩu trước khi cập nhật vào cơ sở dữ liệu
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
-        JDBIConnector.me().get().useHandle((handle) -> {handle.createUpdate("UPDATE users SET password = ? WHERE email = ?")
-                .bind(0, hashedPassword)
-                .bind(1, email)
-                .execute();
+        JDBIConnector.me().get().useHandle((handle) -> {
+            handle.createUpdate("UPDATE users SET password = ? WHERE email = ?")
+                    .bind(0, hashedPassword)
+                    .bind(1, email)
+                    .execute();
         });
     }
 
@@ -176,5 +179,38 @@ public class UserDAO {
             return username.equals(user.getUsername()) && BCrypt.checkpw(password, hashedPasswordFromDatabase) ? user : null;
         }
     }
+
+    public void addAdmin(String username, String email, String password) throws SQLException {
+        // Kiểm tra xem email đã tồn tại trong hệ thống hay chưa
+        if (CheckExistUser(email)) {
+            // Email đã tồn tại, bạn có thể xử lý tùy thuộc vào yêu cầu cụ thể của bạn
+            // Ví dụ: Báo lỗi, không thực hiện thêm admin, ...
+            System.out.println("Email đã tồn tại trong hệ thống.");
+        } else {
+            // Kiểm tra xem username có giá trị hợp lệ hay không
+            if (username != null) {
+                // Tiếp tục xử lý thêm admin vào cơ sở dữ liệu
+                Date dateCreated = new Date();
+                String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
+                JDBIConnector.me().get().withHandle((handle) -> {
+                    return handle.createUpdate("INSERT INTO users (id, username, email, password, verify_status, date_created, role_id) VALUES (?, ?, ?, ?, ?, ?, ?)")
+                            .bind(0, this.GetId() + 1)
+                            .bind(1, username)
+                            .bind(2, email)
+                            .bind(3, hashedPassword)
+                            .bind(4, "verified")
+                            .bind(5, dateCreated)
+                            .bind(6, 2)
+                            .execute();
+                });
+                System.out.println("Admin đã được thêm vào cơ sở dữ liệu.");
+            } else {
+                // Xử lý lỗi hoặc thông báo nếu username không hợp lệ
+                System.out.println("Tên người dùng không hợp lệ.");
+            }
+        }
+    }
+
 
 }
