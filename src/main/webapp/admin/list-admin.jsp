@@ -47,6 +47,11 @@
                     <div class="col">
                         <h3 class="page-title">Danh sách admin</h3>
                     </div>
+                    <div class="col-auto text-right">
+                        <a href="add-admin" class="btn btn-primary add-button ml-3">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
             <!-- /Page Header -->

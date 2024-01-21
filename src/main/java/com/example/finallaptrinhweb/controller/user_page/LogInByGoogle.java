@@ -39,12 +39,12 @@ public class LogInByGoogle extends HttpServlet {
 
         try {
             if (user != null && !userExist) {
-                UserDAO.getInstance().SignUp(user.getUsername(), user.getEmail(), (String) null, "verified", user.getRoleId());
+                UserDAO.getInstance().SignUp(user.getUsername(), user.getEmail(), (String) null, "verified", 1);
             }
 
             HttpSession session = request.getSession();
             session.setAttribute("auth", user);
-            response.sendRedirect("./index.jsp");
+            response.sendRedirect("./home");
         } catch (SQLException var8) {
             throw new RuntimeException(var8);
         }

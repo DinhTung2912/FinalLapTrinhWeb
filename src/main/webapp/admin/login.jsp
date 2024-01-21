@@ -55,13 +55,10 @@
               <button class="btn btn-primary btn-block account-btn" type="submit">Đăng nhập</button>
             </div>
           </form>
-          <div class="text-center forgotpass mt-4"><a href="forgot-password.jsp">Quên mật khẩu?</a></div>
+          <div class="text-center forgotpass mt-4"><a href="">Quên mật khẩu?</a></div>
           <div class="login-or">
             <span class="or-line"></span>
-            <span class="span-or">or</span>
           </div>
-
-          <div class="text-center dont-have">Don’t have an account? <a href="register.jsp">Đăng kí</a></div>
         </div>
       </div></div>
   </div>
