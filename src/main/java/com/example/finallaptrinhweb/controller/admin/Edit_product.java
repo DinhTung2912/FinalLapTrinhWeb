@@ -42,7 +42,7 @@ public class Edit_product extends HttpServlet {
         String storageCondition = request.getParameter("storageCondition");
         String productType = request.getParameter("productType");
         if ("edit".equalsIgnoreCase(type)) {
-            int id = Integer.parseInt(request.getParameter("usercode"));
+            int id = Integer.parseInt(request.getParameter("productId"));
             double price = Double.parseDouble(request.getParameter("price"));
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));

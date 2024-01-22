@@ -438,31 +438,32 @@ public class ProductDAO {
         return deletedRows > 0;
     }
 
-    public void addProduct(Product product) {
-        try {
-            JDBIConnector.me().get().useHandle((handle) -> {
-                handle.createUpdate("INSERT INTO `products`(`id`, `productName`, `categoryId`, `price`, `quantity`, `supplierId`, `purpose`, `contraindications`, `stockQuantity`, `ingredients`, `dosage`, `instructions`, `warrantyPeriod`, `productType`, `storageCondition`, `supplierId`, `imageUrl`, `active`, `supplierImageUrl`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
-                        .bind(0, product.getId())
-                        .bind(1, product.getProductName())
-                        .bind(2, product.getCategoryId())
-                        .bind(3, product.getPrice())
-                        .bind(4, product.getQuantity())
-                        .bind(5, product.getPurpose())
-                        .bind(6, product.getContraindications())
-                        .bind(7, product.getStockQuantity())
-                        .bind(8, product.getIngredients())
-                        .bind(9, product.getDosage())
-                        .bind(10, product.getInstructions())
-                        .bind(11, product.getWarrantyPeriod())
-                        .bind(12, product.getSupplierId())
-                        .bind(13, product.getImageUrl())
-                        .bind(14, product.isActive() ? 1 : 0) // Chuyển đổi giá trị boolean thành 0 hoặc 1
-                        .bind(15, product.getSupplierImageUrl())
+    public static void addProduct(Product product) {
+        String query = "INSERT INTO `products`(`id`, `productCode`, `productName`, `category_id`, `price`, `quantity`, `purpose`, `contraindications`, `stockQuantity`, `ingredients`, `dosage`, `instructions`, `warrantyPeriod`, `storageCondition`, `productType`,`supplier_id`, `imageUrl`, `active`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-                        .execute();
-            });
+        try (PreparedStatement preparedStatement = DBCPDataSource.preparedStatement(query)) {
+            preparedStatement.setInt(1, product.getId());
+            preparedStatement.setString(2, String.valueOf(product.getId()));
+            preparedStatement.setString(3, product.getProductName());
+            preparedStatement.setInt(4, product.getCategoryId());
+            preparedStatement.setDouble(5, product.getPrice());
+            preparedStatement.setInt(6, product.getQuantity());
+            preparedStatement.setString(7, product.getPurpose());
+            preparedStatement.setString(8, product.getContraindications());
+            preparedStatement.setInt(9, product.getStockQuantity());
+            preparedStatement.setString(10, product.getIngredients());
+            preparedStatement.setString(11, product.getDosage());
+            preparedStatement.setString(12, product.getInstructions());
+            preparedStatement.setString(13, product.getWarrantyPeriod());
+            preparedStatement.setString(14, product.getStorageCondition());
+            preparedStatement.setString(15, product.getProductType());
+            preparedStatement.setInt(16, product.getSupplierId());
+            preparedStatement.setString(17, product.getImageUrl());
+            preparedStatement.setInt(18, product.isActive() ? 1 : 0);
+
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace(); // Xử lý ngoại lệ theo ý của bạn
         }
     }
 
